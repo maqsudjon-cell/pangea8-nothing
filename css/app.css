@@ -1333,17 +1333,20 @@
   .lp-lang.is-on { color: var(--color-fg); }
 
   .lp-hero {
-    min-height: 78dvh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 5rem 1.25rem 3.5rem;
+    justify-content: flex-start;
+    padding: 1.15rem 1.25rem 1.75rem;
     max-width: 72rem;
     margin: 0 auto;
   }
 
   @media (min-width: 760px) {
-    .lp-hero { padding: 7rem 2.5rem 4.5rem; }
+    .lp-hero {
+      min-height: min(68dvh, 36rem);
+      justify-content: flex-end;
+      padding: 5rem 2.5rem 3.5rem;
+    }
   }
 
   .lp-prompt {
@@ -1356,7 +1359,7 @@
   .lp-display {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(3.4rem, 14vw, 8.5rem);
+    font-size: clamp(2.6rem, 14vw, 8.5rem);
     font-weight: 500;
     letter-spacing: -0.07em;
     line-height: 0.88;
@@ -1391,6 +1394,38 @@
     color: var(--color-mute);
     font-size: 1.05rem;
     line-height: 1.55;
+  }
+
+  .lp-fix {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.75rem;
+    margin-top: 1.1rem;
+    max-width: 38rem;
+    font-family: var(--font-mono);
+  }
+
+  .lp-fix-k {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ok);
+  }
+
+  .lp-fix-row {
+    font-size: 0.95rem;
+  }
+
+  .lp-fix-hint {
+    flex-basis: 100%;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    color: var(--color-faint);
+  }
+
+  .lp-fix:hover .lp-fix-hint {
+    color: var(--color-mute);
   }
 
   .chertma {
