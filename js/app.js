@@ -119,4 +119,10 @@
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
+  const cn = document.getElementById("cn-day");
+  if (cn) {
+    const start = Date.UTC(2026, 8, 19);
+    const day = Math.max(1, Math.floor((Date.now() - start) / 86400000) + 1);
+    cn.innerHTML = '<i class="lg-pulse"></i>Day ' + day;
+  }
 })();
