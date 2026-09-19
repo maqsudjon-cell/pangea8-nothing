@@ -28,11 +28,11 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 const PALETTE = {
-  bg: "#0A0A0A",
-  surface: "#141414",
-  text: "#FAFAF7",
-  mute: "#7D8187",
-  accent: "#FF7A17",
+  bg: "#050505",
+  surface: "#0A0A0A",
+  text: "#FAFAFA",
+  mute: "#525252",
+  accent: "#22D3EE",
 };
 
 const OG = {
@@ -154,7 +154,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 W, H = 1200, 630
-BG, TEXT, MUTE, ACCENT = "#0A0A0A", "#FAFAF7", "#7D8187", "#FF7A17"
+BG, TEXT, MUTE, ACCENT = "#050505", "#FAFAFA", "#525252", "#22D3EE"
 TOU_SIZE = 400
 TOU_TRACKING = 10
 TOU_CY_RATIO = 0.455
