@@ -1,0 +1,37 @@
+# tou.gg
+
+> Public brand home of Maqsudjon Polatov. TOU = “to you.” Umbrella, not a product name.
+
+- Site: https://tou.gg
+- Person: Maqsudjon Polatov, Tashkent, Uzbekistan (UTC+5)
+- Method: directs AI coding agents end to end (spec → architecture → build → DNS/TLS → ops). Welds full-time; ships software nights/days off.
+- Email: polatovmaqsudjon1@gmail.com
+- Telegram: https://t.me/mrbmp13
+- GitHub: https://github.com/maqsudjon-cell
+- Lab/archive: https://maqsudjon.com
+- Source: https://github.com/maqsudjon-cell/tou
+
+## Live products
+
+- FlareStamina https://flarestamina.com — free IELTS platform, 113 tests, AI essay feedback, speaking lab
+- AI Lenta https://ailenta.uz — autonomous Uzbek AI news wire, hourly
+- Chertma https://chertma.maqsudjon.com — Uzbek New Latin orthography; dataset https://huggingface.co/datasets/Maqsudjonpolatov/uz-lexicon-skeleton
+- Nullsample https://nullsample.maqsudjon.com — seed-reproducible music from code
+- Tadam https://tadam.uz — wedding photo album, no app, no signup
+- KVADRAT https://kvdrt.maqsudjon.com — offline m² calculator for welding jobs
+- Minnos https://minnos.cc — English idioms
+- Pierics https://pierics.com — daily word game
+- ZED AVLOD https://zedavlod.uz — school site
+- CTN Language Centre https://ctnlc.uz
+- Payvandchi https://payvandchi.maqsudjon.com — metalwork catalogue
+- Reshotkachi https://reshotkachi.maqsudjon.com — metalwork catalogue
+- Chiziq https://chzq.uz — web studio
+- Hugging Face https://huggingface.co/Maqsudjonpolatov
+
+## Pages
+
+- / work index and case studies
+- /log editorial index (canonical essays on maqsudjon.com)
+- /about bio, method, stack, availability
+- /now what is being built this month
+- /colophon type, motion, code-generated logo/OG
