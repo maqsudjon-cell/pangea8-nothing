@@ -70,32 +70,35 @@
   const typeEl = document.querySelector("[data-type]");
   if (typeEl) {
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const SRC = "to you";
+    const DROP = new Set([1, 2, 3]);
+    const paint = (typed, dropping, gg) => {
+      const chars = SRC.split("").map((ch, i) => {
+        const cls = ["lp-ch"];
+        if (i >= typed) cls.push("is-hid");
+        if (dropping && DROP.has(i)) cls.push("is-drop");
+        const t = ch === " " ? "&nbsp;" : ch;
+        return '<span class="' + cls.join(" ") + '">' + t + "</span>";
+      }).join("");
+      typeEl.innerHTML = chars + (gg ? '<span class="lp-gg">.gg</span>' : '<span class="lp-caret"></span>');
+      typeEl.classList.toggle("is-done", gg);
+    };
     const run = async () => {
       if (reduced) {
         typeEl.classList.add("is-done");
         typeEl.innerHTML = 'tou<span class="lp-gg">.gg</span>';
+        document.querySelectorAll(".lp-tag, .lp-dek").forEach((n) => n.classList.add("is-in"));
         return;
       }
-      typeEl.classList.remove("is-done");
-      const start = "to you";
-      for (let i = 1; i <= start.length; i++) {
-        typeEl.textContent = start.slice(0, i);
-        await wait(80);
+      for (let i = 1; i <= SRC.length; i++) {
+        paint(i, false, false);
+        await wait(i === 3 ? 140 : 78);
       }
-      await wait(620);
-      for (let i = start.length - 1; i >= 2; i--) {
-        typeEl.textContent = start.slice(0, i);
-        await wait(48);
-      }
-      await wait(160);
-      typeEl.textContent = "tou";
-      await wait(380);
-      for (const next of ["tou.", "tou.g"]) {
-        typeEl.textContent = next;
-        await wait(85);
-      }
-      typeEl.classList.add("is-done");
-      typeEl.innerHTML = 'tou<span class="lp-gg">.gg</span>';
+      await wait(720);
+      paint(SRC.length, true, false);
+      await wait(520);
+      paint(SRC.length, true, true);
+      document.querySelectorAll(".lp-tag, .lp-dek").forEach((n) => n.classList.add("is-in"));
     };
     run();
   }

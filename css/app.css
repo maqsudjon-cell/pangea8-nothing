@@ -1362,6 +1362,32 @@
   .lp-type.is-done { color: var(--color-fg); }
   .lp-gg { color: var(--color-accent); }
 
+  .lp-ch {
+    display: inline-block;
+    overflow: hidden;
+    width: 0.58em;
+    text-align: center;
+    vertical-align: bottom;
+    transition:
+      width 480ms var(--ease-out),
+      opacity 280ms var(--ease-out),
+      filter 280ms var(--ease-out),
+      transform 480ms var(--ease-out),
+      color 280ms var(--ease-out);
+  }
+
+  .lp-ch.is-hid,
+  .lp-ch.is-drop {
+    width: 0;
+    opacity: 0;
+  }
+
+  .lp-ch.is-drop {
+    color: var(--color-accent);
+    filter: blur(8px);
+    transform: translateY(-0.35em);
+  }
+
   .lp-caret {
     display: inline-block;
     width: 0.07em;
@@ -1378,6 +1404,13 @@
     font-size: clamp(0.82rem, 1.5vw, 0.95rem);
     color: var(--color-mute);
     letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(6px);
+    transition:
+      opacity 600ms var(--ease-out) 40ms,
+      transform 600ms var(--ease-out) 40ms,
+      filter 600ms var(--ease-out) 40ms;
   }
 
   .lp-dek {
@@ -1386,6 +1419,20 @@
     color: var(--color-mute);
     font-size: 1.02rem;
     line-height: 1.5;
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(6px);
+    transition:
+      opacity 600ms var(--ease-out) 120ms,
+      transform 600ms var(--ease-out) 120ms,
+      filter 600ms var(--ease-out) 120ms;
+  }
+
+  .lp-tag.is-in,
+  .lp-dek.is-in {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 
   .chertma {
@@ -1397,6 +1444,81 @@
   .chertma.is-fixed {
     color: var(--color-ok);
     text-decoration: none;
+  }
+
+  .chertma-row {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .chertma-ch {
+    display: inline-block;
+    transition: color 180ms var(--ease-out), transform 180ms var(--ease-out), filter 180ms var(--ease-out);
+  }
+
+  .chertma-ch.is-wrong {
+    color: var(--color-accent);
+    text-decoration: line-through;
+    text-decoration-color: rgb(255 107 53 / 0.7);
+  }
+
+  .chertma-ch.is-fixed {
+    color: var(--color-ok);
+    animation: chertma-pop 280ms var(--ease-out);
+  }
+
+  .lp-weld-tip {
+    filter: drop-shadow(0 0 4px #ff6b35);
+    transition: opacity 200ms linear;
+  }
+
+  html[data-cursor="1"] .lp,
+  html[data-cursor="1"] .lp a,
+  html[data-cursor="1"] .lp button {
+    cursor: none;
+  }
+
+  .lp-cursor {
+    display: none;
+  }
+
+  @media (pointer: fine) {
+    html[data-cursor="1"] .lp-cursor { display: block; }
+  }
+
+  .lp-cursor-core,
+  .lp-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 80;
+    border-radius: 99px;
+    will-change: transform;
+  }
+
+  .lp-cursor-core {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--color-accent);
+    mix-blend-mode: difference;
+  }
+
+  .lp-cursor-ring {
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+    border: 1px solid rgb(255 107 53 / 0.55);
+    transition: width 200ms var(--ease-out), height 200ms var(--ease-out), margin 200ms var(--ease-out), border-color 200ms var(--ease-out);
+  }
+
+  .lp-cursor-ring[data-hot="1"] {
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    border-color: var(--color-accent);
   }
 
   .lp-stats {
@@ -1476,12 +1598,17 @@
   @media (prefers-reduced-motion: no-preference) {
     .lp-reveal {
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+      transform: translateY(16px);
+      filter: blur(8px);
+      transition:
+        opacity 640ms var(--ease-out),
+        transform 640ms var(--ease-out),
+        filter 640ms var(--ease-out);
     }
     .lp-reveal.is-in {
       opacity: 1;
       transform: none;
+      filter: none;
     }
   }
 
@@ -1494,6 +1621,24 @@
     padding: 1.7rem 0;
     border-top: 1px solid var(--color-line);
     position: relative;
+  }
+
+  .lp-flag::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--hue, var(--color-accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 520ms var(--ease-out);
+  }
+
+  .lp-flag:hover::after,
+  .lp-flag:focus-visible::after {
+    transform: scaleX(1);
   }
 
   .lp-flag:last-child { border-bottom: 1px solid var(--color-line); }
@@ -1929,6 +2074,11 @@
   100% { box-shadow: 0 0 0 8px rgb(255 179 71 / 0); }
 }
 
+@keyframes chertma-pop {
+  from { transform: translateY(0.25em); filter: blur(4px); }
+  to { transform: none; filter: none; }
+}
+
 @keyframes caret {
   50% { opacity: 0; }
 }
@@ -1997,9 +2147,26 @@
     animation: none !important;
   }
 
-  .lg-sample {
+  .lp-tag,
+  .lp-dek {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
+  }
+
+  .lp-ch,
+  .lp-ch.is-drop,
+  .chertma-ch {
+    width: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+
+  .lp-weld-tip,
+  .lp-cursor {
+    display: none !important;
   }
 
   .chertma {
