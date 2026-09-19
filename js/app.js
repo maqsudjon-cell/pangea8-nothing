@@ -87,7 +87,7 @@
       if (reduced) {
         typeEl.classList.add("is-done");
         typeEl.innerHTML = 'tou<span class="lp-gg">.gg</span>';
-        document.querySelectorAll(".lp-tag, .lp-dek").forEach((n) => n.classList.add("is-in"));
+        document.querySelectorAll(".lp-tag, .lp-dek, .lp-cta").forEach((n) => n.classList.add("is-in"));
         return;
       }
       for (let i = 1; i <= SRC.length; i++) {
@@ -98,7 +98,7 @@
       paint(SRC.length, true, false);
       await wait(520);
       paint(SRC.length, true, true);
-      document.querySelectorAll(".lp-tag, .lp-dek").forEach((n) => n.classList.add("is-in"));
+      document.querySelectorAll(".lp-tag, .lp-dek, .lp-cta").forEach((n) => n.classList.add("is-in"));
     };
     run();
   }
