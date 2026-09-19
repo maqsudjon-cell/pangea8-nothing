@@ -3,10 +3,12 @@
 > Public brand home of Maqsudjon Polatov. TOU = “to you.” Umbrella, not a product name.
 
 - Site: https://tou.gg
+- RSS: https://tou.gg/rss.xml
+- Stats: https://tou.goatcounter.com
 - Person: Maqsudjon Polatov, Tashkent, Uzbekistan (UTC+5)
 - Method: directs AI coding agents end to end (spec → architecture → build → DNS/TLS → ops). Welds full-time; ships software nights/days off.
 - Email: polatovmaqsudjon1@gmail.com
-- Telegram: https://t.me/mrbmp13
+- Telegram: https://t.me/toudotgg
 - GitHub: https://github.com/maqsudjon-cell
 - Lab/archive: https://maqsudjon.com
 - Source: https://github.com/maqsudjon-cell/tou
@@ -31,7 +33,8 @@
 ## Pages
 
 - / work index and case studies
+- /cv curriculum vitae
 - /log editorial index (canonical essays on maqsudjon.com)
 - /about bio, method, stack, availability
 - /now what is being built this month
-- /colophon type, motion, code-generated logo/OG
+- /colophon type, motion, and code-generated logo/OG

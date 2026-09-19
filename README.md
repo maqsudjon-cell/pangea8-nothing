@@ -1,57 +1,85 @@
 # tou.gg
 
-Public brand home of Maqsudjon Polatov. **TOU = “to you.”**
+**TOU = to you.** Public brand home of [Maqsudjon Polatov](https://tou.gg) — Tashkent. Welds metal by day. Ships software by night.
 
-This repository is the GitHub Pages source for [tou.gg](https://tou.gg). The live preview in Grok Built is the same site.
+Live: [https://tou.gg](https://tou.gg)  
+Writing RSS: [https://tou.gg/rss.xml](https://tou.gg/rss.xml)  
+Stats: [https://tou.goatcounter.com](https://tou.goatcounter.com)  
+Source: this repository is the GitHub Pages root.
 
-## Local
+## What this is
 
-```bash
-npm install
-npm run dev
-```
+A static snapshot of the site. Not a product. The umbrella for fifteen live domains (FlareStamina, AI Lenta, Chertma, …). The lab archive stays at [maqsudjon.com](https://maqsudjon.com).
 
-Open the printed local URL. Production build:
+## Pages
 
-```bash
-npm run build
-```
+| Path | What |
+| --- | --- |
+| `/` | Editorial landing — `to you` → `tou.gg` |
+| `/work/` | Selected work + case studies |
+| `/cv/` | Curriculum vitae, print-ready |
+| `/log/` | Writing index. Local notes + outbound archive |
+| `/about/` `/now/` `/colophon/` | Bio, this month, type/motion |
 
-Brand assets (favicon, OG) are generated in code:
+Languages on the landing: **UZ / RU / EN**. Same URLs.
+
+## Brand
+
+Generated in code. No stock photos. No model-drawn people.
 
 ```bash
 node scripts/brand.mjs
 ```
 
-No AI raster images. SVG is canonical; JPEG/PNG are exports.
+Writes `favicon.svg`, `apple-touch-icon.png`, `icon-{32,192,512}.png`, `og.svg`, `og.png`, `og.jpg` (1200×630). Palette: ink `#0A0E1A`, weld `#FF6B35`, AI `#00D4FF`.
 
-## Pages + DNS
+## Analytics
 
-GitHub Pages serves this repo (root) at **tou.gg**.
+[GoatCounter](https://www.goatcounter.com) — no cookies, no Google. Site code **`tou`**.
 
-Cloudflare DNS is already pointed:
+Create the site once: goatcounter.com → new site `tou` → allowed domain `tou.gg`. Public dashboard: `https://tou.goatcounter.com`.
 
-- Apex `tou.gg` — A records to GitHub Pages IPs
-  - `185.199.108.153`
-  - `185.199.109.153`
-  - `185.199.110.153`
-  - `185.199.111.153`
-- `www.tou.gg` — CNAME to `maqsudjon-cell.github.io`
+## SEO
 
-`CNAME` in this repo contains exactly:
+- Canonical URLs, Open Graph + Twitter cards (`/og.jpg`)
+- JSON-LD: WebSite, Person, ItemList, Blog
+- `sitemap.xml`, `robots.txt`, `humans.txt`, `llms.txt`
+- RSS 2.0 at `/rss.xml` and `/feed.xml`
+
+## GitHub Pages + DNS
+
+Repo Settings → Pages → **GitHub Actions** (this repo ships `.github/workflows/pages.yml`). Custom domain: **tou.gg**. Enforce HTTPS after the certificate is issued (usually a few minutes).
+
+DNS (Porkbun / Cloudflare) already needed:
+
+**Apex `tou.gg`** — A records
+
+- `185.199.108.153`
+- `185.199.109.153`
+- `185.199.110.153`
+- `185.199.111.153`
+
+**`www.tou.gg`** — CNAME → `maqsudjon-cell.github.io`
+
+`CNAME` in this repo is exactly:
 
 ```
 tou.gg
 ```
 
-Enable Pages: repo Settings → Pages → Deploy from branch `main` / `/ (root)`.
+Until Pages is enabled, GitHub answers **Site not found** on HTTP and TLS is `*.github.io`. After the first Actions deploy, wait for the custom-domain certificate.
 
-`www` should redirect to apex (Cloudflare “www to root” or a Pages redirect).
+## Local (the React app that generates this snapshot)
 
-## Stack
+The editable source lives in the Grok Built workspace. To refresh this repo:
 
-TanStack Start + React + Tailwind v4. Type: Space Grotesk + JetBrains Mono + Inter. Weld `#FF6B35 → #FFB347` and AI `#00D4FF → #00FF88` on `#0A0E1A`. Brand: TOU = to you. Motion respects `prefers-reduced-motion`.
+```bash
+node --experimental-strip-types scripts/export-static.mjs /tmp/tou-repo
+```
+
+Then commit and push `main`. Do **not** paste personal access tokens into chat or into this repository.
 
 ## Contact
 
-Maqsudjon Polatov · Tashkent · [polatovmaqsudjon1@gmail.com](mailto:polatovmaqsudjon1@gmail.com) · [Telegram](https://t.me/mrbmp13)
+Maqsudjon Polatov · Tashkent  
+[polatovmaqsudjon1@gmail.com](mailto:polatovmaqsudjon1@gmail.com) · [Telegram](https://t.me/toudotgg) · [GitHub](https://github.com/maqsudjon-cell)

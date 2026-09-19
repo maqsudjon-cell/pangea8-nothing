@@ -1,0 +1,15 @@
+/* TEAM */
+Name: Maqsudjon Polatov
+Role: Product engineer / metal fabricator
+Site: https://tou.gg
+Location: Tashkent, Uzbekistan
+Contact: polatovmaqsudjon1@gmail.com
+Telegram: https://t.me/toudotgg
+
+/* SITE */
+Last update: 2026-09-20
+Language: EN / UZ / RU
+Doctype: HTML5
+Standards: RSS, JSON-LD, sitemap
+Analytics: GoatCounter (privacy-first, no cookies)
+Software: TanStack Start, React, Tailwind. Static snapshot on GitHub Pages.

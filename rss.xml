@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tou.gg — writing</title>
+    <link>https://tou.gg/log/</link>
+    <atom:link href="https://tou.gg/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Notes from Maqsudjon Polatov. Code and steel. Tashkent.</description>
+    <language>en</language>
+    <lastBuildDate>Sat, 19 Sep 2026 23:34:15 GMT</lastBuildDate>
+    <managingEditor>polatovmaqsudjon1@gmail.com (Maqsudjon Polatov)</managingEditor>
+    <webMaster>polatovmaqsudjon1@gmail.com (Maqsudjon Polatov)</webMaster>
+    <copyright>© 2026 Maqsudjon Polatov</copyright>
+    <ttl>60</ttl>
+    <image>
+      <url>https://tou.gg/og.jpg</url>
+      <title>tou.gg</title>
+      <link>https://tou.gg/</link>
+    </image>
+    <item>
+      <title>Why a three-letter .gg</title>
+      <link>https://tou.gg/log/why-tou/</link>
+      <guid isPermaLink="true">https://tou.gg/log/why-tou/</guid>
+      <pubDate>Sat, 19 Sep 2026 07:00:00 GMT</pubDate>
+      <description>maqsudjon.com stays the lab. tou.gg is the front door.</description>
+      <content:encoded><![CDATA[<p>I already had a site. maqsudjon.com is the lab — ASCII engine, build log, the long name on the certificate. It is a good lab. It is a bad front door.</p><p>t3.gg is three letters and a TLD that does not pin you to a country or a product. A course, a stack, a stream can all live under it, and the root still means the person. I wanted that shape.</p><p>TOU is “to you.” The work is pointed at a student in Namangan, a welder pricing a grille, a guest at a wedding with a phone full of photos. Not at a category. Not at an “ecosystem.”</p><p>.uz is home. I will keep shipping .uz products. .gg is the handshake for everything else — lab.tou.gg, chat.tou.gg, whatever gets built next without renaming the person every six months.</p><p>pangea8 became FlareStamina because a product should be allowed to grow a real name. The umbrella should not. That is why this domain is three letters and a joke that is not a joke: shipped to you.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Code and steel</title>
+      <link>https://tou.gg/log/code-and-steel/</link>
+      <guid isPermaLink="true">https://tou.gg/log/code-and-steel/</guid>
+      <pubDate>Sat, 19 Sep 2026 07:00:00 GMT</pubDate>
+      <description>The workshop is the engineering school. Measure, join, load-test the seam.</description>
+      <content:encoded><![CDATA[<p>The shop is loud. Steel does not autocomplete.</p><p>You measure the opening. You cut. You tack. You check the square. You run the seam. Then you hang your weight on it, or you do not ship it to a balcony on the fifth floor.</p><p>That is the whole engineering loop. Software pretends the loop is optional because the failure is a 500 and not a railing that lets go.</p><p>I weld during the day in Tashkent. I specify for agents at night. The method is the same: write the joint, inspect the bead, load-test. If the agent hallucinated a library, that is a cold shut — grind it out, run it again.</p><p>People treat the welding as a plot twist. It is the school. The useful diploma is the habit of not shipping a seam you would not stand on.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Tadam: a wedding album with no app and no database</title>
+      <link>https://maqsudjon.com/log/log-2026-08-27-tadam-wedding-photo-album.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-08-27-tadam-wedding-photo-album.html</guid>
+      <pubDate>Thu, 27 Aug 2026 07:00:00 GMT</pubDate>
+      <description>Tadam: a wedding album with no app and no database</description>
+      
+    </item>
+    <item>
+      <title>Seven sites in six weeks</title>
+      <link>https://maqsudjon.com/log/log-2026-08-27-seven-sites-six-weeks.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-08-27-seven-sites-six-weeks.html</guid>
+      <pubDate>Thu, 27 Aug 2026 07:00:00 GMT</pubDate>
+      <description>Seven sites in six weeks</description>
+      
+    </item>
+    <item>
+      <title>Flarestamina — login walls came down</title>
+      <link>https://maqsudjon.com/log/log-2026-08-24-flarestamina-walls-hub-news-tools.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-08-24-flarestamina-walls-hub-news-tools.html</guid>
+      <pubDate>Mon, 24 Aug 2026 07:00:00 GMT</pubDate>
+      <description>Flarestamina — login walls came down</description>
+      
+    </item>
+    <item>
+      <title>Rebuilt Flarestamina in a weekend, deleted the framework</title>
+      <link>https://maqsudjon.com/log/log-2026-08-22-flarestamina-paper-redesign.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-08-22-flarestamina-paper-redesign.html</guid>
+      <pubDate>Sat, 22 Aug 2026 07:00:00 GMT</pubDate>
+      <description>Rebuilt Flarestamina in a weekend, deleted the framework</description>
+      
+    </item>
+    <item>
+      <title>KVADRAT</title>
+      <link>https://maqsudjon.com/log/log-2026-08-07-kvadrat-calculator.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-08-07-kvadrat-calculator.html</guid>
+      <pubDate>Fri, 07 Aug 2026 07:00:00 GMT</pubDate>
+      <description>KVADRAT</description>
+      
+    </item>
+    <item>
+      <title>Reshotkachi second build</title>
+      <link>https://maqsudjon.com/log/log-2026-08-04-reshotkachi-second-build.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-08-04-reshotkachi-second-build.html</guid>
+      <pubDate>Tue, 04 Aug 2026 07:00:00 GMT</pubDate>
+      <description>Reshotkachi second build</description>
+      
+    </item>
+    <item>
+      <title>payvandchi workshop online</title>
+      <link>https://maqsudjon.com/log/log-2026-08-01-payvandchi-workshop.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-08-01-payvandchi-workshop.html</guid>
+      <pubDate>Sat, 01 Aug 2026 07:00:00 GMT</pubDate>
+      <description>payvandchi workshop online</description>
+      
+    </item>
+    <item>
+      <title>Chiziq web studio</title>
+      <link>https://maqsudjon.com/log/log-2026-07-25-chiziq-web-studio.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-07-25-chiziq-web-studio.html</guid>
+      <pubDate>Sat, 25 Jul 2026 07:00:00 GMT</pubDate>
+      <description>Chiziq web studio</description>
+      
+    </item>
+    <item>
+      <title>ZED AVLOD School</title>
+      <link>https://maqsudjon.com/log/log-2026-07-23-zed-avlod-school.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-07-23-zed-avlod-school.html</guid>
+      <pubDate>Thu, 23 Jul 2026 07:00:00 GMT</pubDate>
+      <description>ZED AVLOD School</description>
+      
+    </item>
+    <item>
+      <title>CTN Language Centre</title>
+      <link>https://maqsudjon.com/log/log-2026-07-21-ctn-language-centre.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-07-21-ctn-language-centre.html</guid>
+      <pubDate>Tue, 21 Jul 2026 07:00:00 GMT</pubDate>
+      <description>CTN Language Centre</description>
+      
+    </item>
+    <item>
+      <title>pangea8 is now FLARESTAMINA</title>
+      <link>https://maqsudjon.com/log/log-2026-07-10-pangea8-is-now-flarestamina.html</link>
+      <guid isPermaLink="true">https://maqsudjon.com/log/log-2026-07-10-pangea8-is-now-flarestamina.html</guid>
+      <pubDate>Fri, 10 Jul 2026 07:00:00 GMT</pubDate>
+      <description>pangea8 is now FLARESTAMINA</description>
+      
+    </item>
+  </channel>
+</rss>

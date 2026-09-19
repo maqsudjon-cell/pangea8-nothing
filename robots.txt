@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://tou.gg/sitemap.xml
+Host: https://tou.gg
