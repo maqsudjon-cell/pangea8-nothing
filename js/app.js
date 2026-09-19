@@ -66,4 +66,38 @@
       });
     });
   }
+
+  const typeEl = document.querySelector("[data-type]");
+  if (typeEl) {
+    const full = typeEl.getAttribute("data-type") || "";
+    if (reduced) typeEl.textContent = full;
+    else {
+      let i = 0;
+      const id = setInterval(() => {
+        i += 1;
+        typeEl.textContent = full.slice(0, i);
+        if (i >= full.length) clearInterval(id);
+      }, 26);
+    }
+  }
+  document.querySelectorAll(".chertma[data-to]").forEach((el) => {
+    const to = el.getAttribute("data-to");
+    setTimeout(() => {
+      el.textContent = to;
+      el.classList.add("is-fixed");
+    }, reduced ? 0 : 2200);
+  });
+  const weld = document.getElementById("weld-path");
+  if (weld && !reduced) {
+    const len = weld.getTotalLength();
+    weld.style.strokeDasharray = String(len);
+    weld.style.strokeDashoffset = String(len);
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max <= 0 ? 1 : Math.min(1, window.scrollY / max);
+      weld.style.strokeDashoffset = String(len * (1 - p));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
 })();

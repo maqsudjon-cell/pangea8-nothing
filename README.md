@@ -50,7 +50,7 @@ Enable Pages: repo Settings → Pages → Deploy from branch `main` / `/ (root)`
 
 ## Stack
 
-TanStack Start + React + Tailwind v4. Type: system UI + IBM Plex Mono. Accent: cyan `#22D3EE` on void `#050505`. Home is a t3.gg-style centered column. Motion respects `prefers-reduced-motion`.
+TanStack Start + React + Tailwind v4. Type: JetBrains Mono + Inter. Weld gradient `#FF6B35 → #F7C548` on GitHub dark `#0D1117`. Chertma green `#3FB950`. Motion respects `prefers-reduced-motion`.
 
 ## Contact
 

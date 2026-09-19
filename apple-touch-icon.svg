@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
   <title>TOU</title>
-  <rect width="24" height="24" fill="#050505"/>
+  <rect width="24" height="24" fill="#0D1117"/>
   <g transform="translate(4 4)">
   <!-- T -->
-  <rect x="1" y="3" width="4" height="2" fill="#FAFAFA"/>
-  <rect x="2" y="3" width="2" height="9" fill="#FAFAFA"/>
+  <rect x="1" y="3" width="4" height="2" fill="#E6EDF3"/>
+  <rect x="2" y="3" width="2" height="9" fill="#E6EDF3"/>
   <!-- O: square ring, geometric cut -->
-  <path fill="#FAFAFA" fill-rule="evenodd" d="M6 3h4v9H6zm1 2h2v5H7z"/>
+  <path fill="#E6EDF3" fill-rule="evenodd" d="M6 3h4v9H6zm1 2h2v5H7z"/>
   <!-- U -->
-  <rect x="11" y="3" width="2" height="7" fill="#FAFAFA"/>
-  <rect x="13" y="3" width="2" height="7" fill="#FAFAFA"/>
-  <rect x="11" y="10" width="4" height="2" fill="#FAFAFA"/>
+  <rect x="11" y="3" width="2" height="7" fill="#E6EDF3"/>
+  <rect x="13" y="3" width="2" height="7" fill="#E6EDF3"/>
+  <rect x="11" y="10" width="4" height="2" fill="#E6EDF3"/>
   <!-- .gg square seal -->
-  <rect x="13" y="13" width="2" height="2" fill="#22D3EE"/>
+  <rect x="13" y="13" width="2" height="2" fill="#FF6B35"/>
   </g>
 </svg>
