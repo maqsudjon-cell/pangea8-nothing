@@ -2,32 +2,25 @@
 
 Public brand home of Maqsudjon Polatov. **TOU = “to you.”**
 
-This repository is the GitHub Pages source for [tou.gg](https://tou.gg). The live preview in Grok Built is the same site.
+Static site. GitHub Pages serves this repo (root) at [tou.gg](https://tou.gg).
 
 ## Local
 
-```bash
-npm install
-npm run dev
-```
-
-Open the printed local URL. Production build:
+No build step. Open `index.html` in a browser, or:
 
 ```bash
-npm run build
+python3 -m http.server 8080
 ```
 
-Brand assets (favicon, OG) are generated in code:
+Brand assets (favicon, OG) are generated in code — no AI rasters:
 
 ```bash
 node scripts/brand.mjs
 ```
 
-No AI raster images. SVG is canonical; JPEG/PNG are exports.
+Requires Node, Pillow (`PIL`), and ffmpeg. SVG is canonical; PNG/JPEG are exports.
 
 ## Pages + DNS
-
-GitHub Pages serves this repo (root) at **tou.gg**.
 
 Cloudflare DNS is already pointed:
 
@@ -44,13 +37,13 @@ Cloudflare DNS is already pointed:
 tou.gg
 ```
 
-Enable Pages: repo Settings → Pages → Deploy from branch `main` / `/ (root)`.
+Enable Pages if it is not on yet: **Settings → Pages → Deploy from branch `main` / `/ (root)`**.
 
-`www` should redirect to apex (Cloudflare “www to root” or a Pages redirect).
+`www` should redirect to apex (Cloudflare “www to root”, or a Pages redirect).
 
 ## Stack
 
-TanStack Start + React + Tailwind v4. Type: Instrument Serif (wordmark), IBM Plex Sans, IBM Plex Mono. Accent: cold steel `#7DE1C3`. Motion respects `prefers-reduced-motion`.
+HTML + CSS + a small JS file. Type: Instrument Serif (wordmark), IBM Plex Sans, IBM Plex Mono — self-hosted woff2. Accent: cold steel `#7DE1C3`. Motion respects `prefers-reduced-motion`.
 
 ## Contact
 
