@@ -5,7 +5,18 @@
 Live: [https://tou.gg](https://tou.gg)  
 Writing RSS: [https://tou.gg/rss.xml](https://tou.gg/rss.xml)  
 Stats: [https://tou.goatcounter.com](https://tou.goatcounter.com)  
-Source: this repository is the GitHub Pages root.
+Source: this repository **is** the GitHub Pages site (static HTML on `main`).
+
+## Go live (one click)
+
+DNS for `tou.gg` already points at GitHub Pages (`185.199.108–111.153`). GitHub still answers **Site not found** until Pages is switched on **in the repo UI**. Tokens and GitHub Apps cannot create a Pages site.
+
+1. Open [github.com/maqsudjon-cell/tou/settings/pages](https://github.com/maqsudjon-cell/tou/settings/pages)
+2. **Build and deployment → Source:** Deploy from a branch
+3. **Branch:** `main` · **Folder:** `/ (root)` → **Save**
+4. Custom domain should read **tou.gg** (from the `CNAME` file). Wait for the TLS certificate, then tick **Enforce HTTPS**.
+
+After that, every push to `main` publishes. Do not paste personal access tokens into chat or into this repository.
 
 ## What this is
 
@@ -37,20 +48,16 @@ Writes `favicon.svg`, `apple-touch-icon.png`, `icon-{32,192,512}.png`, `og.svg`,
 
 [GoatCounter](https://www.goatcounter.com) — no cookies, no Google. Site code **`tou`**.
 
-Create the site once: goatcounter.com → new site `tou` → allowed domain `tou.gg`. Public dashboard: `https://tou.goatcounter.com`.
+Create the site once: goatcounter.com → new site `tou` → allowed domain `tou.gg`. Public dashboard: `https://tou.goatcounter.com`. Until that exists, the tracker is a silent no-op.
 
 ## SEO
 
-- Canonical URLs, Open Graph + Twitter cards (`/og.jpg`)
+- Canonical URLs, Open Graph + Twitter cards (`/og.jpg` 1200×630)
 - JSON-LD: WebSite, Person, ItemList, Blog
 - `sitemap.xml`, `robots.txt`, `humans.txt`, `llms.txt`
 - RSS 2.0 at `/rss.xml` and `/feed.xml`
 
-## GitHub Pages + DNS
-
-Repo Settings → Pages → **GitHub Actions** (this repo ships `.github/workflows/pages.yml`). Custom domain: **tou.gg**. Enforce HTTPS after the certificate is issued (usually a few minutes).
-
-DNS (Porkbun / Cloudflare) already needed:
+## DNS
 
 **Apex `tou.gg`** — A records
 
@@ -67,7 +74,7 @@ DNS (Porkbun / Cloudflare) already needed:
 tou.gg
 ```
 
-Until Pages is enabled, GitHub answers **Site not found** on HTTP and TLS is `*.github.io`. After the first Actions deploy, wait for the custom-domain certificate.
+Until Pages is enabled, GitHub answers **Site not found** on HTTP and TLS is `*.github.io`. After Save, wait for the custom-domain certificate.
 
 ## Local (the React app that generates this snapshot)
 
@@ -77,7 +84,7 @@ The editable source lives in the Grok Built workspace. To refresh this repo:
 node --experimental-strip-types scripts/export-static.mjs /tmp/tou-repo
 ```
 
-Then commit and push `main`. Do **not** paste personal access tokens into chat or into this repository.
+Then commit and push `main`.
 
 ## Contact
 
