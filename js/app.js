@@ -69,16 +69,35 @@
 
   const typeEl = document.querySelector("[data-type]");
   if (typeEl) {
-    const full = typeEl.getAttribute("data-type") || "";
-    if (reduced) typeEl.textContent = full;
-    else {
-      let i = 0;
-      const id = setInterval(() => {
-        i += 1;
-        typeEl.textContent = full.slice(0, i);
-        if (i >= full.length) clearInterval(id);
-      }, 26);
-    }
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const run = async () => {
+      if (reduced) {
+        typeEl.classList.add("is-done");
+        typeEl.innerHTML = 'tou<span class="lp-gg">.gg</span>';
+        return;
+      }
+      typeEl.classList.remove("is-done");
+      const start = "to you";
+      for (let i = 1; i <= start.length; i++) {
+        typeEl.textContent = start.slice(0, i);
+        await wait(80);
+      }
+      await wait(620);
+      for (let i = start.length - 1; i >= 2; i--) {
+        typeEl.textContent = start.slice(0, i);
+        await wait(48);
+      }
+      await wait(160);
+      typeEl.textContent = "tou";
+      await wait(380);
+      for (const next of ["tou.", "tou.g"]) {
+        typeEl.textContent = next;
+        await wait(85);
+      }
+      typeEl.classList.add("is-done");
+      typeEl.innerHTML = 'tou<span class="lp-gg">.gg</span>';
+    };
+    run();
   }
   document.querySelectorAll(".chertma[data-to]").forEach((el) => {
     const to = el.getAttribute("data-to");
