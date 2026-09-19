@@ -50,7 +50,7 @@ Enable Pages: repo Settings → Pages → Deploy from branch `main` / `/ (root)`
 
 ## Stack
 
-TanStack Start + React + Tailwind v4. Type: Big Shoulders Display (wordmark, plates), Bricolage Grotesque (body), IBM Plex Mono (domains). Accent: electric lime `#C8F542`. Motion respects `prefers-reduced-motion`.
+TanStack Start + React + Tailwind v4. Type: Bricolage Grotesque + IBM Plex Mono. Accent: sunset `#FF7A17` on `#0A0A0A`. Motion respects `prefers-reduced-motion`.
 
 ## Contact
 
