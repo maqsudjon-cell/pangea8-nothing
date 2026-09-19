@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <title>tou.gg — Shipped to you.</title>
-  <rect width="1200" height="630" fill="#07080A"/>
+  <rect width="1200" height="630" fill="#08090A"/>
   <text
     x="600" y="287"
     text-anchor="middle" dominant-baseline="middle"
     font-family="Instrument Serif, Liberation Serif, Georgia, serif"
     font-size="400" font-weight="400"
     letter-spacing="10"
-    fill="#E8EAEE"
+    fill="#F3F4EE"
   >TOU</text>
-  <rect x="540" y="454" width="120" height="4" fill="#7DE1C3"/>
+  <rect x="540" y="454" width="120" height="4" fill="#C8F542"/>
   <text
     x="600" y="486"
     text-anchor="middle" dominant-baseline="hanging"
     font-family="Instrument Serif, Liberation Serif, Georgia, serif"
     font-style="italic" font-size="40"
-    fill="#8B909A"
+    fill="#9A9D93"
   >to you</text>
   <text
     x="72" y="558"
     text-anchor="start" dominant-baseline="auto"
     font-family="IBM Plex Mono, Liberation Mono, ui-monospace, monospace"
     font-size="22"
-    fill="#8B909A"
+    fill="#9A9D93"
   >tou.gg</text>
 </svg>

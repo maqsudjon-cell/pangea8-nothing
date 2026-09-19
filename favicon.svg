@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
   <title>TOU</title>
-  <rect width="16" height="16" fill="#07080A"/>
+  <rect width="16" height="16" fill="#08090A"/>
   <!-- T -->
-  <rect x="1" y="3" width="4" height="2" fill="#E8EAEE"/>
-  <rect x="2" y="3" width="2" height="9" fill="#E8EAEE"/>
+  <rect x="1" y="3" width="4" height="2" fill="#F3F4EE"/>
+  <rect x="2" y="3" width="2" height="9" fill="#F3F4EE"/>
   <!-- O: square ring, geometric cut -->
-  <path fill="#E8EAEE" fill-rule="evenodd" d="M6 3h4v9H6zm1 2h2v5H7z"/>
+  <path fill="#F3F4EE" fill-rule="evenodd" d="M6 3h4v9H6zm1 2h2v5H7z"/>
   <!-- U -->
-  <rect x="11" y="3" width="2" height="7" fill="#E8EAEE"/>
-  <rect x="13" y="3" width="2" height="7" fill="#E8EAEE"/>
-  <rect x="11" y="10" width="4" height="2" fill="#E8EAEE"/>
+  <rect x="11" y="3" width="2" height="7" fill="#F3F4EE"/>
+  <rect x="13" y="3" width="2" height="7" fill="#F3F4EE"/>
+  <rect x="11" y="10" width="4" height="2" fill="#F3F4EE"/>
   <!-- .gg square seal -->
-  <rect x="13" y="13" width="2" height="2" fill="#7DE1C3"/>
+  <rect x="13" y="13" width="2" height="2" fill="#C8F542"/>
 </svg>
