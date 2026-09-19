@@ -1,13 +1,58 @@
 
 @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}
 @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
-@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/instrument-serif-latin-400-normal.woff2") format("woff2")}
-@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url("/fonts/instrument-serif-latin-400-italic.woff2") format("woff2")}
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-weight:700;font-display:swap;src:url("/fonts/big-shoulders-display-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-weight:800;font-display:swap;src:url("/fonts/big-shoulders-display-latin-800-normal.woff2") format("woff2")}
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-weight:900;font-display:swap;src:url("/fonts/big-shoulders-display-latin-900-normal.woff2") format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/bricolage-grotesque-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:700;font-display:swap;src:url("/fonts/bricolage-grotesque-latin-700-normal.woff2") format("woff2")}
 
 
 
 
-
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("@fontsource/big-shoulders-display/files/big-shoulders-display-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+  src: url("@fontsource/big-shoulders-display/files/big-shoulders-display-latin-800-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 900;
+  src: url("@fontsource/big-shoulders-display/files/big-shoulders-display-latin-900-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url("@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-700-normal.woff2") format("woff2");
+}
 
 :root {
   --color-bg: #08090a;
@@ -21,8 +66,8 @@
   --color-line-strong: rgb(243 244 238 / 0.16);
   --color-chip: rgb(200 245 66 / 0.12);
 
-  --font-sans: "Instrument Serif", "Times New Roman", serif;
-  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --radius-xs: 2px;
@@ -49,7 +94,7 @@
       var(--color-bg);
     color: var(--color-fg);
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
@@ -57,11 +102,11 @@
     min-height: 100dvh;
     background: var(--color-bg);
     color: var(--color-fg);
-    font-family: var(--font-display);
-    font-size: 1.125rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
     line-height: 1.5;
     text-wrap: pretty;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   button:not(:disabled),
@@ -119,9 +164,10 @@
 
   .brand-word {
     font-family: var(--font-display);
-    font-size: 1.35rem;
+    font-size: 1.55rem;
+    font-weight: 800;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
   }
 
   .brand-gg {
@@ -170,10 +216,10 @@
     gap: 0.5rem;
     min-height: 2.75rem;
     padding: 0 1.15rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     border-radius: 2px;
     transition:
@@ -199,16 +245,14 @@
   .btn-ghost {
     background: transparent;
     color: var(--color-fg);
-    border: 0;
-    padding-inline: 0.2rem;
-    text-decoration: underline;
-    text-underline-offset: 0.28em;
-    text-decoration-thickness: 1px;
+    border: 1px solid var(--color-line-strong);
+    padding-inline: 1.15rem;
+    text-decoration: none;
   }
 
   .btn-ghost:hover {
+    border-color: var(--color-accent);
     color: var(--color-accent);
-    border-color: transparent;
   }
 
   .chip {
@@ -285,8 +329,9 @@
   }
 
   .nav-link {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-mute);
@@ -386,14 +431,15 @@
   .hero-ghost {
     display: none;
     position: absolute;
-    right: -5%;
-    top: -20%;
+    right: 0;
+    top: -12%;
     font-family: var(--font-display);
-    font-size: clamp(14rem, 34vw, 24rem);
+    font-size: clamp(12rem, 26vw, 18rem);
+    font-weight: 900;
     line-height: 0.72;
     letter-spacing: -0.08em;
     color: transparent;
-    -webkit-text-stroke: 1px rgb(200 245 66 / 0.18);
+    -webkit-text-stroke: 1px rgb(200 245 66 / 0.11);
     pointer-events: none;
     user-select: none;
     z-index: 0;
@@ -431,16 +477,16 @@
   .hero-lockup {
     display: flex;
     align-items: flex-start;
-    gap: 0.12em;
+    gap: 0.08em;
     margin: 0;
-    line-height: 0.82;
-    letter-spacing: -0.06em;
+    line-height: 0.75;
+    letter-spacing: -0.07em;
   }
 
   .hero-tou {
     font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(5.6rem, 28vw, 12rem);
+    font-weight: 900;
+    font-size: clamp(6.4rem, 38vw, 14rem);
     animation: fade-up 700ms var(--ease-out) both;
   }
 
@@ -454,56 +500,68 @@
     color: var(--color-accent-fg);
     background: var(--color-accent);
     letter-spacing: 0.04em;
-    margin-top: 0.55em;
+    margin-top: 0.42em;
     padding: 0.28em 0.42em 0.22em;
     animation: fade-up 700ms var(--ease-out) 280ms both;
   }
 
-  .hero-toyou {
-    margin: 0.85rem 0 0;
+  .hero-headline {
+    margin: 1.1rem 0 0;
     font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(1.35rem, 3vw, 2rem);
-    color: var(--color-mute);
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    text-transform: uppercase;
     animation: fade-up 700ms var(--ease-out) 360ms both;
   }
 
-  .hero-headline {
-    margin: 2rem 0 0;
-    max-width: 14ch;
-    font-family: var(--font-display);
-    font-size: clamp(2.1rem, 6vw, 3.4rem);
-    font-weight: 400;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    animation: fade-up 700ms var(--ease-out) 460ms both;
+  .hero-punch {
+    margin: 0.85rem 0 0;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+    animation: fade-up 700ms var(--ease-out) 440ms both;
   }
 
-  .hero-sub {
-    margin: 1rem 0 0;
-    max-width: 36rem;
-    color: var(--color-mute);
-    font-size: 1.15rem;
-    font-style: italic;
-    animation: fade-up 700ms var(--ease-out) 540ms both;
+  .hero-proof {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+    margin-top: 1.5rem;
+    animation: fade-up 700ms var(--ease-out) 520ms both;
+  }
+
+  @media (min-width: 700px) {
+    .hero-proof {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .hero-proof-cell {
+    padding: 0.85rem 0.9rem 0.75rem;
+    border: 1px solid var(--color-line);
+    background:
+      linear-gradient(var(--color-accent), var(--color-accent)) left top / 10px 2px no-repeat,
+      linear-gradient(var(--color-accent), var(--color-accent)) left top / 2px 10px no-repeat,
+      linear-gradient(var(--color-accent), var(--color-accent)) right top / 10px 2px no-repeat,
+      linear-gradient(var(--color-accent), var(--color-accent)) right top / 2px 10px no-repeat,
+      linear-gradient(var(--color-accent), var(--color-accent)) left bottom / 10px 2px no-repeat,
+      linear-gradient(var(--color-accent), var(--color-accent)) left bottom / 2px 10px no-repeat,
+      linear-gradient(var(--color-accent), var(--color-accent)) right bottom / 10px 2px no-repeat,
+      linear-gradient(var(--color-accent), var(--color-accent)) right bottom / 2px 10px no-repeat,
+      var(--color-surface);
   }
 
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 1.75rem;
-    animation: fade-up 700ms var(--ease-out) 620ms both;
-  }
-
-  .hero-open {
-    margin: 1.25rem 0 0;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    animation: fade-up 700ms var(--ease-out) 700ms both;
+    margin-top: 1.5rem;
+    animation: fade-up 700ms var(--ease-out) 600ms both;
   }
 
   .ticker {
@@ -575,89 +633,197 @@
     color: var(--color-accent);
   }
 
-  .manifest {
+  .plate-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  @media (min-width: 700px) {
+    .plate-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .plate-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .plate-grid > * {
+    min-width: 0;
+    display: flex;
+  }
+
+  .plate-grid > .span {
+    grid-column: 1 / -1;
+  }
+
+  .plate {
+    position: relative;
+    isolation: isolate;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid var(--color-line);
+    justify-content: space-between;
+    width: 100%;
+    min-height: 17.5rem;
+    padding: 1.05rem 1.1rem 1rem;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    background-image:
+      linear-gradient(var(--color-accent), var(--color-accent)),
+      linear-gradient(var(--color-accent), var(--color-accent)),
+      linear-gradient(var(--color-accent), var(--color-accent)),
+      linear-gradient(var(--color-accent), var(--color-accent)),
+      linear-gradient(var(--color-accent), var(--color-accent)),
+      linear-gradient(var(--color-accent), var(--color-accent)),
+      linear-gradient(var(--color-accent), var(--color-accent)),
+      linear-gradient(var(--color-accent), var(--color-accent));
+    background-size: 12px 2px, 2px 12px, 12px 2px, 2px 12px, 12px 2px, 2px 12px, 12px 2px, 2px 12px;
+    background-position: left top, left top, right top, right top, left bottom, left bottom, right bottom, right bottom;
+    background-repeat: no-repeat;
+    transition:
+      border-color 200ms var(--ease-out),
+      transform 200ms var(--ease-out);
   }
 
-  .man-row {
-    display: grid;
-    grid-template-columns: 2.6rem 1fr;
-    column-gap: 0.85rem;
-    padding: 1.2rem 0 1.15rem;
-    border-top: 1px solid var(--color-line);
-    align-items: start;
+  .plate:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
   }
 
-  .man-row:hover .man-name,
-  .man-row:hover .man-dom {
+  .plate-hatch {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+
+  .plate[data-h="0"] .plate-hatch {
+    background: repeating-linear-gradient(-18deg, transparent, transparent 11px, rgb(200 245 66 / 0.08) 11px, rgb(200 245 66 / 0.08) 12px);
+  }
+  .plate[data-h="1"] .plate-hatch {
+    background: repeating-linear-gradient(28deg, transparent, transparent 9px, rgb(200 245 66 / 0.08) 9px, rgb(200 245 66 / 0.08) 10px);
+  }
+  .plate[data-h="2"] .plate-hatch {
+    background: repeating-linear-gradient(90deg, transparent, transparent 13px, rgb(200 245 66 / 0.07) 13px, rgb(200 245 66 / 0.07) 14px);
+  }
+  .plate[data-h="3"] .plate-hatch {
+    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgb(200 245 66 / 0.08) 10px, rgb(200 245 66 / 0.08) 11px);
+  }
+  .plate[data-h="4"] .plate-hatch {
+    background: repeating-linear-gradient(-40deg, transparent, transparent 7px, rgb(200 245 66 / 0.09) 7px, rgb(200 245 66 / 0.09) 8px);
+  }
+  .plate[data-h="5"] .plate-hatch {
+    background: repeating-linear-gradient(0deg, transparent, transparent 12px, rgb(200 245 66 / 0.07) 12px, rgb(200 245 66 / 0.07) 13px);
+  }
+  .plate[data-h="6"] .plate-hatch {
+    background: repeating-linear-gradient(12deg, transparent 0 8px, rgb(200 245 66 / 0.08) 8px 9px, transparent 9px 16px, rgb(200 245 66 / 0.05) 16px 17px);
+  }
+  .plate[data-h="7"] .plate-hatch {
+    background: repeating-linear-gradient(-62deg, transparent, transparent 14px, rgb(200 245 66 / 0.08) 14px, rgb(200 245 66 / 0.08) 15px);
+  }
+
+  .plate-no {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
     color: var(--color-accent);
   }
 
-  .stack-chip {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--color-faint);
-    letter-spacing: 0.02em;
-  }
-
-  .man-n {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+  .plate-mark {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(6.2rem, 22vw, 8.8rem);
+    line-height: 0.78;
+    letter-spacing: -0.07em;
     color: var(--color-accent);
-    padding-top: 0.45rem;
+    transform-origin: left bottom;
+    transition: transform 220ms var(--ease-out), color 220ms var(--ease-out);
   }
 
-  .man-top {
+  .plate:hover .plate-mark {
+    transform: scale(1.04);
+    color: var(--color-fg);
+  }
+
+  .plate-meta {
+    position: relative;
+    z-index: 1;
     display: flex;
-    flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    gap: 0.35rem 1.25rem;
+    gap: 0.75rem;
+    margin-top: 0.35rem;
   }
 
-  .man-name {
-    font-family: var(--font-display);
-    font-size: clamp(1.55rem, 3.4vw, 2.15rem);
-    font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 1.1;
-  }
-
-  .man-row.flagship .man-name {
-    font-size: clamp(1.85rem, 4.2vw, 2.7rem);
-  }
-
-  .man-dom {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-faint);
-  }
-
-  .man-line {
-    display: block;
-    margin: 0.35rem 0 0;
-    max-width: 46ch;
-    color: var(--color-mute);
+  .plate-name {
+    font-family: var(--font-sans);
+    font-weight: 700;
     font-size: 1.05rem;
-    font-style: italic;
-    line-height: 1.4;
+    letter-spacing: -0.02em;
   }
 
+  .plate-dom {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-faint);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .plate:hover .plate-dom {
+    color: var(--color-accent);
+  }
+
+  .plate.flagship {
+    min-height: 19.5rem;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-fg);
+    background-image:
+      linear-gradient(var(--color-accent-fg), var(--color-accent-fg)),
+      linear-gradient(var(--color-accent-fg), var(--color-accent-fg)),
+      linear-gradient(var(--color-accent-fg), var(--color-accent-fg)),
+      linear-gradient(var(--color-accent-fg), var(--color-accent-fg)),
+      linear-gradient(var(--color-accent-fg), var(--color-accent-fg)),
+      linear-gradient(var(--color-accent-fg), var(--color-accent-fg)),
+      linear-gradient(var(--color-accent-fg), var(--color-accent-fg)),
+      linear-gradient(var(--color-accent-fg), var(--color-accent-fg));
+    background-size: 12px 2px, 2px 12px, 12px 2px, 2px 12px, 12px 2px, 2px 12px, 12px 2px, 2px 12px;
+    background-position: left top, left top, right top, right top, left bottom, left bottom, right bottom, right bottom;
+    background-repeat: no-repeat;
+  }
+
+  .plate.flagship .plate-no,
+  .plate.flagship .plate-dom,
+  .plate.flagship .plate-mark {
+    color: var(--color-accent-fg);
+  }
+
+  .plate.flagship .plate-hatch {
+    background: repeating-linear-gradient(-22deg, transparent, transparent 10px, rgb(16 18 4 / 0.12) 10px, rgb(16 18 4 / 0.12) 11px) !important;
+  }
+
+  .plate.flagship:hover .plate-mark {
+    color: var(--color-bg);
+  }
+
+  .stack-chip,
   .man-stack {
-    display: block;
-    margin-top: 0.4rem;
     font-family: var(--font-mono);
     font-size: 0.72rem;
     color: var(--color-faint);
     letter-spacing: 0.02em;
-  }
-
-  .man-row:hover .man-name,
-  .man-row:hover .man-dom {
-    color: var(--color-accent);
   }
 
   .stats {
@@ -668,10 +834,11 @@
 
   .stat-value {
     font-family: var(--font-display);
-    font-style: italic;
+    font-style: normal;
+    font-weight: 800;
     font-size: clamp(2rem, 5vw, 3rem);
     font-variant-numeric: tabular-nums;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
     line-height: 1;
     color: var(--color-accent);
   }
@@ -800,10 +967,12 @@
 
   .page-title {
     margin: 0.55rem 0 0;
-    font-size: clamp(2.1rem, 5vw, 3.4rem);
-    font-weight: 400;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 8vw, 4.6rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 0.92;
+    text-transform: uppercase;
   }
 
   .page-dek {
@@ -954,11 +1123,10 @@
 
   .hero-tou,
   .hero-gg,
-  .hero-toyou,
   .hero-headline,
-  .hero-sub,
+  .hero-punch,
+  .hero-proof,
   .hero-actions,
-  .hero-open,
   .reveal {
     animation: none !important;
     opacity: 1 !important;
@@ -969,6 +1137,10 @@
 
   .ticker-track {
     animation: none;
+  }
+
+  .plate:hover {
+    transform: none;
   }
 
   .btn:active {
