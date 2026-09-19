@@ -50,7 +50,7 @@ Enable Pages: repo Settings → Pages → Deploy from branch `main` / `/ (root)`
 
 ## Stack
 
-TanStack Start + React + Tailwind v4. Type: JetBrains Mono + Inter. Weld gradient `#FF6B35 → #F7C548` on GitHub dark `#0D1117`. Chertma green `#3FB950`. Motion respects `prefers-reduced-motion`.
+TanStack Start + React + Tailwind v4. Type: Space Grotesk + JetBrains Mono + Inter. Weld `#FF6B35 → #FFB347` and AI `#00D4FF → #00FF88` on `#0A0E1A`. Brand: TOU = to you. Motion respects `prefers-reduced-motion`.
 
 ## Contact
 

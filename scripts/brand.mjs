@@ -28,11 +28,14 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 const PALETTE = {
-  bg: "#0D1117",
-  surface: "#161B22",
+  bg: "#0A0E1A",
+  surface: "#101624",
   text: "#E6EDF3",
   mute: "#8B949E",
   accent: "#FF6B35",
+  spark: "#FFB347",
+  ai: "#00D4FF",
+  ok: "#00FF88",
 };
 
 const OG = {
@@ -66,40 +69,39 @@ function parseArgs(argv) {
 
 /** Shared TOU geometry on a 16×16 grid. Min feature = 1 unit → 1px at 16px. */
 function monogramMarks() {
-  const { text, accent } = PALETTE;
+  const { text, accent, ok } = PALETTE;
   return [
-    `<!-- T -->`,
-    `<rect x="1" y="3" width="4" height="2" fill="${text}"/>`,
-    `<rect x="2" y="3" width="2" height="9" fill="${text}"/>`,
-    `<!-- O: square ring, geometric cut -->`,
-    `<path fill="${text}" fill-rule="evenodd" d="M6 3h4v9H6zm1 2h2v5H7z"/>`,
-    `<!-- U -->`,
-    `<rect x="11" y="3" width="2" height="7" fill="${text}"/>`,
-    `<rect x="13" y="3" width="2" height="7" fill="${text}"/>`,
-    `<rect x="11" y="10" width="4" height="2" fill="${text}"/>`,
-    `<!-- .gg square seal -->`,
-    `<rect x="13" y="13" width="2" height="2" fill="${accent}"/>`,
+    `<!-- t -->`,
+    `<rect x="2" y="7" width="6" height="2" fill="${text}"/>`,
+    `<rect x="4" y="7" width="2" height="18" fill="${text}"/>`,
+    `<!-- o -->`,
+    `<path fill="${text}" fill-rule="evenodd" d="M11 7h8v18h-8zm2 3h4v12h-4z"/>`,
+    `<!-- u, bowl holds a 2px 'to you' spark -->`,
+    `<rect x="21" y="7" width="2" height="14" fill="${text}"/>`,
+    `<rect x="27" y="7" width="2" height="14" fill="${text}"/>`,
+    `<rect x="21" y="19" width="8" height="2" fill="${text}"/>`,
+    `<rect x="24" y="13" width="2" height="2" fill="${accent}"/>`,
+    `<!-- > -->`,
+    `<path d="M32 10l6 8-6 8" fill="none" stroke="${ok}" stroke-width="2" stroke-linecap="square"/>`,
   ].join("\n  ");
 }
 
 function faviconSvg() {
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
-  <title>TOU</title>
-  <rect width="16" height="16" fill="${PALETTE.bg}"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 32">
+  <title>tou></title>
+  <rect width="40" height="32" fill="${PALETTE.bg}"/>
   ${monogramMarks()}
 </svg>
 `;
 }
 
 function appleTouchSvg() {
-  // 4 units of padding on a 24-unit canvas (~17%) keeps the mark inside the
-  // iOS rounded-square mask (safe zone ≈ 80% / 10% inset each side).
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <title>TOU</title>
-  <rect width="24" height="24" fill="${PALETTE.bg}"/>
-  <g transform="translate(4 4)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <title>tou></title>
+  <rect width="48" height="48" fill="${PALETTE.bg}"/>
+  <g transform="translate(4 8)">
   ${monogramMarks()}
   </g>
 </svg>
@@ -108,38 +110,21 @@ function appleTouchSvg() {
 
 function ogSvg() {
   const { width: w, height: h } = OG;
-  const cx = w / 2;
-  const touY = Math.round(h * OG.touCyRatio);
-  const ruleY = 454;
-  const subY = ruleY + OG.ruleHeight + OG.subGap;
-  const ruleX = cx - OG.ruleWidth / 2;
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
-  <title>tou.gg — Shipped to you.</title>
+  <title>tou.gg — from me, to you</title>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="${PALETTE.accent}"/>
+      <stop offset="100%" stop-color="${PALETTE.spark}"/>
+    </linearGradient>
+  </defs>
   <rect width="${w}" height="${h}" fill="${PALETTE.bg}"/>
-  <text
-    x="${cx}" y="${touY}"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="Instrument Serif, Liberation Serif, Georgia, serif"
-    font-size="${OG.touSize}" font-weight="400"
-    letter-spacing="${OG.touTracking}"
-    fill="${PALETTE.text}"
-  >TOU</text>
-  <rect x="${ruleX}" y="${ruleY}" width="${OG.ruleWidth}" height="${OG.ruleHeight}" fill="${PALETTE.accent}"/>
-  <text
-    x="${cx}" y="${subY}"
-    text-anchor="middle" dominant-baseline="hanging"
-    font-family="Instrument Serif, Liberation Serif, Georgia, serif"
-    font-style="italic" font-size="${OG.subSize}"
-    fill="${PALETTE.mute}"
-  >to you</text>
-  <text
-    x="${OG.margin}" y="${h - OG.margin}"
-    text-anchor="start" dominant-baseline="auto"
-    font-family="IBM Plex Mono, Liberation Mono, ui-monospace, monospace"
-    font-size="${OG.domainSize}"
-    fill="${PALETTE.mute}"
-  >tou.gg</text>
+  <path d="M48 80 C 80 220, 40 360, 64 540" fill="none" stroke="${PALETTE.accent}" stroke-width="2"/>
+  <path d="M1152 90 h-80 m80 28 h-48 m48 28 h-72 m72 28 h-40" fill="none" stroke="${PALETTE.ai}" stroke-width="1.5"/>
+  <text x="${w / 2}" y="300" text-anchor="middle" font-family="IBM Plex Mono, Liberation Mono, monospace" font-size="140" font-weight="700" fill="url(#g)">tou></text>
+  <text x="${w / 2}" y="390" text-anchor="middle" font-family="IBM Plex Mono, Liberation Mono, monospace" font-size="32" fill="${PALETTE.ai}">to you → tou.gg</text>
+  <text x="${w / 2}" y="560" text-anchor="middle" font-family="IBM Plex Mono, Liberation Mono, monospace" font-size="22" fill="${PALETTE.mute}">15 products · 189 repos · 19 months solo</text>
 </svg>
 `;
 }
@@ -154,7 +139,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 W, H = 1200, 630
-BG, TEXT, MUTE, ACCENT = "#0D1117", "#E6EDF3", "#8B949E", "#FF6B35"
+BG, TEXT, MUTE, ACCENT, AI = "#0A0E1A", "#E6EDF3", "#8B949E", "#FF6B35", "#00D4FF"
 TOU_SIZE = 400
 TOU_TRACKING = 10
 TOU_CY_RATIO = 0.455
@@ -194,11 +179,11 @@ def load_fonts(font_dir):
             "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
         ]
     )
-    display = ImageFont.truetype(display_path, TOU_SIZE * SCALE)
-    italic = ImageFont.truetype(italic_path, SUB_SIZE * SCALE)
-    mono = ImageFont.truetype(mono_path, DOMAIN_SIZE * SCALE)
+    display = ImageFont.truetype(mono_path, 168 * SCALE)
+    italic = ImageFont.truetype(mono_path, 28 * SCALE)
+    mono = ImageFont.truetype(mono_path, 22 * SCALE)
     print("fonts:", display.getname(), italic.getname(), mono.getname(), flush=True)
-    return display, italic, mono
+    return display, italic, mono, mono_path
 
 
 def draw_tracked(draw, text, center, font, fill, tracking):
@@ -213,13 +198,17 @@ def draw_tracked(draw, text, center, font, fill, tracking):
 
 
 def render(out_png, font_dir):
-    display, italic, mono = load_fonts(font_dir)
+    display, italic, mono, mono_path = load_fonts(font_dir)
     img = Image.new("RGB", (W * SCALE, H * SCALE), BG)
     draw = ImageDraw.Draw(img)
     cx = W * SCALE / 2
     tou_y = H * SCALE * TOU_CY_RATIO
     tracking = TOU_TRACKING * SCALE
-    draw_tracked(draw, "TOU", (cx, tou_y), display, TEXT, tracking)
+    draw_tracked(draw, "tou>", (cx, tou_y), display, ACCENT, tracking * 0.2)
+
+    # Visual bottom of the (untracked) mm box sits very close to the tracked
+    # drawing; use it for the rule so the lockup spacing stays stable.
+    bb = draw.textbbox((cx, tou_y), "tou>", font=display, anchor="mm")
 
     # Visual bottom of the (untracked) mm box sits very close to the tracked
     # drawing; use it for the rule so the lockup spacing stays stable.
@@ -232,13 +221,13 @@ def render(out_png, font_dir):
         fill=ACCENT,
     )
     sub_y = rule_y + rule_h + SUB_GAP * SCALE
-    draw.text((cx, sub_y), "to you", font=italic, fill=MUTE, anchor="mt")
+    draw.text((cx, sub_y), "to you → tou.gg", font=italic, fill=AI, anchor="mt")
     margin = MARGIN * SCALE
-    draw.text((margin, H * SCALE - margin), "tou.gg", font=mono, fill=MUTE, anchor="ld")
+    draw.text((cx, H * SCALE - margin), "15 products · 189 repos · 19 months solo", font=mono, fill=MUTE, anchor="md")
 
-    tou_bb = draw.textbbox((cx, tou_y), "TOU", font=display, anchor="mm")
-    sub_bb = draw.textbbox((cx, sub_y), "to you", font=italic, anchor="mt")
-    dom_bb = draw.textbbox((margin, H * SCALE - margin), "tou.gg", font=mono, anchor="ld")
+    tou_bb = draw.textbbox((cx, tou_y), "tou>", font=display, anchor="mm")
+    sub_bb = draw.textbbox((cx, sub_y), "to you → tou.gg", font=italic, anchor="mt")
+    dom_bb = draw.textbbox((cx, H * SCALE - margin), "15 products · 189 repos · 19 months solo", font=mono, anchor="md")
     print(
         "bbox TOU",
         tuple(round(v / SCALE, 1) for v in tou_bb),
@@ -250,10 +239,10 @@ def render(out_png, font_dir):
     )
     # Tracked TOU is slightly wider than the mm bbox — pad the crop gate.
     tracked_half = (
-        (sum(display.getlength(ch) for ch in "TOU") + tracking * 2) / 2 / SCALE
+        (sum(display.getlength(ch) for ch in "tou>") + tracking * 0.2 * 3) / 2 / SCALE
     )
-    extra_boxes = [("TOU-tracked", (W / 2 - tracked_half, tou_bb[1] / SCALE, W / 2 + tracked_half, tou_bb[3] / SCALE))]
-    for name, box in [("TOU", tou_bb), ("to you", sub_bb), ("tou.gg", dom_bb)]:
+    extra_boxes = [("tou-tracked", (W / 2 - tracked_half, tou_bb[1] / SCALE, W / 2 + tracked_half, tou_bb[3] / SCALE))]
+    for name, box in [("tou>", tou_bb), ("to you", sub_bb), ("stats", dom_bb)]:
         l, t, r, b = (v / SCALE for v in box)
         extra_boxes.append((name, (l, t, r, b)))
     for name, (l, t, r, b) in extra_boxes:
@@ -264,6 +253,17 @@ def render(out_png, font_dir):
     out_png.parent.mkdir(parents=True, exist_ok=True)
     out.save(out_png, format="PNG", optimize=True)
     print("wrote", out_png, out.size, flush=True)
+
+    # Square icons
+    mono_icon = ImageFont.truetype(mono_path, 14)
+    for size, name in [(32, "icon-32.png"), (180, "apple-touch-icon.png"), (192, "icon-192.png"), (512, "icon-512.png")]:
+        im = Image.new("RGB", (size, size), BG)
+        d = ImageDraw.Draw(im)
+        f = ImageFont.truetype(mono_path, max(12, int(size * 0.34)))
+        d.text((size / 2, size / 2), "tou>", font=f, fill=ACCENT, anchor="mm")
+        dest = out_png.parent / name
+        im.save(dest, format="PNG", optimize=True)
+        print("wrote", dest, im.size, flush=True)
 
 
 if __name__ == "__main__":
