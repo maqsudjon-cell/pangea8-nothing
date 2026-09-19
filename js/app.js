@@ -72,36 +72,83 @@
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
     const SRC = "to you";
     const DROP = new Set([1, 2, 3]);
-    const paint = (typed, dropping, gg) => {
-      const chars = SRC.split("").map((ch, i) => {
-        const cls = ["lp-ch"];
-        if (i >= typed) cls.push("is-hid");
-        if (dropping && DROP.has(i)) cls.push("is-drop");
-        const t = ch === " " ? "&nbsp;" : ch;
-        return '<span class="' + cls.join(" ") + '">' + t + "</span>";
-      }).join("");
-      typeEl.innerHTML = chars + (gg ? '<span class="lp-gg">.gg</span>' : '<span class="lp-caret"></span>');
-      typeEl.classList.toggle("is-done", gg);
+    const KEEP = [0, 4, 5];
+    const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+    const chars = SRC.split("").map((ch, i) => {
+      const span = document.createElement("span");
+      span.className = "lp-ch";
+      if (KEEP.includes(i)) span.dataset.keep = "";
+      span.textContent = ch === " " ? "\u00a0" : ch;
+      span.style.visibility = "hidden";
+      typeEl.appendChild(span);
+      return span;
+    });
+    const caret = document.createElement("span");
+    caret.className = "lp-caret";
+    typeEl.appendChild(caret);
+    const ready = () => {
+      document.querySelectorAll(".lp-tag, .lp-dek, .lp-cta, .lp-stats").forEach((n) => n.classList.add("is-in"));
     };
     const run = async () => {
       if (reduced) {
+        chars.forEach((el, i) => {
+          if (DROP.has(i)) el.classList.add("is-drop");
+          else el.style.visibility = "";
+        });
+        const gg = document.createElement("span");
+        gg.className = "lp-gg";
+        gg.textContent = ".gg";
+        caret.replaceWith(gg);
         typeEl.classList.add("is-done");
-        typeEl.innerHTML = 'tou<span class="lp-gg">.gg</span>';
-        document.querySelectorAll(".lp-tag, .lp-dek, .lp-cta").forEach((n) => n.classList.add("is-in"));
+        ready();
         return;
       }
-      for (let i = 1; i <= SRC.length; i++) {
-        paint(i, false, false);
-        await wait(i === 3 ? 140 : 78);
+      await wait(160);
+      for (let i = 0; i < chars.length; i++) {
+        chars[i].style.visibility = "";
+        await wait(i === 2 ? 170 : 64 + (i % 3) * 14);
       }
-      await wait(720);
-      paint(SRC.length, true, false);
-      await wait(520);
-      paint(SRC.length, true, true);
-      document.querySelectorAll(".lp-tag, .lp-dek, .lp-cta").forEach((n) => n.classList.add("is-in"));
+      await wait(820);
+      const firstX = KEEP.map((i) => chars[i].getBoundingClientRect().left);
+      const dropX = chars.map((n) => n.offsetLeft);
+      DROP.forEach((i) => {
+        chars[i].classList.add("is-drop");
+        chars[i].style.left = dropX[i] + "px";
+      });
+      KEEP.forEach((idx, i) => {
+        const el = chars[idx];
+        const dx = firstX[i] - el.getBoundingClientRect().left;
+        el.animate(
+          [{ transform: "translateX(" + dx + "px)" }, { transform: "translateX(-3px)" }, { transform: "translateX(0px)" }],
+          { duration: 880, easing: EASE, fill: "both" },
+        );
+      });
+      [...DROP].forEach((idx, i) => {
+        chars[idx].animate(
+          [
+            { opacity: 1, filter: "blur(0px)", transform: "translateY(0) rotate(0deg)" },
+            { opacity: 0, filter: "blur(10px)", transform: "translateY(1.15em) rotate(11deg)" },
+          ],
+          { duration: 640, delay: i * 52, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "both" },
+        );
+      });
+      await wait(820);
+      const gg = document.createElement("span");
+      gg.className = "lp-gg";
+      gg.textContent = ".gg";
+      caret.replaceWith(gg);
+      typeEl.classList.add("is-done");
+      ready();
     };
     run();
   }
+  document.querySelectorAll(".lp-reveal").forEach((el) => {
+    if (reduced) { el.classList.add("is-in"); return; }
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { el.classList.add("is-in"); io.disconnect(); }
+    }, { threshold: 0.01, rootMargin: "0px 0px 14% 0px" });
+    io.observe(el);
+  });
   document.querySelectorAll(".chertma[data-to]").forEach((el) => {
     const to = el.getAttribute("data-to");
     setTimeout(() => {
