@@ -1,15 +1,28 @@
 name: build
 
-# The repo is the site: GitHub Pages serves the committed HTML directly.
-# This job exists to prove the committed HTML is what build.mjs produces, so a
-# content edit can never half-land, and to fail the build when a translation,
-# a canonical or an internal link is missing.
+# The repo is the site. This workflow does two things:
+#   1. proves the committed HTML is exactly what build.mjs produces, and that
+#      every link, canonical and hreflang holds;
+#   2. publishes it to GitHub Pages.
+#
+# Pages source must be set to "GitHub Actions" in repo Settings → Pages.
+# A token cannot flip that switch, so if the deploy job fails with
+# "Resource not accessible", that setting is the reason.
 
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   verify:
@@ -33,3 +46,26 @@ jobs:
 
       - name: Links, canonicals, hreflang
         run: node scripts/check.mjs
+
+      - name: Stage the site
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          mkdir -p _site
+          tar -C . --exclude=.git --exclude=.github --exclude=_site --exclude=src \
+                   --exclude=scripts --exclude=node_modules -cf - . | tar -C _site -xf -
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        with:
+          path: _site
+
+  deploy:
+    needs: verify
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
