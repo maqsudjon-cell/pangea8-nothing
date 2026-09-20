@@ -98,11 +98,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* The weld seam down the left edge, drawn as the page scrolls. */
 .lp-draft {
-  position: fixed; top: 0; left: 8px; z-index: 2;
-  width: 20px; height: 100dvh; opacity: .45; pointer-events: none;
+  position: fixed; top: 0; left: 4px; z-index: 2;
+  width: 14px; height: 100dvh; opacity: .4; pointer-events: none;
 }
-@media (width >= 768px) { .lp-draft { left: 22px; width: 28px; } }
-@media (width < 1180px) { .lp-draft { display: none; } }
+/* Only widen it once the text column has left enough gutter for it. */
+@media (width >= 1180px) { .lp-draft { left: 22px; width: 28px; opacity: .45; } }
 
 /* --- Header --------------------------------------------------------------- */
 .lp-bar {
@@ -473,6 +473,85 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .lp-reveal { opacity: 1; transform: none; filter: none; }
   .lg-fill { width: var(--fill, 0%) !important; }
+}
+
+
+/* --- Signature motion ------------------------------------------------------
+   These are the bits that make the page feel like this page: type that climbs
+   out from behind a mask, the domain landing from the right, product names
+   rolling up as a row scrolls in, the rule sweeping across the method table,
+   the chain ticking in one arrow at a time, and Chertma correcting its own
+   spelling in front of you. All of it is decoration: nothing here is the only
+   way a word becomes readable.
+   -------------------------------------------------------------------------- */
+@keyframes clip-up   { from { transform: translateY(110%); filter: blur(6px); } to { transform: none; filter: none; } }
+@keyframes fade-up   { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes gg-reveal { from { opacity: 0; transform: translateX(.12em); } to { opacity: 1; transform: none; } }
+@keyframes chain-tick{ from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+@keyframes chertma-pop { from { filter: blur(4px); transform: translateY(.25em); } to { filter: none; transform: none; } }
+
+.lp-who, .lp-role, .lp-handle { overflow: hidden; padding-bottom: .22em; }
+.lp-who > span, .lp-role > span, .lp-handle > span { display: block; }
+.lp-card-name { display: inline-block; overflow: hidden; padding-bottom: .06em; }
+.lp-card-name > span { display: block; }
+
+.lp-flag-mark:has(.chertma) { font-size: clamp(1.05rem, 2vw, 1.5rem); line-height: 1.25; letter-spacing: -.03em; max-width: 14rem; }
+.chertma { display: inline-block; }
+.chertma.is-fixed { color: var(--hue, var(--ok)); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero: the name and role climb out from behind their own edge. */
+  .lp-who > span   { animation: clip-up .72s var(--ease-soft) both; }
+  .lp-role > span  { animation: clip-up .72s var(--ease-soft) .1s both; }
+
+  /* Hero copy fades up on paint — on CSS alone, never waiting for a script. */
+  .lp-dek { animation: fade-up .6s var(--ease-soft) .12s both; }
+  .lp-tag { animation: fade-up .6s var(--ease-soft) .2s both; }
+  .lp-cta { animation: fade-up .6s var(--ease-soft) .28s both; }
+  .lp-gg  { animation: gg-reveal .56s var(--ease-soft) 40ms both; }
+
+  /* Stats: blur up, one after another. */
+  .lp-stat { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+  .lp-mask.is-in .lp-stat {
+    opacity: 1; transform: none; filter: none;
+    transition: opacity .55s var(--ease), transform .55s var(--ease), filter .55s var(--ease);
+  }
+  .lp-mask.is-in .lp-stat:nth-child(1) { transition-delay: 40ms; }
+  .lp-mask.is-in .lp-stat:nth-child(2) { transition-delay: 90ms; }
+  .lp-mask.is-in .lp-stat:nth-child(3) { transition-delay: 140ms; }
+  .lp-mask.is-in .lp-stat:nth-child(4) { transition-delay: 190ms; }
+  .lp-mask.is-in .lp-stat:nth-child(5) { transition-delay: 240ms; }
+
+  /* A product name rolls up as its row arrives. */
+  .lp-card-name > span { transform: translateY(110%); }
+  .lp-reveal.is-in .lp-card-name > span,
+  .lp-mask.is-in .lp-card-name > span { transform: none; transition: transform .8s var(--ease-soft); }
+  .lp-flag-idx { opacity: 0; transform: translateY(8px); }
+  .lp-reveal.is-in .lp-flag-idx { opacity: 1; transform: none; transition: opacity .5s var(--ease) 80ms, transform .5s var(--ease) 80ms; }
+
+  /* The method table draws its own top rule. */
+  .lp-steps::after {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    transition: transform .9s var(--ease-soft) .18s; pointer-events: none;
+  }
+  .lp-mask.is-in .lp-steps::after { transform: scaleX(1); }
+
+  /* The footer handle climbs out; the chain ticks in arrow by arrow. */
+  .lp-mask.is-in .lp-handle > span { animation: clip-up .9s var(--ease-soft) both; }
+  .lp-chain span { opacity: 0; }
+  .lp-mask.is-in .lp-chain span { animation: chain-tick .6s var(--ease) both; }
+  .lp-mask.is-in .lp-chain span:nth-of-type(1) { animation-delay: .05s; }
+  .lp-mask.is-in .lp-chain span:nth-of-type(2) { animation-delay: .16s; }
+  .lp-mask.is-in .lp-chain span:nth-of-type(3) { animation-delay: .27s; }
+
+  /* Chertma fixes its own spelling in front of you. */
+  .chertma.is-fixed { animation: chertma-pop .42s var(--ease-soft) both; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-who > span, .lp-role > span, .lp-handle > span, .lp-card-name > span { transform: none !important; }
+  .lp-stat, .lp-flag-idx, .lp-chain span { opacity: 1 !important; transform: none !important; filter: none !important; }
 }
 
 /* --- Print ---------------------------------------------------------------- */

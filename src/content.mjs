@@ -153,6 +153,9 @@ export const products = [
     flagship: true,
     case: true,
     metric: { n: "4.89M", label: { en: "word forms, open", uz: "so‘z shakli, ochiq", ru: "словоформ, открыто" } },
+    // Chertma shows itself working: the ASCII a keyboard can type, corrected
+    // in place to the New Latin it should have been.
+    demo: { from: "to'g'ri o'zbekcha", to: "to‘g‘ri o‘zbekcha", label: "ascii → ş ç ö ğ" },
     dek: {
       en: "Type ASCII, get correct Uzbek New Latin — ş ç ö ğ. Offline. An open 28-million-row lexicon underneath.",
       uz: "ASCII yozing — to‘g‘ri o‘zbek yangi lotinini oling: ş ç ö ğ. Oflayn. Ostida 28 million qatorli ochiq leksikon.",

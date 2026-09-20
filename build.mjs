@@ -172,14 +172,14 @@ function footer(loc) {
     [site.huggingface, "hugging face"],
   ];
   return `  </main>
-  <footer class="lp-block lp-foot" id="contact">
+  <footer class="lp-block lp-foot lp-mask" id="contact">
     <p class="lp-kicker">${esc(T("home.kicker.contact"))}</p>
-    <h2 class="lp-handle">${site.handle}</h2>
+    <h2 class="lp-handle"><span>${site.handle}</span></h2>
     <p class="lp-body">${esc(T("home.contact.body"))}</p>
     <div class="lp-contact">
       ${links.map(([u, label]) => `<a href="${u}"${u.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : ""}>${esc(label)}</a>`).join("\n      ")}
     </div>
-    <p class="lp-chain">maqsudjon <span>→</span> tou <span>→</span> to you <span>→</span> ${esc(T("home.toyou"))}</p>
+    <p class="lp-chain">${T("footer.chain").split("→").map(esc).map((x) => x.trim()).join(" <span>→</span> ")}</p>
     <p class="lp-copy">© 2026 ${site.name} · ${esc(L(site.city, loc))} · tou.gg ·
       <a href="/rss.xml">${esc(T("footer.rss"))}</a> ·
       <a href="${site.repo}" target="_blank" rel="noopener noreferrer">${esc(T("footer.source"))}</a> ·
@@ -208,14 +208,17 @@ function productRow(p, loc) {
 function flagRow(p, loc, i) {
   const T = t(loc);
   const m = p.metric;
+  // `demo` products show the product working instead of a number.
   return `<a class="lp-flag lp-reveal" style="--hue:${p.hue}" href="${href(loc, `/work/${p.slug}/`)}">
         <span class="lp-flag-idx">0${i + 1}</span>
         <span class="lp-flag-copy">
-          <span class="lp-flag-top"><span class="lp-card-name">${esc(p.name)}</span><span class="lp-toyou">→ ${esc(T("home.toyou"))}</span></span>
+          <span class="lp-flag-top"><span class="lp-card-name"><span>${esc(p.name)}</span></span><span class="lp-toyou">→ ${esc(T("home.toyou"))}</span></span>
           <span class="lp-card-dek">${esc(L(p.dek, loc))}</span>
           <span class="lp-flag-dom">${esc(p.domain)}</span>
         </span>
-        <span class="lp-flag-mark" aria-hidden="true">${esc(m.n)}<small>${esc(L(m.label, loc))}</small></span>
+        <span class="lp-flag-mark" aria-hidden="true">${p.demo
+          ? `<span class="chertma" data-from="${esc(p.demo.from)}" data-to="${esc(p.demo.to)}">${esc(p.demo.from)}</span>`
+          : esc(m.n)}<small>${esc(p.demo ? p.demo.label : L(m.label, loc))}</small></span>
       </a>`;
 }
 
@@ -245,8 +248,8 @@ function pageHome(loc) {
   return head({ loc, path: "/", title: T("home.title"), description: T("home.description"), jsonld: ld })
     + header(loc, "/")
     + `<section class="lp-hero" id="top">
-      <p class="lp-who">${site.name}</p>
-      <p class="lp-role">${esc(L(site.role, loc))} · ${esc(L(site.city, loc))} · ${esc(T("home.remote"))}</p>
+      <p class="lp-who"><span>${site.name}</span></p>
+      <p class="lp-role"><span>${esc(L(site.role, loc))} · ${esc(L(site.city, loc))} · ${esc(T("home.remote"))}</span></p>
       <h1 class="lp-display" data-wordmark><span class="lp-type"><span class="ch">t</span><span class="ch">o</span><span class="ch">u</span></span><span class="lp-gg">.gg</span><span class="lp-caret" aria-hidden="true"></span></h1>
       <p class="lp-dek">${esc(T("home.dek"))}</p>
       <p class="lp-tag">${esc(T("home.tagline"))}</p>
@@ -256,7 +259,7 @@ function pageHome(loc) {
       </div>
     </section>
 
-    <section class="lp-stats" aria-label="${esc(T("home.kicker.flagship"))}">
+    <section class="lp-stats lp-mask" aria-label="${esc(T("home.kicker.flagship"))}">
       ${stats.map((s) => `<div class="lp-stat"><span class="lp-stat-n" data-count="${s.n}"${s.plus ? ' data-suffix="+"' : ""}>${s.n.toLocaleString(loc)}${s.plus ? "+" : ""}</span><span class="lp-stat-l">${esc(L(s.label, loc))}</span></div>`).join("\n      ")}
     </section>
 
@@ -296,7 +299,7 @@ function pageHome(loc) {
       <p class="lp-kicker">${esc(T("home.kicker.open"))}</p>
       <div class="lp-ai">
         <a class="lp-ai-main" href="${site.huggingface}" target="_blank" rel="noopener noreferrer">
-          <span class="lp-card-name">Maqsudjonpolatov</span>
+          <span class="lp-card-name"><span>Maqsudjonpolatov</span></span>
           <span class="lp-card-dek">${esc(T("home.open.dek"))}</span>
           <span class="lp-more-dom">huggingface.co</span>
         </a>
@@ -309,7 +312,7 @@ function pageHome(loc) {
       </div>
     </section>
 
-    <section class="lp-block" id="method">
+    <section class="lp-block lp-mask" id="method">
       <p class="lp-kicker">${esc(T("home.kicker.method"))}</p>
       <h2 class="lp-h2">${esc(T("home.method.title"))}</h2>
       <p class="lp-body">${esc(T("home.method.body"))}</p>

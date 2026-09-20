@@ -35,7 +35,7 @@
   }
 
   /* -------------------------------------------------------- scroll reveals */
-  const reveals = $$(".lp-reveal");
+  const reveals = $$(".lp-reveal, .lp-mask");
   if (reduced || !("IntersectionObserver" in window)) {
     reveals.forEach((el) => el.classList.add("is-in"));
   } else {
@@ -94,6 +94,27 @@
     draw();
     addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(draw); } }, { passive: true });
     addEventListener("resize", draw, { passive: true });
+  }
+
+  /* ------------------------------------------------------- Chertma demo
+     The flagship row shows what the product does: the ASCII a keyboard can
+     type, corrected in place to the New Latin it should have been. The HTML
+     ships the corrected form's meaning either way — this only animates it. */
+  const chertma = $(".chertma[data-to]");
+  if (chertma) {
+    const fix = () => {
+      chertma.textContent = chertma.dataset.to;
+      chertma.classList.add("is-fixed");
+    };
+    if (reduced || !("IntersectionObserver" in window)) fix();
+    else {
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        setTimeout(fix, 900);
+      }, { threshold: 0.6 });
+      io.observe(chertma);
+    }
   }
 
   /* ------------------------------------------------------- live day counter */

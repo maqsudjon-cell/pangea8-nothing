@@ -114,6 +114,20 @@ What did **not** go back, because it was a defect rather than a choice:
   sizes it is used at — two steps lighter, indistinguishable at a glance;
 - the reveal observer still catches elements a fast scroll jumped over.
 
+A second pass put the signature motion back too, which the layout revert had
+quietly dropped: the weld seam drawing down the left edge as you scroll (now at
+every width, sitting in the page gutter instead of being hidden below 1180px),
+the name and role climbing out from behind their own edge, the domain landing
+from the right, product names rolling up as a row arrives, the stat strip
+staggering, the rule sweeping across the method table, the chain ticking in one
+arrow at a time, and Chertma correcting its own spelling — `to'g'ri o'zbekcha`
+becomes `to‘g‘ri o‘zbekcha` in front of you, which is the product demonstrating
+itself instead of a number.
+
+None of it gates text: the hero copy fades up from CSS on paint, not from a
+JavaScript callback, and `prefers-reduced-motion` still turns all of it into
+instant states.
+
 The lesson worth keeping: **the monospace display type was never a bug.** It
 looked like one — `--font-display` listed Space Grotesk with no `@font-face`
 behind it, so every heading silently fell through to JetBrains Mono. Fixing the
