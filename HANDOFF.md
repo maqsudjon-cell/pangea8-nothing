@@ -6,6 +6,39 @@ chunki ular login yoki UI tugma talab qiladi. Har biri 2–5 daqiqa.
 
 ---
 
+## 0. Ikkita repo bitta domenda ⚠️
+
+Audit paytida chiqdi: **tou.gg aslida `maqsudjon-cell/tou` dan emas,
+`maqsudjon-cell/pangea8-nothing` dan tarqatilyapti.** Ikkala repoda bir xil
+commit tarixi bor, lekin GitHub Pages custom domain `tou.gg` — eskisida
+(iyun oyidagi "pangea8 landing" testi qayta ishlatilgan).
+
+Shu sababli `tou` ga push qilish saytni **umuman yangilamas edi**.
+
+Hozircha men yangi kodni **ikkala repoga ham** yubordim, shuning uchun sayt
+ishlaydi. Lekin uzoq muddatga bu chalkash: sayt "Source" havolasi `tou` ga
+ko'rsatadi, domen esa boshqa repoda.
+
+**Tavsiya — bittaga yig'ish (5 daqiqa, sizning qaroringiz):**
+
+1. https://github.com/maqsudjon-cell/pangea8-nothing/settings/pages →
+   **Custom domain** ni bo'shatib, **Save**.
+2. https://github.com/maqsudjon-cell/tou/settings/pages →
+   Source: **Deploy from a branch** → `main` / `(root)` → **Save**,
+   Custom domain: `tou.gg` → **Save**.
+3. Sertifikat chiqqach **Enforce HTTPS** (quyida 2-bandga qarang).
+4. `pangea8-nothing` ni arxivlang yoki o'chiring.
+
+Buni qilmaguningizcha **har o'zgarishdan keyin ikkala repoga ham push qiling**:
+
+```bash
+git push origin main && git push live main
+```
+
+(`live` remote allaqachon sozlangan: `git remote -v` bilan ko'rasiz.)
+
+---
+
 ## 1. GoatCounter — statistika hozir NOLNI yig‘yapti ⚠️
 
 `https://tou.goatcounter.com` hali mavjud emas: har bir sahifa ochilishi

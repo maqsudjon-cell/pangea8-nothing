@@ -38,7 +38,14 @@ Found by reading the live site, not the repo.
    URL is `/work/`.
 10. **`then.uz` was listed as a live product.** The domain does not resolve at
     all — no NS, no A record. A dead link in a portfolio is expensive. Removed.
-11. `README.md` referenced `scripts/export-static.mjs`, which does not exist,
+11. **Two repositories claim the same domain.** `tou.gg` is served by
+    `maqsudjon-cell/pangea8-nothing` — a June "pangea8 landing" test repo that
+    was reused — while `maqsudjon-cell/tou` holds the identical history and
+    serves nothing. Pushing to `tou` did not update the live site, which is why
+    the first deploy of this rebuild appeared to do nothing. Both are now in
+    sync; consolidating them is HANDOFF step 0 and is your call, because it
+    means retiring a repository.
+12. `README.md` referenced `scripts/export-static.mjs`, which does not exist,
     and described the repo as an export of a React app kept in a third-party
     workspace. That workspace is not in the repo, so the site could not be
     rebuilt from its own source. It can now.
