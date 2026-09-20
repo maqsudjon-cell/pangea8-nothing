@@ -70,12 +70,13 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
     : `<link rel="canonical" href="${canonical}"/>\n  `
       + LOCALES.map((l) => `<link rel="alternate" hreflang="${l}" href="${abs(href(l, path))}"/>`).join("\n  ")
       + `\n  <link rel="alternate" hreflang="x-default" href="${abs(href(DEFAULT_LOCALE, path))}"/>`;
-  const ogLocale = { en: "en_US", uz: "uz_UZ", ru: "ru_RU" }[loc];
+  const ogLocale = { en: "en_US", uz: "uz_UZ", ru: "ru_RU" };
   const ogAlt = LOCALES.filter((l) => l !== loc)
-    .map((l) => `<meta property="og:locale:alternate" content="${{ en: "en_US", uz: "uz_UZ", ru: "ru_RU" }[l]}"/>`)
-    .join("\n  ");
+    .map((l) => `<meta property="og:locale:alternate" content="${ogLocale[l]}"/>`).join("\n  ");
 
-  const ld = jsonld.length ? `\n  <script type="application/ld+json">${JSON.stringify(jsonld.length === 1 ? jsonld[0] : { "@context": "https://schema.org", "@graph": jsonld.map(({ "@context": _c, ...rest }) => rest) })}</script>` : "";
+  const ld = jsonld.length
+    ? `\n  <script type="application/ld+json">${JSON.stringify(jsonld.length === 1 ? jsonld[0] : { "@context": "https://schema.org", "@graph": jsonld.map(({ "@context": _c, ...rest }) => rest) })}</script>`
+    : "";
 
   return `<!doctype html>
 <html lang="${loc}">
@@ -86,7 +87,7 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
   <meta name="description" content="${esc(description)}"/>
   <meta name="author" content="${site.name}"/>
   <meta name="robots" content="${noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1"}"/>
-  <meta name="theme-color" content="#080B14"/>
+  <meta name="theme-color" content="#0A0E1A"/>
   <meta name="color-scheme" content="dark"/>${site.googleSiteVerification ? `\n  <meta name="google-site-verification" content="${site.googleSiteVerification}"/>` : ""}
   ${discovery}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
@@ -104,20 +105,24 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
   <meta property="og:image:alt" content="tou.gg — ${esc(site.name)}"/>
   <meta property="og:type" content="${type}"/>
   <meta property="og:site_name" content="tou.gg"/>
-  <meta property="og:locale" content="${ogLocale}"/>
+  <meta property="og:locale" content="${ogLocale[loc]}"/>
   ${ogAlt}${article ? `\n  <meta property="article:published_time" content="${article}"/>` : ""}
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="${esc(title)}"/>
   <meta name="twitter:description" content="${esc(description)}"/>
   <meta name="twitter:image" content="${abs(site.ogImage)}"/>
   <meta name="twitter:creator" content="${site.handle}"/>
-  <link rel="preload" href="/fonts/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="/fonts/jetbrains-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="stylesheet" href="/css/app.css"/>${ld}
 </head>
 <body>
   <a href="#main" class="skip">${esc(T("nav.skip"))}</a>
-  <div class="seam-rail" data-seam aria-hidden="true"><i></i></div>
+<div class="lp">
+  <svg class="lp-draft" viewBox="0 0 48 2400" preserveAspectRatio="none" aria-hidden="true">
+    <path id="weld-path" d="M24 8 C 10 120, 38 220, 24 340 S 8 560, 24 720 S 40 980, 24 1160 S 6 1380, 24 1560 S 42 1780, 24 1980 S 12 2200, 24 2388" fill="none" stroke="url(#weld)" stroke-width="1.25" stroke-linecap="round"/>
+    <defs><linearGradient id="weld" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+  </svg>
 `;
 }
 
@@ -131,24 +136,21 @@ function header(loc, path, langPath = path) {
     ["/about/", T("nav.about")],
   ];
   const isOn = (p) => (path === p || (p !== "/" && path.startsWith(p)) ? ' aria-current="page"' : "");
-  return `  <header class="hdr">
-    <div class="shell hdr-in">
-      <a class="brand" href="${href(loc, "/")}" aria-label="${esc(T("nav.home"))}">tou<span class="caret">&gt;</span></a>
-      <nav class="nav" aria-label="${esc(T("nav.primary"))}">
-        ${nav.map(([p, label]) => `<a href="${href(loc, p)}"${isOn(p)}>${esc(label)}</a>`).join("\n        ")}
-      </nav>
-      <div class="hdr-end">
-        <nav class="langs" aria-label="${esc(T("nav.language"))}">
-          ${LOCALES.map((l) => `<a href="${href(l, langPath)}" lang="${l}" hreflang="${l}"${l === loc ? ' aria-current="true"' : ""} title="${esc(ui[l]["lang.name"])}">${l.toUpperCase()}</a>`).join("\n          ")}
-        </nav>
-        <button type="button" class="burger" data-burger aria-expanded="false" aria-controls="menu-sheet"
-                aria-label="${esc(T("nav.menu"))}" data-open="${esc(T("nav.menu"))}" data-close="${esc(T("nav.close"))}">
-          <svg class="i-open" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <svg class="i-close" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </button>
-      </div>
+  return `  <header class="lp-bar">
+    <a class="lp-brand" href="${href(loc, "/")}" aria-label="${esc(T("nav.home"))}">tou<span class="tou-gt">&gt;</span></a>
+    <nav class="lp-hash" aria-label="${esc(T("nav.primary"))}">
+      ${nav.map(([p, label]) => `<a href="${href(loc, p)}"${isOn(p)}>${esc(label)}</a>`).join("\n      ")}
+      <a href="${href(loc, "/")}#contact">${esc(T("nav.contact"))}</a>
+    </nav>
+    <div class="lp-langs" role="group" aria-label="${esc(T("nav.language"))}">
+      ${LOCALES.map((l) => `<a class="lp-lang${l === loc ? " is-on" : ""}" href="${href(l, langPath)}" lang="${l}" hreflang="${l}"${l === loc ? ' aria-current="true"' : ""} title="${esc(ui[l]["lang.name"])}">${l.toUpperCase()}</a>`).join("\n      ")}
+      <button type="button" class="lp-burger" data-burger aria-expanded="false" aria-controls="menu-sheet"
+              aria-label="${esc(T("nav.menu"))}" data-open="${esc(T("nav.menu"))}" data-close="${esc(T("nav.close"))}">
+        <svg class="i-open" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="i-close" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
     </div>
-    <nav id="menu-sheet" class="sheet" aria-label="${esc(T("nav.menu"))}" hidden>
+    <nav id="menu-sheet" class="lp-sheet" aria-label="${esc(T("nav.menu"))}" hidden>
       ${nav.map(([p, label]) => `<a href="${href(loc, p)}">${esc(label)}<span>${ARROW}</span></a>`).join("\n      ")}
       <a href="${href(loc, "/")}#contact">${esc(T("nav.contact"))}<span>${ARROW}</span></a>
     </nav>
@@ -163,32 +165,27 @@ function footer(loc) {
   const links = [
     [`mailto:${site.email}`, site.email],
     [`tel:${site.tel}`, site.telDisplay],
-    [site.telegram, "Telegram"],
-    [site.x, "X"],
-    [site.instagram, "Instagram"],
-    [site.github, "GitHub"],
-    [site.huggingface, "Hugging Face"],
+    [site.telegram, site.handle],
+    [site.x, "x"],
+    [site.instagram, "ig"],
+    [site.github, "github"],
+    [site.huggingface, "hugging face"],
   ];
   return `  </main>
-  <footer class="foot" id="contact">
-    <div class="shell">
-      <p class="kicker">${esc(T("home.kicker.contact"))}</p>
-      <h2 class="foot-handle">${site.handle}</h2>
-      <p class="foot-body">${esc(T("home.contact.body"))}</p>
-      <div class="foot-links">
-        ${links.map(([u, label]) => `<a href="${u}"${u.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : ""}>${esc(label)}</a>`).join("\n        ")}
-      </div>
-      <p class="foot-chain">${esc(T("footer.chain"))}</p>
-      <div class="foot-base">
-        <span>© 2026 ${site.name} · ${esc(L(site.city, loc))} · tou.gg</span>
-        <span>
-          <a href="/rss.xml">${esc(T("footer.rss"))}</a> ·
-          <a href="${site.repo}" target="_blank" rel="noopener noreferrer">${esc(T("footer.source"))}</a> ·
-          ${esc(T("footer.updated"))} ${site.updated}
-        </span>
-      </div>
+  <footer class="lp-block lp-foot" id="contact">
+    <p class="lp-kicker">${esc(T("home.kicker.contact"))}</p>
+    <h2 class="lp-handle">${site.handle}</h2>
+    <p class="lp-body">${esc(T("home.contact.body"))}</p>
+    <div class="lp-contact">
+      ${links.map(([u, label]) => `<a href="${u}"${u.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : ""}>${esc(label)}</a>`).join("\n      ")}
     </div>
+    <p class="lp-chain">maqsudjon <span>→</span> tou <span>→</span> to you <span>→</span> ${esc(T("home.toyou"))}</p>
+    <p class="lp-copy">© 2026 ${site.name} · ${esc(L(site.city, loc))} · tou.gg ·
+      <a href="/rss.xml">${esc(T("footer.rss"))}</a> ·
+      <a href="${site.repo}" target="_blank" rel="noopener noreferrer">${esc(T("footer.source"))}</a> ·
+      ${esc(T("footer.updated"))} ${site.updated}</p>
   </footer>
+</div>
   <script data-goatcounter="${site.goatcounter}" async src="https://gc.zgo.at/count.js"></script>
   <script src="/js/app.js" defer></script>
 </body>
@@ -197,33 +194,29 @@ function footer(loc) {
 }
 
 /* ------------------------------------------------------------- shared parts */
-function productRow(p, loc, i) {
+function productRow(p, loc) {
   const T = t(loc);
   const external = !p.case;
   const target = p.case ? href(loc, `/work/${p.slug}/`) : p.url;
-  return `<a class="row reveal" style="--hue:${p.hue}" href="${target}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
-          <span class="row-name"><i class="row-dot"></i>${esc(p.name)}${p.beta ? ` <span class="chip">${esc(T("work.beta"))}</span>` : ""}</span>
-          <span class="row-dek">${esc(L(p.dek, loc))}</span>
-          <span class="row-meta mono">${esc(p.domain)}</span>
-        </a>`;
+  return `<a class="lp-more-row lp-reveal" style="--hue:${p.hue}" href="${target}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
+        <span class="lp-more-name"><i class="lp-dot"></i>${esc(p.name)}${p.beta ? ` <span class="lp-chip">${esc(T("work.beta"))}</span>` : ""}</span>
+        <span class="lp-more-dek">${esc(L(p.dek, loc))}</span>
+        <span class="lp-more-dom">${esc(p.domain)}</span>
+      </a>`;
 }
 
-function flagCard(p, loc, i) {
+function flagRow(p, loc, i) {
   const T = t(loc);
   const m = p.metric;
-  return `<a class="flag reveal d${i}" style="--hue:${p.hue}" href="${href(loc, `/work/${p.slug}/`)}">
-          <span class="flag-idx mono">0${i + 1}</span>
-          <span class="flag-head">
-            <span class="flag-name">${esc(p.name)}</span>
-            <span class="flag-toyou mono">→ ${esc(T("home.toyou"))}</span>
-          </span>
-          <span class="flag-dek">${esc(L(p.dek, loc))}</span>
-          <span class="flag-metric num">${esc(m.n)}<small>${esc(L(m.label, loc))}</small></span>
-          <span class="flag-foot">
-            <span class="flag-dom">${esc(p.domain)}</span>
-            ${(p.stack || []).slice(0, 3).map((s) => `<span class="chip">${esc(s)}</span>`).join("")}
-          </span>
-        </a>`;
+  return `<a class="lp-flag lp-reveal" style="--hue:${p.hue}" href="${href(loc, `/work/${p.slug}/`)}">
+        <span class="lp-flag-idx">0${i + 1}</span>
+        <span class="lp-flag-copy">
+          <span class="lp-flag-top"><span class="lp-card-name">${esc(p.name)}</span><span class="lp-toyou">→ ${esc(T("home.toyou"))}</span></span>
+          <span class="lp-card-dek">${esc(L(p.dek, loc))}</span>
+          <span class="lp-flag-dom">${esc(p.domain)}</span>
+        </span>
+        <span class="lp-flag-mark" aria-hidden="true">${esc(m.n)}<small>${esc(L(m.label, loc))}</small></span>
+      </a>`;
 }
 
 /* -------------------------------------------------------------------- pages */
@@ -231,16 +224,16 @@ function pageHome(loc) {
   const T = t(loc);
   const flagship = products.filter((p) => p.flagship);
   const rest = products.filter((p) => !p.flagship);
-  const localPosts = posts.map((p) => ({ ...p, url: href(loc, `/log/${p.slug}/`), local: true }));
-  const writing = [...localPosts, ...outbound.slice(0, 1).map((o) => ({ ...o, local: false }))];
+  const writing = [
+    ...posts.map((p) => ({ title: L(p.title, loc), dek: L(p.dek, loc), date: p.date, url: href(loc, `/log/${p.slug}/`), tag: T("log.local") })),
+    { title: outbound[0].title, dek: "maqsudjon.com", date: outbound[0].date, url: outbound[0].url, tag: "↗", external: true },
+  ];
 
   const ld = [
     { "@type": "WebSite", "@id": abs("/#site"), name: "tou.gg", url: abs(href(loc, "/")), inLanguage: loc,
-      description: L({ en: ui.en["home.description"], uz: ui.uz["home.description"], ru: ui.ru["home.description"] }, loc),
-      publisher: { "@id": abs("/#person") } },
+      description: T("home.description"), publisher: { "@id": abs("/#person") } },
     { "@type": "Person", "@id": abs("/#person"), name: site.name, url: site.origin,
-      email: `mailto:${site.email}`, telephone: site.tel,
-      jobTitle: L(site.role, loc),
+      email: `mailto:${site.email}`, telephone: site.tel, jobTitle: L(site.role, loc),
       address: { "@type": "PostalAddress", addressLocality: "Tashkent", addressCountry: "UZ" },
       knowsLanguage: ["uz", "en", "ko", "ru"],
       sameAs: [site.github, site.telegram, site.x, site.instagram, site.huggingface, site.lab] },
@@ -251,128 +244,100 @@ function pageHome(loc) {
 
   return head({ loc, path: "/", title: T("home.title"), description: T("home.description"), jsonld: ld })
     + header(loc, "/")
-    + `<section class="shell hero">
-      <p class="avail"><i class="dot"></i>${esc(T("home.available"))}</p>
-      <p class="hero-who mono"><b>${site.name}</b> · ${esc(L(site.role, loc))} · ${esc(L(site.city, loc))}</p>
-      <h1 class="wordmark" data-wordmark><span class="tou"><span class="ch">t</span><span class="ch">o</span><span class="ch">u</span></span><span class="gg">.gg</span><span class="caret" aria-hidden="true"></span></h1>
-      <div class="hero-side">
-        <p class="hero-dek">${esc(T("home.dek"))}</p>
-        <p class="hero-tag mono">${esc(T("home.tagline"))}</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="${href(loc, "/cv/")}">${esc(T("home.cta.cv"))}${ARROW}</a>
-          <a class="btn" href="${href(loc, "/work/")}">${esc(T("home.cta.work"))}</a>
+    + `<section class="lp-hero" id="top">
+      <p class="lp-who">${site.name}</p>
+      <p class="lp-role">${esc(L(site.role, loc))} · ${esc(L(site.city, loc))} · ${esc(T("home.remote"))}</p>
+      <h1 class="lp-display" data-wordmark><span class="lp-type"><span class="ch">t</span><span class="ch">o</span><span class="ch">u</span></span><span class="lp-gg">.gg</span><span class="lp-caret" aria-hidden="true"></span></h1>
+      <p class="lp-dek">${esc(T("home.dek"))}</p>
+      <p class="lp-tag">${esc(T("home.tagline"))}</p>
+      <div class="lp-cta">
+        <a class="lp-cta-btn" href="${href(loc, "/cv/")}">${esc(T("home.cta.cv"))}${ARROW}</a>
+        <a href="${href(loc, "/work/")}">${esc(T("home.cta.work"))}</a>
+      </div>
+    </section>
+
+    <section class="lp-stats" aria-label="${esc(T("home.kicker.flagship"))}">
+      ${stats.map((s) => `<div class="lp-stat"><span class="lp-stat-n" data-count="${s.n}"${s.plus ? ' data-suffix="+"' : ""}>${s.n.toLocaleString(loc)}${s.plus ? "+" : ""}</span><span class="lp-stat-l">${esc(L(s.label, loc))}</span></div>`).join("\n      ")}
+    </section>
+
+    <section class="lp-block" id="flagship">
+      <p class="lp-kicker">${esc(T("home.kicker.flagship"))}</p>
+      <div class="lp-flags">
+        ${flagship.map((p, i) => flagRow(p, loc, i)).join("\n        ")}
+      </div>
+    </section>
+
+    <section class="lp-block" id="work">
+      <p class="lp-kicker">${esc(T("home.kicker.more"))}</p>
+      <div class="lp-more">
+        ${rest.map((p) => productRow(p, loc)).join("\n        ")}
+      </div>
+      <a class="lp-more-link" href="${href(loc, "/work/")}">${esc(T("home.more"))}${ARROW}</a>
+    </section>
+
+    <section class="lp-block" id="cv">
+      <p class="lp-kicker">${esc(T("home.kicker.cv"))}</p>
+      <ul class="lp-cv">
+        ${cv.jobs.concat(cv.education.slice(0, 2).map((e) => ({ role: e.title, org: e.org, period: e.period })))
+          .map((j) => `<li><time>${esc(L(j.period, loc))}</time><div><b>${esc(L(j.role, loc))}</b><p>${esc(L(j.org, loc))}</p></div></li>`).join("\n        ")}
+      </ul>
+      <a class="lp-more-link" href="${href(loc, "/cv/")}">${esc(T("home.cv.more"))}${ARROW}</a>
+    </section>
+
+    <section class="lp-block" id="writing">
+      <p class="lp-kicker">${esc(T("home.kicker.writing"))}</p>
+      <div class="lp-write">
+        ${writing.map((w) => `<a href="${w.url}"${w.external ? ' target="_blank" rel="noopener noreferrer"' : ""}><time>${w.date}</time><b>${esc(w.title)}</b><span>${esc(w.tag)}</span></a>`).join("\n        ")}
+      </div>
+      <a class="lp-more-link" href="${href(loc, "/log/")}">${esc(T("home.writing.more"))}${ARROW}</a>
+    </section>
+
+    <section class="lp-block" id="open">
+      <p class="lp-kicker">${esc(T("home.kicker.open"))}</p>
+      <div class="lp-ai">
+        <a class="lp-ai-main" href="${site.huggingface}" target="_blank" rel="noopener noreferrer">
+          <span class="lp-card-name">Maqsudjonpolatov</span>
+          <span class="lp-card-dek">${esc(T("home.open.dek"))}</span>
+          <span class="lp-more-dom">huggingface.co</span>
+        </a>
+        <div class="lp-bots">
+          <p class="lp-bots-k">${esc(T("home.open.bots"))}</p>
+          <a href="https://t.me/chertmabot" target="_blank" rel="noopener noreferrer">@Chertmabot</a>
+          <a href="https://t.me/chzquzbot" target="_blank" rel="noopener noreferrer">@Chzquzbot</a>
+          <a href="${site.dataset}" target="_blank" rel="noopener noreferrer">uz-lexicon-skeleton</a>
         </div>
       </div>
     </section>
 
-    <section class="shell">
-      <div class="stats">
-        ${stats.map((s) => `<div class="stat"><b class="num" data-count="${s.n}"${s.plus ? ' data-suffix="+"' : ""}>${s.n.toLocaleString(loc)}${s.plus ? "+" : ""}</b><span>${esc(L(s.label, loc))}</span></div>`).join("\n        ")}
-      </div>
+    <section class="lp-block" id="method">
+      <p class="lp-kicker">${esc(T("home.kicker.method"))}</p>
+      <h2 class="lp-h2">${esc(T("home.method.title"))}</h2>
+      <p class="lp-body">${esc(T("home.method.body"))}</p>
+      <ol class="lp-steps">
+        ${method.map((s) => `<li><span>${s.n}</span><b>${esc(L(s.label, loc))}</b></li>`).join("\n        ")}
+      </ol>
     </section>
 
-    <section class="shell band" id="flagship">
-      <div class="band-grid">
-        <p class="kicker">${esc(T("home.kicker.flagship"))}</p>
-        <div class="flags">
-          ${flagship.map((p, i) => flagCard(p, loc, i)).join("\n          ")}
-        </div>
-      </div>
-    </section>
-
-    <section class="shell band" id="work">
-      <div class="band-grid">
-        <p class="kicker">${esc(T("home.kicker.more"))}</p>
-        <div>
-          <div class="rows">
-          ${rest.map((p, i) => productRow(p, loc, i)).join("\n          ")}
+    <section class="lp-block" id="languages">
+      <p class="lp-kicker">${esc(T("home.kicker.languages"))}</p>
+      <h2 class="lp-h2">${esc(T("home.languages.title"))}</h2>
+      <div class="lg-list">
+        ${languages.map((l) => {
+          const tag = l.native === "한국어" ? "ko" : l.native === "中文" ? "zh" : l.native === "Русский" ? "ru" : l.native === "English" ? "en" : "uz";
+          return `<article class="lg-row lp-reveal" style="--hue:${l.hue}">
+          <header class="lg-id">
+            <p class="lg-native" lang="${tag}">${esc(l.native)}</p>
+            <p class="lg-latin">${esc(L(l.latin, loc))}</p>
+            <span class="lg-cefr">${l.cefr}</span>
+          </header>
+          <div class="lg-mid">
+            <span class="lg-track"><span class="lg-fill" style="--fill:${l.fill}%"></span></span>
+            <p class="lg-story">${esc(L(l.story, loc))}</p>
+            <p class="lg-sample" lang="${tag}"><span>${esc(T("home.sample"))}</span>${esc(l.sample)}</p>
           </div>
-          <a class="more-link" href="${href(loc, "/work/")}">${esc(T("home.more"))}${ARROW}</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell band" id="method">
-      <div class="band-grid">
-        <p class="kicker">${esc(T("home.kicker.method"))}</p>
-        <div class="reveal">
-          <h2 style="font-size:clamp(1.5rem,3.6vw,2.25rem)">${esc(T("home.method.title"))}</h2>
-          <p class="measure" style="margin-top:1rem;color:var(--ink-muted)">${esc(T("home.method.body"))}</p>
-          <ol class="steps">
-            ${method.map((s) => `<li class="step"><span class="mono">${s.n}</span><b>${esc(L(s.label, loc))}</b></li>`).join("\n            ")}
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell band" id="open">
-      <div class="band-grid">
-        <p class="kicker">${esc(T("home.kicker.open"))}</p>
-        <div class="os reveal">
-          <a class="os-card" href="${site.huggingface}" target="_blank" rel="noopener noreferrer">
-            <h3>Maqsudjonpolatov</h3>
-            <p>${esc(T("home.open.dek"))}</p>
-            <p class="mono" style="margin-top:.9rem;color:var(--ink-faint);font-size:.75rem">huggingface.co ${EXT}</p>
-          </a>
-          <div class="os-links">
-            <b>${esc(T("home.open.bots"))}</b>
-            <a href="https://t.me/chertmabot" target="_blank" rel="noopener noreferrer">@Chertmabot</a>
-            <a href="https://t.me/chzquzbot" target="_blank" rel="noopener noreferrer">@Chzquzbot</a>
-            <a href="${site.dataset}" target="_blank" rel="noopener noreferrer">uz-lexicon-skeleton</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell band" id="languages">
-      <div class="band-grid">
-        <p class="kicker">${esc(T("home.kicker.languages"))}</p>
-        <div>
-          <h2 style="font-size:clamp(1.5rem,3.6vw,2.25rem)">${esc(T("home.languages.title"))}</h2>
-          <div class="rows" style="margin-top:1.5rem">
-            ${languages.map((l) => `<article class="lang-row reveal" style="--hue:${l.hue}">
-              <header class="lang-id">
-                <p class="lang-native" lang="${l.native === "한국어" ? "ko" : l.native === "中文" ? "zh" : l.native === "Русский" ? "ru" : l.native === "English" ? "en" : "uz"}">${esc(l.native)}</p>
-                <p class="lang-latin">${esc(L(l.latin, loc))} <span class="lang-cefr">${l.cefr}</span></p>
-              </header>
-              <div>
-                <span class="track" style="--fill:${l.fill / 100}"><i></i></span>
-                <p class="lang-story">${esc(L(l.story, loc))}</p>
-                <p class="lang-sample" lang="${l.native === "한국어" ? "ko" : l.native === "中文" ? "zh" : l.native === "Русский" ? "ru" : l.native === "English" ? "en" : "uz"}"><span>${esc(T("home.sample"))}</span>${esc(l.sample)}</p>
-              </div>
-              <p class="lang-badge${l.live ? " is-live" : ""}"${l.live ? ` data-since="2026-09-19"` : ""}>${l.live ? `<i class="pulse"></i>${esc(L(l.badge, loc))} <span data-n>1</span>` : esc(L(l.badge, loc))}</p>
-            </article>`).join("\n            ")}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell band" id="cv">
-      <div class="band-grid">
-        <p class="kicker">${esc(T("home.kicker.cv"))}</p>
-        <div>
-          <div class="rows">
-            ${cv.jobs.concat(cv.education.slice(0, 2).map((e) => ({ role: e.title, org: e.org, period: e.period })))
-              .map((j) => `<div class="row"><span class="row-name">${esc(L(j.role, loc))}</span><span class="row-dek">${esc(L(j.org, loc))}</span><span class="row-meta mono">${esc(L(j.period, loc))}</span></div>`).join("\n            ")}
-          </div>
-          <a class="more-link" href="${href(loc, "/cv/")}">${esc(T("home.cv.more"))}${ARROW}</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell band" id="writing">
-      <div class="band-grid">
-        <p class="kicker">${esc(T("home.kicker.writing"))}</p>
-        <div>
-          <div class="rows">
-            ${writing.map((p) => `<a class="row" href="${p.url}"${p.local ? "" : ' target="_blank" rel="noopener noreferrer"'}>
-              <span class="row-name">${esc(L(p.title, loc))}</span>
-              <span class="row-dek">${esc(p.local ? L(p.dek, loc) : "maqsudjon.com")}</span>
-              <span class="row-meta mono">${p.date}</span>
-            </a>`).join("\n            ")}
-          </div>
-          <a class="more-link" href="${href(loc, "/log/")}">${esc(T("home.writing.more"))}${ARROW}</a>
-        </div>
+          <p class="lg-badge${l.live ? " is-live" : ""}"${l.live ? ' data-since="2026-09-19"' : ""}>${l.live ? `<i class="lg-pulse"></i>${esc(L(l.badge, loc))} <span data-n>1</span>` : esc(L(l.badge, loc))}</p>
+        </article>`;
+        }).join("\n        ")}
       </div>
     </section>
 `
@@ -392,19 +357,17 @@ function pageWork(loc) {
   }];
   return head({ loc, path: "/work/", title: T("work.title"), description: T("work.description"), jsonld: ld })
     + header(loc, "/work/")
-    + `<section class="shell page-head">
-      <p class="kicker">${esc(T("nav.work"))}</p>
-      <h1 class="page-h1">${esc(T("work.h1"))}</h1>
-      <p class="page-dek">${esc(T("work.dek"))}</p>
+    + `<section class="lp-head">
+      <p class="lp-kicker">${esc(T("nav.work"))}</p>
+      <h1 class="lp-title">${esc(T("work.h1"))}</h1>
+      <p class="lp-lede">${esc(T("work.dek"))}</p>
     </section>
-    <section class="shell band">
-      ${groups.map((g) => `<div class="band-grid" style="margin-bottom:2.5rem">
-        <p class="kicker kicker-plain">${esc(L(tags[g], loc))}</p>
-        <div class="rows">
-          ${products.filter((p) => p.tag === g).map((p, i) => productRow(p, loc, i)).join("\n          ")}
-        </div>
-      </div>`).join("\n      ")}
-    </section>
+    ${groups.map((g) => `<section class="lp-block" style="padding-block:2rem">
+      <p class="lp-kicker lp-kicker-plain">${esc(L(tags[g], loc))}</p>
+      <div class="lp-more">
+        ${products.filter((p) => p.tag === g).map((p) => productRow(p, loc)).join("\n        ")}
+      </div>
+    </section>`).join("\n    ")}
 `
     + footer(loc);
 }
@@ -422,38 +385,34 @@ function pageCase(p, loc) {
       { "@type": "ListItem", position: 3, name: p.name, item: abs(href(loc, path)) },
     ] },
   }];
-  const cell = (key, body) => `<div class="case-cell"><h2>${esc(T(key))}</h2><p>${esc(body)}</p></div>`;
+  const cell = (key, body) => `<div><h2>${esc(T(key))}</h2><p>${esc(body)}</p></div>`;
   return head({ loc, path, title: `${p.name} — tou.gg`, description: L(p.dek, loc), jsonld: ld })
     + header(loc, "/work/")
-    + `<section class="shell page-head" style="--hue:${p.hue}">
-      <p class="kicker">${esc(L(tags[p.tag], loc))}</p>
-      <h1 class="page-h1">${esc(p.name)}</h1>
-      <p class="page-dek">${esc(L(p.dek, loc))}</p>
-      ${p.metric ? `<p class="case-metric"><b class="num">${esc(p.metric.n)}</b><span>${esc(L(p.metric.label, loc))}</span></p>` : ""}
-      <div class="case-links">
-        <a class="btn btn-primary" href="${p.url}" target="_blank" rel="noopener noreferrer">${esc(T("work.open"))}${EXT}</a>
-        ${(p.links || []).map((l) => `<a class="btn" href="${l.url}" target="_blank" rel="noopener noreferrer">${esc(l.label)}${EXT}</a>`).join("\n        ")}
+    + `<section class="lp-head" style="--hue:${p.hue}">
+      <p class="lp-kicker">${esc(L(tags[p.tag], loc))}</p>
+      <h1 class="lp-title">${esc(p.name)}</h1>
+      <p class="lp-lede">${esc(L(p.dek, loc))}</p>
+      ${p.metric ? `<p class="lp-metric"><b>${esc(p.metric.n)}</b><span>${esc(L(p.metric.label, loc))}</span></p>` : ""}
+      <div class="lp-cta">
+        <a class="lp-cta-btn" href="${p.url}" target="_blank" rel="noopener noreferrer">${esc(T("work.open"))}${EXT}</a>
+        ${(p.links || []).map((l) => `<a href="${l.url}" target="_blank" rel="noopener noreferrer">${esc(l.label)}${EXT}</a>`).join("\n        ")}
       </div>
     </section>
-    <section class="shell band">
-      <div class="case-grid reveal">
+    <section class="lp-block">
+      <div class="lp-case lp-reveal">
         ${cell("case.problem", L(p.story.problem, loc))}
         ${cell("case.constraint", L(p.story.constraint, loc))}
         ${cell("case.shipped", L(p.story.shipped, loc))}
         ${cell("case.hard", L(p.story.hard, loc))}
       </div>
-      <div class="stack-chips">${(p.stack || []).map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
+      <div class="lp-chips">${(p.stack || []).map((s) => `<span class="lp-chip">${esc(s)}</span>`).join("")}</div>
     </section>
-    <section class="shell band">
-      <div class="band-grid">
-        <p class="kicker">${esc(T("work.more"))}</p>
-        <div>
-          <div class="rows">
-            ${others.map((o, i) => productRow(o, loc, i)).join("\n            ")}
-          </div>
-          <a class="more-link" href="${href(loc, "/work/")}">${esc(T("case.back"))}${ARROW}</a>
-        </div>
+    <section class="lp-block">
+      <p class="lp-kicker">${esc(T("work.more"))}</p>
+      <div class="lp-more">
+        ${others.map((o) => productRow(o, loc)).join("\n        ")}
       </div>
+      <a class="lp-more-link" href="${href(loc, "/work/")}">${esc(T("case.back"))}${ARROW}</a>
     </section>
 `
     + footer(loc);
@@ -461,27 +420,25 @@ function pageCase(p, loc) {
 
 function pageCv(loc) {
   const T = t(loc);
-  const ld = [{
-    "@type": "ProfilePage", url: abs(href(loc, "/cv/")), inLanguage: loc,
-    mainEntity: { "@id": abs("/#person") },
-  }];
+  const country = { en: "Uzbekistan", uz: "O‘zbekiston", ru: "Узбекистан" }[loc];
+  const ld = [{ "@type": "ProfilePage", url: abs(href(loc, "/cv/")), inLanguage: loc, mainEntity: { "@id": abs("/#person") } }];
   return head({ loc, path: "/cv/", title: T("cv.title"), description: T("cv.description"), jsonld: ld })
     + header(loc, "/cv/")
-    + `<article class="shell band" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    + `<article class="lp-block" style="padding-top:2.5rem">
       <header class="cv-top">
         <div>
-          <p class="kicker">CV</p>
-          <h1 class="cv-name" style="margin-top:.9rem">${site.name}</h1>
-          <p class="cv-meta">${esc(L(site.role, loc))} · ${esc(L(site.city, loc))}, ${loc === "ru" ? "Узбекистан" : loc === "uz" ? "O‘zbekiston" : "Uzbekistan"}<br/>
+          <p class="lp-kicker">CV</p>
+          <h1 class="cv-name">${site.name}</h1>
+          <p class="cv-meta">${esc(L(site.role, loc))} · ${esc(L(site.city, loc))}, ${country}<br/>
             <a href="mailto:${site.email}">${site.email}</a> · <a href="tel:${site.tel}">${site.telDisplay}</a><br/>
             tou.gg · <a href="${site.github}" target="_blank" rel="noopener noreferrer">github.com/maqsudjon-cell</a></p>
           <p class="cv-avail">${esc(T("cv.available"))}</p>
         </div>
-        <button type="button" class="btn cv-print" onclick="window.print()">${esc(T("cv.print"))}</button>
+        <button type="button" class="lp-cta-btn cv-print" style="padding:.7rem 1.15rem;border:1px solid var(--line-2);font:400 .8rem/1 var(--font-mono);color:var(--fg)" onclick="window.print()">${esc(T("cv.print"))}</button>
       </header>
 
       <section class="cv-sec"><h2>${esc(T("cv.summary"))}</h2>
-        <p class="measure" style="margin-top:1rem;color:var(--ink-muted)">${esc(L(cv.summary, loc))}</p>
+        <p class="lp-body" style="margin-top:1rem">${esc(L(cv.summary, loc))}</p>
       </section>
 
       <section class="cv-sec"><h2>${esc(T("cv.experience"))}</h2>
@@ -510,7 +467,7 @@ function pageCv(loc) {
       </section>
 
       <section class="cv-sec"><h2>${esc(T("cv.stack"))}</h2>
-        <div class="stack-chips">${cv.stack.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
+        <div class="lp-chips">${cv.stack.map((s) => `<span class="lp-chip">${esc(s)}</span>`).join("")}</div>
       </section>
     </article>
 `
@@ -522,28 +479,20 @@ function pageLog(loc) {
   const ld = [{ "@type": "Blog", url: abs(href(loc, "/log/")), inLanguage: loc, name: T("log.title"), author: { "@id": abs("/#person") } }];
   return head({ loc, path: "/log/", title: T("log.title"), description: T("log.description"), jsonld: ld })
     + header(loc, "/log/")
-    + `<section class="shell page-head">
-      <p class="kicker">${esc(T("nav.writing"))}</p>
-      <h1 class="page-h1">${esc(T("log.h1"))}</h1>
-      <p class="page-dek">${esc(T("log.dek"))}</p>
+    + `<section class="lp-head">
+      <p class="lp-kicker">${esc(T("nav.writing"))}</p>
+      <h1 class="lp-title">${esc(T("log.h1"))}</h1>
+      <p class="lp-lede">${esc(T("log.dek"))}</p>
     </section>
-    <section class="shell band">
-      <div class="rows">
-        ${posts.map((p) => `<a class="row" href="${href(loc, `/log/${p.slug}/`)}">
-          <span class="row-name">${esc(L(p.title, loc))}</span>
-          <span class="row-dek">${esc(L(p.dek, loc))}</span>
-          <span class="row-meta mono">${p.date} · ${esc(T("log.local"))}</span>
-        </a>`).join("\n        ")}
+    <section class="lp-block" style="padding-top:1.5rem">
+      <div class="lp-write">
+        ${posts.map((p) => `<a href="${href(loc, `/log/${p.slug}/`)}"><time>${p.date}</time><b>${esc(L(p.title, loc))}</b><span>${esc(T("log.local"))}</span></a>`).join("\n        ")}
       </div>
-      <div class="band-grid" style="margin-top:3rem">
-        <p class="kicker kicker-plain">${esc(T("log.archive"))}</p>
-        <div class="rows">
-          ${outbound.map((o) => `<a class="row" href="${o.url}" target="_blank" rel="noopener noreferrer">
-            <span class="row-name">${esc(o.title)}</span>
-            <span class="row-dek">maqsudjon.com</span>
-            <span class="row-meta mono">${o.date}</span>
-          </a>`).join("\n          ")}
-        </div>
+    </section>
+    <section class="lp-block" style="padding-top:1rem">
+      <p class="lp-kicker lp-kicker-plain">${esc(T("log.archive"))}</p>
+      <div class="lp-write">
+        ${outbound.map((o) => `<a href="${o.url}" target="_blank" rel="noopener noreferrer"><time>${o.date}</time><b>${esc(o.title)}</b><span>↗</span></a>`).join("\n        ")}
       </div>
     </section>
 `
@@ -561,14 +510,14 @@ function pagePost(p, loc) {
   }];
   return head({ loc, path, title: `${L(p.title, loc)} — tou.gg`, description: L(p.dek, loc), type: "article", article: p.date, jsonld: ld })
     + header(loc, "/log/")
-    + `<article class="shell band" style="padding-top:clamp(2.5rem,6vw,4rem)">
-      <p class="kicker">${esc(T("nav.writing"))} / <time datetime="${p.date}">${p.date}</time></p>
-      <h1 class="page-h1">${esc(L(p.title, loc))}</h1>
-      <p class="page-dek">${esc(L(p.dek, loc))}</p>
-      <div class="prose" style="margin-top:2.5rem">
+    + `<article class="lp-block" style="padding-top:2.5rem">
+      <p class="lp-kicker">${esc(T("nav.writing"))} / <time datetime="${p.date}">${p.date}</time></p>
+      <h1 class="lp-title">${esc(L(p.title, loc))}</h1>
+      <p class="lp-lede">${esc(L(p.dek, loc))}</p>
+      <div class="lp-prose" style="margin-top:2.5rem">
         ${L(p.body, loc).map((x) => `<p>${esc(x)}</p>`).join("\n        ")}
       </div>
-      <a class="more-link" href="${href(loc, "/log/")}">${esc(T("log.back"))}${ARROW}</a>
+      <a class="lp-more-link" href="${href(loc, "/log/")}">${esc(T("log.back"))}${ARROW}</a>
     </article>
 `
     + footer(loc);
@@ -578,21 +527,18 @@ function pageAbout(loc) {
   const T = t(loc);
   return head({ loc, path: "/about/", title: T("about.title"), description: T("about.description") })
     + header(loc, "/about/")
-    + `<section class="shell page-head">
-      <p class="kicker">${esc(T("nav.about"))}</p>
-      <h1 class="page-h1">${esc(T("about.h1"))}</h1>
+    + `<section class="lp-head">
+      <p class="lp-kicker">${esc(T("nav.about"))}</p>
+      <h1 class="lp-title">${esc(T("about.h1"))}</h1>
     </section>
-    <section class="shell band">
-      <div class="band-grid">
-        <p class="kicker kicker-plain">${esc(L(site.city, loc))}</p>
-        <div class="prose">
-          ${prose.about[loc].map((x) => `<p>${esc(x)}</p>`).join("\n          ")}
-        </div>
+    <section class="lp-block" style="padding-top:1.5rem">
+      <div class="lp-prose">
+        ${prose.about[loc].map((x) => `<p>${esc(x)}</p>`).join("\n        ")}
       </div>
-      <div class="band-grid" style="margin-top:3rem">
-        <p class="kicker kicker-plain">${esc(T("about.stack"))}</p>
-        <div class="stack-chips" style="margin-top:0">${cv.stack.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
-      </div>
+    </section>
+    <section class="lp-block" style="padding-top:0">
+      <p class="lp-kicker lp-kicker-plain">${esc(T("about.stack"))}</p>
+      <div class="lp-chips" style="margin-top:0">${cv.stack.map((s) => `<span class="lp-chip">${esc(s)}</span>`).join("")}</div>
     </section>
 `
     + footer(loc);
@@ -602,18 +548,15 @@ function pageNow(loc) {
   const T = t(loc);
   return head({ loc, path: "/now/", title: T("now.title"), description: T("now.description") })
     + header(loc, "/now/")
-    + `<section class="shell page-head">
-      <p class="kicker">NOW · ${site.updated}</p>
-      <h1 class="page-h1">${esc(T("now.h1"))}</h1>
-      <p class="page-dek">${esc(T("now.dek"))}</p>
+    + `<section class="lp-head">
+      <p class="lp-kicker">NOW · ${site.updated}</p>
+      <h1 class="lp-title">${esc(T("now.h1"))}</h1>
+      <p class="lp-lede">${esc(T("now.dek"))}</p>
     </section>
-    <section class="shell band">
-      <div class="band-grid">
-        <p class="kicker kicker-plain">${esc(T("footer.updated"))} ${site.updated}</p>
-        <div class="prose">
-          ${prose.now[loc].map((x) => `<p>${esc(x)}</p>`).join("\n          ")}
-          <p><a href="${href(loc, "/log/why-tou/")}">${esc(L(posts[0].title, loc))} →</a></p>
-        </div>
+    <section class="lp-block" style="padding-top:1.5rem">
+      <div class="lp-prose">
+        ${prose.now[loc].map((x) => `<p>${esc(x)}</p>`).join("\n        ")}
+        <p><a href="${href(loc, "/log/why-tou/")}">${esc(L(posts[0].title, loc))} →</a></p>
       </div>
     </section>
 `
@@ -625,17 +568,14 @@ function pageColophon(loc) {
   const md = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/`(.+?)`/g, "<code>$1</code>");
   return head({ loc, path: "/colophon/", title: T("colophon.title"), description: T("colophon.description") })
     + header(loc, "/colophon/")
-    + `<section class="shell page-head">
-      <p class="kicker">Colophon</p>
-      <h1 class="page-h1">${esc(T("colophon.h1"))}</h1>
+    + `<section class="lp-head">
+      <p class="lp-kicker">Colophon</p>
+      <h1 class="lp-title">${esc(T("colophon.h1"))}</h1>
     </section>
-    <section class="shell band">
-      <div class="band-grid">
-        <p class="kicker kicker-plain">tou.gg</p>
-        <div class="prose">
-          ${prose.colophon[loc].map((x) => `<p>${md(x)}</p>`).join("\n          ")}
-          <p><a href="${site.repo}" target="_blank" rel="noopener noreferrer">${site.repo.replace("https://", "")}</a></p>
-        </div>
+    <section class="lp-block" style="padding-top:1.5rem">
+      <div class="lp-prose">
+        ${prose.colophon[loc].map((x) => `<p>${md(x)}</p>`).join("\n        ")}
+        <p><a href="${site.repo}" target="_blank" rel="noopener noreferrer">${site.repo.replace("https://", "")}</a></p>
       </div>
     </section>
 `
@@ -647,11 +587,11 @@ function page404() {
   const T = t(loc);
   return head({ loc, path: "/404", title: T("404.title"), description: T("404.dek"), noindex: true })
     + header(loc, "/404", "/")
-    + `<section class="shell page-head" style="min-height:52vh">
-      <p class="kicker">404</p>
-      <h1 class="page-h1">${esc(T("404.h1"))}</h1>
-      <p class="page-dek">${esc(T("404.dek"))}</p>
-      <div class="cta-row"><a class="btn btn-primary" href="/">${esc(T("404.cta"))}${ARROW}</a><a class="btn" href="/work/">${esc(T("nav.work"))}</a></div>
+    + `<section class="lp-head" style="min-height:48vh">
+      <p class="lp-kicker">404</p>
+      <h1 class="lp-title">${esc(T("404.h1"))}</h1>
+      <p class="lp-lede">${esc(T("404.dek"))}</p>
+      <div class="lp-cta"><a class="lp-cta-btn" href="/">${esc(T("404.cta"))}${ARROW}</a><a href="/work/">${esc(T("nav.work"))}</a></div>
     </section>
 `
     + footer(loc);

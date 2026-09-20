@@ -8,18 +8,15 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  /* ---------------------------------------------------------------- header */
-  const hdr = $(".hdr");
-  if (hdr) {
+  /* ---------------------------------------------------------------- header
+     The bar is transparent until you scroll. Without this, it printed the nav
+     straight over the body text. */
+  const bar = $(".lp-bar");
+  if (bar) {
     let ticking = false;
-    const sync = () => {
-      hdr.classList.toggle("is-stuck", window.scrollY > 6);
-      ticking = false;
-    };
+    const sync = () => { bar.classList.toggle("is-scrolled", scrollY > 6); ticking = false; };
     sync();
-    addEventListener("scroll", () => {
-      if (!ticking) { ticking = true; requestAnimationFrame(sync); }
-    }, { passive: true });
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(sync); } }, { passive: true });
   }
 
   /* ----------------------------------------------------------- mobile menu */
@@ -30,16 +27,15 @@
       sheet.hidden = !open;
       burger.setAttribute("aria-expanded", String(open));
       burger.setAttribute("aria-label", open ? burger.dataset.close : burger.dataset.open);
-      document.documentElement.style.overflow = open ? "hidden" : "";
     };
     burger.addEventListener("click", () => setOpen(sheet.hidden));
     sheet.addEventListener("click", (e) => { if (e.target.closest("a")) setOpen(false); });
     addEventListener("keydown", (e) => { if (e.key === "Escape" && !sheet.hidden) { setOpen(false); burger.focus(); } });
-    matchMedia("(width >= 860px)").addEventListener("change", (e) => { if (e.matches) setOpen(false); });
+    matchMedia("(width >= 720px)").addEventListener("change", (e) => { if (e.matches) setOpen(false); });
   }
 
   /* -------------------------------------------------------- scroll reveals */
-  const reveals = $$(".reveal");
+  const reveals = $$(".lp-reveal");
   if (reduced || !("IntersectionObserver" in window)) {
     reveals.forEach((el) => el.classList.add("is-in"));
   } else {
@@ -81,13 +77,18 @@
     counters.forEach((el) => io.observe(el));
   }
 
-  /* -------------------------------------------------------- scroll progress */
-  const seam = $("[data-seam] i");
-  if (seam && !reduced) {
+  /* ------------------------------------------------------------- weld seam
+     The line down the left edge draws itself as the page scrolls. */
+  const weld = $("#weld-path");
+  if (weld && !reduced) {
+    const len = weld.getTotalLength();
+    weld.style.strokeDasharray = String(len);
+    weld.style.strokeDashoffset = String(len);
     let queued = false;
     const draw = () => {
       const max = document.documentElement.scrollHeight - innerHeight;
-      seam.style.transform = `scaleX(${max <= 0 ? 0 : Math.min(1, scrollY / max)})`;
+      const p = max <= 0 ? 1 : Math.min(1, scrollY / max);
+      weld.style.strokeDashoffset = String(len * (1 - p));
       queued = false;
     };
     draw();
@@ -104,14 +105,14 @@
   }
 
   /* ------------------------------------------------------------- word mark
-     The HTML already says "tou.gg". This replays how it got there:
-     type "to you", drop the middle, close the gap, land ".gg".
-     Once per session — an animation you cannot skip is a tax on the reader. */
+     The HTML already says "tou.gg". This replays how it got there: type
+     "to you", drop the middle, close the gap, land ".gg". Once per session —
+     an animation you cannot skip is a tax on the reader. */
   const mark = $("[data-wordmark]");
   const PLAYED = "tou:intro";
   if (mark && !reduced && !sessionStorage.getItem(PLAYED)) {
-    const tou = $(".tou", mark);
-    const gg = $(".gg", mark);
+    const tou = $(".lp-type", mark);
+    const gg = $(".lp-gg", mark);
     const keep = tou ? $$(".ch", tou) : [];          // t, o, u — already in the DOM
     if (keep.length === 3 && gg) {
       const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -124,7 +125,7 @@
 
         // 1. Remember where "tou" sits, then widen it back out into "to you".
         const home = keep.map((el) => el.getBoundingClientRect().left);
-        const ghosts = ["o", "\u00a0", "y"].map((c) => {
+        const ghosts = ["o", " ", "y"].map((c) => {
           const s = document.createElement("span");
           s.className = "ch is-ghost";
           s.setAttribute("aria-hidden", "true");
@@ -154,7 +155,7 @@
           el.classList.add("is-falling");
           el.animate(
             [{ opacity: 1, transform: "translateY(0) rotate(0deg)" },
-             { opacity: 0, transform: "translateY(0.85em) rotate(9deg)" }],
+             { opacity: 0, transform: "translateY(-0.55em) rotate(-10deg)", filter: "blur(8px)" }],
             { duration: 440, delay: i * 45, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" },
           );
         });

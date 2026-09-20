@@ -93,6 +93,33 @@ it now lives once, in `src/content.mjs`.
   it a real domain or consider dropping it from the public list — a
   `*.workers.dev` link in a portfolio reads as unfinished.
 
+## The redesign, and the rollback
+
+The first pass of this rebuild replaced the visual language as well as the
+broken parts: a proportional display face (Space Grotesk), bordered cards for
+the flagship work, background glows, a two-column hero, a left rail of sticky
+section labels. Maqsudjon looked at it and said no. Reverted the same day.
+
+What went back: monospace at every display size, flat hairline rows with no
+surfaces, the single-column hero, kickers above their sections, the small mono
+stat strip, the weld seam down the left edge, and the plain UZ / RU / EN text
+switch instead of a segmented pill.
+
+What did **not** go back, because it was a defect rather than a choice:
+
+- the header now takes a backdrop when it sticks, instead of printing the nav
+  over body text;
+- the hero reads before JavaScript runs, and the mobile hero has no 600px hole;
+- `--faint` is `#79839a` instead of `#6e7681`, which failed AA at the 11px
+  sizes it is used at — two steps lighter, indistinguishable at a glance;
+- the reveal observer still catches elements a fast scroll jumped over.
+
+The lesson worth keeping: **the monospace display type was never a bug.** It
+looked like one — `--font-display` listed Space Grotesk with no `@font-face`
+behind it, so every heading silently fell through to JetBrains Mono. Fixing the
+"bug" removed the thing that made the site look like itself. The font stack now
+says mono on purpose, with a comment, so nobody helpfully repairs it again.
+
 ## Design decisions
 
 - **Dark only.** A light theme doubles the QA surface for a site whose whole

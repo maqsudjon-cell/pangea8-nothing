@@ -131,7 +131,8 @@ def write_icons() -> None:
 # ------------------------------------------------------------------------ og
 def write_og() -> None:
     W, H = 1200, 630
-    display = "space-grotesk-latin-700-normal.woff2"
+    # The site's display face is the mono; the card must match it.
+    display = "jetbrains-mono-latin-700-normal.woff2"
     mono = "jetbrains-mono-latin-400-normal.woff2"
 
     for font_file, text in ((display, "tou.gg"), (mono, WHO + STATS + LINE + "".join(MANIFEST))):
@@ -140,7 +141,7 @@ def write_og() -> None:
             sys.exit(f"{font_file} has no glyph for {missing!r} — fix the copy or the font, "
                      f"do not ship a tofu box in the share card")
 
-    f_mark = load(display, 168)
+    f_mark = load(display, 150)
     f_who = load(mono, 24)
     f_line = load(mono, 30)
     f_stats = load(mono, 23)
@@ -193,7 +194,7 @@ def write_og() -> None:
   </linearGradient></defs>
   <rect width="1200" height="630" fill="#080B14"/>
   <text x="84" y="116" font-family="JetBrains Mono, monospace" font-size="24" fill="#7D8AA3">{WHO}</text>
-  <text x="84" y="356" font-family="Space Grotesk, Inter, sans-serif" font-size="168" font-weight="700" fill="#E9EEF8">tou<tspan fill="#FF6B35">.gg</tspan></text>
+  <text x="84" y="356" font-family="JetBrains Mono, ui-monospace, monospace" font-size="150" font-weight="700" fill="#E9EEF8">tou<tspan fill="#FF6B35">.gg</tspan></text>
   <text x="84" y="460" font-family="JetBrains Mono, monospace" font-size="30" fill="#A6B2C6">{LINE}</text>
   <rect x="84" y="512" width="150" height="3" fill="url(#seam)"/>
   <text x="84" y="570" font-family="JetBrains Mono, monospace" font-size="23" fill="#7D8AA3">{STATS}</text>
