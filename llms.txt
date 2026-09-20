@@ -1,40 +1,51 @@
 # tou.gg
 
-> Public brand home of Maqsudjon Polatov. TOU = “to you.” Umbrella, not a product name.
+> Public brand home of Maqsudjon Polatov. TOU = "to you". An umbrella, not a product name.
 
 - Site: https://tou.gg
+- Languages: English (/), Uzbek (/uz/), Russian (/ru/)
 - RSS: https://tou.gg/rss.xml
 - Stats: https://tou.goatcounter.com
 - Person: Maqsudjon Polatov, Tashkent, Uzbekistan (UTC+5)
-- Method: directs AI coding agents end to end (spec → architecture → build → DNS/TLS → ops). Welds full-time; ships software nights/days off.
+- Method: directs AI coding agents end to end (spec -> architecture -> build -> DNS/TLS -> ops). Welds full time; ships software nights and days off.
 - Email: polatovmaqsudjon1@gmail.com
 - Telegram: https://t.me/toudotgg
 - GitHub: https://github.com/maqsudjon-cell
-- Lab/archive: https://maqsudjon.com
-- Source: https://github.com/maqsudjon-cell/tou
+- Lab and long-form archive: https://maqsudjon.com
+- Source of this site: https://github.com/maqsudjon-cell/tou
 
-## Live products
+## Verified numbers (2026-09-20)
 
-- FlareStamina https://flarestamina.com — free IELTS platform, 113 tests, AI essay feedback, speaking lab
-- AI Lenta https://ailenta.uz — autonomous Uzbek AI news wire, hourly
-- Chertma https://chertma.maqsudjon.com — Uzbek New Latin orthography; dataset https://huggingface.co/datasets/Maqsudjonpolatov/uz-lexicon-skeleton
-- Nullsample https://nullsample.maqsudjon.com — seed-reproducible music from code
-- Tadam https://tadam.uz — wedding photo album, no app, no signup
-- KVADRAT https://kvdrt.maqsudjon.com — offline m² calculator for welding jobs
-- Minnos https://minnos.cc — English idioms
-- Pierics https://pierics.com — daily word game
-- ZED AVLOD https://zedavlod.uz — school site
-- CTN Language Centre https://ctnlc.uz
-- Payvandchi https://payvandchi.maqsudjon.com — metalwork catalogue
-- Reshotkachi https://reshotkachi.maqsudjon.com — metalwork catalogue
-- Chiziq https://chzq.uz — web studio
-- Hugging Face https://huggingface.co/Maqsudjonpolatov
+- 15 live sites
+- 191 public repos
+- 3,000+ commits
+- 144 IELTS tests live
+- 19 months solo
+
+## Live sites
+
+- FlareStamina https://flarestamina.com — Free IELTS Academic platform. 144 timed mocks, AI writing feedback, a speaking lab. Teachers run it with a class.
+- AI Lenta https://ailenta.uz — Uzbek AI news wire. 24 sources, LLM summaries on a schedule, every item cites the original. Nobody in the loop.
+- Chertma https://chertma.maqsudjon.com — Type ASCII, get correct Uzbek New Latin — ş ç ö ğ. Offline. An open 28-million-row lexicon underneath.
+- Nullsample https://nullsample.maqsudjon.com — Music from code. Zero samples, six stems, same seed = same track. Source public.
+- Tadam https://tadam.uz — Wedding photos in one album. One QR, no app, no signup. Used at a real wedding the week it shipped.
+- KVADRAT https://kvdrt.maqsudjon.com — m² calculator for window grilles. Free-text Uzbek and Russian. Offline, PDF out. Built for the shop I work in.
+- Davomat https://davomat.maqsudjon-polatov.workers.dev — Attendance for university group monitors, inside Telegram. 25 students marked in under a minute, offline-safe.
+- Chiziq / CHZQ https://chzq.uz — Productised web studio: fixed scopes, fixed prices, live portfolio in an iframe instead of screenshots.
+- Pierics https://pierics.com — Daily IELTS vocabulary game. One round a day, no account.
+- Minnos https://minnos.cc — 26 English cat idioms, with audio, explained in Uzbek.
+- ZED AVLOD School https://zedavlod.uz — Language school in To‘raqo‘rg‘on. English, IELTS, CEFR, Ibrat, DTM. Real results, no invented ones.
+- CTN Language Centre https://ctnlc.uz — Tashkent language centre. A1–C1, IELTS intensive, kids, speaking club. Trilingual, one file.
+- Payvandchi https://payvandchi.maqsudjon.com — Catalogue for the metal workshop. Grilles, railings, canopies — photographed on the job, not staged.
+- Reshotkachi https://reshotkachi.maqsudjon.com — Second grille catalogue, Russian-first, built as a 3D wall of 123 real photos.
+- maqsudjon.com https://maqsudjon.com — The lab and the build log. Long-form notes on every ship, in English and Uzbek.
 
 ## Pages
 
-- / work index and case studies
-- /cv curriculum vitae
-- /log editorial index (canonical essays on maqsudjon.com)
-- /about bio, method, stack, availability
-- /now what is being built this month
-- /colophon type, motion, and code-generated logo/OG
+- / home
+- /work/ work index, plus a case study per flagship product
+- /cv/ curriculum vitae, print-ready
+- /log/ writing index; long-form archive lives on maqsudjon.com
+- /about/ bio, method, stack, availability
+- /now/ what is being built this month
+- /colophon/ type, colour, motion, build

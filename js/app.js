@@ -1,178 +1,189 @@
+/* tou.gg — progressive enhancement only.
+   Every word on the page is readable with this file blocked. Nothing here
+   creates content; it only animates content the HTML already shipped. */
 (() => {
-  const menuBtn = document.querySelector(".menu-btn");
-  const panel = document.getElementById("mobile-nav");
-  if (menuBtn && panel) {
-    menuBtn.addEventListener("click", () => {
-      const open = panel.classList.toggle("open");
-      panel.hidden = !open;
-      menuBtn.setAttribute("aria-expanded", String(open));
-      menuBtn.textContent = open ? "Close" : "Menu";
-    });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && panel.classList.contains("open")) {
-        panel.classList.remove("open");
-        panel.hidden = true;
-        menuBtn.setAttribute("aria-expanded", "false");
-        menuBtn.textContent = "Menu";
-      }
-    });
-  }
+  "use strict";
 
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.querySelectorAll(".reveal").forEach((el, i) => {
-    if (reduced) { el.classList.add("is-in"); return; }
-    el.style.transitionDelay = (i % 6) * 50 + "ms";
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add("is-in"); io.disconnect(); }
-    }, { threshold: 0.14 });
-    io.observe(el);
-  });
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  const ease = (t) => 1 - (1 - t) ** 3;
-  document.querySelectorAll("[data-count]").forEach((el) => {
-    const value = Number(el.getAttribute("data-count"));
-    const plus = el.hasAttribute("data-plus");
-    const fmt = (n) => (value >= 1000 ? n.toLocaleString("en-US") : String(n)) + (plus ? "+" : "");
-    el.textContent = fmt(value);
-    if (reduced) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      io.disconnect();
-      const t0 = performance.now();
-      const tick = (now) => {
-        const t = Math.min(1, (now - t0) / 1100);
-        el.textContent = fmt(Math.round(ease(t) * value));
-        if (t < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }, { threshold: 0.4 });
-    io.observe(el);
-  });
-
-  const filters = document.querySelector("[data-log-filters]");
-  if (filters) {
-    const rows = [...document.querySelectorAll(".log-row[data-tags]")];
-    filters.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-filter]");
-      if (!btn) return;
-      const id = btn.getAttribute("data-filter");
-      filters.querySelectorAll("[data-filter]").forEach((b) => {
-        b.classList.toggle("is-on", b === btn);
-        b.setAttribute("aria-selected", String(b === btn));
-      });
-      rows.forEach((row) => {
-        const tags = row.getAttribute("data-tags") || "";
-        row.hidden = id !== "all" && !tags.split(" ").includes(id);
-      });
-    });
-  }
-
-  const typeEl = document.querySelector("[data-type]");
-  if (typeEl) {
-    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-    const SRC = "to you";
-    const DROP = new Set([1, 2, 3]);
-    const KEEP = [0, 4, 5];
-    const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
-    const chars = SRC.split("").map((ch, i) => {
-      const span = document.createElement("span");
-      span.className = "lp-ch";
-      if (KEEP.includes(i)) span.dataset.keep = "";
-      span.textContent = ch === " " ? "\u00a0" : ch;
-      span.style.visibility = "hidden";
-      typeEl.appendChild(span);
-      return span;
-    });
-    const caret = document.createElement("span");
-    caret.className = "lp-caret";
-    typeEl.appendChild(caret);
-    const ready = () => {
-      document.querySelectorAll(".lp-tag, .lp-dek, .lp-cta, .lp-stats").forEach((n) => n.classList.add("is-in"));
+  /* ---------------------------------------------------------------- header */
+  const hdr = $(".hdr");
+  if (hdr) {
+    let ticking = false;
+    const sync = () => {
+      hdr.classList.toggle("is-stuck", window.scrollY > 6);
+      ticking = false;
     };
-    const run = async () => {
-      if (reduced) {
-        chars.forEach((el, i) => {
-          if (DROP.has(i)) el.classList.add("is-drop");
-          else el.style.visibility = "";
+    sync();
+    addEventListener("scroll", () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(sync); }
+    }, { passive: true });
+  }
+
+  /* ----------------------------------------------------------- mobile menu */
+  const burger = $("[data-burger]");
+  const sheet = $("#menu-sheet");
+  if (burger && sheet) {
+    const setOpen = (open) => {
+      sheet.hidden = !open;
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? burger.dataset.close : burger.dataset.open);
+      document.documentElement.style.overflow = open ? "hidden" : "";
+    };
+    burger.addEventListener("click", () => setOpen(sheet.hidden));
+    sheet.addEventListener("click", (e) => { if (e.target.closest("a")) setOpen(false); });
+    addEventListener("keydown", (e) => { if (e.key === "Escape" && !sheet.hidden) { setOpen(false); burger.focus(); } });
+    matchMedia("(width >= 860px)").addEventListener("change", (e) => { if (e.matches) setOpen(false); });
+  }
+
+  /* -------------------------------------------------------- scroll reveals */
+  const reveals = $$(".reveal");
+  if (reduced || !("IntersectionObserver" in window)) {
+    reveals.forEach((el) => el.classList.add("is-in"));
+  } else {
+    const show = (el) => { el.classList.add("is-in"); io.unobserve(el); };
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        // isIntersecting alone loses anything a fast scroll jumped clean over,
+        // so anything now above the fold counts as seen too.
+        if (e.isIntersecting || e.boundingClientRect.top < 0) show(e.target);
+      }
+    }, { threshold: 0.06, rootMargin: "0px 0px -6% 0px" });
+    reveals.forEach((el) => {
+      if (el.getBoundingClientRect().top < innerHeight * 0.94) el.classList.add("is-in");
+      else io.observe(el);
+    });
+  }
+
+  /* ------------------------------------------------------------- count-ups */
+  const counters = $$("[data-count]");
+  if (counters.length && !reduced && "IntersectionObserver" in window) {
+    const ease = (t) => 1 - (1 - t) ** 3;
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        io.unobserve(e.target);
+        const el = e.target;
+        const to = Number(el.dataset.count);
+        const suffix = el.dataset.suffix || "";
+        const locale = document.documentElement.lang || "en";
+        const t0 = performance.now();
+        const tick = (now) => {
+          const t = Math.min(1, (now - t0) / 900);
+          el.textContent = Math.round(ease(t) * to).toLocaleString(locale) + (t === 1 ? suffix : "");
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.5 });
+    counters.forEach((el) => io.observe(el));
+  }
+
+  /* -------------------------------------------------------- scroll progress */
+  const seam = $("[data-seam] i");
+  if (seam && !reduced) {
+    let queued = false;
+    const draw = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      seam.style.transform = `scaleX(${max <= 0 ? 0 : Math.min(1, scrollY / max)})`;
+      queued = false;
+    };
+    draw();
+    addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(draw); } }, { passive: true });
+    addEventListener("resize", draw, { passive: true });
+  }
+
+  /* ------------------------------------------------------- live day counter */
+  const day = $("[data-since]");
+  if (day) {
+    const start = Date.parse(day.dataset.since + "T00:00:00Z");
+    const n = Math.max(1, Math.floor((Date.now() - start) / 86_400_000) + 1);
+    day.querySelector("[data-n]").textContent = String(n);
+  }
+
+  /* ------------------------------------------------------------- word mark
+     The HTML already says "tou.gg". This replays how it got there:
+     type "to you", drop the middle, close the gap, land ".gg".
+     Once per session — an animation you cannot skip is a tax on the reader. */
+  const mark = $("[data-wordmark]");
+  const PLAYED = "tou:intro";
+  if (mark && !reduced && !sessionStorage.getItem(PLAYED)) {
+    const tou = $(".tou", mark);
+    const gg = $(".gg", mark);
+    const keep = tou ? $$(".ch", tou) : [];          // t, o, u — already in the DOM
+    if (keep.length === 3 && gg) {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+
+      const play = async () => {
+        try { sessionStorage.setItem(PLAYED, "1"); } catch {}
+        mark.classList.add("is-typing");
+        gg.style.opacity = "0";
+
+        // 1. Remember where "tou" sits, then widen it back out into "to you".
+        const home = keep.map((el) => el.getBoundingClientRect().left);
+        const ghosts = ["o", "\u00a0", "y"].map((c) => {
+          const s = document.createElement("span");
+          s.className = "ch is-ghost";
+          s.setAttribute("aria-hidden", "true");
+          s.textContent = c;
+          return s;
         });
-        const gg = document.createElement("span");
-        gg.className = "lp-gg";
-        gg.textContent = ".gg";
-        caret.replaceWith(gg);
-        typeEl.classList.add("is-done");
-        ready();
-        return;
-      }
-      await wait(160);
-      for (let i = 0; i < chars.length; i++) {
-        chars[i].style.visibility = "";
-        await wait(i === 2 ? 170 : 64 + (i % 3) * 14);
-      }
-      await wait(820);
-      const firstX = KEEP.map((i) => chars[i].getBoundingClientRect().left);
-      const dropX = chars.map((n) => n.offsetLeft);
-      DROP.forEach((i) => {
-        chars[i].classList.add("is-drop");
-        chars[i].style.left = dropX[i] + "px";
-      });
-      KEEP.forEach((idx, i) => {
-        const el = chars[idx];
-        const dx = firstX[i] - el.getBoundingClientRect().left;
-        el.animate(
-          [{ transform: "translateX(" + dx + "px)" }, { transform: "translateX(-3px)" }, { transform: "translateX(0px)" }],
-          { duration: 880, easing: EASE, fill: "both" },
+        keep[1].before(...ghosts);                    // t [o _ y] o u
+        const wide = keep.map((el) => el.getBoundingClientRect().left);
+
+        // 2. Type "to you", one letter at a time.
+        const order = [keep[0], ghosts[0], ghosts[1], ghosts[2], keep[1], keep[2]];
+        order.forEach((el) => { el.style.visibility = "hidden"; });
+        for (const el of order) {
+          el.style.visibility = "";
+          el.animate(
+            [{ opacity: 0, transform: "translateY(0.2em)" }, { opacity: 1, transform: "none" }],
+            { duration: 220, easing: EASE },
+          );
+          await sleep(el === ghosts[1] ? 90 : 58);
+        }
+        await sleep(620);
+        mark.classList.remove("is-typing");
+
+        // 3. The middle falls out; t, o, u slide back to where "tou" was.
+        ghosts.forEach((el, i) => {
+          el.style.left = el.offsetLeft + "px";
+          el.classList.add("is-falling");
+          el.animate(
+            [{ opacity: 1, transform: "translateY(0) rotate(0deg)" },
+             { opacity: 0, transform: "translateY(0.85em) rotate(9deg)" }],
+            { duration: 440, delay: i * 45, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" },
+          );
+        });
+        const slides = keep.map((el, i) =>
+          el.animate(
+            [{ transform: "translateX(0)" }, { transform: `translateX(${home[i] - wide[i]}px)` }],
+            { duration: 620, easing: EASE, fill: "forwards" },
+          ));
+        await sleep(640);
+
+        // 4. Drop the ghosts so the layout really is "tou", then land ".gg".
+        ghosts.forEach((el) => el.remove());
+        slides.forEach((a) => a.cancel());
+        gg.style.opacity = "";
+        gg.animate(
+          [{ opacity: 0, transform: "translateY(-0.25em)" }, { opacity: 1, transform: "none" }],
+          { duration: 420, easing: EASE },
         );
-      });
-      [...DROP].forEach((idx, i) => {
-        chars[idx].animate(
-          [
-            { opacity: 1, filter: "blur(0px)", transform: "translateY(0) rotate(0deg)" },
-            { opacity: 0, filter: "blur(10px)", transform: "translateY(1.15em) rotate(11deg)" },
-          ],
-          { duration: 640, delay: i * 52, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "both" },
-        );
-      });
-      await wait(820);
-      const gg = document.createElement("span");
-      gg.className = "lp-gg";
-      gg.textContent = ".gg";
-      caret.replaceWith(gg);
-      typeEl.classList.add("is-done");
-      ready();
-    };
-    run();
-  }
-  document.querySelectorAll(".lp-reveal").forEach((el) => {
-    if (reduced) { el.classList.add("is-in"); return; }
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add("is-in"); io.disconnect(); }
-    }, { threshold: 0.01, rootMargin: "0px 0px 14% 0px" });
-    io.observe(el);
-  });
-  document.querySelectorAll(".chertma[data-to]").forEach((el) => {
-    const to = el.getAttribute("data-to");
-    setTimeout(() => {
-      el.textContent = to;
-      el.classList.add("is-fixed");
-    }, reduced ? 0 : 2200);
-  });
-  const weld = document.getElementById("weld-path");
-  if (weld && !reduced) {
-    const len = weld.getTotalLength();
-    weld.style.strokeDasharray = String(len);
-    weld.style.strokeDashoffset = String(len);
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const p = max <= 0 ? 1 : Math.min(1, window.scrollY / max);
-      weld.style.strokeDashoffset = String(len * (1 - p));
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
-  const cn = document.getElementById("cn-day");
-  if (cn) {
-    const start = Date.UTC(2026, 8, 19);
-    const day = Math.max(1, Math.floor((Date.now() - start) / 86400000) + 1);
-    cn.innerHTML = '<i class="lg-pulse"></i>Day ' + day;
+      };
+
+      const recover = () => {
+        mark.classList.remove("is-typing");
+        $$(".ch.is-ghost", mark).forEach((el) => el.remove());
+        keep.forEach((el) => { el.style.visibility = ""; el.getAnimations().forEach((a) => a.cancel()); });
+        gg.style.opacity = "";
+      };
+      const start = () => play().catch(recover);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(start, start);
+      else start();
+    }
   }
 })();

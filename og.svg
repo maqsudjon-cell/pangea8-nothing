@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <title>tou.gg — from me, to you</title>
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#FF6B35"/>
-      <stop offset="100%" stop-color="#FFB347"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="#0A0E1A"/>
-  <path d="M48 80 C 80 220, 40 360, 64 540" fill="none" stroke="#FF6B35" stroke-width="2"/>
-  <path d="M1152 90 h-80 m80 28 h-48 m48 28 h-72 m72 28 h-40" fill="none" stroke="#00D4FF" stroke-width="1.5"/>
-  <text x="600" y="300" text-anchor="middle" font-family="IBM Plex Mono, Liberation Mono, monospace" font-size="140" font-weight="700" fill="url(#g)">tou></text>
-  <text x="600" y="390" text-anchor="middle" font-family="IBM Plex Mono, Liberation Mono, monospace" font-size="32" fill="#00D4FF">to you → tou.gg</text>
-  <text x="600" y="560" text-anchor="middle" font-family="IBM Plex Mono, Liberation Mono, monospace" font-size="22" fill="#8B949E">15 products · 189 repos · 19 months solo</text>
+  <defs><linearGradient id="seam" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#FF6B35"/><stop offset="100%" stop-color="#FFB347"/>
+  </linearGradient></defs>
+  <rect width="1200" height="630" fill="#080B14"/>
+  <text x="84" y="116" font-family="JetBrains Mono, monospace" font-size="24" fill="#7D8AA3">MAQSUDJON POLATOV · PRODUCT ENGINEER · TASHKENT</text>
+  <text x="84" y="356" font-family="Space Grotesk, Inter, sans-serif" font-size="168" font-weight="700" fill="#E9EEF8">tou<tspan fill="#FF6B35">.gg</tspan></text>
+  <text x="84" y="460" font-family="JetBrains Mono, monospace" font-size="30" fill="#A6B2C6">from me — to you</text>
+  <rect x="84" y="512" width="150" height="3" fill="url(#seam)"/>
+  <text x="84" y="570" font-family="JetBrains Mono, monospace" font-size="23" fill="#7D8AA3">15 live sites · 191 repos · 3,000+ commits · 144 IELTS tests</text>
+  <rect x="0" y="626" width="1200" height="4" fill="url(#seam)"/>
 </svg>

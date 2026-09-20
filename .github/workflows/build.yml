@@ -1,0 +1,35 @@
+name: build
+
+# The repo is the site: GitHub Pages serves the committed HTML directly.
+# This job exists to prove the committed HTML is what build.mjs produces, so a
+# content edit can never half-land, and to fail the build when a translation,
+# a canonical or an internal link is missing.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build
+        run: node build.mjs
+
+      - name: Committed output matches the generator
+        run: |
+          if ! git diff --quiet; then
+            echo "::error::Generated files are stale. Run 'node build.mjs' and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
+      - name: Links, canonicals, hreflang
+        run: node scripts/check.mjs

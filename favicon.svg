@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 32">
-  <title>tou></title>
-  <rect width="40" height="32" fill="#0A0E1A"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>tou.gg</title>
+  <rect width="32" height="32" rx="0" fill="#080B14"/>
   <!-- t -->
-  <rect x="2" y="7" width="6" height="2" fill="#E6EDF3"/>
-  <rect x="4" y="7" width="2" height="18" fill="#E6EDF3"/>
-  <!-- o -->
-  <path fill="#E6EDF3" fill-rule="evenodd" d="M11 7h8v18h-8zm2 3h4v12h-4z"/>
-  <!-- u, bowl holds a 2px 'to you' spark -->
-  <rect x="21" y="7" width="2" height="14" fill="#E6EDF3"/>
-  <rect x="27" y="7" width="2" height="14" fill="#E6EDF3"/>
-  <rect x="21" y="19" width="8" height="2" fill="#E6EDF3"/>
-  <rect x="24" y="13" width="2" height="2" fill="#FF6B35"/>
-  <!-- > -->
-  <path d="M32 10l6 8-6 8" fill="none" stroke="#00FF88" stroke-width="2" stroke-linecap="square"/>
+  <rect x="4" y="9" width="9" height="3" fill="#E9EEF8"/>
+  <rect x="7" y="5" width="3" height="18" fill="#E9EEF8"/>
+  <rect x="7" y="23" width="7" height="3" fill="#E9EEF8"/>
+  <!-- caret -->
+  <path d="M18 11l6 7-6 7" fill="none" stroke="#FF6B35"
+        stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
