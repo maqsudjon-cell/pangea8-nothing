@@ -14,7 +14,8 @@
  * output of this file verbatim.
  */
 
-import { mkdirSync, writeFileSync, rmSync, existsSync } from "node:fs";
+import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -38,8 +39,20 @@ const t = (loc) => (key) => {
 const href = (loc, path = "/") => (loc === DEFAULT_LOCALE ? path : `/${loc}${path}`);
 const abs = (path) => site.origin + path;
 const cls = (...xs) => xs.filter(Boolean).join(" ");
+const cvPdf = (loc) => site.cvPdf[loc] || site.cvPdf[DEFAULT_LOCALE];
+
+/** Content hash, so a deploy is visible immediately instead of after a cache
+ *  expiry. GitHub Pages serves assets with a 10 minute max-age. */
+const rev = (file) => {
+  try {
+    return createHash("sha1").update(readFileSync(join(ROOT, file))).digest("hex").slice(0, 8);
+  } catch { return "0"; }
+};
+const CSS_V = rev("css/app.css");
+const JS_V = rev("js/app.js");
 
 const ARROW = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const DOWN = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v8M4.5 7.5 8 11l3.5-3.5M3 13h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const EXT = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 /** Pages that exist in every language. Used for nav, sitemap and hreflang. */
@@ -114,14 +127,15 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
   <meta name="twitter:creator" content="${site.handle}"/>
   <link rel="preload" href="/fonts/jetbrains-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
-  <link rel="stylesheet" href="/css/app.css"/>${ld}
+  <link rel="stylesheet" href="/css/app.css?v=${CSS_V}"/>${ld}
 </head>
 <body>
   <a href="#main" class="skip">${esc(T("nav.skip"))}</a>
 <div class="lp">
   <svg class="lp-draft" viewBox="0 0 48 2400" preserveAspectRatio="none" aria-hidden="true">
-    <path id="weld-path" d="M24 8 C 10 120, 38 220, 24 340 S 8 560, 24 720 S 40 980, 24 1160 S 6 1380, 24 1560 S 42 1780, 24 1980 S 12 2200, 24 2388" fill="none" stroke="url(#weld)" stroke-width="1.25" stroke-linecap="round"/>
-    <defs><linearGradient id="weld" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+    <path id="weld-path" d="M24 8 C 10 120, 38 220, 24 340 S 8 560, 24 720 S 40 980, 24 1160 S 6 1380, 24 1560 S 42 1780, 24 1980 S 12 2200, 24 2388" fill="none" stroke="url(#weld)" stroke-width="2" stroke-linecap="round"/>
+    <circle id="weld-tip" r="3.2" cx="24" cy="8" opacity="0"/>
+    <defs><linearGradient id="weld" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ffb347"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
   </svg>
 `;
 }
@@ -162,22 +176,22 @@ function header(loc, path, langPath = path) {
 /* ------------------------------------------------------------------- footer */
 function footer(loc) {
   const T = t(loc);
-  const links = [
-    [`mailto:${site.email}`, site.email],
-    [`tel:${site.tel}`, site.telDisplay],
-    [site.telegram, site.handle],
-    [site.x, "x"],
-    [site.instagram, "ig"],
-    [site.github, "github"],
-    [site.huggingface, "hugging face"],
-  ];
+  const ext = ' target="_blank" rel="noopener noreferrer"';
+  const row = (key, value) => `<div class="lp-crow"><span class="lp-ckey">${esc(T(key))}</span><span class="lp-cval">${value}</span></div>`;
   return `  </main>
   <footer class="lp-block lp-foot lp-mask" id="contact">
     <p class="lp-kicker">${esc(T("home.kicker.contact"))}</p>
     <h2 class="lp-handle"><span>${site.handle}</span></h2>
     <p class="lp-body">${esc(T("home.contact.body"))}</p>
     <div class="lp-contact">
-      ${links.map(([u, label]) => `<a href="${u}"${u.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : ""}>${esc(label)}</a>`).join("\n      ")}
+      ${row("contact.email", `<a href="mailto:${site.email}">${site.email}</a>`)}
+      ${row("contact.phone", `<a href="tel:${site.tel}">${site.telDisplay}</a>`)}
+      ${row("contact.telegram", `<a href="${site.telegram}"${ext}>${site.handle}</a>`)}
+      ${row("contact.elsewhere", [
+        [site.github, "GitHub"], [site.huggingface, "Hugging Face"],
+        [site.x, "X"], [site.instagram, "Instagram"], [site.lab, "maqsudjon.com"],
+      ].map(([u, l]) => `<a href="${u}"${ext}>${l}</a>`).join(""))}
+      ${row("contact.cv", `<a href="${href(loc, "/cv/")}">${esc(T("nav.cv"))}</a><a href="${cvPdf(loc)}" download>${esc(T("cv.download"))}</a>`)}
     </div>
     <p class="lp-chain">${T("footer.chain").split("→").map(esc).map((x) => x.trim()).join(" <span>→</span> ")}</p>
     <p class="lp-copy">© 2026 ${site.name} · ${esc(L(site.city, loc))} · tou.gg ·
@@ -187,7 +201,7 @@ function footer(loc) {
   </footer>
 </div>
   <script data-goatcounter="${site.goatcounter}" async src="https://gc.zgo.at/count.js"></script>
-  <script src="/js/app.js" defer></script>
+  <script src="/js/app.js?v=${JS_V}" defer></script>
 </body>
 </html>
 `;
@@ -250,11 +264,12 @@ function pageHome(loc) {
     + `<section class="lp-hero" id="top">
       <p class="lp-who"><span>${site.name}</span></p>
       <p class="lp-role"><span>${esc(L(site.role, loc))} · ${esc(L(site.city, loc))} · ${esc(T("home.remote"))}</span></p>
-      <h1 class="lp-display" data-wordmark><span class="lp-type"><span class="ch">t</span><span class="ch">o</span><span class="ch">u</span></span><span class="lp-gg">.gg</span><span class="lp-caret" aria-hidden="true"></span></h1>
+      <h1 class="lp-display" data-wordmark><span class="lp-word"><span class="lp-type"><span class="ch">t</span><span class="ch">o</span><span class="ch">u</span></span><span class="lp-gg"><span class="ch">.</span><span class="ch">g</span><span class="ch">g</span></span></span><span class="lp-caret" aria-hidden="true"></span><span class="lp-intro" aria-hidden="true" data-intro="to you, given gladly"></span></h1>
       <p class="lp-dek">${esc(T("home.dek"))}</p>
       <p class="lp-tag">${esc(T("home.tagline"))}</p>
       <div class="lp-cta">
         <a class="lp-cta-btn" href="${href(loc, "/cv/")}">${esc(T("home.cta.cv"))}${ARROW}</a>
+        <a class="btn-download" href="${cvPdf(loc)}" download>${esc(T("cv.download"))}${DOWN}</a>
         <a href="${href(loc, "/work/")}">${esc(T("home.cta.work"))}</a>
       </div>
     </section>
@@ -437,7 +452,11 @@ function pageCv(loc) {
             tou.gg · <a href="${site.github}" target="_blank" rel="noopener noreferrer">github.com/maqsudjon-cell</a></p>
           <p class="cv-avail">${esc(T("cv.available"))}</p>
         </div>
-        <button type="button" class="lp-cta-btn cv-print" style="padding:.7rem 1.15rem;border:1px solid var(--line-2);font:400 .8rem/1 var(--font-mono);color:var(--fg)" onclick="window.print()">${esc(T("cv.print"))}</button>
+        <div class="cv-actions">
+          <a class="btn btn-download" href="${cvPdf(loc)}" download>${esc(T("cv.download"))}${DOWN}</a>
+          <button type="button" class="btn cv-print" onclick="window.print()">${esc(T("cv.print"))}</button>
+          <p class="cv-hint">${esc(T("cv.pdf.hint"))}</p>
+        </div>
       </header>
 
       <section class="cv-sec"><h2>${esc(T("cv.summary"))}</h2>
@@ -452,9 +471,21 @@ function pageCv(loc) {
       </section>
 
       <section class="cv-sec"><h2>${esc(T("cv.selected"))}</h2>
-        ${products.filter((p) => p.flagship || p.case).map((p) => `<div class="cv-item">
-          <div class="cv-item-h"><div><b>${esc(p.name)}</b><em>${esc(L(p.dek, loc))}</em></div><a href="${p.url}" target="_blank" rel="noopener noreferrer">${esc(p.domain)}</a></div>
+        ${[...new Set(products.map((p) => p.tag))].map((g) => `<div class="cv-group">
+          <p class="cv-group-k">${esc(L(tags[g], loc))}</p>
+          ${products.filter((p) => p.tag === g).map((p) => `<div class="cv-item">
+            <div class="cv-item-h"><div><b>${esc(p.name)}${p.beta ? ` <span class="lp-chip">${esc(T("work.beta"))}</span>` : ""}</b><em>${esc(L(p.dek, loc))}</em></div><a href="${p.url}" target="_blank" rel="noopener noreferrer">${esc(p.domain)}</a></div>
+          </div>`).join("\n          ")}
         </div>`).join("\n        ")}
+      </section>
+
+      <section class="cv-sec"><h2>${esc(T("cv.opensource"))}</h2>
+        <div class="cv-item">
+          <div class="cv-item-h"><div><b>uz-lexicon-skeleton</b><em>${esc(T("home.open.dek"))}</em></div><a href="${site.dataset}" target="_blank" rel="noopener noreferrer">huggingface.co</a></div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-h"><div><b>@Chertmabot · @Chzquzbot</b><em>${esc(T("home.open.bots"))}</em></div><a href="https://t.me/chertmabot" target="_blank" rel="noopener noreferrer">t.me</a></div>
+        </div>
       </section>
 
       <section class="cv-sec"><h2>${esc(T("cv.education"))}</h2>
@@ -471,6 +502,16 @@ function pageCv(loc) {
 
       <section class="cv-sec"><h2>${esc(T("cv.stack"))}</h2>
         <div class="lp-chips">${cv.stack.map((s) => `<span class="lp-chip">${esc(s)}</span>`).join("")}</div>
+      </section>
+
+      <section class="cv-sec"><h2>${esc(T("cv.contact"))}</h2>
+        <p class="cv-meta" style="margin-top:.9rem">
+          <a href="mailto:${site.email}">${site.email}</a> · <a href="tel:${site.tel}">${site.telDisplay}</a><br/>
+          <a href="${site.telegram}" target="_blank" rel="noopener noreferrer">${site.handle}</a> ·
+          <a href="${site.github}" target="_blank" rel="noopener noreferrer">github.com/maqsudjon-cell</a> ·
+          <a href="${site.huggingface}" target="_blank" rel="noopener noreferrer">huggingface.co/Maqsudjonpolatov</a><br/>
+          tou.gg
+        </p>
       </section>
     </article>
 `

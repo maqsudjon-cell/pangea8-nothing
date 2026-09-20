@@ -51,7 +51,7 @@ for (const file of html) {
     const href = m[1];
     if (/^(https?:|mailto:|tel:|data:)/.test(href)) { external.add(href.split("?")[0]); continue; }
     if (!href.startsWith("/")) continue;
-    const [path] = href.split("#");
+    const [path] = href.split("#")[0].split("?");
     const target = path.endsWith("/") ? join(ROOT, path, "index.html") : join(ROOT, path);
     if (!existsSync(target)) errors.push(`${rel}: dead internal link ${href}`);
   }

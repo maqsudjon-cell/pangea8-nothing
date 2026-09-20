@@ -99,10 +99,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* The weld seam down the left edge, drawn as the page scrolls. */
 .lp-draft {
   position: fixed; top: 0; left: 4px; z-index: 2;
-  width: 14px; height: 100dvh; opacity: .4; pointer-events: none;
+  width: 14px; height: 100dvh; opacity: .85; pointer-events: none;
 }
 /* Only widen it once the text column has left enough gutter for it. */
-@media (width >= 1180px) { .lp-draft { left: 22px; width: 28px; opacity: .45; } }
+@media (width >= 1180px) { .lp-draft { left: 20px; width: 30px; } }
+#weld-tip { fill: var(--weld-hot, #ffb347); filter: drop-shadow(0 0 6px #ff6b35) drop-shadow(0 0 14px #ff6b35aa); }
+@media (prefers-reduced-motion: reduce) { #weld-tip { display: none; } .lp-draft { opacity: .5; } }
 
 /* --- Header --------------------------------------------------------------- */
 .lp-bar {
@@ -199,7 +201,25 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   font-size: clamp(2.4rem, 11.5vw, 8.5rem); line-height: 1.28;
   letter-spacing: -.075em; white-space: nowrap; overflow: visible;
 }
+.lp-display { position: relative; }
+.lp-word { display: inline-flex; align-items: baseline; }
 .lp-type { position: relative; color: var(--fg); }
+
+/* The etymology, played once: "to you, given gladly" collapses into tou.gg.
+   The real wordmark is always in the DOM underneath — this overlay is only a
+   picture of how the name was made. */
+.lp-intro {
+  position: absolute; inset: 0; display: none; align-items: center;
+  white-space: nowrap; pointer-events: none;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(.95rem, 4.2vw, 3.4rem); line-height: 1.2; letter-spacing: -.02em;
+  color: var(--faint);
+}
+.lp-display.is-intro .lp-intro { display: flex; }
+.lp-display.is-intro .lp-word { opacity: 0; }
+.lp-intro .ch { display: inline-block; will-change: transform, opacity; }
+.lp-intro .keep { color: var(--fg); }
+.lp-intro .keep.is-gg { color: var(--accent); }
 .lp-ch { display: inline-block; vertical-align: bottom; }
 .lp-ch.is-ghost { color: var(--mute); }
 .lp-ch.is-falling { position: absolute; top: 0; color: var(--accent); pointer-events: none; }
@@ -218,21 +238,31 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .lp-tag { margin: .75rem 0 0; font: 400 clamp(.82rem,1.5vw,.95rem)/1 var(--font-mono); letter-spacing: .02em; color: var(--faint); }
 
 .lp-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
-.lp-cta a {
+/* Stacked buttons of three different widths read as debris. Same width. */
+@media (width < 560px) {
+  .lp-cta { display: grid; gap: .6rem; }
+  .lp-cta a { justify-content: space-between; }
+}
+.btn, .lp-cta a {
   position: relative; isolation: isolate; overflow: hidden; z-index: 0;
   display: inline-flex; align-items: center; gap: .5rem;
-  padding: .7rem 1.15rem; border: 1px solid var(--line-2);
+  padding: .75rem 1.2rem; border: 1px solid var(--line-2);
   font: 400 .85rem/1 var(--font-mono); letter-spacing: .02em; color: var(--fg);
+  cursor: pointer;
   transition: color .22s var(--ease), border-color .22s var(--ease), transform .12s ease-out;
 }
-.lp-cta a::before {
+.btn::before, .lp-cta a::before {
   content: ""; position: absolute; inset: 0; z-index: -1; background: var(--accent);
   transform: scaleX(0); transform-origin: left; transition: transform .32s var(--ease);
 }
-.lp-cta a:hover, .lp-cta a:focus-visible { color: var(--accent-ink); border-color: var(--accent); }
-.lp-cta a:hover::before, .lp-cta a:focus-visible::before { transform: scaleX(1); }
-.lp-cta a:active { transform: scale(.97); }
-.lp-cta-btn { border-color: var(--accent); color: var(--accent); }
+.btn:hover, .btn:focus-visible, .lp-cta a:hover, .lp-cta a:focus-visible { color: var(--accent-ink); border-color: var(--accent); }
+.btn:hover::before, .btn:focus-visible::before, .lp-cta a:hover::before, .lp-cta a:focus-visible::before { transform: scaleX(1); }
+.btn:active, .lp-cta a:active { transform: scale(.97); }
+.btn-primary, .lp-cta-btn { border-color: var(--accent); color: var(--accent); }
+/* The one thing HR needs: a file, not a print dialog. */
+.btn-download { border-color: var(--ok); color: var(--ok); font-weight: 500; }
+.btn-download::before { background: var(--ok); }
+.btn-download:hover, .btn-download:focus-visible { color: #06210f; border-color: var(--ok); }
 
 /* --- Stats ---------------------------------------------------------------- */
 .lp-stats {
@@ -428,7 +458,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .cv-meta { margin-top: .8rem; font: 400 .85rem/1.7 var(--font-mono); color: var(--mute); }
 .cv-meta a:hover { color: var(--accent); }
 .cv-avail { margin-top: .7rem; font: 400 .8rem/1.5 var(--font-mono); color: var(--accent); }
+.cv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; max-width: 22rem; }
+.cv-hint { flex-basis: 100%; font: 400 .68rem/1.5 var(--font-mono); color: var(--faint); }
 .cv-sec { padding-top: 2.25rem; }
+.cv-group { padding-top: 1.25rem; }
+.cv-group-k { font: 400 .62rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.cv-group .cv-item { padding-top: .9rem; }
 .cv-sec > h2 { font: 400 .68rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
 .cv-item { padding-top: 1.35rem; }
 .cv-item-h { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: baseline; justify-content: space-between; }
@@ -446,13 +481,22 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* --- Footer --------------------------------------------------------------- */
 .lp-foot { padding-bottom: 4rem; }
 .lp-handle { margin: 0 0 .7rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2.2rem, 8vw, 5.5rem); line-height: 1.12; letter-spacing: -.06em; }
-.lp-contact { display: flex; flex-wrap: wrap; gap: .85rem 1.5rem; margin-top: 1.6rem; font-family: var(--font-mono); font-size: .92rem; }
-.lp-contact a {
-  display: inline-flex; align-items: center; gap: .4rem; min-height: 2.5rem;
-  color: var(--mute); border-bottom: 1px solid transparent;
-  transition: color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+.lp-contact { max-width: 46rem; margin-top: 1.75rem; border-top: 1px solid var(--line); }
+.lp-crow {
+  display: grid; grid-template-columns: 1fr; gap: .15rem;
+  padding: .9rem 0; border-bottom: 1px solid var(--line);
 }
-.lp-contact a:hover { color: var(--fg); border-bottom-color: var(--accent); transform: translateY(-1px); }
+@media (width >= 560px) { .lp-crow { grid-template-columns: 8.5rem 1fr; gap: 1.25rem; align-items: baseline; } }
+.lp-ckey { font: 400 .62rem/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.lp-cval { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; font: 400 .95rem/1.5 var(--font-mono); }
+.lp-cval a {
+  color: var(--mute); border-bottom: 1px solid transparent;
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.lp-cval a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+.lp-cval a[download] { color: var(--ok); }
+.lp-cval a[download]::after { content: " ↓"; }
+.lp-cval .lp-cnote { color: var(--faint); font-size: .8rem; }
 .lp-chain { margin: 2.4rem 0 0; font: 400 .78rem/1.6 var(--font-mono); letter-spacing: .06em; color: var(--mute); }
 .lp-chain span { display: inline-block; margin: 0 .4rem; color: var(--accent); }
 .lp-copy { margin: 1.25rem 0 0; font: 400 .7rem/1.6 var(--font-mono); color: var(--faint); }
@@ -460,10 +504,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* --- Motion --------------------------------------------------------------- */
 @media (prefers-reduced-motion: no-preference) {
-  .lp-reveal { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+  .lp-reveal { opacity: 0; transform: translateY(12px); }
   .lp-reveal.is-in {
-    opacity: 1; transform: none; filter: none;
-    transition: opacity .64s var(--ease), transform .64s var(--ease), filter .64s var(--ease);
+    opacity: 1; transform: none;
+    transition: opacity .44s var(--ease), transform .44s var(--ease);
   }
   .lp-bar { animation: lp-fade .55s var(--ease-soft) both; }
   @keyframes lp-fade { from { opacity: 0; transform: translateY(-8px); } }
@@ -484,7 +528,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    spelling in front of you. All of it is decoration: nothing here is the only
    way a word becomes readable.
    -------------------------------------------------------------------------- */
-@keyframes clip-up   { from { transform: translateY(110%); filter: blur(6px); } to { transform: none; filter: none; } }
+@keyframes clip-up   { from { transform: translateY(110%); } to { transform: none; } }
 @keyframes fade-up   { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes gg-reveal { from { opacity: 0; transform: translateX(.12em); } to { opacity: 1; transform: none; } }
 @keyframes chain-tick{ from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
@@ -511,10 +555,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .lp-gg  { animation: gg-reveal .56s var(--ease-soft) 40ms both; }
 
   /* Stats: blur up, one after another. */
-  .lp-stat { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+  .lp-stat { opacity: 0; transform: translateY(10px); }
   .lp-mask.is-in .lp-stat {
-    opacity: 1; transform: none; filter: none;
-    transition: opacity .55s var(--ease), transform .55s var(--ease), filter .55s var(--ease);
+    opacity: 1; transform: none;
+    transition: opacity .4s var(--ease), transform .4s var(--ease);
   }
   .lp-mask.is-in .lp-stat:nth-child(1) { transition-delay: 40ms; }
   .lp-mask.is-in .lp-stat:nth-child(2) { transition-delay: 90ms; }
@@ -554,17 +598,68 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .lp-stat, .lp-flag-idx, .lp-chain span { opacity: 1 !important; transform: none !important; filter: none !important; }
 }
 
-/* --- Print ---------------------------------------------------------------- */
+/* --- Print: this is the PDF HR downloads, so it is a layout, not a fallback -- */
 @media print {
-  @page { margin: 14mm; }
-  html, body { background: #fff !important; color: #111 !important; font-size: 10.5pt; }
-  .lp-bar, .lp-sheet, .lp-foot, .skip, .lp-draft, .cv-print { display: none !important; }
-  .lp-block, .lp-head { max-width: none; padding: 0; }
-  a { color: #111 !important; }
-  .lp-kicker, .cv-sec > h2 { color: #666 !important; }
-  .cv-avail { color: #111 !important; }
-  .cv-points li::before { background: #999; }
-  .cv-item, .cv-sec { break-inside: avoid; }
-  .cv-meta, .cv-item-h em, .cv-item-h time, .cv-langs span { color: #444 !important; }
-  .cv-points li { color: #222 !important; }
+  /* Headless Chrome sizes the PDF page from `size` but lays the content out
+     at its default Letter width, so A4 clips the right edge by the 6mm
+     difference. The wider side margins absorb it and the file is still A4. */
+  @page { size: A4; margin: 13mm 17mm; }
+
+  :root { --bg: #fff; --fg: #111; --mute: #333; --faint: #666; --line: #ddd; --line-2: #ccc; --accent: #b4431a; }
+  html, body {
+    background: #fff !important; color: #111 !important;
+    font-size: 9.5pt; line-height: 1.42;
+  }
+  .lp { padding: 0 !important; }
+  html, body { overflow: visible !important; }
+  /* A right-aligned date must never be the thing that runs off the page. */
+  .cv-item-h { flex-wrap: nowrap; gap: .5rem 1rem; }
+  .cv-item-h > div { min-width: 0; }
+  .cv-item-h time, .cv-item-h > a { flex: 0 0 auto; }
+  .lp-bar, .lp-sheet, .lp-foot, .skip, .lp-draft, .cv-print, .cv-actions,
+  .lp-intro, .lp-caret { display: none !important; }
+
+  .lp-block, .lp-head, .lp-hero, .lp-stats {
+    max-width: none !important; width: auto !important;
+    margin: 0 !important; padding: 0 !important;
+  }
+  a { color: #111 !important; text-decoration: none; }
+
+  .lp-kicker { color: #888 !important; margin-bottom: .5rem; }
+  .lp-kicker::before { background: #bbb; }
+  .cv-name { font-size: 21pt; margin-top: .2rem; letter-spacing: -.05em; }
+  .cv-meta { margin-top: .3rem; font-size: 8.5pt; line-height: 1.5; color: #333 !important; }
+  .cv-avail { margin-top: .35rem; font-size: 8.5pt; color: #111 !important; }
+
+  .cv-sec { padding-top: .95rem; break-inside: auto; }
+  .cv-sec > h2 { font-size: 7.5pt; letter-spacing: .18em; color: #999 !important; }
+  .lp-body { margin-top: .35rem !important; font-size: 9.5pt; color: #222 !important; max-width: none; }
+
+  .cv-item { padding-top: .5rem; break-inside: avoid; }
+  .cv-item-h b { font-size: 10pt; }
+  .cv-item-h em { margin-top: .1rem; font-size: 8.5pt; color: #444 !important; }
+  .cv-item-h time, .cv-item-h > a { font-size: 8pt; color: #666 !important; }
+  .cv-points { gap: .18rem; margin-top: .35rem; }
+  .cv-points li { font-size: 9pt; color: #222 !important; padding-left: .8rem; }
+  .cv-points li::before { background: #999; top: .58em; width: 4px; }
+
+  /* Fifteen projects read better as two columns than as a long ladder. */
+  .cv-group { padding-top: .55rem; break-inside: avoid; }
+  .cv-sec > h2 + .cv-group { padding-top: .3rem; }
+  .cv-group-k { font-size: 7pt; color: #999 !important; letter-spacing: .16em; }
+  .cv-group .cv-item { padding-top: .35rem; }
+  .cv-group .cv-item-h { display: block; }
+  .cv-group .cv-item-h b { font-size: 9pt; }
+  .cv-group .cv-item-h em { display: inline; margin: 0; font-size: 8.5pt; }
+  .cv-group .cv-item-h b::after { content: " — "; color: #999; font-weight: 400; }
+  .cv-group .cv-item-h > a { display: block; font-size: 7.5pt; color: #777 !important; }
+
+  .cv-langs { gap: .2rem; margin-top: .4rem; }
+  .cv-langs p { font-size: 9pt; }
+  .cv-langs span { font-size: 8pt; color: #555 !important; }
+  .lp-chips { gap: .25rem; margin-top: .5rem; }
+  .lp-chip { border-color: #ccc !important; color: #444 !important; font-size: 7.5pt; padding: .08rem .3rem; }
+
+  .lp-prose { max-width: none; }
+  .lp-prose p { color: #222 !important; font-size: 9.5pt; }
 }

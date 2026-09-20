@@ -40,15 +40,16 @@
   <meta name="twitter:creator" content="@toudotgg"/>
   <link rel="preload" href="/fonts/jetbrains-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
-  <link rel="stylesheet" href="/css/app.css"/>
+  <link rel="stylesheet" href="/css/app.css?v=3103d697"/>
   <script type="application/ld+json">{"@type":"ProfilePage","url":"https://tou.gg/cv/","inLanguage":"en","mainEntity":{"@id":"https://tou.gg/#person"}}</script>
 </head>
 <body>
   <a href="#main" class="skip">Skip to content</a>
 <div class="lp">
   <svg class="lp-draft" viewBox="0 0 48 2400" preserveAspectRatio="none" aria-hidden="true">
-    <path id="weld-path" d="M24 8 C 10 120, 38 220, 24 340 S 8 560, 24 720 S 40 980, 24 1160 S 6 1380, 24 1560 S 42 1780, 24 1980 S 12 2200, 24 2388" fill="none" stroke="url(#weld)" stroke-width="1.25" stroke-linecap="round"/>
-    <defs><linearGradient id="weld" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+    <path id="weld-path" d="M24 8 C 10 120, 38 220, 24 340 S 8 560, 24 720 S 40 980, 24 1160 S 6 1380, 24 1560 S 42 1780, 24 1980 S 12 2200, 24 2388" fill="none" stroke="url(#weld)" stroke-width="2" stroke-linecap="round"/>
+    <circle id="weld-tip" r="3.2" cx="24" cy="8" opacity="0"/>
+    <defs><linearGradient id="weld" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ffb347"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
   </svg>
   <header class="lp-bar">
     <a class="lp-brand" href="/" aria-label="tou.gg home">tou<span class="tou-gt">&gt;</span></a>
@@ -88,7 +89,11 @@
             tou.gg · <a href="https://github.com/maqsudjon-cell" target="_blank" rel="noopener noreferrer">github.com/maqsudjon-cell</a></p>
           <p class="cv-avail">Open to full-time remote (Europe / US / Gulf overlap) or on-site in Tashkent.</p>
         </div>
-        <button type="button" class="lp-cta-btn cv-print" style="padding:.7rem 1.15rem;border:1px solid var(--line-2);font:400 .8rem/1 var(--font-mono);color:var(--fg)" onclick="window.print()">Print / PDF</button>
+        <div class="cv-actions">
+          <a class="btn btn-download" href="/Maqsudjon-Polatov-CV.pdf" download>Download CV (PDF)<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v8M4.5 7.5 8 11l3.5-3.5M3 13h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <button type="button" class="btn cv-print" onclick="window.print()">Print</button>
+          <p class="cv-hint">One page, up to date, ready to forward.</p>
+        </div>
       </header>
 
       <section class="cv-sec"><h2>Summary</h2>
@@ -107,23 +112,83 @@
       </section>
 
       <section class="cv-sec"><h2>Selected work</h2>
+        <div class="cv-group">
+          <p class="cv-group-k">Education</p>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>FlareStamina</b><em>Free IELTS Academic platform. 144 timed mocks, AI writing feedback, a speaking lab. Teachers run it with a class.</em></div><a href="https://flarestamina.com" target="_blank" rel="noopener noreferrer">flarestamina.com</a></div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Davomat <span class="lp-chip">Beta</span></b><em>Attendance for university group monitors, inside Telegram. 25 students marked in under a minute, offline-safe.</em></div><a href="https://davomat.maqsudjon-polatov.workers.dev" target="_blank" rel="noopener noreferrer">davomat.maqsudjon-polatov.workers.dev</a></div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Pierics</b><em>Daily IELTS vocabulary game. One round a day, no account.</em></div><a href="https://pierics.com" target="_blank" rel="noopener noreferrer">pierics.com</a></div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Minnos</b><em>26 English cat idioms, with audio, explained in Uzbek.</em></div><a href="https://minnos.cc" target="_blank" rel="noopener noreferrer">minnos.cc</a></div>
+          </div>
+        </div>
+        <div class="cv-group">
+          <p class="cv-group-k">AI &amp; language</p>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>AI Lenta</b><em>Uzbek AI news wire. 24 sources, LLM summaries on a schedule, every item cites the original. Nobody in the loop.</em></div><a href="https://ailenta.uz" target="_blank" rel="noopener noreferrer">ailenta.uz</a></div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Chertma</b><em>Type ASCII, get correct Uzbek New Latin — ş ç ö ğ. Offline. An open 28-million-row lexicon underneath.</em></div><a href="https://chertma.maqsudjon.com" target="_blank" rel="noopener noreferrer">chertma.maqsudjon.com</a></div>
+          </div>
+        </div>
+        <div class="cv-group">
+          <p class="cv-group-k">Music</p>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Nullsample</b><em>Music from code. Zero samples, six stems, same seed = same track. Source public.</em></div><a href="https://nullsample.maqsudjon.com" target="_blank" rel="noopener noreferrer">nullsample.maqsudjon.com</a></div>
+          </div>
+        </div>
+        <div class="cv-group">
+          <p class="cv-group-k">Tools</p>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Tadam</b><em>Wedding photos in one album. One QR, no app, no signup. Used at a real wedding the week it shipped.</em></div><a href="https://tadam.uz" target="_blank" rel="noopener noreferrer">tadam.uz</a></div>
+          </div>
+        </div>
+        <div class="cv-group">
+          <p class="cv-group-k">Code &amp; steel</p>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>KVADRAT</b><em>m² calculator for window grilles. Free-text Uzbek and Russian. Offline, PDF out. Built for the shop I work in.</em></div><a href="https://kvdrt.maqsudjon.com" target="_blank" rel="noopener noreferrer">kvdrt.maqsudjon.com</a></div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Payvandchi</b><em>Catalogue for the metal workshop. Grilles, railings, canopies — photographed on the job, not staged.</em></div><a href="https://payvandchi.maqsudjon.com" target="_blank" rel="noopener noreferrer">payvandchi.maqsudjon.com</a></div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Reshotkachi</b><em>Second grille catalogue, Russian-first, built as a 3D wall of 123 real photos.</em></div><a href="https://reshotkachi.maqsudjon.com" target="_blank" rel="noopener noreferrer">reshotkachi.maqsudjon.com</a></div>
+          </div>
+        </div>
+        <div class="cv-group">
+          <p class="cv-group-k">Studio</p>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>Chiziq / CHZQ</b><em>Productised web studio: fixed scopes, fixed prices, live portfolio in an iframe instead of screenshots.</em></div><a href="https://chzq.uz" target="_blank" rel="noopener noreferrer">chzq.uz</a></div>
+          </div>
+        </div>
+        <div class="cv-group">
+          <p class="cv-group-k">Client work</p>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>ZED AVLOD School</b><em>Language school in To‘raqo‘rg‘on. English, IELTS, CEFR, Ibrat, DTM. Real results, no invented ones.</em></div><a href="https://zedavlod.uz" target="_blank" rel="noopener noreferrer">zedavlod.uz</a></div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>CTN Language Centre</b><em>Tashkent language centre. A1–C1, IELTS intensive, kids, speaking club. Trilingual, one file.</em></div><a href="https://ctnlc.uz" target="_blank" rel="noopener noreferrer">ctnlc.uz</a></div>
+          </div>
+        </div>
+        <div class="cv-group">
+          <p class="cv-group-k">Lab</p>
+          <div class="cv-item">
+            <div class="cv-item-h"><div><b>maqsudjon.com</b><em>The lab and the build log. Long-form notes on every ship, in English and Uzbek.</em></div><a href="https://maqsudjon.com" target="_blank" rel="noopener noreferrer">maqsudjon.com</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv-sec"><h2>Open source</h2>
         <div class="cv-item">
-          <div class="cv-item-h"><div><b>FlareStamina</b><em>Free IELTS Academic platform. 144 timed mocks, AI writing feedback, a speaking lab. Teachers run it with a class.</em></div><a href="https://flarestamina.com" target="_blank" rel="noopener noreferrer">flarestamina.com</a></div>
+          <div class="cv-item-h"><div><b>uz-lexicon-skeleton</b><em>uz-lexicon-skeleton — 28,052,730 rows. CC BY 4.0.</em></div><a href="https://huggingface.co/datasets/Maqsudjonpolatov/uz-lexicon-skeleton" target="_blank" rel="noopener noreferrer">huggingface.co</a></div>
         </div>
         <div class="cv-item">
-          <div class="cv-item-h"><div><b>AI Lenta</b><em>Uzbek AI news wire. 24 sources, LLM summaries on a schedule, every item cites the original. Nobody in the loop.</em></div><a href="https://ailenta.uz" target="_blank" rel="noopener noreferrer">ailenta.uz</a></div>
-        </div>
-        <div class="cv-item">
-          <div class="cv-item-h"><div><b>Chertma</b><em>Type ASCII, get correct Uzbek New Latin — ş ç ö ğ. Offline. An open 28-million-row lexicon underneath.</em></div><a href="https://chertma.maqsudjon.com" target="_blank" rel="noopener noreferrer">chertma.maqsudjon.com</a></div>
-        </div>
-        <div class="cv-item">
-          <div class="cv-item-h"><div><b>Nullsample</b><em>Music from code. Zero samples, six stems, same seed = same track. Source public.</em></div><a href="https://nullsample.maqsudjon.com" target="_blank" rel="noopener noreferrer">nullsample.maqsudjon.com</a></div>
-        </div>
-        <div class="cv-item">
-          <div class="cv-item-h"><div><b>Tadam</b><em>Wedding photos in one album. One QR, no app, no signup. Used at a real wedding the week it shipped.</em></div><a href="https://tadam.uz" target="_blank" rel="noopener noreferrer">tadam.uz</a></div>
-        </div>
-        <div class="cv-item">
-          <div class="cv-item-h"><div><b>KVADRAT</b><em>m² calculator for window grilles. Free-text Uzbek and Russian. Offline, PDF out. Built for the shop I work in.</em></div><a href="https://kvdrt.maqsudjon.com" target="_blank" rel="noopener noreferrer">kvdrt.maqsudjon.com</a></div>
+          <div class="cv-item-h"><div><b>@Chertmabot · @Chzquzbot</b><em>Telegram bots</em></div><a href="https://t.me/chertmabot" target="_blank" rel="noopener noreferrer">t.me</a></div>
         </div>
       </section>
 
@@ -155,6 +220,16 @@
       <section class="cv-sec"><h2>Stack</h2>
         <div class="lp-chips"><span class="lp-chip">JS / TS</span><span class="lp-chip">Node</span><span class="lp-chip">Python</span><span class="lp-chip">Cloudflare Workers</span><span class="lp-chip">D1 / R2</span><span class="lp-chip">Firebase</span><span class="lp-chip">Supabase</span><span class="lp-chip">Claude API</span><span class="lp-chip">GitHub Actions</span><span class="lp-chip">Pages</span><span class="lp-chip">Web Audio</span><span class="lp-chip">Canvas</span></div>
       </section>
+
+      <section class="cv-sec"><h2>Contact</h2>
+        <p class="cv-meta" style="margin-top:.9rem">
+          <a href="mailto:polatovmaqsudjon1@gmail.com">polatovmaqsudjon1@gmail.com</a> · <a href="tel:+998959059493">+998 95 905 94 93</a><br/>
+          <a href="https://t.me/toudotgg" target="_blank" rel="noopener noreferrer">@toudotgg</a> ·
+          <a href="https://github.com/maqsudjon-cell" target="_blank" rel="noopener noreferrer">github.com/maqsudjon-cell</a> ·
+          <a href="https://huggingface.co/Maqsudjonpolatov" target="_blank" rel="noopener noreferrer">huggingface.co/Maqsudjonpolatov</a><br/>
+          tou.gg
+        </p>
+      </section>
     </article>
   </main>
   <footer class="lp-block lp-foot lp-mask" id="contact">
@@ -162,13 +237,11 @@
     <h2 class="lp-handle"><span>@toudotgg</span></h2>
     <p class="lp-body">Tashkent or remote. Email, Telegram, or the CV.</p>
     <div class="lp-contact">
-      <a href="mailto:polatovmaqsudjon1@gmail.com">polatovmaqsudjon1@gmail.com</a>
-      <a href="tel:+998959059493">+998 95 905 94 93</a>
-      <a href="https://t.me/toudotgg" target="_blank" rel="noopener noreferrer">@toudotgg</a>
-      <a href="https://x.com/toudotgg" target="_blank" rel="noopener noreferrer">x</a>
-      <a href="https://instagram.com/toudotgg" target="_blank" rel="noopener noreferrer">ig</a>
-      <a href="https://github.com/maqsudjon-cell" target="_blank" rel="noopener noreferrer">github</a>
-      <a href="https://huggingface.co/Maqsudjonpolatov" target="_blank" rel="noopener noreferrer">hugging face</a>
+      <div class="lp-crow"><span class="lp-ckey">Email</span><span class="lp-cval"><a href="mailto:polatovmaqsudjon1@gmail.com">polatovmaqsudjon1@gmail.com</a></span></div>
+      <div class="lp-crow"><span class="lp-ckey">Phone</span><span class="lp-cval"><a href="tel:+998959059493">+998 95 905 94 93</a></span></div>
+      <div class="lp-crow"><span class="lp-ckey">Telegram</span><span class="lp-cval"><a href="https://t.me/toudotgg" target="_blank" rel="noopener noreferrer">@toudotgg</a></span></div>
+      <div class="lp-crow"><span class="lp-ckey">Elsewhere</span><span class="lp-cval"><a href="https://github.com/maqsudjon-cell" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://huggingface.co/Maqsudjonpolatov" target="_blank" rel="noopener noreferrer">Hugging Face</a><a href="https://x.com/toudotgg" target="_blank" rel="noopener noreferrer">X</a><a href="https://instagram.com/toudotgg" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://maqsudjon.com" target="_blank" rel="noopener noreferrer">maqsudjon.com</a></span></div>
+      <div class="lp-crow"><span class="lp-ckey">Curriculum vitae</span><span class="lp-cval"><a href="/cv/">CV</a><a href="/Maqsudjon-Polatov-CV.pdf" download>Download CV (PDF)</a></span></div>
     </div>
     <p class="lp-chain">maqsudjon <span>→</span> tou <span>→</span> to you <span>→</span> sizga</p>
     <p class="lp-copy">© 2026 Maqsudjon Polatov · Tashkent · tou.gg ·
@@ -178,6 +251,6 @@
   </footer>
 </div>
   <script data-goatcounter="https://tou.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  <script src="/js/app.js" defer></script>
+  <script src="/js/app.js?v=3de91379" defer></script>
 </body>
 </html>

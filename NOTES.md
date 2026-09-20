@@ -134,6 +134,34 @@ behind it, so every heading silently fell through to JetBrains Mono. Fixing the
 "bug" removed the thing that made the site look like itself. The font stack now
 says mono on purpose, with a comment, so nobody helpfully repairs it again.
 
+## The CV had no file to download
+
+The CV lived only as a web page with a "Print / PDF" button that opened the
+browser's print dialog. A recruiter does not want a print dialog; they want a
+file they can attach to an email. There is now a real PDF at
+`/Maqsudjon-Polatov-CV.pdf` (plus `-uz` and `-ru`), linked from the hero, the
+CV page and the footer, and it is **not** a second copy of the CV: it is the
+`/cv/` page printed by headless Chrome through the site's own print stylesheet,
+so the two cannot drift.
+
+Two things worth knowing about that stylesheet:
+
+- Headless Chrome sizes the PDF page from `@page { size }` but lays the content
+  out at its own default Letter width, so declaring A4 clipped the right-hand
+  dates by the 6mm difference. The side margins absorb it; the file is A4.
+- The CV now carries every live site grouped by kind, the open-source dataset
+  and bots, all five languages with their evidence, the stack and the contact
+  block — two A4 pages.
+
+## The wordmark says what the name means
+
+tou.gg is an abbreviation with a sentence behind it, and the sentence was
+nowhere on the page. The mark now plays it once a session: **t**o y**ou**,
+**g**iven **g**ladly types out, the five letters that survive are lit from the
+first frame, everything else falls away, and the survivors fly into place as
+the mark — the dot lands last, because it is the only character the sentence
+never had. Click, tap or any key ends it. The HTML still says `tou.gg`.
+
 ## Design decisions
 
 - **Dark only.** A light theme doubles the QA surface for a site whose whole

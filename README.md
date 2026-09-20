@@ -16,11 +16,16 @@ Live: **https://tou.gg** · RSS: [/rss.xml](https://tou.gg/rss.xml) · Source: t
 ## Working on it
 
 ```bash
-node build.mjs          # regenerate every page
-node scripts/check.mjs  # dead links, canonicals, hreflang, missing h1
+node build.mjs                      # regenerate every page
+node scripts/check.mjs              # dead links, canonicals, hreflang, missing h1
 node scripts/check.mjs --external   # also pings every outbound URL (slow)
+node scripts/cv-pdf.mjs en uz ru    # print /cv/ to the downloadable PDFs
 python3 scripts/brand.py            # favicon, icons, og.png / og.jpg
 ```
+
+The CV PDF is not a second copy of the CV: `scripts/cv-pdf.mjs` serves the built
+site and prints `/cv/` with headless Chrome, so the file HR downloads is the
+page's own print stylesheet. Re-run it whenever the CV content changes.
 
 `build.mjs` writes the HTML into the repo root. Commit the output — GitHub Pages
 serves these files directly, there is no build step on the server.
@@ -34,6 +39,7 @@ serves these files directly, there is no build step on the server.
 | `build.mjs` | page templates, `<head>`, sitemap, RSS, robots |
 | `css/app.css` | the whole design system, hand-authored |
 | `js/app.js` | motion only — the site reads fine with JS disabled |
+| `scripts/cv-pdf.mjs` | renders `/cv/` to `Maqsudjon-Polatov-CV*.pdf` |
 
 The build **fails** if a UI key or a product description is missing in any of the
 three languages. That is the only thing that keeps a second language from rotting.

@@ -80,6 +80,7 @@
   /* ------------------------------------------------------------- weld seam
      The line down the left edge draws itself as the page scrolls. */
   const weld = $("#weld-path");
+  const tip = $("#weld-tip");
   if (weld && !reduced) {
     const len = weld.getTotalLength();
     weld.style.strokeDasharray = String(len);
@@ -89,6 +90,13 @@
       const max = document.documentElement.scrollHeight - innerHeight;
       const p = max <= 0 ? 1 : Math.min(1, scrollY / max);
       weld.style.strokeDashoffset = String(len * (1 - p));
+      // The lit bead sits where the seam is being laid right now.
+      if (tip) {
+        const pt = weld.getPointAtLength(len * p);
+        tip.setAttribute("cx", pt.x);
+        tip.setAttribute("cy", pt.y);
+        tip.setAttribute("opacity", p > 0.004 && p < 0.999 ? "1" : "0");
+      }
       queued = false;
     };
     draw();
@@ -126,86 +134,109 @@
   }
 
   /* ------------------------------------------------------------- word mark
-     The HTML already says "tou.gg". This replays how it got there: type
-     "to you", drop the middle, close the gap, land ".gg". Once per session —
-     an animation you cannot skip is a tax on the reader. */
+     tou.gg is an abbreviation with a sentence behind it:
+        t o  y ou ,  g iven  g ladly
+        ^ ^    ^^     ^        ^
+     The page ships "tou.gg" in the HTML. This plays the sentence once a
+     session and collapses it into the mark — the five letters that survive
+     fly into their final place, everything else falls away, and the dot lands
+     last. Click, tap or any key ends it immediately. */
   const mark = $("[data-wordmark]");
-  const PLAYED = "tou:intro";
-  if (mark && !reduced && !sessionStorage.getItem(PLAYED)) {
-    const tou = $(".lp-type", mark);
+  const SEEN = "tou:intro";
+  if (mark) {
+    const word = $(".lp-word", mark);
+    const intro = $(".lp-intro", mark);
     const gg = $(".lp-gg", mark);
-    const keep = tou ? $$(".ch", tou) : [];          // t, o, u — already in the DOM
-    if (keep.length === 3 && gg) {
+    const targets = $$(".ch", word);            // t o u . g g
+    const phrase = intro && intro.dataset.intro ? intro.dataset.intro : "";
+
+    // Which characters of the phrase survive, and which target each becomes.
+    //   "to you, given gladly"  ->  t(0) o(1) u(5) g(8) g(14)
+    const KEEP = { 0: 0, 1: 1, 5: 2, 8: 4, 14: 5 };
+
+    const seen = (() => { try { return sessionStorage.getItem(SEEN); } catch { return null; } })();
+
+    if (!reduced && intro && word && targets.length === 6 && phrase && !seen) {
       const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
       const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+      let done = false;
+
+      const finish = () => {
+        if (done) return;
+        done = true;
+        mark.classList.remove("is-intro");
+        intro.textContent = "";
+        word.style.opacity = "";
+        removeEventListener("keydown", finish);
+        mark.removeEventListener("click", finish);
+      };
 
       const play = async () => {
-        try { sessionStorage.setItem(PLAYED, "1"); } catch {}
-        mark.classList.add("is-typing");
-        gg.style.opacity = "0";
+        try { sessionStorage.setItem(SEEN, "1"); } catch {}
+        mark.classList.add("is-intro");
+        addEventListener("keydown", finish, { once: true });
+        mark.addEventListener("click", finish, { once: true });
 
-        // 1. Remember where "tou" sits, then widen it back out into "to you".
-        const home = keep.map((el) => el.getBoundingClientRect().left);
-        const ghosts = ["o", " ", "y"].map((c) => {
-          const s = document.createElement("span");
-          s.className = "ch is-ghost";
-          s.setAttribute("aria-hidden", "true");
-          s.textContent = c;
-          return s;
+        // 1. Build the sentence, one span per character.
+        const cells = [...phrase].map((c, i) => {
+          const el = document.createElement("span");
+          el.className = "ch" + (i in KEEP ? " keep" : "") + (i in KEEP && KEEP[i] >= 4 ? " is-gg" : "");
+          el.textContent = c === " " ? "\u00a0" : c;
+          el.style.opacity = "0";
+          intro.appendChild(el);
+          return el;
         });
-        keep[1].before(...ghosts);                    // t [o _ y] o u
-        const wide = keep.map((el) => el.getBoundingClientRect().left);
 
-        // 2. Type "to you", one letter at a time.
-        const order = [keep[0], ghosts[0], ghosts[1], ghosts[2], keep[1], keep[2]];
-        order.forEach((el) => { el.style.visibility = "hidden"; });
-        for (const el of order) {
-          el.style.visibility = "";
-          el.animate(
-            [{ opacity: 0, transform: "translateY(0.2em)" }, { opacity: 1, transform: "none" }],
-            { duration: 220, easing: EASE },
-          );
-          await sleep(el === ghosts[1] ? 90 : 58);
+        // 2. Type it.
+        for (const el of cells) {
+          if (done) return finish();
+          el.style.opacity = "";
+          el.animate([{ opacity: 0, transform: "translateY(0.18em)" }, { opacity: 1, transform: "none" }],
+                     { duration: 180, easing: EASE });
+          await sleep(el.textContent === "\u00a0" ? 52 : 26);
         }
         await sleep(620);
-        mark.classList.remove("is-typing");
+        if (done) return finish();
 
-        // 3. The middle falls out; t, o, u slide back to where "tou" was.
-        ghosts.forEach((el, i) => {
-          el.style.left = el.offsetLeft + "px";
-          el.classList.add("is-falling");
-          el.animate(
-            [{ opacity: 1, transform: "translateY(0) rotate(0deg)" },
-             { opacity: 0, transform: "translateY(-0.55em) rotate(-10deg)", filter: "blur(8px)" }],
-            { duration: 440, delay: i * 45, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" },
-          );
+        // 3. Everything that is not in the abbreviation falls away.
+        let n = 0;
+        cells.forEach((el, i) => {
+          if (i in KEEP) return;
+          el.animate([{ opacity: 1, transform: "none", filter: "blur(0)" },
+                      { opacity: 0, transform: "translateY(0.5em)", filter: "blur(5px)" }],
+                     { duration: 320, delay: (n++) * 14, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" });
         });
-        const slides = keep.map((el, i) =>
-          el.animate(
-            [{ transform: "translateX(0)" }, { transform: `translateX(${home[i] - wide[i]}px)` }],
-            { duration: 620, easing: EASE, fill: "forwards" },
-          ));
-        await sleep(640);
 
-        // 4. Drop the ghosts so the layout really is "tou", then land ".gg".
-        ghosts.forEach((el) => el.remove());
-        slides.forEach((a) => a.cancel());
-        gg.style.opacity = "";
-        gg.animate(
-          [{ opacity: 0, transform: "translateY(-0.25em)" }, { opacity: 1, transform: "none" }],
-          { duration: 420, easing: EASE },
-        );
+        // 4. The five that survive fly into the mark, growing as they go.
+        await sleep(180);
+        if (done) return finish();
+        for (const [idx, t] of Object.entries(KEEP)) {
+          const from = cells[idx].getBoundingClientRect();
+          const to = targets[t].getBoundingClientRect();
+          if (!from.width || !to.width) continue;
+          const scale = to.width / from.width;
+          cells[idx].style.transformOrigin = "left top";
+          cells[idx].animate(
+            [{ transform: "translate(0, 0) scale(1)" },
+             { transform: `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${scale})` }],
+            { duration: 760, easing: EASE, fill: "forwards" },
+          );
+        }
+        await sleep(700);
+        if (done) return finish();
+
+        // 5. Hand over to the real mark and land the dot it never had.
+        word.style.opacity = "1";
+        mark.classList.remove("is-intro");
+        intro.textContent = "";
+        targets[3].animate([{ opacity: 0, transform: "scale(.2)" }, { opacity: 1, transform: "none" }],
+                           { duration: 380, easing: EASE });
+        finish();
       };
 
-      const recover = () => {
-        mark.classList.remove("is-typing");
-        $$(".ch.is-ghost", mark).forEach((el) => el.remove());
-        keep.forEach((el) => { el.style.visibility = ""; el.getAnimations().forEach((a) => a.cancel()); });
-        gg.style.opacity = "";
-      };
-      const start = () => play().catch(recover);
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(start, start);
-      else start();
+      play().catch(finish);
+    } else if (!seen) {
+      try { sessionStorage.setItem(SEEN, "1"); } catch {}
     }
   }
 })();
