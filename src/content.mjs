@@ -32,8 +32,9 @@ export const site = {
   lab: "https://maqsudjon.com",
   goatcounter: "https://tou.goatcounter.com/count",
   stats_url: "https://tou.goatcounter.com",
-  // Paste the token Google Search Console gives you (HTML tag method) and rebuild.
-  googleSiteVerification: "",
+  // Search Console, URL-prefix property https://tou.gg/, HTML-tag method.
+  // Do not remove this once verified — Google re-checks it.
+  googleSiteVerification: "On9oW2bT9G3wndosR-K_KcL85-D6v_XpetjXbPEVUaY",
   updated: "2026-09-20",
 };
 

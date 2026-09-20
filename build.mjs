@@ -183,7 +183,6 @@ function footer(loc) {
         <span>© 2026 ${site.name} · ${esc(L(site.city, loc))} · tou.gg</span>
         <span>
           <a href="/rss.xml">${esc(T("footer.rss"))}</a> ·
-          <a href="${site.stats_url}" target="_blank" rel="noopener noreferrer">${esc(T("footer.stats"))}</a> ·
           <a href="${site.repo}" target="_blank" rel="noopener noreferrer">${esc(T("footer.source"))}</a> ·
           ${esc(T("footer.updated"))} ${site.updated}
         </span>
