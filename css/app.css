@@ -526,6 +526,31 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 
 
+
+/* --- Chinese --------------------------------------------------------------
+   No CJK webfont is shipped: a full Simplified set is megabytes, and every
+   platform already has a good one. JetBrains Mono and Inter stay first in the
+   stack, so Latin inside a Chinese page (tou.gg, domain names, IELTS) still
+   renders in the brand faces and only the Han characters fall through.
+   CJK also wants no negative tracking and a looser line.
+   -------------------------------------------------------------------------- */
+:root:lang(zh) {
+  --font-display: "JetBrains Mono", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", ui-sans-serif, sans-serif;
+  --font-sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", ui-monospace, monospace;
+}
+:lang(zh) body { line-height: 1.75; }
+:lang(zh) h1, :lang(zh) h2, :lang(zh) h3,
+:lang(zh) .lp-title, :lang(zh) .lp-h2, :lang(zh) .lp-handle,
+:lang(zh) .lp-card-name, :lang(zh) .cv-name, :lang(zh) .lg-native { letter-spacing: 0; }
+:lang(zh) .lp-kicker, :lang(zh) .lg-latin, :lang(zh) .cv-sec > h2,
+:lang(zh) .lp-case h2, :lang(zh) .cv-group-k, :lang(zh) .lp-ckey { letter-spacing: .06em; }
+:lang(zh) .lp-dek, :lang(zh) .lp-lede, :lang(zh) .lp-body { line-height: 1.8; }
+:lang(zh) .lp-prose p { line-height: 1.95; }
+:lang(zh) .lp-flag-mark { line-height: 1.15; }
+/* The wordmark is Latin on every page and keeps its own tracking. */
+:lang(zh) .lp-display { letter-spacing: -.075em; }
+
 /* --- Phone ----------------------------------------------------------------
    The desktop rhythm, dropped onto a 375px screen, turned into a column of
    small type separated by large holes. Tighter line boxes, less air between

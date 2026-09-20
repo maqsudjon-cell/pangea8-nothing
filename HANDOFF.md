@@ -1,5 +1,10 @@
 # HANDOFF — tou.gg
 
+**Tillar:** sayt endi **to‘rt tilda** — `/` EN, `/uz/`, `/ru/`, `/zh/` (xitoycha).
+Har biri alohida URL daraxti, hreflang bilan; har biriga alohida CV PDF.
+⚠️ **Xitoychasini men yozdim — siz tekshira olmaysiz.** Birortasiga yuborishdan
+oldin xitoy tilini biladigan odamga bir marta o‘qitib oling.
+
 **Holati (2026-09-20):** GoatCounter, HTTPS va Search Console **bajarildi**.
 Qolgani — repolarni bittaga yig‘ish (§0) va Telegram/LinkedIn keshi (§4).
 

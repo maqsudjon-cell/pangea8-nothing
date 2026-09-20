@@ -7,7 +7,7 @@ Live: **https://tou.gg** · RSS: [/rss.xml](https://tou.gg/rss.xml) · Source: t
 
 | | |
 |---|---|
-| Languages | English `/`, Uzbek `/uz/`, Russian `/ru/` — three URL trees with `hreflang`, not a client-side swap |
+| Languages | English `/`, Uzbek `/uz/`, Russian `/ru/`, Chinese `/zh/` — four URL trees with `hreflang`, not a client-side swap |
 | Build | `node build.mjs` — plain Node, zero dependencies, no framework |
 | Hosting | GitHub Pages, deploy from `main` |
 | DNS | Cloudflare (A records → GitHub Pages, `www` CNAME → `maqsudjon-cell.github.io`) |
@@ -19,7 +19,7 @@ Live: **https://tou.gg** · RSS: [/rss.xml](https://tou.gg/rss.xml) · Source: t
 node build.mjs                      # regenerate every page
 node scripts/check.mjs              # dead links, canonicals, hreflang, missing h1
 node scripts/check.mjs --external   # also pings every outbound URL (slow)
-node scripts/cv-pdf.mjs en uz ru    # print /cv/ to the downloadable PDFs
+node scripts/cv-pdf.mjs en uz ru zh # print /cv/ to the downloadable PDFs
 python3 scripts/brand.py            # favicon, icons, og.png / og.jpg
 ```
 
@@ -42,12 +42,12 @@ serves these files directly, there is no build step on the server.
 | `scripts/cv-pdf.mjs` | renders `/cv/` to `Maqsudjon-Polatov-CV*.pdf` |
 
 The build **fails** if a UI key or a product description is missing in any of the
-three languages. That is the only thing that keeps a second language from rotting.
+four languages. That is the only thing that keeps a second language from rotting.
 
 ## Pages
 
 `/` · `/work/` + a case study per flagship · `/cv/` (print-ready) · `/log/` + notes ·
-`/about/` · `/now/` · `/colophon/` — each one at `/`, `/uz/` and `/ru/`.
+`/about/` · `/now/` · `/colophon/` — each one at `/`, `/uz/`, `/ru/` and `/zh/`.
 
 ## Brand
 
@@ -58,7 +58,9 @@ every link preview.
 
 Palette: ink `#080B14`, weld `#FF6B35`, AI `#38D9FF`, ok `#3EF29A`.
 Type: Space Grotesk (display), Inter (text), JetBrains Mono (data). Self-hosted,
-with Cyrillic subsets loaded only when a page actually paints Cyrillic.
+with Cyrillic subsets loaded only when a page actually paints Cyrillic. Chinese
+falls through to the reader's own system CJK face — a full Simplified webfont is
+megabytes and every platform already ships a good one.
 
 ## Setup that is not in this repo
 

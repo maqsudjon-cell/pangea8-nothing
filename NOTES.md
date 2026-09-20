@@ -187,6 +187,30 @@ out. Both were right.
 - The third hero button was demoted to a text link: two CV buttons and a third
   box was a stack of three identical rectangles with nothing to choose between.
 
+## A fourth language
+
+Chinese (`/zh/`) ships alongside English, Uzbek and Russian — four URL trees,
+four `hreflang` entries, four CV PDFs. `<html lang>` and every `hreflang` for it
+is `zh-Hans`, not bare `zh`, because the pages are Simplified.
+
+No CJK webfont is shipped. A usable Simplified set is several megabytes, and
+every platform already has one (PingFang SC, Microsoft YaHei, Noto Sans SC).
+JetBrains Mono and Inter stay first in the stack, so Latin inside a Chinese
+page — `tou.gg`, domain names, IELTS — still renders in the brand faces and
+only the Han characters fall through. CJK also gets its negative tracking
+removed and a looser line, because the Latin settings make it cramped.
+
+Two things Chinese broke that the other three did not: `第 2` needed its 天, so
+the live day counter grew a per-locale suffix; and `Tashkent, Uzbekistan`
+needed a full-width comma.
+
+**Say this plainly: the Chinese is mine, not Maqsudjon's.** He is on day two of
+the language — the site itself says so, in the languages panel. He cannot
+proofread it, so if a Chinese speaker finds an error it is still his site's
+error. The copy is deliberately plain for that reason: short sentences, no
+idiom, nothing clever. Worth a read from a native speaker before it is used to
+approach anyone.
+
 ## Design decisions
 
 - **Dark only.** A light theme doubles the QA surface for a site whose whole

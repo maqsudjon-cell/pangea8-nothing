@@ -39,6 +39,8 @@ const t = (loc) => (key) => {
 const href = (loc, path = "/") => (loc === DEFAULT_LOCALE ? path : `/${loc}${path}`);
 const abs = (path) => site.origin + path;
 const cls = (...xs) => xs.filter(Boolean).join(" ");
+const LANG = { en: "en", uz: "uz", ru: "ru", zh: "zh-Hans" };
+const OG_LOCALE = { en: "en_US", uz: "uz_UZ", ru: "ru_RU", zh: "zh_CN" };
 const cvPdf = (loc) => site.cvPdf[loc] || site.cvPdf[DEFAULT_LOCALE];
 
 /** Content hash, so a deploy is visible immediately instead of after a cache
@@ -81,18 +83,17 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
   const discovery = noindex
     ? ""
     : `<link rel="canonical" href="${canonical}"/>\n  `
-      + LOCALES.map((l) => `<link rel="alternate" hreflang="${l}" href="${abs(href(l, path))}"/>`).join("\n  ")
+      + LOCALES.map((l) => `<link rel="alternate" hreflang="${LANG[l]}" href="${abs(href(l, path))}"/>`).join("\n  ")
       + `\n  <link rel="alternate" hreflang="x-default" href="${abs(href(DEFAULT_LOCALE, path))}"/>`;
-  const ogLocale = { en: "en_US", uz: "uz_UZ", ru: "ru_RU" };
   const ogAlt = LOCALES.filter((l) => l !== loc)
-    .map((l) => `<meta property="og:locale:alternate" content="${ogLocale[l]}"/>`).join("\n  ");
+    .map((l) => `<meta property="og:locale:alternate" content="${OG_LOCALE[l]}"/>`).join("\n  ");
 
   const ld = jsonld.length
     ? `\n  <script type="application/ld+json">${JSON.stringify(jsonld.length === 1 ? jsonld[0] : { "@context": "https://schema.org", "@graph": jsonld.map(({ "@context": _c, ...rest }) => rest) })}</script>`
     : "";
 
   return `<!doctype html>
-<html lang="${loc}">
+<html lang="${LANG[loc]}">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
@@ -118,7 +119,7 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
   <meta property="og:image:alt" content="tou.gg — ${esc(site.name)}"/>
   <meta property="og:type" content="${type}"/>
   <meta property="og:site_name" content="tou.gg"/>
-  <meta property="og:locale" content="${ogLocale[loc]}"/>
+  <meta property="og:locale" content="${OG_LOCALE[loc]}"/>
   ${ogAlt}${article ? `\n  <meta property="article:published_time" content="${article}"/>` : ""}
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="${esc(title)}"/>
@@ -159,7 +160,7 @@ function header(loc, path, langPath = path) {
       <a href="${href(loc, "/")}#contact">${esc(T("nav.contact"))}</a>
     </nav>
     <div class="lp-langs" role="group" aria-label="${esc(T("nav.language"))}">
-      ${LOCALES.map((l) => `<a class="lp-lang${l === loc ? " is-on" : ""}" href="${href(l, langPath)}" lang="${l}" hreflang="${l}"${l === loc ? ' aria-current="true"' : ""} title="${esc(ui[l]["lang.name"])}">${l.toUpperCase()}</a>`).join("\n      ")}
+      ${LOCALES.map((l) => `<a class="lp-lang${l === loc ? " is-on" : ""}" href="${href(l, langPath)}" lang="${LANG[l]}" hreflang="${LANG[l]}"${l === loc ? ' aria-current="true"' : ""} title="${esc(ui[l]["lang.name"])}">${l.toUpperCase()}</a>`).join("\n      ")}
       <button type="button" class="lp-burger" data-burger aria-expanded="false" aria-controls="menu-sheet"
               aria-label="${esc(T("nav.menu"))}" data-open="${esc(T("nav.menu"))}" data-close="${esc(T("nav.close"))}">
         <svg class="i-open" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -355,7 +356,7 @@ function pageHome(loc) {
             <p class="lg-story">${esc(L(l.story, loc))}</p>
             <p class="lg-sample" lang="${tag}"><span>${esc(T("home.sample"))}</span>${esc(l.sample)}</p>
           </div>
-          <p class="lg-badge${l.live ? " is-live" : ""}"${l.live ? ' data-since="2026-09-19"' : ""}>${l.live ? `<i class="lg-pulse"></i>${esc(L(l.badge, loc))} <span data-n>1</span>` : esc(L(l.badge, loc))}</p>
+          <p class="lg-badge${l.live ? " is-live" : ""}"${l.live ? ' data-since="2026-09-19"' : ""}>${l.live ? `<i class="lg-pulse"></i>${esc(L(l.badge, loc))} <span data-n>1</span>${esc(L(l.badgeAfter, loc) || "")}` : esc(L(l.badge, loc))}</p>
         </article>`;
         }).join("\n        ")}
       </div>
@@ -440,7 +441,8 @@ function pageCase(p, loc) {
 
 function pageCv(loc) {
   const T = t(loc);
-  const country = { en: "Uzbekistan", uz: "O‘zbekiston", ru: "Узбекистан" }[loc];
+  const country = { en: "Uzbekistan", uz: "O‘zbekiston", ru: "Узбекистан", zh: "乌兹别克斯坦" }[loc];
+  const comma = loc === "zh" ? "，" : ", ";   // CJK punctuation is full width
   const ld = [{ "@type": "ProfilePage", url: abs(href(loc, "/cv/")), inLanguage: loc, mainEntity: { "@id": abs("/#person") } }];
   return head({ loc, path: "/cv/", title: T("cv.title"), description: T("cv.description"), jsonld: ld })
     + header(loc, "/cv/")
@@ -449,7 +451,7 @@ function pageCv(loc) {
         <div>
           <p class="lp-kicker">CV</p>
           <h1 class="cv-name">${site.name}</h1>
-          <p class="cv-meta">${esc(L(site.role, loc))} · ${esc(L(site.city, loc))}, ${country}<br/>
+          <p class="cv-meta">${esc(L(site.role, loc))} · ${esc(L(site.city, loc))}${comma}${country}<br/>
             <a href="mailto:${site.email}">${site.email}</a> · <a href="tel:${site.tel}">${site.telDisplay}</a><br/>
             tou.gg · <a href="${site.github}" target="_blank" rel="noopener noreferrer">github.com/maqsudjon-cell</a></p>
           <p class="cv-avail">${esc(T("cv.available"))}</p>
@@ -676,7 +678,7 @@ function sitemap() {
   const urls = [];
   for (const r of rs) {
     for (const loc of LOCALES) {
-      const links = LOCALES.map((l) => `      <xhtml:link rel="alternate" hreflang="${l}" href="${abs(href(l, r.path))}"/>`).join("\n");
+      const links = LOCALES.map((l) => `      <xhtml:link rel="alternate" hreflang="${LANG[l]}" href="${abs(href(l, r.path))}"/>`).join("\n");
       urls.push(`  <url>
     <loc>${abs(href(loc, r.path))}</loc>
 ${links}
@@ -711,7 +713,7 @@ Telegram: ${site.telegram}
 
 /* THE SITE */
 Last update: ${site.updated}
-Languages: EN / UZ / RU — three URL trees, hreflang, no client-side swap
+Languages: EN / UZ / RU / ZH — four URL trees, hreflang, no client-side swap
 Doctype: HTML5
 Standards: RSS 2.0, JSON-LD, sitemap with alternates
 Analytics: GoatCounter — no cookies, no Google
@@ -728,7 +730,7 @@ function llms() {
 > Public brand home of ${site.name}. TOU = "to you". An umbrella, not a product name.
 
 - Site: ${site.origin}
-- Languages: English (/), Uzbek (/uz/), Russian (/ru/)
+- Languages: English (/), Uzbek (/uz/), Russian (/ru/), Chinese (/zh/)
 - RSS: ${abs("/rss.xml")}
 - Stats: ${site.stats_url}
 - Person: ${site.name}, Tashkent, Uzbekistan (UTC+5)

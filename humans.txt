@@ -8,7 +8,7 @@ Telegram: https://t.me/toudotgg
 
 /* THE SITE */
 Last update: 2026-09-20
-Languages: EN / UZ / RU — three URL trees, hreflang, no client-side swap
+Languages: EN / UZ / RU / ZH — four URL trees, hreflang, no client-side swap
 Doctype: HTML5
 Standards: RSS 2.0, JSON-LD, sitemap with alternates
 Analytics: GoatCounter — no cookies, no Google

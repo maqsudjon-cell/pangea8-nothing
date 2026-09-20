@@ -3,7 +3,7 @@
 > Public brand home of Maqsudjon Polatov. TOU = "to you". An umbrella, not a product name.
 
 - Site: https://tou.gg
-- Languages: English (/), Uzbek (/uz/), Russian (/ru/)
+- Languages: English (/), Uzbek (/uz/), Russian (/ru/), Chinese (/zh/)
 - RSS: https://tou.gg/rss.xml
 - Stats: https://tou.goatcounter.com
 - Person: Maqsudjon Polatov, Tashkent, Uzbekistan (UTC+5)

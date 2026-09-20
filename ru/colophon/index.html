@@ -14,6 +14,7 @@
   <link rel="alternate" hreflang="en" href="https://tou.gg/colophon/"/>
   <link rel="alternate" hreflang="uz" href="https://tou.gg/uz/colophon/"/>
   <link rel="alternate" hreflang="ru" href="https://tou.gg/ru/colophon/"/>
+  <link rel="alternate" hreflang="zh-Hans" href="https://tou.gg/zh/colophon/"/>
   <link rel="alternate" hreflang="x-default" href="https://tou.gg/colophon/"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png"/>
@@ -33,6 +34,7 @@
   <meta property="og:locale" content="ru_RU"/>
   <meta property="og:locale:alternate" content="en_US"/>
   <meta property="og:locale:alternate" content="uz_UZ"/>
+  <meta property="og:locale:alternate" content="zh_CN"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Колофон — tou.gg"/>
   <meta name="twitter:description" content="Шрифт, цвет, движение и код, который генерирует бренд-ассеты."/>
@@ -40,7 +42,7 @@
   <meta name="twitter:creator" content="@toudotgg"/>
   <link rel="preload" href="/fonts/jetbrains-mono-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
-  <link rel="stylesheet" href="/css/app.css?v=9dd236a9"/>
+  <link rel="stylesheet" href="/css/app.css?v=06bb3339"/>
 </head>
 <body>
   <a href="#main" class="skip">Перейти к содержанию</a>
@@ -65,6 +67,7 @@
       <a class="lp-lang" href="/colophon/" lang="en" hreflang="en" title="English">EN</a>
       <a class="lp-lang" href="/uz/colophon/" lang="uz" hreflang="uz" title="O‘zbekcha">UZ</a>
       <a class="lp-lang is-on" href="/ru/colophon/" lang="ru" hreflang="ru" aria-current="true" title="Русский">RU</a>
+      <a class="lp-lang" href="/zh/colophon/" lang="zh-Hans" hreflang="zh-Hans" title="中文">ZH</a>
       <button type="button" class="lp-burger" data-burger aria-expanded="false" aria-controls="menu-sheet"
               aria-label="Меню" data-open="Меню" data-close="Закрыть">
         <svg class="i-open" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -90,7 +93,7 @@
         <p><strong>Шрифт.</strong> Крупный кегль держит JetBrains Mono — логотип, все заголовки, все числа; Inter для чтения и тот же моно для доменов, дат и подписей. Оба лежат рядом со страницей в woff2, во время работы ничего не тянется из Google. Пропорциональный дисплейный шрифт попробовали и откатили: терминальная интонация и есть бренд.</p>
         <p><strong>Знак.</strong> T, O, U вырезаны из геометрической сетки, для <code>.gg</code> — каретка терминала. Фавикон, touch-иконка и OG-локап 1200×630 генерируются скриптом <code>scripts/brand.py</code> из тех же woff2. Ни стоковых фото, ни нарисованных моделью людей.</p>
         <p><strong>Движение.</strong> Логотип печатает <code>to you</code>, роняет середину, сжимается в <code>tou</code> и опускает <code>.gg</code> — один раз за сессию, не при каждой перезагрузке. Всё остальное — появление при скролле, шов на ховере и счётчик. <code>prefers-reduced-motion</code> превращает это в мгновенные состояния, и ни один текст не ждёт JavaScript, чтобы стать читаемым.</p>
-        <p><strong>Сборка.</strong> Обычный статический HTML, собранный <code>build.mjs</code> — без фреймворка, без рантайм-зависимостей, без build-сервера. Три языка — это три дерева URL и hreflang, а не подмена на клиенте. Хостинг GitHub Pages, DNS на Cloudflare.</p>
+        <p><strong>Сборка.</strong> Обычный статический HTML, собранный <code>build.mjs</code> — без фреймворка, без рантайм-зависимостей, без build-сервера. Четыре языка — это четыре дерева URL и hreflang, а не подмена на клиенте. Хостинг GitHub Pages, DNS на Cloudflare.</p>
         <p><a href="https://github.com/maqsudjon-cell/tou" target="_blank" rel="noopener noreferrer">github.com/maqsudjon-cell/tou</a></p>
       </div>
     </section>
