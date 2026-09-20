@@ -36,6 +36,8 @@ export const site = {
   // Do not remove this once verified — Google re-checks it.
   googleSiteVerification: "On9oW2bT9G3wndosR-K_KcL85-D6v_XpetjXbPEVUaY",
   updated: "2026-09-20",
+  // Bump with scripts/brand.py OG_VERSION when the share card changes.
+  ogImage: "/og-2026-09.jpg",
 };
 
 /* Verified 2026-09-20. Re-verify: see NOTES.md §Numbers. */

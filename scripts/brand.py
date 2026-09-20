@@ -36,6 +36,7 @@ FAINT = (125, 138, 163)
 WELD = (255, 107, 53)
 HOT = (255, 179, 71)
 
+OG_VERSION = "2026-09"
 STATS = "15 live sites · 191 repos · 3,000+ commits · 144 IELTS tests"
 MANIFEST = ["flarestamina.com", "ailenta.uz", "chertma", "nullsample", "tadam.uz", "kvdrt", "chzq.uz"]
 WHO = "MAQSUDJON POLATOV · PRODUCT ENGINEER · TASHKENT"
@@ -176,7 +177,12 @@ def write_og() -> None:
     rgb = img.convert("RGB")
     rgb.save(ROOT / "og.png", optimize=True)
     rgb.save(ROOT / "og.jpg", quality=92, optimize=True, progressive=True)
-    print("  og.png / og.jpg 1200x630")
+    # Same bytes under a versioned name. Telegram, X and LinkedIn cache an image
+    # by URL, so a redesigned card only reaches them under a URL they have not
+    # seen. Bump OG_VERSION whenever the card changes; keep og.jpg as well, for
+    # anything that already links to it.
+    rgb.save(ROOT / f"og-{OG_VERSION}.jpg", quality=92, optimize=True, progressive=True)
+    print(f"  og.png / og.jpg / og-{OG_VERSION}.jpg 1200x630")
 
     # A vector twin, for anything that prefers SVG.
     (ROOT / "og.svg").write_text(f"""<?xml version="1.0" encoding="UTF-8"?>

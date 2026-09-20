@@ -1,8 +1,7 @@
 # HANDOFF — tou.gg
 
-Hamma kod tayyor va pushed. Quyidagi to‘rt ishni faqat **siz** qila olasiz,
-chunki ular login yoki UI tugma talab qiladi. Har biri 2–5 daqiqa.
-*(Each step below needs your login or a UI toggle — no token can do it.)*
+**Holati (2026-09-20):** GoatCounter, HTTPS va Search Console **bajarildi**.
+Qolgani — repolarni bittaga yig‘ish (§0) va Telegram/LinkedIn keshi (§4).
 
 ---
 
@@ -39,10 +38,18 @@ git push origin main && git push live main
 
 ---
 
-## 1. GoatCounter — statistika hozir NOLNI yig‘yapti ⚠️
+## 1. GoatCounter — ✅ BAJARILDI
 
-`https://tou.goatcounter.com` hali mavjud emas: har bir sahifa ochilishi
-**400** qaytaryapti, ya’ni hech qanday tashrif yozilmayapti.
+`tou` kodi yaratildi, domen `tou.gg` qilib belgilandi, hisoblagich ishlayapti
+(`/count` endi **200** qaytaryapti, ilgari 400 edi). Dashboard:
+https://tou.goatcounter.com — boshqa saytlaringiz kabi **faqat login qilgan
+foydalanuvchilar uchun**. Shu sababli saytning pastki qismidagi ommaviy
+"Stats" havolasi olib tashlandi: mehmon uni bossa login oynasini ko‘rardi.
+
+<details><summary>Ilgari nima bo‘lgan edi</summary>
+
+`https://tou.goatcounter.com` mavjud emas edi: har bir sahifa ochilishi
+**400** qaytarardi, ya’ni hech qanday tashrif yozilmasdi.
 
 1. https://www.goatcounter.com/signup ga kiring (mavjud akkauntingiz bilan —
    `flarestamina`, `zedavlod` va h.k. o‘sha yerda).
@@ -54,16 +61,26 @@ git push origin main && git push live main
 curl -sI "https://tou.goatcounter.com/count?p=/test" | head -1
 ```
 
-`400` emas, `200` yoki `307` chiqsa — ishladi. Saytda hech narsa
-o‘zgartirish shart emas, hisoblagich darrov ishlay boshlaydi.
+`400` emas, `200` chiqsa — ishladi.
+</details>
 
 ---
 
-## 2. GitHub Pages — HTTPS majburiy emas ⚠️
+## 2. GitHub Pages HTTPS — ✅ BAJARILDI
 
-Hozir `http://tou.gg` **301 bermayapti, 200 qaytaryapti** — ya’ni sayt
-shifrlanmagan HTTP orqali ham ochiladi. Bu SEO uchun dublikat, xavfsizlik
-uchun esa yomon.
+`https_enforced` API orqali yoqildi (`pangea8-nothing` repo’sida — domen
+o‘sha yerda). Tekshirildi:
+
+```
+http://tou.gg      → 301 https://tou.gg/
+http://tou.gg/uz/  → 301
+http://www.tou.gg  → 301
+```
+
+<details><summary>Ilgari nima bo‘lgan edi</summary>
+
+`http://tou.gg` **301 bermasdi, 200 qaytarardi** — sayt shifrlanmagan HTTP
+orqali ham ochilardi. SEO uchun dublikat, xavfsizlik uchun yomon.
 
 1. https://github.com/maqsudjon-cell/tou/settings/pages
 2. **Enforce HTTPS** — belgilang.
@@ -75,11 +92,28 @@ curl -sI http://tou.gg | head -2
 
 `HTTP/1.1 301` va `location: https://tou.gg/` chiqishi kerak.
 
-> Bu sozlamani API orqali yoqib bo‘lmadi — token `pages` scope’iga ega emas.
+</details>
 
 ---
 
-## 3. Google Search Console
+## 3. Google Search Console — ✅ BAJARILDI
+
+- Resurs: **`https://tou.gg/`** (URL-prefiks), **HTML teg** usuli bilan
+  tasdiqlandi. Token `src/content.mjs` da — **o‘chirmang**, Google uni
+  qayta-qayta tekshiradi.
+- **Sitemap yuborildi**: `https://tou.gg/sitemap.xml` → holati **“Muvaffaqiyatli”**
+  (46 sahifa × 3 til, hreflang bilan).
+- **Indekslash so‘raldi**: `/`, `/uz/`, `/ru/work/` emas — `/`, `/uz/`, `/work/`.
+  Qolganini Google sitemap orqali o‘zi topadi.
+
+Bir-ikki kundan keyin Search Console’da “Sahifalar” bo‘limiga qarang.
+
+> Eslatma: **Domain resursi** (DNS TXT) qilinmadi — u Cloudflare’ga kirishni
+> talab qiladi, brauzerda Cloudflare login qilinmagan. URL-prefiks resursi
+> `https://tou.gg/` uchun yetarli. Keyinchalik `lab.tou.gg` kabi subdomenlar
+> qo‘shsangiz, Domain resursini ham qo‘shib qo‘yish foydali.
+
+<details><summary>Eski yo‘riqnoma (endi kerak emas)</summary>
 
 Sayt hali Search Console’da tasdiqlanmagan (DNS’da `TXT` yozuv yo‘q).
 
@@ -117,15 +151,25 @@ Sitemap 46 ta sahifani, har birini uch tilda, `hreflang` bilan e’lon qiladi.
 
 ---
 
-## 4. Ijtimoiy tarmoq kartasi va profil havolalari
+</details>
 
-- **OG rasm yangilandi** (eskisida `to you □ tou.gg` — kvadratcha bor edi).
-  Telegram/X eski rasmni keshlagan bo‘lishi mumkin. Yangilash:
-  - X: https://cards-dev.twitter.com/validator
-  - Telegram: `@WebpageBot` ga `https://tou.gg` yuboring.
-  - LinkedIn: https://www.linkedin.com/post-inspector/
-- Bio havolasini `tou.gg` ga o‘zgartiring: X, Instagram, Telegram, GitHub
-  profil, Hugging Face.
+---
+
+## 4. Ijtimoiy tarmoq kartasi — qisman ⚠️
+
+**Qilindi:** OG rasm qayta yasaldi va **yangi manzilga** qo‘yildi —
+`/og-2026-09.jpg`. Ijtimoiy tarmoqlar rasmni **URL bo‘yicha** keshlaydi,
+shuning uchun yangi manzil = yangi rasm. Eski `/og.jpg` ham joyida qoldi.
+
+**Sizdan qolgani (login kerak, brauzerda kirilmagan):**
+
+- **Telegram** — telefonda `@WebpageBot` ga `https://tou.gg` yuboring.
+  Telegram *sahifani* keshlaydi, faqat shu bot tozalaydi. 10 soniyalik ish.
+- **LinkedIn** — https://www.linkedin.com/post-inspector/ (login talab qiladi).
+- **X** — alohida validator endi yo‘q, yangi post yozilganda o‘zi qayta oladi.
+
+**Bio havolalari** — X, Instagram, Telegram, GitHub profil, Hugging Face’da
+`tou.gg` ga o‘zgartiring.
 
 ---
 

@@ -98,7 +98,7 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
   <meta property="og:title" content="${esc(title)}"/>
   <meta property="og:description" content="${esc(description)}"/>
   <meta property="og:url" content="${canonical}"/>
-  <meta property="og:image" content="${abs("/og.jpg")}"/>
+  <meta property="og:image" content="${abs(site.ogImage)}"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:image:alt" content="tou.gg — ${esc(site.name)}"/>
@@ -109,7 +109,7 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="${esc(title)}"/>
   <meta name="twitter:description" content="${esc(description)}"/>
-  <meta name="twitter:image" content="${abs("/og.jpg")}"/>
+  <meta name="twitter:image" content="${abs(site.ogImage)}"/>
   <meta name="twitter:creator" content="${site.handle}"/>
   <link rel="preload" href="/fonts/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
