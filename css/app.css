@@ -97,14 +97,22 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .lp { position: relative; padding-bottom: 5rem; }
 
 /* The weld seam down the left edge, drawn as the page scrolls. */
-.lp-draft {
+.lp-rail {
   position: fixed; top: 0; left: 4px; z-index: 2;
-  width: 14px; height: 100dvh; opacity: .85; pointer-events: none;
+  width: 12px; height: 100dvh; opacity: .8; pointer-events: none;
 }
 /* Only widen it once the text column has left enough gutter for it. */
-@media (width >= 1180px) { .lp-draft { left: 20px; width: 30px; } }
-#weld-tip { fill: var(--weld-hot, #ffb347); filter: drop-shadow(0 0 6px #ff6b35) drop-shadow(0 0 14px #ff6b35aa); }
-@media (prefers-reduced-motion: reduce) { #weld-tip { display: none; } .lp-draft { opacity: .5; } }
+@media (width >= 1180px) { .lp-rail { left: 20px; width: 28px; } }
+.lp-draft { width: 100%; height: 100%; }
+/* The lit bead is its own element. Inside the stretched SVG it became a huge
+   orange smear, because preserveAspectRatio="none" scales x and y by wildly
+   different factors and a circle is not a circle any more. */
+.lp-bead {
+  position: absolute; left: 50%; top: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%; background: #ffd9a3; opacity: 0;
+  box-shadow: 0 0 5px 1px #ff8a4c, 0 0 14px 3px rgba(255,107,53,.5);
+}
+@media (prefers-reduced-motion: reduce) { .lp-bead { display: none; } .lp-rail { opacity: .45; } }
 
 /* --- Header --------------------------------------------------------------- */
 .lp-bar {
@@ -192,13 +200,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   @keyframes lp-dot { 0%,100% { box-shadow: 0 0 0 0 #00ff8873; } 50% { box-shadow: 0 0 0 5px #00ff8800; } }
 }
 
-.lp-who { margin: 0; font: 500 clamp(1.05rem,2.6vw,1.35rem)/1.2 var(--font-display); letter-spacing: -.03em; color: var(--fg); }
-.lp-role { margin: .3rem 0 0; font: 400 clamp(.78rem,1.6vw,.88rem)/1.4 var(--font-mono); letter-spacing: .04em; color: var(--faint); }
+.lp-who { margin: 0; font: 500 clamp(1.2rem,5vw,1.45rem)/1.2 var(--font-display); letter-spacing: -.03em; color: var(--fg); }
+.lp-role { margin: .3rem 0 0; font: 400 clamp(.72rem,3vw,.88rem)/1.5 var(--font-mono); letter-spacing: .03em; color: var(--faint); }
 
 .lp-display {
   margin: .9rem 0 0; padding-bottom: .28em;
   font-family: var(--font-display); font-weight: 500;
-  font-size: clamp(2.4rem, 11.5vw, 8.5rem); line-height: 1.28;
+  font-size: clamp(3rem, 17vw, 8.5rem); line-height: 1.28;
   letter-spacing: -.075em; white-space: nowrap; overflow: visible;
 }
 .lp-display { position: relative; }
@@ -239,10 +247,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .lp-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
 /* Stacked buttons of three different widths read as debris. Same width. */
-@media (width < 560px) {
-  .lp-cta { display: grid; gap: .6rem; }
-  .lp-cta a { justify-content: space-between; }
-}
+@media (width < 560px) { .lp-cta { display: grid; gap: .6rem; } }
 .btn, .lp-cta a {
   position: relative; isolation: isolate; overflow: hidden; z-index: 0;
   display: inline-flex; align-items: center; gap: .5rem;
@@ -273,9 +278,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (width >= 768px) { .lp-stats { grid-template-columns: repeat(5, minmax(0,1fr)); padding-bottom: 3rem; } }
 .lp-stat-n {
   display: inline-flex; font-family: var(--font-mono); font-variant-numeric: tabular-nums;
-  font-size: clamp(.95rem, 2.2vw, 1.55rem); letter-spacing: -.04em; color: var(--fg);
+  font-size: clamp(1.2rem, 5.2vw, 1.55rem); letter-spacing: -.04em; color: var(--fg);
 }
-.lp-stat-l { display: block; margin-top: .22rem; font: 400 .58rem/1.25 var(--font-mono); letter-spacing: .04em; color: var(--mute); }
+.lp-stat-l { display: block; margin-top: .3rem; font: 400 .62rem/1.3 var(--font-mono); letter-spacing: .04em; color: var(--mute); }
 @media (width >= 480px) { .lp-stat-l { white-space: nowrap; } }
 
 /* --- Blocks --------------------------------------------------------------- */
@@ -519,6 +524,49 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .lg-fill { width: var(--fill, 0%) !important; }
 }
 
+
+
+/* --- Phone ----------------------------------------------------------------
+   The desktop rhythm, dropped onto a 375px screen, turned into a column of
+   small type separated by large holes. Tighter line boxes, less air between
+   blocks, and buttons whose label sits in the middle of the button rather
+   than in its top-left corner.
+   -------------------------------------------------------------------------- */
+@media (width < 768px) {
+  .lp-hero { padding-top: .75rem; padding-bottom: 1rem; }
+  .lp-display { line-height: 1.08; padding-bottom: .12em; margin-top: .75rem; letter-spacing: -.06em; }
+  .lp-dek { margin-top: 1.1rem; font-size: 1.05rem; line-height: 1.45; }
+  .lp-tag { margin-top: .6rem; }
+  .lp-cta { margin-top: 1.4rem; }
+
+  .lp-stats { padding-top: 1.25rem; padding-bottom: 1.75rem; gap: 1.1rem .75rem; }
+
+  .lp-block { padding-block: 2.5rem; }
+  .lp-kicker { margin-bottom: 1.1rem; }
+  .lp-h2 { font-size: 1.5rem; }
+
+  .lp-flag { padding: 1.35rem 0; gap: .3rem .75rem; grid-template-columns: 1.6rem 1fr; }
+  .lp-card-name { font-size: 1.7rem; }
+  .lp-card-dek { font-size: .95rem; }
+  .lp-flag-mark { font-size: 2.1rem; margin-top: .75rem; }
+  .lp-flag-mark small { margin-top: .3rem; }
+
+  .lp-more-row { padding: .95rem 0; }
+  .lp-more-name { font-size: 1.05rem; }
+  .lp-more-dek { font-size: .88rem; }
+
+  .lp-cv li, .lp-write a { padding: .95rem 0; }
+  .lg-row { padding: 1rem 0; }
+  .lp-handle { font-size: clamp(2rem, 13vw, 3.4rem); }
+  .lp-foot { padding-bottom: 3rem; }
+  .lp-contact { margin-top: 1.25rem; }
+}
+
+/* A stacked full-width button reads as an empty box when its label hugs the
+   left edge and its icon hugs the right. Put them together, centred. */
+@media (width < 560px) {
+  .lp-cta a { justify-content: center; padding: .85rem 1rem; }
+}
 
 /* --- Signature motion ------------------------------------------------------
    These are the bits that make the page feel like this page: type that climbs

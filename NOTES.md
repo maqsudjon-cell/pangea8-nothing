@@ -162,6 +162,31 @@ first frame, everything else falls away, and the survivors fly into place as
 the mark — the dot lands last, because it is the only character the sentence
 never had. Click, tap or any key ends it. The HTML still says `tou.gg`.
 
+## The phone was an afterthought, and one animation was broken
+
+Maqsudjon sent two screenshots: the hero on a phone, and the whole page zoomed
+out. Both were right.
+
+- **A giant orange smear down the page.** The lit bead that rides the weld seam
+  was a `<circle>` inside an SVG with `preserveAspectRatio="none"`, stretched
+  from a 48-unit viewBox into a 14px-wide element over the full viewport
+  height. Non-uniform scaling does not preserve circles: it became an enormous
+  cone. The bead is now its own DOM element positioned by percentage, so it
+  cannot be distorted by the rail it rides.
+- **The desktop rhythm on a 375px screen.** The wordmark was 43px, the stat
+  numbers 15px, the buttons full-width boxes with the label in the top-left
+  corner and the icon in the far right — which reads as an empty box, not a
+  button. The wordmark is now 17vw, the numbers scale with the viewport, the
+  labels are centred, and every block lost about a third of its vertical
+  padding.
+- **Sections blank in a full-page screenshot.** Scroll reveals fire on an
+  IntersectionObserver, and a phone's full-page capture never scrolls, so
+  everything below the fold stayed at `opacity: 0`. Same for a printed page or
+  a throttled background tab. There is now a 4-second fallback that reveals
+  everything regardless, and the observer reaches 15% past the fold.
+- The third hero button was demoted to a text link: two CV buttons and a third
+  box was a stack of three identical rectangles with nothing to choose between.
+
 ## Design decisions
 
 - **Dark only.** A light theme doubles the QA surface for a site whose whole

@@ -132,11 +132,13 @@ function head({ loc, path, title, description, type = "website", jsonld = [], ar
 <body>
   <a href="#main" class="skip">${esc(T("nav.skip"))}</a>
 <div class="lp">
-  <svg class="lp-draft" viewBox="0 0 48 2400" preserveAspectRatio="none" aria-hidden="true">
-    <path id="weld-path" d="M24 8 C 10 120, 38 220, 24 340 S 8 560, 24 720 S 40 980, 24 1160 S 6 1380, 24 1560 S 42 1780, 24 1980 S 12 2200, 24 2388" fill="none" stroke="url(#weld)" stroke-width="2" stroke-linecap="round"/>
-    <circle id="weld-tip" r="3.2" cx="24" cy="8" opacity="0"/>
-    <defs><linearGradient id="weld" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ffb347"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
-  </svg>
+  <div class="lp-rail" aria-hidden="true">
+    <svg class="lp-draft" viewBox="0 0 48 2400" preserveAspectRatio="none">
+      <path id="weld-path" d="M24 8 C 10 120, 38 220, 24 340 S 8 560, 24 720 S 40 980, 24 1160 S 6 1380, 24 1560 S 42 1780, 24 1980 S 12 2200, 24 2388" fill="none" stroke="url(#weld)" stroke-width="2.5" stroke-linecap="round"/>
+      <defs><linearGradient id="weld" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b35"/><stop offset="55%" stop-color="#ffb347"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+    </svg>
+    <i class="lp-bead"></i>
+  </div>
 `;
 }
 
@@ -270,8 +272,8 @@ function pageHome(loc) {
       <div class="lp-cta">
         <a class="lp-cta-btn" href="${href(loc, "/cv/")}">${esc(T("home.cta.cv"))}${ARROW}</a>
         <a class="btn-download" href="${cvPdf(loc)}" download>${esc(T("cv.download"))}${DOWN}</a>
-        <a href="${href(loc, "/work/")}">${esc(T("home.cta.work"))}</a>
       </div>
+      <a class="lp-more-link" href="${href(loc, "/work/")}">${esc(T("home.cta.work"))}${ARROW}</a>
     </section>
 
     <section class="lp-stats lp-mask" aria-label="${esc(T("home.kicker.flagship"))}">

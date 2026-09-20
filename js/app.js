@@ -46,11 +46,15 @@
         // so anything now above the fold counts as seen too.
         if (e.isIntersecting || e.boundingClientRect.top < 0) show(e.target);
       }
-    }, { threshold: 0.06, rootMargin: "0px 0px -6% 0px" });
+    }, { threshold: 0.02, rootMargin: "0px 0px 15% 0px" });
     reveals.forEach((el) => {
-      if (el.getBoundingClientRect().top < innerHeight * 0.94) el.classList.add("is-in");
+      if (el.getBoundingClientRect().top < innerHeight * 1.1) el.classList.add("is-in");
       else io.observe(el);
     });
+    // Safety net. A full-page screenshot, a printed page, a browser that
+    // throttles observers in a background tab — anything that never fires an
+    // intersection would otherwise leave whole sections blank for good.
+    setTimeout(() => reveals.forEach((el) => el.classList.add("is-in")), 4000);
   }
 
   /* ------------------------------------------------------------- count-ups */
@@ -80,7 +84,7 @@
   /* ------------------------------------------------------------- weld seam
      The line down the left edge draws itself as the page scrolls. */
   const weld = $("#weld-path");
-  const tip = $("#weld-tip");
+  const bead = $(".lp-bead");
   if (weld && !reduced) {
     const len = weld.getTotalLength();
     weld.style.strokeDasharray = String(len);
@@ -91,11 +95,9 @@
       const p = max <= 0 ? 1 : Math.min(1, scrollY / max);
       weld.style.strokeDashoffset = String(len * (1 - p));
       // The lit bead sits where the seam is being laid right now.
-      if (tip) {
-        const pt = weld.getPointAtLength(len * p);
-        tip.setAttribute("cx", pt.x);
-        tip.setAttribute("cy", pt.y);
-        tip.setAttribute("opacity", p > 0.004 && p < 0.999 ? "1" : "0");
+      if (bead) {
+        bead.style.top = (p * 100).toFixed(2) + "%";
+        bead.style.opacity = p > 0.004 && p < 0.997 ? "1" : "0";
       }
       queued = false;
     };
