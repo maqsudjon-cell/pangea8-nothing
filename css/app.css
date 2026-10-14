@@ -1,0 +1,738 @@
+/* ==========================================================================
+   tou.gg — design system
+   The original editorial look: void navy, one weld accent, monospace display
+   type, hairline rules, no cards. Restored 2026-09-20 after a redesign that
+   traded the character for conventional surfaces.
+
+   What is NOT restored, on purpose: the header now gets a backdrop when it
+   sticks (it used to print over body text), the hero copy is readable before
+   JavaScript runs, and the grey ramp clears WCAG AA.
+   ========================================================================== */
+
+@font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/inter-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/inter-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:700;font-display:swap;src:url("/fonts/inter-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:700;font-display:swap;src:url("/fonts/jetbrains-mono-latin-700-normal.woff2") format("woff2")}
+
+/* Cyrillic, fetched only by pages that actually paint it. */
+@font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/inter-cyrillic-400-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/inter-cyrillic-600-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Inter";font-style:normal;font-weight:700;font-display:swap;src:url("/fonts/inter-cyrillic-700-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/jetbrains-mono-cyrillic-400-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/jetbrains-mono-cyrillic-500-normal.woff2") format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+
+:root {
+  --bg:          #0a0e1a;
+  --fg:          #e6edf3;
+  --mute:        #8b949e;
+  /* Was #6e7681, which is 4.0:1 on this background and fails AA at the 11px
+     sizes it is used at. This is two steps lighter and reads the same. */
+  --faint:       #79839a;
+  --line:        #e6edf314;
+  --line-2:      #e6edf329;
+
+  --accent:      #ff6b35;
+  --accent-ink:  #0a0e1a;
+  --ai:          #00d4ff;
+  --ok:          #00ff88;
+
+  --font-sans:    "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shell: 72rem;
+  --pad: 1.25rem;
+}
+@media (width >= 768px) { :root { --pad: 2.5rem; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: radial-gradient(80% 50% at 50% -20%, #ff6b3514, transparent 55%), var(--bg);
+  color: var(--fg);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  overflow-x: clip;
+}
+body {
+  margin: 0;
+  min-height: 100dvh;
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 500; letter-spacing: -.045em; line-height: 1.15; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+a svg, button svg, .lp-more-link svg { flex: none; width: 1em; height: 1em; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.num { font-variant-numeric: tabular-nums; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.skip {
+  position: fixed; top: -100px; left: 1rem; z-index: 100;
+  padding: .55rem 1rem; background: var(--accent); color: var(--accent-ink);
+  font: 500 .8125rem/1 var(--font-mono);
+}
+.skip:focus { top: 12px; }
+
+/* --- The page frame ------------------------------------------------------- */
+.lp { position: relative; padding-bottom: 5rem; }
+
+/* The weld seam down the left edge, drawn as the page scrolls. */
+.lp-rail {
+  position: fixed; top: 0; left: 4px; z-index: 2;
+  width: 12px; height: 100dvh; opacity: .8; pointer-events: none;
+}
+/* Only widen it once the text column has left enough gutter for it. */
+@media (width >= 1180px) { .lp-rail { left: 20px; width: 28px; } }
+.lp-draft { width: 100%; height: 100%; }
+/* The lit bead is its own element. Inside the stretched SVG it became a huge
+   orange smear, because preserveAspectRatio="none" scales x and y by wildly
+   different factors and a circle is not a circle any more. */
+.lp-bead {
+  position: absolute; left: 50%; top: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%; background: #ffd9a3; opacity: 0;
+  box-shadow: 0 0 5px 1px #ff8a4c, 0 0 14px 3px rgba(255,107,53,.5);
+}
+@media (prefers-reduced-motion: reduce) { .lp-bead { display: none; } .lp-rail { opacity: .45; } }
+
+/* --- Header --------------------------------------------------------------- */
+.lp-bar {
+  position: sticky; top: 0; z-index: 20;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+  gap: .4rem 1rem;
+  padding: calc(.7rem + env(safe-area-inset-top, 0px)) var(--pad) .85rem;
+  background: transparent; border-bottom: 1px solid transparent;
+  transition: background .2s var(--ease), border-color .2s var(--ease);
+}
+.lp-bar.is-scrolled {
+  background: #0a0e1ac7;
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--line);
+}
+.lp-brand {
+  display: inline-flex; align-items: center;
+  font: 700 1rem/1 var(--font-mono); letter-spacing: -.02em; color: var(--fg);
+}
+.lp-brand .tou-gt { color: var(--accent); transition: transform .3s var(--ease); }
+.lp-brand:hover .tou-gt { transform: translateX(3px); }
+
+.lp-hash {
+  display: none; justify-content: center; gap: 1.5rem;
+  font: 400 .72rem/1 var(--font-mono); letter-spacing: .04em; color: var(--mute);
+}
+@media (width >= 720px) { .lp-hash { display: flex; } }
+.lp-hash a { position: relative; padding-block: .4rem; }
+.lp-hash a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform .28s var(--ease);
+}
+.lp-hash a:hover, .lp-hash a[aria-current="page"] { color: var(--fg); }
+.lp-hash a:hover::after, .lp-hash a:focus-visible::after, .lp-hash a[aria-current="page"]::after { transform: scaleX(1); }
+
+.lp-langs { display: flex; gap: 0; justify-self: end; }
+.lp-lang {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.2rem; min-height: 1.7rem; padding: 0 .2rem;
+  font: 400 .68rem/1 var(--font-mono); letter-spacing: .08em; color: var(--faint);
+  transition: color .2s var(--ease);
+}
+.lp-lang::after {
+  content: ""; position: absolute; left: 18%; right: 18%; bottom: .15rem; height: 1px;
+  background: var(--fg); transform: scaleX(0); transition: transform .22s var(--ease);
+}
+.lp-lang:hover { color: var(--mute); }
+.lp-lang.is-on { color: var(--fg); }
+.lp-lang.is-on::after { transform: scaleX(1); }
+
+/* A menu only exists below the breakpoint where the inline nav fits. */
+.lp-burger {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; margin-left: .35rem; color: var(--mute);
+}
+@media (width >= 720px) { .lp-burger { display: none; } }
+.lp-burger svg { width: 18px; height: 18px; }
+.lp-burger[aria-expanded="true"] .i-open, .lp-burger[aria-expanded="false"] .i-close { display: none; }
+.lp-sheet { grid-column: 1 / -1; padding-top: .35rem; }
+.lp-sheet[hidden] { display: none; }
+.lp-sheet a {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .85rem 0; border-top: 1px solid var(--line);
+  font: 500 1rem/1 var(--font-display); letter-spacing: -.02em;
+}
+.lp-sheet a span { color: var(--faint); }
+
+/* --- Hero ----------------------------------------------------------------- */
+.lp-hero {
+  display: flex; flex-direction: column; justify-content: flex-start;
+  max-width: var(--shell); margin: 0 auto;
+  padding: 1.35rem var(--pad) 1.5rem;
+}
+@media (width >= 768px) { .lp-hero { padding: 3.5rem var(--pad) 2.25rem; } }
+
+.lp-avail {
+  display: inline-flex; align-items: center; gap: .5rem; align-self: flex-start;
+  font: 400 .7rem/1.3 var(--font-mono); letter-spacing: .04em; color: var(--mute);
+  margin-bottom: 1.15rem;
+}
+.lp-avail i { width: 6px; height: 6px; border-radius: 99px; background: var(--ok); flex: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .lp-avail i { animation: lp-dot 2.4s var(--ease) infinite; }
+  @keyframes lp-dot { 0%,100% { box-shadow: 0 0 0 0 #00ff8873; } 50% { box-shadow: 0 0 0 5px #00ff8800; } }
+}
+
+.lp-who { margin: 0; font: 500 clamp(1.2rem,5vw,1.45rem)/1.2 var(--font-display); letter-spacing: -.03em; color: var(--fg); }
+.lp-role { margin: .3rem 0 0; font: 400 clamp(.72rem,3vw,.88rem)/1.5 var(--font-mono); letter-spacing: .03em; color: var(--faint); }
+
+.lp-display {
+  margin: .9rem 0 0; padding-bottom: .28em;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(3rem, 17vw, 8.5rem); line-height: 1.28;
+  letter-spacing: -.075em; white-space: nowrap; overflow: visible;
+}
+.lp-display { position: relative; }
+.lp-word { display: inline-flex; align-items: baseline; }
+.lp-type { position: relative; color: var(--fg); }
+
+/* The etymology, played once: "to you, given gladly" collapses into tou.gg.
+   The real wordmark is always in the DOM underneath — this overlay is only a
+   picture of how the name was made. */
+.lp-intro {
+  position: absolute; inset: 0; display: none; align-items: center;
+  white-space: nowrap; pointer-events: none;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(.95rem, 4.2vw, 3.4rem); line-height: 1.2; letter-spacing: -.02em;
+  color: var(--faint);
+}
+.lp-display.is-intro .lp-intro { display: flex; }
+.lp-display.is-intro .lp-word { opacity: 0; }
+.lp-intro .ch { display: inline-block; will-change: transform, opacity; }
+.lp-intro .keep { color: var(--fg); }
+.lp-intro .keep.is-gg { color: var(--accent); }
+.lp-ch { display: inline-block; vertical-align: bottom; }
+.lp-ch.is-ghost { color: var(--mute); }
+.lp-ch.is-falling { position: absolute; top: 0; color: var(--accent); pointer-events: none; }
+.lp-gg { display: inline-block; color: var(--accent); padding-bottom: .28em; overflow: visible; }
+.lp-caret {
+  display: none; width: .07em; height: .76em; margin-left: .06em;
+  background: var(--accent); vertical-align: -.04em;
+}
+.lp-display.is-typing .lp-caret { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .lp-display.is-typing .lp-caret { animation: lp-caret 1.05s step-end infinite; }
+  @keyframes lp-caret { 50% { opacity: 0; } }
+}
+
+.lp-dek { max-width: 34rem; margin: 1rem 0 0; font-size: 1.02rem; line-height: 1.5; color: var(--mute); }
+.lp-tag { margin: .75rem 0 0; font: 400 clamp(.82rem,1.5vw,.95rem)/1 var(--font-mono); letter-spacing: .02em; color: var(--faint); }
+
+.lp-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+/* Stacked buttons of three different widths read as debris. Same width. */
+@media (width < 560px) { .lp-cta { display: grid; gap: .6rem; } }
+.btn, .lp-cta a {
+  position: relative; isolation: isolate; overflow: hidden; z-index: 0;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .75rem 1.2rem; border: 1px solid var(--line-2);
+  font: 400 .85rem/1 var(--font-mono); letter-spacing: .02em; color: var(--fg);
+  cursor: pointer;
+  transition: color .22s var(--ease), border-color .22s var(--ease), transform .12s ease-out;
+}
+.btn::before, .lp-cta a::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--accent);
+  transform: scaleX(0); transform-origin: left; transition: transform .32s var(--ease);
+}
+.btn:hover, .btn:focus-visible, .lp-cta a:hover, .lp-cta a:focus-visible { color: var(--accent-ink); border-color: var(--accent); }
+.btn:hover::before, .btn:focus-visible::before, .lp-cta a:hover::before, .lp-cta a:focus-visible::before { transform: scaleX(1); }
+.btn:active, .lp-cta a:active { transform: scale(.97); }
+.btn-primary, .lp-cta-btn { border-color: var(--accent); color: var(--accent); }
+/* The one thing HR needs: a file, not a print dialog. */
+.btn-download { border-color: var(--ok); color: var(--ok); font-weight: 500; }
+.btn-download::before { background: var(--ok); }
+.btn-download:hover, .btn-download:focus-visible { color: #06210f; border-color: var(--ok); }
+
+/* --- Stats ---------------------------------------------------------------- */
+.lp-stats {
+  display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .85rem .6rem;
+  max-width: var(--shell); margin: 0 auto;
+  padding: 1.15rem var(--pad) 2.25rem; border-top: 1px solid var(--line);
+}
+@media (width >= 768px) { .lp-stats { grid-template-columns: repeat(5, minmax(0,1fr)); padding-bottom: 3rem; } }
+.lp-stat-n {
+  display: inline-flex; font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: clamp(1.2rem, 5.2vw, 1.55rem); letter-spacing: -.04em; color: var(--fg);
+}
+.lp-stat-l { display: block; margin-top: .3rem; font: 400 .62rem/1.3 var(--font-mono); letter-spacing: .04em; color: var(--mute); }
+@media (width >= 480px) { .lp-stat-l { white-space: nowrap; } }
+
+/* --- Blocks --------------------------------------------------------------- */
+.lp-block { max-width: var(--shell); margin: 0 auto; padding: 3.5rem var(--pad); }
+@media (width >= 768px) { .lp-block { padding: 4.5rem var(--pad); } }
+
+.lp-kicker {
+  display: flex; align-items: center; gap: .7rem; margin: 0 0 1.5rem;
+  font: 400 .68rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent);
+}
+.lp-kicker::before { content: ""; flex: none; width: .9rem; height: 1px; background: currentColor; }
+.lp-kicker-plain { color: var(--faint); }
+
+.lp-h2 { margin: 0 0 .85rem; font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
+.lp-body { max-width: 42rem; margin: 0; font-size: 1.02rem; line-height: 1.6; color: var(--mute); }
+
+/* --- Flagship ------------------------------------------------------------- */
+.lp-flags { display: grid; }
+.lp-flag {
+  position: relative; display: grid; grid-template-columns: 2.2rem 1fr; gap: .35rem 1rem;
+  padding: 1.7rem 0; border-top: 1px solid var(--line);
+}
+@media (width >= 768px) { .lp-flag { grid-template-columns: 2.4rem 1fr auto; align-items: start; padding: 2.1rem 0; } }
+.lp-flag:last-child { border-bottom: 1px solid var(--line); }
+.lp-flag::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--hue, var(--accent)); transform: scaleX(0); transform-origin: left;
+  transition: transform .52s var(--ease);
+}
+.lp-flag:hover::after, .lp-flag:focus-visible::after { transform: scaleX(1); }
+.lp-flag-idx { padding-top: .45rem; font: 400 .68rem/1 var(--font-mono); color: var(--faint); }
+.lp-flag-copy { min-width: 0; }
+.lp-flag-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: .45rem 1rem; }
+.lp-card-name { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.55rem,3.4vw,2.55rem); line-height: 1.05; letter-spacing: -.045em; }
+.lp-toyou { font: 400 .62rem/1 var(--font-mono); letter-spacing: .08em; color: var(--faint); }
+.lp-card-dek { display: block; max-width: 36rem; margin-top: .45rem; font-size: .98rem; line-height: 1.5; color: var(--mute); }
+.lp-flag-dom { display: block; margin-top: .75rem; font: 400 .68rem/1 var(--font-mono); color: var(--faint); transition: color .2s var(--ease); }
+.lp-flag:hover .lp-flag-dom { color: var(--accent); }
+.lp-flag-mark {
+  display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
+  min-width: 11rem; padding-top: .1rem; text-align: right;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: .9; letter-spacing: -.06em;
+  color: var(--hue, var(--fg));
+}
+.lp-flag-mark small { display: block; margin-top: .45rem; font: 400 .62rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+@media (width < 768px) { .lp-flag-mark { grid-column: 2; align-items: flex-start; text-align: left; min-width: 0; margin-top: .9rem; } }
+
+/* --- Row lists ------------------------------------------------------------ */
+.lp-more { display: grid; }
+.lp-more-row {
+  position: relative; display: grid; gap: .2rem 1.25rem;
+  padding: 1.05rem 0; border-top: 1px solid var(--line);
+}
+@media (width >= 768px) { .lp-more-row { grid-template-columns: 10rem 1fr auto; align-items: baseline; } }
+.lp-more-row:last-child { border-bottom: 1px solid var(--line); }
+.lp-more-row::after, .lp-write a::after, .lp-cv li::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--hue, var(--accent)); transform: scaleX(0); transform-origin: left;
+  transition: transform .4s var(--ease); pointer-events: none;
+}
+.lp-more-row:hover::after, .lp-more-row:focus-visible::after,
+.lp-write a:hover::after, .lp-write a:focus-visible::after, .lp-cv li:hover::after { transform: scaleX(1); }
+.lp-more-name {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--font-display); font-weight: 500; letter-spacing: -.02em;
+  transition: transform .28s var(--ease), color .2s var(--ease);
+}
+.lp-more-row:hover .lp-more-name { transform: translateX(6px); color: var(--fg); }
+.lp-dot { width: 7px; height: 7px; border-radius: 99px; background: var(--hue, var(--accent)); flex: none; }
+.lp-more-dek { font-size: .92rem; color: var(--mute); }
+.lp-more-dom { font: 400 .68rem/1 var(--font-mono); color: var(--faint); transition: color .2s var(--ease), transform .28s var(--ease); }
+.lp-more-row:hover .lp-more-dom { color: var(--accent); transform: translateX(-2px); }
+.lp-chip { padding: .1rem .4rem; border: 1px solid var(--line-2); font: 400 .6rem/1.4 var(--font-mono); color: var(--faint); }
+
+.lp-more-link {
+  position: relative; display: inline-flex; align-items: center; gap: .45rem;
+  min-height: 2.5rem; margin-top: .35rem;
+  font: 400 .78rem/1 var(--font-mono); color: var(--accent);
+  transition: transform .2s var(--ease);
+}
+.lp-more-link:hover { transform: translateX(4px); }
+
+/* --- CV + writing rows ---------------------------------------------------- */
+.lp-cv { margin: 0 0 1.25rem; border-top: 1px solid var(--line); }
+.lp-cv li { position: relative; display: grid; gap: .2rem; padding: 1.15rem 0; border-bottom: 1px solid var(--line); }
+@media (width >= 768px) { .lp-cv li { grid-template-columns: 7.5rem 1fr; align-items: baseline; gap: 1.5rem; } }
+.lp-cv time { font: 400 .68rem/1 var(--font-mono); letter-spacing: .04em; color: var(--faint); }
+.lp-cv b { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.15rem; letter-spacing: -.03em; transition: color .2s var(--ease); }
+.lp-cv p { margin: .25rem 0 0; font-size: .95rem; line-height: 1.5; color: var(--mute); }
+
+.lp-write { display: grid; margin: 0; border-top: 1px solid var(--line); }
+.lp-write a { position: relative; display: grid; gap: .2rem; padding: 1.05rem 0; border-bottom: 1px solid var(--line); }
+@media (width >= 768px) { .lp-write a { grid-template-columns: 7.5rem 1fr auto; align-items: baseline; gap: 1.25rem; } }
+.lp-write time { font: 400 .68rem/1 var(--font-mono); color: var(--faint); }
+.lp-write b { font-family: var(--font-display); font-weight: 500; font-size: 1.08rem; letter-spacing: -.03em; transition: color .2s var(--ease); }
+.lp-write span { font: 400 .68rem/1 var(--font-mono); color: var(--faint); }
+.lp-write a:hover b { color: var(--accent); }
+
+/* --- Method --------------------------------------------------------------- */
+.lp-steps { position: relative; display: grid; grid-template-columns: 1fr; margin: 1.75rem 0 0; border-top: 1px solid var(--line); }
+@media (width >= 768px) { .lp-steps { grid-template-columns: repeat(5, 1fr); } }
+.lp-steps li {
+  display: grid; gap: .35rem; padding: .9rem 0; border-bottom: 1px solid var(--line);
+  font-family: var(--font-display); font-size: 1.05rem; letter-spacing: -.03em;
+}
+@media (width >= 768px) {
+  .lp-steps li { border-bottom: 0; border-right: 1px solid var(--line); padding: 1.1rem 1rem 1.1rem 0; }
+  .lp-steps li:last-child { border-right: 0; padding-right: 0; }
+}
+.lp-steps li span { font: 400 .62rem/1 var(--font-mono); letter-spacing: .1em; color: var(--accent); }
+.lp-steps li b { font-weight: 500; }
+
+/* --- Open source ---------------------------------------------------------- */
+.lp-ai { display: grid; gap: 2rem; padding-top: .25rem; border-top: 1px solid var(--line); }
+@media (width >= 768px) { .lp-ai { grid-template-columns: 1.4fr 1fr; gap: 3rem; } }
+.lp-ai-main { display: flex; flex-direction: column; gap: .45rem; padding-top: 1.2rem; }
+.lp-bots { display: flex; flex-direction: column; gap: .55rem; padding-top: 1.2rem; }
+.lp-bots-k { margin: 0 0 .2rem; font: 400 .68rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.lp-bots a { font-family: var(--font-mono); font-size: .9rem; color: var(--ok); transition: color .2s var(--ease); }
+.lp-bots a:hover { color: var(--fg); }
+
+/* --- Languages ------------------------------------------------------------ */
+.lg-list { display: grid; margin-top: 1.75rem; border-top: 1px solid var(--line); }
+.lg-row { display: grid; grid-template-columns: 1fr auto; gap: .35rem 1rem; padding: 1.15rem 0; border-bottom: 1px solid var(--line); }
+@media (width >= 768px) { .lg-row { grid-template-columns: 10.5rem 1fr auto; align-items: start; padding: 1.35rem 0; } }
+.lg-id { min-width: 0; }
+.lg-native { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; line-height: 1.15; letter-spacing: -.03em; }
+.lg-latin { margin: .15rem 0 0; font: 400 .62rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.lg-cefr { display: block; margin-top: .15rem; font: 400 .72rem/1 var(--font-mono); letter-spacing: .08em; color: var(--accent); }
+.lg-mid { grid-column: 1 / -1; }
+@media (width >= 768px) { .lg-mid { grid-column: auto; padding-top: .4rem; } }
+.lg-track { display: block; width: 100%; height: 2px; background: #e6edf31a; overflow: hidden; }
+.lg-fill { display: block; height: 100%; width: var(--fill, 0%); background: var(--hue, var(--accent)); }
+@media (prefers-reduced-motion: no-preference) {
+  .lp-reveal .lg-fill { width: 0; transition: width .9s var(--ease) .1s; }
+  .lp-reveal.is-in .lg-fill { width: var(--fill, 0%); }
+}
+.lg-story { margin: .55rem 0 0; font-size: .9rem; line-height: 1.45; color: var(--mute); }
+.lg-sample { margin: .4rem 0 0; font: 400 .82rem/1.45 var(--font-mono); color: var(--fg); }
+.lg-sample span { display: block; margin-bottom: .2rem; font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+@media (hover: hover) and (pointer: fine) and (width >= 768px) {
+  .lg-sample { opacity: 0; transform: translateY(4px); transition: opacity .2s var(--ease), transform .2s var(--ease); }
+  .lg-row:hover .lg-sample, .lg-row:focus-within .lg-sample { opacity: 1; transform: none; }
+  .lg-row { transition: transform .28s var(--ease); }
+  .lg-row:hover { transform: translateX(6px); }
+}
+.lg-badge { display: inline-flex; align-items: center; gap: .35rem; justify-self: end; padding-top: .25rem; font: 400 .68rem/1 var(--font-mono); letter-spacing: .06em; white-space: nowrap; color: var(--hue, var(--mute)); }
+.lg-badge.is-live { color: var(--accent); }
+.lg-pulse { width: 6px; height: 6px; border-radius: 99px; background: currentColor; }
+@media (prefers-reduced-motion: no-preference) { .lg-pulse { animation: lp-dot 1.6s ease-out infinite; } }
+
+/* --- Prose + inner pages -------------------------------------------------- */
+.lp-prose { max-width: 42rem; }
+.lp-prose p { margin-top: 1.1rem; font-size: 1.02rem; line-height: 1.7; color: var(--mute); }
+.lp-prose p:first-child { margin-top: 0; }
+.lp-prose strong, .lp-prose b { color: var(--fg); font-weight: 600; }
+.lp-prose a { color: var(--accent); border-bottom: 1px solid #ff6b3566; }
+.lp-prose a:hover { border-bottom-color: var(--accent); }
+.lp-prose code { font: 400 .875em/1 var(--font-mono); padding: .1em .3em; background: #e6edf30f; color: var(--fg); }
+
+.lp-head { max-width: var(--shell); margin: 0 auto; padding: 2.5rem var(--pad) 1rem; }
+@media (width >= 768px) { .lp-head { padding: 4rem var(--pad) 1.5rem; } }
+.lp-title { margin: 0; font-size: clamp(2rem, 6vw, 3.4rem); letter-spacing: -.055em; }
+.lp-lede { max-width: 42rem; margin: 1rem 0 0; font-size: 1.02rem; line-height: 1.6; color: var(--mute); }
+
+.lp-case { display: grid; gap: 2.25rem 3rem; border-top: 1px solid var(--line); padding-top: 2rem; }
+@media (width >= 768px) { .lp-case { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.lp-case h2 { font: 400 .68rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.lp-case p { margin-top: .8rem; font-size: .98rem; line-height: 1.55; color: var(--mute); }
+.lp-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.5rem; }
+.lp-metric { display: flex; align-items: baseline; gap: .7rem; margin-top: 1.4rem; }
+.lp-metric b { font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem,4.5vw,3.2rem); letter-spacing: -.06em; color: var(--hue, var(--accent)); }
+.lp-metric span { font: 400 .62rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+
+/* --- CV page -------------------------------------------------------------- */
+.cv-top { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: flex-start; justify-content: space-between; }
+.cv-name { margin: .9rem 0 0; font-size: clamp(1.9rem, 5vw, 2.8rem); letter-spacing: -.055em; }
+.cv-meta { margin-top: .8rem; font: 400 .85rem/1.7 var(--font-mono); color: var(--mute); }
+.cv-meta a:hover { color: var(--accent); }
+.cv-avail { margin-top: .7rem; font: 400 .8rem/1.5 var(--font-mono); color: var(--accent); }
+.cv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; max-width: 22rem; }
+.cv-hint { flex-basis: 100%; font: 400 .68rem/1.5 var(--font-mono); color: var(--faint); }
+.cv-sec { padding-top: 2.25rem; }
+.cv-group { padding-top: 1.25rem; }
+.cv-group-k { font: 400 .62rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.cv-group .cv-item { padding-top: .9rem; }
+.cv-sec > h2 { font: 400 .68rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.cv-item { padding-top: 1.35rem; }
+.cv-item-h { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: baseline; justify-content: space-between; }
+.cv-item-h b { font-family: var(--font-display); font-weight: 500; font-size: 1.08rem; letter-spacing: -.03em; }
+.cv-item-h em { display: block; margin-top: .2rem; font-style: normal; font-size: .9rem; line-height: 1.5; color: var(--faint); }
+.cv-item-h time, .cv-item-h > a { font: 400 .68rem/1.4 var(--font-mono); color: var(--faint); white-space: nowrap; }
+.cv-item-h > a:hover { color: var(--accent); }
+.cv-points { display: grid; gap: .45rem; margin-top: .8rem; }
+.cv-points li { position: relative; padding-left: 1.1rem; font-size: .95rem; color: var(--mute); }
+.cv-points li::before { content: ""; position: absolute; left: 0; top: .62em; width: 5px; height: 1px; background: var(--accent); }
+.cv-langs { display: grid; gap: .55rem; margin-top: 1rem; }
+.cv-langs p { display: flex; flex-wrap: wrap; gap: .25rem .8rem; font-size: .95rem; }
+.cv-langs span { font: 400 .8rem/1.5 var(--font-mono); color: var(--faint); }
+
+/* --- Footer --------------------------------------------------------------- */
+.lp-foot { padding-bottom: 4rem; }
+.lp-handle { margin: 0 0 .7rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2.2rem, 8vw, 5.5rem); line-height: 1.12; letter-spacing: -.06em; }
+.lp-contact { max-width: 46rem; margin-top: 1.75rem; border-top: 1px solid var(--line); }
+.lp-crow {
+  display: grid; grid-template-columns: 1fr; gap: .15rem;
+  padding: .9rem 0; border-bottom: 1px solid var(--line);
+}
+@media (width >= 560px) { .lp-crow { grid-template-columns: 8.5rem 1fr; gap: 1.25rem; align-items: baseline; } }
+.lp-ckey { font: 400 .62rem/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.lp-cval { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; font: 400 .95rem/1.5 var(--font-mono); }
+.lp-cval a {
+  color: var(--mute); border-bottom: 1px solid transparent;
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.lp-cval a:hover { color: var(--fg); border-bottom-color: var(--accent); }
+.lp-cval a[download] { color: var(--ok); }
+.lp-cval a[download]::after { content: " ↓"; }
+.lp-cval .lp-cnote { color: var(--faint); font-size: .8rem; }
+.lp-chain { margin: 2.4rem 0 0; font: 400 .78rem/1.6 var(--font-mono); letter-spacing: .06em; color: var(--mute); }
+.lp-chain span { display: inline-block; margin: 0 .4rem; color: var(--accent); }
+.lp-copy { margin: 1.25rem 0 0; font: 400 .7rem/1.6 var(--font-mono); color: var(--faint); }
+.lp-copy a:hover { color: var(--accent); }
+
+/* --- Motion --------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .lp-reveal { opacity: 0; transform: translateY(12px); }
+  .lp-reveal.is-in {
+    opacity: 1; transform: none;
+    transition: opacity .44s var(--ease), transform .44s var(--ease);
+  }
+  .lp-bar { animation: lp-fade .55s var(--ease-soft) both; }
+  @keyframes lp-fade { from { opacity: 0; transform: translateY(-8px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .lp-reveal { opacity: 1; transform: none; filter: none; }
+  .lg-fill { width: var(--fill, 0%) !important; }
+}
+
+
+
+
+/* --- Chinese --------------------------------------------------------------
+   No CJK webfont is shipped: a full Simplified set is megabytes, and every
+   platform already has a good one. JetBrains Mono and Inter stay first in the
+   stack, so Latin inside a Chinese page (tou.gg, domain names, IELTS) still
+   renders in the brand faces and only the Han characters fall through.
+   CJK also wants no negative tracking and a looser line.
+   -------------------------------------------------------------------------- */
+:root:lang(zh) {
+  --font-display: "JetBrains Mono", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", ui-sans-serif, sans-serif;
+  --font-sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", ui-monospace, monospace;
+}
+:lang(zh) body { line-height: 1.75; }
+:lang(zh) h1, :lang(zh) h2, :lang(zh) h3,
+:lang(zh) .lp-title, :lang(zh) .lp-h2, :lang(zh) .lp-handle,
+:lang(zh) .lp-card-name, :lang(zh) .cv-name, :lang(zh) .lg-native { letter-spacing: 0; }
+:lang(zh) .lp-kicker, :lang(zh) .lg-latin, :lang(zh) .cv-sec > h2,
+:lang(zh) .lp-case h2, :lang(zh) .cv-group-k, :lang(zh) .lp-ckey { letter-spacing: .06em; }
+:lang(zh) .lp-dek, :lang(zh) .lp-lede, :lang(zh) .lp-body { line-height: 1.8; }
+:lang(zh) .lp-prose p { line-height: 1.95; }
+:lang(zh) .lp-flag-mark { line-height: 1.15; }
+/* The wordmark is Latin on every page and keeps its own tracking. */
+:lang(zh) .lp-display { letter-spacing: -.075em; }
+
+/* --- Phone ----------------------------------------------------------------
+   The desktop rhythm, dropped onto a 375px screen, turned into a column of
+   small type separated by large holes. Tighter line boxes, less air between
+   blocks, and buttons whose label sits in the middle of the button rather
+   than in its top-left corner.
+   -------------------------------------------------------------------------- */
+@media (width < 768px) {
+  .lp-hero { padding-top: .75rem; padding-bottom: 1rem; }
+  .lp-display { line-height: 1.08; padding-bottom: .12em; margin-top: .75rem; letter-spacing: -.06em; }
+  .lp-dek { margin-top: 1.1rem; font-size: 1.05rem; line-height: 1.45; }
+  .lp-tag { margin-top: .6rem; }
+  .lp-cta { margin-top: 1.4rem; }
+
+  .lp-stats { padding-top: 1.25rem; padding-bottom: 1.75rem; gap: 1.1rem .75rem; }
+
+  .lp-block { padding-block: 2.5rem; }
+  .lp-kicker { margin-bottom: 1.1rem; }
+  .lp-h2 { font-size: 1.5rem; }
+
+  .lp-flag { padding: 1.35rem 0; gap: .3rem .75rem; grid-template-columns: 1.6rem 1fr; }
+  .lp-card-name { font-size: 1.7rem; }
+  .lp-card-dek { font-size: .95rem; }
+  .lp-flag-mark { font-size: 2.1rem; margin-top: .75rem; }
+  .lp-flag-mark small { margin-top: .3rem; }
+
+  .lp-more-row { padding: .95rem 0; }
+  .lp-more-name { font-size: 1.05rem; }
+  .lp-more-dek { font-size: .88rem; }
+
+  .lp-cv li, .lp-write a { padding: .95rem 0; }
+  .lg-row { padding: 1rem 0; }
+  .lp-handle { font-size: clamp(2rem, 13vw, 3.4rem); }
+  .lp-foot { padding-bottom: 3rem; }
+  .lp-contact { margin-top: 1.25rem; }
+}
+
+/* A stacked full-width button reads as an empty box when its label hugs the
+   left edge and its icon hugs the right. Put them together, centred. */
+@media (width < 560px) {
+  .lp-cta a { justify-content: center; padding: .85rem 1rem; }
+}
+
+/* --- Signature motion ------------------------------------------------------
+   These are the bits that make the page feel like this page: type that climbs
+   out from behind a mask, the domain landing from the right, product names
+   rolling up as a row scrolls in, the rule sweeping across the method table,
+   the chain ticking in one arrow at a time, and Chertma correcting its own
+   spelling in front of you. All of it is decoration: nothing here is the only
+   way a word becomes readable.
+   -------------------------------------------------------------------------- */
+@keyframes clip-up   { from { transform: translateY(110%); } to { transform: none; } }
+@keyframes fade-up   { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes gg-reveal { from { opacity: 0; transform: translateX(.12em); } to { opacity: 1; transform: none; } }
+@keyframes chain-tick{ from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+@keyframes chertma-pop { from { filter: blur(4px); transform: translateY(.25em); } to { filter: none; transform: none; } }
+
+.lp-who, .lp-role, .lp-handle { overflow: hidden; padding-bottom: .22em; }
+.lp-who > span, .lp-role > span, .lp-handle > span { display: block; }
+.lp-card-name { display: inline-block; overflow: hidden; padding-bottom: .06em; }
+.lp-card-name > span { display: block; }
+
+.lp-flag-mark:has(.chertma) { font-size: clamp(1.05rem, 2vw, 1.5rem); line-height: 1.25; letter-spacing: -.03em; max-width: 14rem; }
+.chertma { display: inline-block; }
+.chertma.is-fixed { color: var(--hue, var(--ok)); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero: the name and role climb out from behind their own edge. */
+  .lp-who > span   { animation: clip-up .72s var(--ease-soft) both; }
+  .lp-role > span  { animation: clip-up .72s var(--ease-soft) .1s both; }
+
+  /* Hero copy fades up on paint — on CSS alone, never waiting for a script. */
+  .lp-dek { animation: fade-up .6s var(--ease-soft) .12s both; }
+  .lp-tag { animation: fade-up .6s var(--ease-soft) .2s both; }
+  .lp-cta { animation: fade-up .6s var(--ease-soft) .28s both; }
+  .lp-gg  { animation: gg-reveal .56s var(--ease-soft) 40ms both; }
+
+  /* Stats: blur up, one after another. */
+  .lp-stat { opacity: 0; transform: translateY(10px); }
+  .lp-mask.is-in .lp-stat {
+    opacity: 1; transform: none;
+    transition: opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .lp-mask.is-in .lp-stat:nth-child(1) { transition-delay: 40ms; }
+  .lp-mask.is-in .lp-stat:nth-child(2) { transition-delay: 90ms; }
+  .lp-mask.is-in .lp-stat:nth-child(3) { transition-delay: 140ms; }
+  .lp-mask.is-in .lp-stat:nth-child(4) { transition-delay: 190ms; }
+  .lp-mask.is-in .lp-stat:nth-child(5) { transition-delay: 240ms; }
+
+  /* A product name rolls up as its row arrives. */
+  .lp-card-name > span { transform: translateY(110%); }
+  .lp-reveal.is-in .lp-card-name > span,
+  .lp-mask.is-in .lp-card-name > span { transform: none; transition: transform .8s var(--ease-soft); }
+  .lp-flag-idx { opacity: 0; transform: translateY(8px); }
+  .lp-reveal.is-in .lp-flag-idx { opacity: 1; transform: none; transition: opacity .5s var(--ease) 80ms, transform .5s var(--ease) 80ms; }
+
+  /* The method table draws its own top rule. */
+  .lp-steps::after {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    transition: transform .9s var(--ease-soft) .18s; pointer-events: none;
+  }
+  .lp-mask.is-in .lp-steps::after { transform: scaleX(1); }
+
+  /* The footer handle climbs out; the chain ticks in arrow by arrow. */
+  .lp-mask.is-in .lp-handle > span { animation: clip-up .9s var(--ease-soft) both; }
+  .lp-chain span { opacity: 0; }
+  .lp-mask.is-in .lp-chain span { animation: chain-tick .6s var(--ease) both; }
+  .lp-mask.is-in .lp-chain span:nth-of-type(1) { animation-delay: .05s; }
+  .lp-mask.is-in .lp-chain span:nth-of-type(2) { animation-delay: .16s; }
+  .lp-mask.is-in .lp-chain span:nth-of-type(3) { animation-delay: .27s; }
+
+  /* Chertma fixes its own spelling in front of you. */
+  .chertma.is-fixed { animation: chertma-pop .42s var(--ease-soft) both; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-who > span, .lp-role > span, .lp-handle > span, .lp-card-name > span { transform: none !important; }
+  .lp-stat, .lp-flag-idx, .lp-chain span { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+
+/* --- Print: this is the PDF HR downloads, so it is a layout, not a fallback -- */
+@media print {
+  /* Headless Chrome sizes the PDF page from `size` but lays the content out
+     at its default Letter width, so A4 clips the right edge by the 6mm
+     difference. The wider side margins absorb it and the file is still A4. */
+  @page { size: A4; margin: 13mm 17mm; }
+
+  :root { --bg: #fff; --fg: #111; --mute: #333; --faint: #666; --line: #ddd; --line-2: #ccc; --accent: #b4431a; }
+  html, body {
+    background: #fff !important; color: #111 !important;
+    font-size: 9.5pt; line-height: 1.42;
+  }
+  .lp { padding: 0 !important; }
+  html, body { overflow: visible !important; }
+  /* A right-aligned date must never be the thing that runs off the page. */
+  .cv-item-h { flex-wrap: nowrap; gap: .5rem 1rem; }
+  .cv-item-h > div { min-width: 0; }
+  .cv-item-h time, .cv-item-h > a { flex: 0 0 auto; }
+  .lp-bar, .lp-sheet, .lp-foot, .skip, .lp-draft, .cv-print, .cv-actions,
+  .lp-intro, .lp-caret { display: none !important; }
+
+  .lp-block, .lp-head, .lp-hero, .lp-stats {
+    max-width: none !important; width: auto !important;
+    margin: 0 !important; padding: 0 !important;
+  }
+  a { color: #111 !important; text-decoration: none; }
+
+  .lp-kicker { color: #888 !important; margin-bottom: .5rem; }
+  .lp-kicker::before { background: #bbb; }
+  .cv-name { font-size: 21pt; margin-top: .2rem; letter-spacing: -.05em; }
+  .cv-meta { margin-top: .3rem; font-size: 8.5pt; line-height: 1.5; color: #333 !important; }
+  .cv-avail { margin-top: .35rem; font-size: 8.5pt; color: #111 !important; }
+
+  .cv-sec { padding-top: .95rem; break-inside: auto; }
+  .cv-sec > h2 { font-size: 7.5pt; letter-spacing: .18em; color: #999 !important; }
+  .lp-body { margin-top: .35rem !important; font-size: 9.5pt; color: #222 !important; max-width: none; }
+
+  .cv-item { padding-top: .5rem; break-inside: avoid; }
+  .cv-item-h b { font-size: 10pt; }
+  .cv-item-h em { margin-top: .1rem; font-size: 8.5pt; color: #444 !important; }
+  .cv-item-h time, .cv-item-h > a { font-size: 8pt; color: #666 !important; }
+  .cv-points { gap: .18rem; margin-top: .35rem; }
+  .cv-points li { font-size: 9pt; color: #222 !important; padding-left: .8rem; }
+  .cv-points li::before { background: #999; top: .58em; width: 4px; }
+
+  /* Fifteen projects read better as two columns than as a long ladder. */
+  .cv-group { padding-top: .55rem; break-inside: avoid; }
+  .cv-sec > h2 + .cv-group { padding-top: .3rem; }
+  .cv-group-k { font-size: 7pt; color: #999 !important; letter-spacing: .16em; }
+  .cv-group .cv-item { padding-top: .35rem; }
+  .cv-group .cv-item-h { display: block; }
+  .cv-group .cv-item-h b { font-size: 9pt; }
+  .cv-group .cv-item-h em { display: inline; margin: 0; font-size: 8.5pt; }
+  .cv-group .cv-item-h b::after { content: " — "; color: #999; font-weight: 400; }
+  .cv-group .cv-item-h > a { display: block; font-size: 7.5pt; color: #777 !important; }
+
+  .cv-langs { gap: .2rem; margin-top: .4rem; }
+  .cv-langs p { font-size: 9pt; }
+  .cv-langs span { font-size: 8pt; color: #555 !important; }
+  .lp-chips { gap: .25rem; margin-top: .5rem; }
+  .lp-chip { border-color: #ccc !important; color: #444 !important; font-size: 7.5pt; padding: .08rem .3rem; }
+
+  .lp-prose { max-width: none; }
+  .lp-prose p { color: #222 !important; font-size: 9.5pt; }
+}

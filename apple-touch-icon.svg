@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>tou.gg</title>
+  <rect width="32" height="32" rx="7" fill="#080B14"/>
+  <!-- t -->
+  <rect x="6" y="11" width="9" height="3" fill="#E9EEF8"/>
+  <rect x="9" y="7" width="3" height="14" fill="#E9EEF8"/>
+  <rect x="9" y="21" width="7" height="3" fill="#E9EEF8"/>
+  <!-- caret -->
+  <path d="M16 13l6 6-6 6" fill="none" stroke="#FF6B35"
+        stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
