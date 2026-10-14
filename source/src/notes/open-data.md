@@ -1,6 +1,6 @@
 ---
-title: Open data: an Uzbek lexicon and a Chinese–Uzbek HSK vocabulary
-seo_title: Open Uzbek NLP data and an HSK Chinese–Uzbek–Russian vocabulary on Hugging Face
+title: Open data: Uzbek words, Chinese HSK, and music with exact labels
+seo_title: Open datasets on Hugging Face: Uzbek lexicon, HSK Chinese–Uzbek–Russian vocabulary, Nullsample Multitrack
 slug: open-data
 section: work
 order: 19
@@ -9,15 +9,16 @@ project: Open data
 url: https://huggingface.co/Maqsudjonpolatov
 image: hfspace.webp
 tags: Open data, Hugging Face, Uzbek, Chinese
-description: Two datasets and one Space on Hugging Face: 28 million rows of Uzbek word and word-pair frequencies with a skeleton index, and 8,296 HSK words with Uzbek and Russian meanings.
+description: Three datasets and one Space on Hugging Face: 28 million rows of Uzbek word frequencies with a skeleton index, 8,296 HSK words with Uzbek and Russian meanings, and 20 synthetic music tracks with stems, MIDI and exact annotations.
 facts:
   - Profile: [Maqsudjonpolatov](https://huggingface.co/Maqsudjonpolatov)
   - Uzbek lexicon rows: 28,052,730
   - HSK words: 8,296
+  - Music tracks with exact labels: 20
   - Licence: CC BY 4.0
   - Lexicon downloads: 111 (14 Oct 2026)
 ---
-Two of my products sit on top of data I built myself, and I published both datasets on Hugging Face so that nobody has to build them again.
+Three of my products sit on top of data I built myself, and I published each dataset on Hugging Face so that nobody has to build it again.
 
 ## Uzbek frequency lexicon with skeleton index
 
@@ -45,10 +46,26 @@ Each word has its simplified and traditional form, pinyin with tone marks and wi
 
 The Uzbek and Russian meanings were written for Zitou with AI assistance. They are reviewed and corrected over time from learners' reports in the app, and both the app and the dataset card say so plainly. Expect some mistakes, especially in rare senses. As far as I know it is the first open Chinese–Uzbek HSK vocabulary.
 
+## Nullsample Multitrack
+
+[nullsample-multitrack](https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack) comes out of [Nullsample](/work/nullsample/), my music generator. It has **20 complete tracks generated from code, with zero samples**. Each one comes with its mix, six stems (drums, 808 bass, lead, arp, pads and effects), a MIDI file and exact annotations: tempo, downbeats, key, the chord in every bar, the sections, every drum hit by instrument and every note of every part. That is 40,060 drum hits and 32,919 notes over 37 minutes of music.
+
+The labels are not estimated and not annotated by hand. They are the score the audio was synthesised from, so they are exact by construction. And every track can be rebuilt bit for bit from its seed, on any machine, with the open-source engine.
+
+That makes it useful for work that needs ground truth:
+
+- source separation, with six stems per track;
+- drum and note transcription, with onsets exact to the sample;
+- beat, downbeat and tempo tracking;
+- key and chord recognition, and structure segmentation;
+- testing a music-analysis tool against known answers before trusting it on real recordings.
+
+The card is honest about the limits. All 20 tracks come from one preset, an energetic electronic style around 151–160 BPM, so it is a probe and a clean supplement, not a training corpus on its own. The stems do not sum exactly to the mix, because the mix has its own effects and a limiter. The audio is MP3 to keep it small; for lossless audio you render the seed yourself. Audio, MIDI and annotations are under CC BY 4.0, and the engine is AGPL-3.0.
+
 ## The dictionary Space
 
 To make the vocabulary usable without code, there is a free [HSK dictionary Space](https://huggingface.co/spaces/Maqsudjonpolatov/hsk-uzbek-dictionary). You can search by character, by pinyin with or without tones, or by an Uzbek or Russian word; browse a level of any of the three HSK lists; and practise ten words at a time with flashcards. The page is in Uzbek, Russian and English, and every word links to its page on zitou.app with stroke order, audio and examples.
 
 ## Why publish it
 
-Data for Uzbek is scarce, and data that connects Uzbek to Chinese is scarcer. Publishing them costs nothing, and the next person who builds an Uzbek keyboard or a Chinese course for Uzbek speakers can start from here instead of from zero.
+Data for Uzbek is scarce, data that connects Uzbek to Chinese is scarcer, and music with exact, complete labels is rare in any language. Publishing them costs nothing, and the next person who builds an Uzbek keyboard or a Chinese course for Uzbek speakers can start from here instead of from zero. The same goes for anyone testing a music model who needs the right answers in advance.

@@ -17,6 +17,7 @@ facts:
   - Same seed: same track, byte for byte
   - Source: [GitHub](https://github.com/maqsudjon-cell/nullsample)
   - Licence: AGPL-3.0
+  - Open dataset: [20 tracks with labels](https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack)
 ---
 Before any of the software, I made music. I release UK garage under the name Matsumi; the album *HOME* is on Spotify, and most of its listeners are in the UK, which is where that sound lives. **Nullsample** is what happened when the two halves met.
 
@@ -47,5 +48,9 @@ Every track comes out as six separate stems because they were never mixed into o
 Code that makes sound is easy. Code that makes sound you want to hear again is the hard part, so there is a quality loop, and it is not optional. Render fifty tracks from a preset, listen, rate each from 1 to 5, then let a script correlate every random parameter with the ratings. It runs a permutation test so it does not chase noise and proposes tighter ranges, but never overwrites them by itself. A preset is finished when fewer than five in a hundred random renders are rated poor.
 
 The code is split so that taste and machinery never mix. The core is generic sound machinery that knows nothing about genre. A preset is data and recipe: pattern banks, arrangements, harmony, and a ranges file. If changing how something sounds requires editing the core, the line between them is in the wrong place.
+
+## A dataset with exact answers
+
+Because every note and every drum hit comes from a score the engine wrote itself, Nullsample can do something recorded music cannot: hand you the right answers. I published [Nullsample Multitrack](https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack) on Hugging Face: 20 tracks, each with its mix, six stems, a MIDI file and exact annotations for tempo, downbeats, key, chords, sections, 40,060 drum hits and 32,919 notes over 37 minutes. Researchers can use it to test source separation, transcription, beat tracking and chord recognition against ground truth. More in the note on [open data](/work/open-data/).
 
 The source is public on [GitHub](https://github.com/maqsudjon-cell/nullsample). Hear it at [nullsample.maqsudjon.com](https://nullsample.maqsudjon.com).

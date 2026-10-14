@@ -226,7 +226,7 @@ h2 { font-family: var(--f-display); font-weight: 600; font-size: var(--t-h2); li
 .filters button[aria-pressed="true"] span { color: inherit; opacity: .65; }
 
 /* ---------- open data ---------- */
-.data { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.data { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .big {
   font-family: var(--f-display);
   font-weight: 600;
@@ -434,7 +434,7 @@ footer a { color: var(--muted); }
       <div class="num" role="listitem"><b>191</b><span>public repos</span></div>
       <div class="num" role="listitem"><b>3,146</b><span>commits</span></div>
       <div class="num" role="listitem"><b>14</b><span>domains</span></div>
-      <div class="num" role="listitem"><b>3</b><span>on Hugging Face</span></div>
+      <div class="num" role="listitem"><b>4</b><span>on Hugging Face</span></div>
     </div>
 
     <!-- flagships -->
@@ -561,7 +561,7 @@ footer a { color: var(--muted); }
           <div class="body">
             <div class="name"><h3>Nullsample</h3><span class="tag">Music</span></div>
             <p class="line">Music from arithmetic. Zero samples.</p>
-            <div class="chips"><span class="chip">6 stems</span><span class="chip">open source</span></div>
+            <div class="chips"><span class="chip">6 stems</span><span class="chip">open dataset</span></div>
             <span class="url">nullsample.maqsudjon.com · read the story →</span>
           </div>
         </a>
@@ -640,7 +640,7 @@ footer a { color: var(--muted); }
           <p class="eyebrow">Hugging Face · open data</p>
           <h2 id="h-data">Data anyone can use</h2>
         </div>
-        <p class="sec-note">Two datasets and one Space, published as Maqsudjonpolatov. <a href="/work/open-data/">How they were made →</a></p>
+        <p class="sec-note">Three datasets and one Space, published as Maqsudjonpolatov. <a href="/work/open-data/">How they were made →</a></p>
       </div>
       <div class="data">
         <a class="card" href="https://huggingface.co/datasets/Maqsudjonpolatov/uz-lexicon-skeleton">
@@ -659,6 +659,15 @@ footer a { color: var(--muted); }
             <p class="line">Chinese words with meanings in Uzbek and Russian.</p>
             <div class="chips"><span class="chip">HSK</span><span class="chip">中 → UZ · RU</span></div>
             <span class="url">hsk-chinese-uzbek-russian on Hugging Face ↗</span>
+          </div>
+        </a>
+        <a class="card" href="https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack">
+          <div class="body">
+            <span class="kind">Dataset · from Nullsample</span>
+            <span class="big">20</span>
+            <p class="line">tracks made from code, each with 6 stems, MIDI and exact labels.</p>
+            <div class="chips"><span class="chip">40,060 drum hits</span><span class="chip">32,919 notes</span><span class="chip">37 min</span></div>
+            <span class="url">nullsample-multitrack on Hugging Face ↗</span>
           </div>
         </a>
         <a class="card" href="https://huggingface.co/spaces/Maqsudjonpolatov/hsk-uzbek-dictionary">

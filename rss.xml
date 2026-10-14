@@ -219,6 +219,8 @@
 <h2 id="how-it-gets-good">How it gets good</h2>
 <p>Code that makes sound is easy. Code that makes sound you want to hear again is the hard part, so there is a quality loop, and it is not optional. Render fifty tracks from a preset, listen, rate each from 1 to 5, then let a script correlate every random parameter with the ratings. It runs a permutation test so it does not chase noise and proposes tighter ranges, but never overwrites them by itself. A preset is finished when fewer than five in a hundred random renders are rated poor.</p>
 <p>The code is split so that taste and machinery never mix. The core is generic sound machinery that knows nothing about genre. A preset is data and recipe: pattern banks, arrangements, harmony, and a ranges file. If changing how something sounds requires editing the core, the line between them is in the wrong place.</p>
+<h2 id="a-dataset-with-exact-answers">A dataset with exact answers</h2>
+<p>Because every note and every drum hit comes from a score the engine wrote itself, Nullsample can do something recorded music cannot: hand you the right answers. I published <a href="https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack">Nullsample Multitrack</a> on Hugging Face: 20 tracks, each with its mix, six stems, a MIDI file and exact annotations for tempo, downbeats, key, chords, sections, 40,060 drum hits and 32,919 notes over 37 minutes. Researchers can use it to test source separation, transcription, beat tracking and chord recognition against ground truth. More in the note on <a href="https://tou.gg/work/open-data/">open data</a>.</p>
 <p>The source is public on <a href="https://github.com/maqsudjon-cell/nullsample">GitHub</a>. Hear it at <a href="https://nullsample.maqsudjon.com">nullsample.maqsudjon.com</a>.</p>]]></content:encoded>
   </item>
   <item>
@@ -401,12 +403,12 @@
 <p>You are reading it. <a href="https://tou.gg/./">Back to the front page</a>.</p>]]></content:encoded>
   </item>
   <item>
-    <title>Open data: an Uzbek lexicon and a Chinese–Uzbek HSK vocabulary</title>
+    <title>Open data: Uzbek words, Chinese HSK, and music with exact labels</title>
     <link>https://tou.gg/work/open-data/</link>
     <guid isPermaLink="true">https://tou.gg/work/open-data/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
-    <description>Two datasets and one Space on Hugging Face: 28 million rows of Uzbek word and word-pair frequencies with a skeleton index, and 8,296 HSK words with Uzbek and Russian meanings.</description>
-    <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/open-data.jpg" alt=""></p><p>Two of my products sit on top of data I built myself, and I published both datasets on Hugging Face so that nobody has to build them again.</p>
+    <description>Three datasets and one Space on Hugging Face: 28 million rows of Uzbek word frequencies with a skeleton index, 8,296 HSK words with Uzbek and Russian meanings, and 20 synthetic music tracks with stems, MIDI and exact annotations.</description>
+    <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/open-data.jpg" alt=""></p><p>Three of my products sit on top of data I built myself, and I published each dataset on Hugging Face so that nobody has to build it again.</p>
 <h2 id="uzbek-frequency-lexicon-with-skeleton-index">Uzbek frequency lexicon with skeleton index</h2>
 <p><a href="https://huggingface.co/datasets/Maqsudjonpolatov/uz-lexicon-skeleton">uz-lexicon-skeleton</a> is the data underneath <a href="https://tou.gg/work/chertma/">Chertma</a>. It was counted from 1.75 billion Uzbek word tokens: 1.43 billion from books, 296 million from news and 25.5 million from Telegram channels, taken from the open datasets <code>tahrirchi/uz-books-v2</code> (MIT) and <code>tahrirchi/uz-crawl</code> (Apache-2.0).</p>
 <div class="table"><table><thead><tr><th>File</th><th>Rows</th><th>What is in it</th></tr></thead><tbody><tr><td>unigrams</td><td>4,892,125</td><td>word, count, skeleton</td></tr><tr><td>bigrams</td><td>23,160,605</td><td>word, next word, count</td></tr><tr><td>skeleton index</td><td>4,711,419</td><td>a skeleton and every word that has it</td></tr></tbody></table></div>
@@ -418,10 +420,16 @@
 <p><a href="https://huggingface.co/datasets/Maqsudjonpolatov/hsk-chinese-uzbek-russian">hsk-chinese-uzbek-russian</a> is the vocabulary of <a href="https://tou.gg/work/zitou/">Zitou</a>. It has <strong>8,296 Chinese words</strong>: every word of HSK levels 1–6 (7,824 words) and 472 everyday words that are on no list, such as 这个, 一个, 不是 and 不会.</p>
 <p>Each word has its simplified and traditional form, pinyin with tone marks and with numbers, the meaning in Uzbek and in Russian, its level in three HSK lists (2025, HSK 3.0 and HSK 2.0) and a frequency rank. When a word has more than one reading, the reading HSK means was chosen, and some were fixed by hand, for example 教 jiāo, 重 zhòng and 得 dé.</p>
 <p>The Uzbek and Russian meanings were written for Zitou with AI assistance. They are reviewed and corrected over time from learners' reports in the app, and both the app and the dataset card say so plainly. Expect some mistakes, especially in rare senses. As far as I know it is the first open Chinese–Uzbek HSK vocabulary.</p>
+<h2 id="nullsample-multitrack">Nullsample Multitrack</h2>
+<p><a href="https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack">nullsample-multitrack</a> comes out of <a href="https://tou.gg/work/nullsample/">Nullsample</a>, my music generator. It has <strong>20 complete tracks generated from code, with zero samples</strong>. Each one comes with its mix, six stems (drums, 808 bass, lead, arp, pads and effects), a MIDI file and exact annotations: tempo, downbeats, key, the chord in every bar, the sections, every drum hit by instrument and every note of every part. That is 40,060 drum hits and 32,919 notes over 37 minutes of music.</p>
+<p>The labels are not estimated and not annotated by hand. They are the score the audio was synthesised from, so they are exact by construction. And every track can be rebuilt bit for bit from its seed, on any machine, with the open-source engine.</p>
+<p>That makes it useful for work that needs ground truth:</p>
+<ul><li>source separation, with six stems per track;</li><li>drum and note transcription, with onsets exact to the sample;</li><li>beat, downbeat and tempo tracking;</li><li>key and chord recognition, and structure segmentation;</li><li>testing a music-analysis tool against known answers before trusting it on real recordings.</li></ul>
+<p>The card is honest about the limits. All 20 tracks come from one preset, an energetic electronic style around 151–160 BPM, so it is a probe and a clean supplement, not a training corpus on its own. The stems do not sum exactly to the mix, because the mix has its own effects and a limiter. The audio is MP3 to keep it small; for lossless audio you render the seed yourself. Audio, MIDI and annotations are under CC BY 4.0, and the engine is AGPL-3.0.</p>
 <h2 id="the-dictionary-space">The dictionary Space</h2>
 <p>To make the vocabulary usable without code, there is a free <a href="https://huggingface.co/spaces/Maqsudjonpolatov/hsk-uzbek-dictionary">HSK dictionary Space</a>. You can search by character, by pinyin with or without tones, or by an Uzbek or Russian word; browse a level of any of the three HSK lists; and practise ten words at a time with flashcards. The page is in Uzbek, Russian and English, and every word links to its page on zitou.app with stroke order, audio and examples.</p>
 <h2 id="why-publish-it">Why publish it</h2>
-<p>Data for Uzbek is scarce, and data that connects Uzbek to Chinese is scarcer. Publishing them costs nothing, and the next person who builds an Uzbek keyboard or a Chinese course for Uzbek speakers can start from here instead of from zero.</p>]]></content:encoded>
+<p>Data for Uzbek is scarce, data that connects Uzbek to Chinese is scarcer, and music with exact, complete labels is rare in any language. Publishing them costs nothing, and the next person who builds an Uzbek keyboard or a Chinese course for Uzbek speakers can start from here instead of from zero. The same goes for anyone testing a music model who needs the right answers in advance.</p>]]></content:encoded>
   </item>
   <item>
     <title>Code and steel</title>
