@@ -1,51 +1,34 @@
 # tou.gg
 
-> Public brand home of Maqsudjon Polatov. TOU = "to you". An umbrella, not a product name.
-
-- Site: https://tou.gg
-- Languages: English (/), Uzbek (/uz/), Russian (/ru/), Chinese (/zh/)
-- RSS: https://tou.gg/rss.xml
-- Stats: https://tou.goatcounter.com
-- Person: Maqsudjon Polatov, Tashkent, Uzbekistan (UTC+5)
-- Method: directs AI coding agents end to end (spec -> architecture -> build -> DNS/TLS -> ops). Welds full time; ships software nights and days off.
-- Email: polatovmaqsudjon1@gmail.com
-- Telegram: https://t.me/toudotgg
-- GitHub: https://github.com/maqsudjon-cell
-- Lab and long-form archive: https://maqsudjon.com
-- Source of this site: https://github.com/maqsudjon-cell/tou
-
-## Verified numbers (2026-09-20)
-
-- 15 live sites
-- 191 public repos
-- 3,000+ commits
-- 144 IELTS tests live
-- 19 months solo
-
-## Live sites
-
-- FlareStamina https://flarestamina.com — Free IELTS Academic platform. 144 timed mocks, AI writing feedback, a speaking lab. Teachers run it with a class.
-- AI Lenta https://ailenta.uz — Uzbek AI news wire. 24 sources, LLM summaries on a schedule, every item cites the original. Nobody in the loop.
-- Chertma https://chertma.maqsudjon.com — Type ASCII, get correct Uzbek New Latin — ş ç ö ğ. Offline. An open 28-million-row lexicon underneath.
-- Nullsample https://nullsample.maqsudjon.com — Music from code. Zero samples, six stems, same seed = same track. Source public.
-- Tadam https://tadam.uz — Wedding photos in one album. One QR, no app, no signup. Used at a real wedding the week it shipped.
-- KVADRAT https://kvdrt.maqsudjon.com — m² calculator for window grilles. Free-text Uzbek and Russian. Offline, PDF out. Built for the shop I work in.
-- Davomat https://davomat.maqsudjon-polatov.workers.dev — Attendance for university group monitors, inside Telegram. 25 students marked in under a minute, offline-safe.
-- Chiziq / CHZQ https://chzq.uz — Productised web studio: fixed scopes, fixed prices, live portfolio in an iframe instead of screenshots.
-- Pierics https://pierics.com — Daily IELTS vocabulary game. One round a day, no account.
-- Minnos https://minnos.cc — 26 English cat idioms, with audio, explained in Uzbek.
-- ZED AVLOD School https://zedavlod.uz — Language school in To‘raqo‘rg‘on. English, IELTS, CEFR, Ibrat, DTM. Real results, no invented ones.
-- CTN Language Centre https://ctnlc.uz — Tashkent language centre. A1–C1, IELTS intensive, kids, speaking club. Trilingual, one file.
-- Payvandchi https://payvandchi.maqsudjon.com — Catalogue for the metal workshop. Grilles, railings, canopies — photographed on the job, not staged.
-- Reshotkachi https://reshotkachi.maqsudjon.com — Second grille catalogue, Russian-first, built as a 3D wall of 123 real photos.
-- maqsudjon.com https://maqsudjon.com — The lab and the build log. Long-form notes on every ship, in English and Uzbek.
+> Maqsudjon Polatov, product engineer in Tashkent. Welds metal by day, ships software by night.
 
 ## Pages
 
-- / home
-- /work/ work index, plus a case study per flagship product
-- /cv/ curriculum vitae, print-ready
-- /log/ writing index; long-form archive lives on maqsudjon.com
-- /about/ bio, method, stack, availability
-- /now/ what is being built this month
-- /colophon/ type, colour, motion, build
+- [Home](https://tou.gg/)
+- [CV](https://tou.gg/cv/)
+- [Notes](https://tou.gg/log/)
+- [RSS](https://tou.gg/rss.xml)
+
+## Notes
+
+- [FlareStamina: free IELTS practice, built around a welding job](https://tou.gg/work/flarestamina/): How a handful of listening tests became a free IELTS platform with 144 tests, a writing lab, a speaking lab and a news desk, and why the login walls had to come down.
+- [Zitou: learning Chinese in Uzbek, ten minutes a day](https://tou.gg/work/zitou/): A free app that teaches Chinese in Uzbek and nine other languages: a 123,000-word dictionary, all HSK lists, stroke-order writing, spaced repetition, and tools for teachers.
+- [AI Lenta: an Uzbek AI news wire with nobody in the loop](https://tou.gg/work/ailenta/): How AI Lenta collects AI news from dozens of outlets, writes it in Uzbek, refuses to publish a number it cannot find in the source, and stops the same story from appearing twice.
+- [zh.tou.gg: Chinese homework, in the order of the slides](https://tou.gg/work/zh-tou-gg/): A small free app that turns a Chinese teacher's slides, homework text and textbook audio into numbered practice: stroke order by finger, tone tests, pinyin and dialogues you can replay sentence by sentence.
+- [Chertma: type plain ASCII, get correct Uzbek](https://tou.gg/work/chertma/): Uzbekistan is moving to a new Latin alphabet that no phone keyboard has. Chertma restores ş ç ö ğ from plain typing, offline, using a 4.9-million-word lexicon, and refuses to touch anything it is not sure about.
+- [Davomat: group attendance in four taps, inside Telegram](https://tou.gg/work/davomat/): A free attendance app for university group monitors: mark 25 students in four taps, let the bot ask absentees why, and never miss a birthday. Built by a student for his own group.
+- [Tadam: every wedding photo in one album, with no app and no database](https://tou.gg/work/tadam/): Guests scan one QR code on the table and add the photos already on their phones; the couple downloads everything as one ZIP. How it works without an app, an account or a database.
+- [Nullsample: music built from arithmetic, with zero samples](https://tou.gg/work/nullsample/): A music generator where every sound is computed from code, the same seed gives the same track on any browser, and the six stems come out separate because they were never mixed.
+- [Pierics: a five-letter word game that teaches IELTS vocabulary](https://tou.gg/work/pierics/): My own take on Wordle: guess the hidden five-letter word in six tries, then learn its definition and an example sentence. Small rules, instant feedback, no account.
+- [Minnos: a cat who brings you English idioms](https://tou.gg/work/minnos/): Cats leave little gifts on the doorstep. Minnos leaves English idioms, every one of them about cats. Pet her, collect all 26, and read each one explained in Uzbek.
+- [Speaking Lab: talking to an AI IELTS examiner like a voice call](https://tou.gg/work/speaking-lab/): An experiment: an IELTS Speaking examiner you talk to out loud, with the January–April 2026 topics for Parts 1–3, band-score feedback, and a camera mode you control with hand gestures.
+- [KVADRAT: the square-metre calculator I use on grille jobs](https://tou.gg/work/kvadrat/): Three numbers in, a priceable area out. A calculator for window grilles that projects from the wall, built for a dusty phone held in one hand while the other holds a tape measure.
+- [Payvandchi: my own welding workshop, finally online](https://tou.gg/work/payvandchi/): A catalogue for the workshop where I weld: window and balcony grilles, railings and canopies, with real photos of real jobs, and nothing on the site we cannot actually make.
+- [Reshotkachi: the same workshop, built a second time](https://tou.gg/work/reshotkachi/): Same welder, same grilles, same photos and prices, built again as a completely different site: 123 real photos arranged as a 3D wall. An experiment in how much design alone changes a business.
+- [ZED AVLOD School: real results, no invented ones](https://tou.gg/work/zed-avlod/): A website for a family language school in To'raqo'rg'on, Namangan. The part I care about is a results table of thirteen real CEFR scores, each one checkable, and the things I deliberately left out.
+- [CTN Language Centre: a whole school website in one file](https://tou.gg/work/ctn/): A trilingual site for an English school in Tashkent, built as a single HTML file, with a lead form that opens Telegram, brand images generated by code, and one near-miss with 40 MB of audio.
+- [maqsudjon.com: the lab, rebuilt until it was fast](https://tou.gg/work/maqsudjon-com/): My first personal site and still the lab: a live colour ASCII engine fed by F1 footage, a terminal in the header, an installable app, and a build log with more than forty entries.
+- [tou.gg: the front door, and why it was rebuilt](https://tou.gg/work/tou-gg/): Why my main site has a three-letter name, what the first version was, and why the second one is made of pictures, numbers and long notes instead of rows of text.
+- [Open data: an Uzbek lexicon and a Chinese–Uzbek HSK vocabulary](https://tou.gg/work/open-data/): Two datasets and one Space on Hugging Face: 28 million rows of Uzbek word and word-pair frequencies with a skeleton index, and 8,296 HSK words with Uzbek and Russian meanings.
+- [Code and steel](https://tou.gg/log/code-and-steel/): The workshop is the engineering school. Measure, join, load-test the seam.
+- [Why a three-letter .gg](https://tou.gg/log/why-tou/): maqsudjon.com stays the lab. tou.gg is the front door.

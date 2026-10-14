@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Open Uzbek NLP data and an HSK Chinese–Uzbek–Russian vocabulary on Hugging Face · Maqsudjon Polatov</title>
+<meta name="description" content="Two datasets and one Space on Hugging Face: 28 million rows of Uzbek word and word-pair frequencies with a skeleton index, and 8,296 HSK words with Uzbek and Russian meanings.">
+<link rel="canonical" href="https://tou.gg/work/open-data/">
+<meta name="author" content="Maqsudjon Polatov">
+<meta name="theme-color" content="#F1F2F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0C0F" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tou.gg">
+<meta property="og:title" content="Open Uzbek NLP data and an HSK Chinese–Uzbek–Russian vocabulary on Hugging Face · Maqsudjon Polatov">
+<meta property="og:description" content="Two datasets and one Space on Hugging Face: 28 million rows of Uzbek word and word-pair frequencies with a skeleton index, and 8,296 HSK words with Uzbek and Russian meanings.">
+<meta property="og:url" content="https://tou.gg/work/open-data/">
+<meta property="og:image" content="https://tou.gg/brand/og/open-data.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@toudotgg">
+<link rel="icon" href="../../favicon.ico" sizes="32x32">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="tou.gg notes" href="../../rss.xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "Open data: an Uzbek lexicon and a Chinese–Uzbek HSK vocabulary", "description": "Two datasets and one Space on Hugging Face: 28 million rows of Uzbek word and word-pair frequencies with a skeleton index, and 8,296 HSK words with Uzbek and Russian meanings.", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "mainEntityOfPage": "https://tou.gg/work/open-data/", "url": "https://tou.gg/work/open-data/", "image": "https://tou.gg/brand/og/open-data.jpg", "wordCount": 582, "author": {"@id": "https://tou.gg/#person"}, "publisher": {"@id": "https://tou.gg/#person"}, "inLanguage": "en", "keywords": "Open data, Hugging Face, Uzbek, Chinese"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "tou.gg", "item": "https://tou.gg/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://tou.gg/log/"}, {"@type": "ListItem", "position": 3, "name": "Open data: an Uzbek lexicon and a Chinese–Uzbek HSK vocabulary", "item": "https://tou.gg/work/open-data/"}]}, {"@type": "Person", "@id": "https://tou.gg/#person", "name": "Maqsudjon Polatov", "url": "https://tou.gg/", "jobTitle": "Product engineer", "email": "mailto:polatovmaqsudjon1@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Tashkent", "addressCountry": "UZ"}, "sameAs": ["https://github.com/maqsudjon-cell", "https://huggingface.co/Maqsudjonpolatov", "https://x.com/toudotgg", "https://instagram.com/toudotgg", "https://t.me/toudotgg", "https://maqsudjon.com/"]}]}</script>
+<meta property="article:published_time" content="2026-10-14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
+<script data-goatcounter="https://tou.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<style>/* Notes and index pages. Same tokens as the home page; one readable column for the essay. */
+:root {
+  --bg: #F1F2F4; --card: #FFFFFF; --ink: #0E1014; --muted: #5D6470; --line: #E0E3E8;
+  --accent: #2F49F5; --on-accent: #FFFFFF; --shot: #E7E9ED;
+  --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --f-body: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0C0F; --card: #15171C; --ink: #ECEEF2; --muted: #9AA1AD; --line: #262A31;
+    --accent: #8C9CFF; --on-accent: #0B0C0F; --shot: #1C1F25; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0C0F; --card: #15171C; --ink: #ECEEF2; --muted: #9AA1AD; --line: #262A31;
+  --accent: #8C9CFF; --on-accent: #0B0C0F; --shot: #1C1F25; color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 1rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--accent); color: var(--on-accent); }
+.wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 32px); }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; flex-wrap: wrap; }
+.logo { font-family: var(--f-display); font-weight: 700; font-size: 1.25rem; text-decoration: none; letter-spacing: -.01em; }
+.logo span { color: var(--accent); }
+.nav { display: flex; flex-wrap: wrap; gap: .25rem; }
+.nav a { text-decoration: none; font-size: .875rem; color: var(--muted); padding: .4rem .7rem; border-radius: 999px; }
+.nav a:hover { color: var(--ink); background: var(--card); }
+
+.btn { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: .875rem; padding: .7rem 1.1rem; border-radius: 999px; text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); }
+.btn-solid { background: var(--ink); color: var(--bg); }
+.btn:hover { border-color: var(--accent); }
+.btn-solid:hover { background: var(--accent); color: var(--on-accent); }
+.actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.eyebrow { margin: 0; font-family: var(--f-mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+
+/* ---- essay ---- */
+.post { max-width: 46rem; margin-inline: auto; padding-block: clamp(1.5rem, 5vw, 3rem) 1rem; }
+.crumbs { margin: 0 0 1rem; font-size: .875rem; color: var(--muted); }
+.crumbs a { color: var(--muted); }
+.post h1, .index-head h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 1rem; text-wrap: balance; }
+.lede { font-size: clamp(1.1rem, 2.2vw, 1.3rem); line-height: 1.5; color: var(--muted); margin: 0 0 1rem; max-width: 40rem; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; font-family: var(--f-mono); font-size: .75rem; color: var(--muted); margin: 0 0 1.25rem; }
+.tag { border: 1px solid var(--line); border-radius: 999px; padding: .1rem .5rem; }
+.hero-shot { margin: 2rem 0 0; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); background: var(--shot); aspect-ratio: 16 / 10; }
+.hero-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin: 1.5rem 0 0; }
+.facts div { background: var(--card); padding: .8rem 1rem; display: grid; gap: .15rem; }
+.facts dt { font-family: var(--f-mono); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.prose { font-size: 1.0625rem; line-height: 1.75; margin-top: 2.25rem; }
+.prose > * { margin: 0 0 1.25rem; }
+.prose h2 { font-family: var(--f-display); font-weight: 600; font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.25; letter-spacing: -.01em; margin: 2.75rem 0 1rem; text-wrap: balance; }
+.prose h3 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 .75rem; }
+.prose a { color: var(--accent); text-underline-offset: .18em; }
+.prose code { font-family: var(--f-mono); font-size: .88em; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: .05em .35em; }
+.prose ul, .prose ol { padding-left: 1.3rem; display: grid; gap: .45rem; }
+.prose blockquote { margin: 2rem 0; padding: .25rem 0 .25rem 1.25rem; border-left: 3px solid var(--accent); font-size: 1.2rem; line-height: 1.5; }
+.prose blockquote p { margin: 0; }
+.prose figure { margin: 2rem 0; }
+.prose figure img { border-radius: var(--r); border: 1px solid var(--line); }
+.prose figcaption { font-size: .875rem; color: var(--muted); margin-top: .5rem; }
+.prose .table { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--card); }
+.prose table { width: 100%; border-collapse: collapse; font-size: .9375rem; font-variant-numeric: tabular-nums; }
+.prose th, .prose td { text-align: left; padding: .6rem .85rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+.prose th { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.prose tr:last-child td { border-bottom: 0; }
+.next { margin-top: 3rem; padding: 1.25rem 1.4rem; border-radius: var(--r); background: var(--card); border: 1px solid var(--line); display: grid; gap: .25rem; }
+.next span { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.next a { font-weight: 600; font-size: 1.1rem; text-decoration: none; }
+.next a:hover { color: var(--accent); }
+
+/* ---- cards ---- */
+.more { padding-block: 3rem 0; }
+.more h2 { font-family: var(--f-display); font-weight: 600; font-size: 1.5rem; margin: 0 0 1.25rem; }
+.index-head { max-width: 46rem; padding-block: clamp(1.5rem, 5vw, 3rem) 2rem; display: grid; gap: .25rem; }
+.ngrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.ncard { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; text-decoration: none; min-width: 0; transition: transform .18s, border-color .18s; }
+.ncard:hover { transform: translateY(-3px); border-color: var(--accent); }
+.shot { aspect-ratio: 16 / 10; background: var(--shot); overflow: hidden; border-bottom: 1px solid var(--line); }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.shot-text { display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font-family: var(--f-display); font-weight: 700; font-size: 1.6rem; padding: 1rem; text-align: center; }
+.nbody { padding: 1rem 1.1rem 1.2rem; display: grid; gap: .35rem; }
+.nmeta { font-family: var(--f-mono); font-size: .7rem; color: var(--muted); }
+.nbody b { font-family: var(--f-display); font-weight: 600; font-size: 1.05rem; line-height: 1.3; letter-spacing: -.01em; }
+.ndesc { color: var(--muted); font-size: .875rem; line-height: 1.45; }
+
+.foot { padding-block: 4rem 2rem; color: var(--muted); font-size: .875rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; }
+.foot a { color: var(--muted); }
+
+@media (max-width: 900px) { .ngrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ngrid { grid-template-columns: 1fr; } .prose { font-size: 1rem; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+.facts div:last-child:nth-child(3n+2) { grid-column: span 2; }
+.facts div:last-child:nth-child(3n+1) { grid-column: span 3; }
+@media (max-width: 600px) { .facts div:last-child:nth-child(n) { grid-column: auto; } .facts div:last-child:nth-child(odd) { grid-column: span 2; } }
+</style>
+<header class="top wrap"><a class="logo" href="../../">tou<span>.</span>gg</a><nav class="nav" aria-label="Site"><a href="../../#work">Projects</a><a href="../../log/">Notes</a><a href="../../cv/">CV</a><a href="../../#contact">Contact</a></nav></header>
+<main class="wrap">
+  <article class="post">
+    <p class="crumbs"><a href="../../log/">Notes</a> / Open data</p>
+    <h1>Open data: an Uzbek lexicon and a Chinese–Uzbek HSK vocabulary</h1>
+    <p class="lede">Two datasets and one Space on Hugging Face: 28 million rows of Uzbek word and word-pair frequencies with a skeleton index, and 8,296 HSK words with Uzbek and Russian meanings.</p>
+    <p class="meta"><time datetime="2026-10-14">14 October 2026</time> · 3 min read · <span class="tag">Open data</span><span class="tag">Hugging Face</span><span class="tag">Uzbek</span><span class="tag">Chinese</span></p>
+    <div class="actions"><a class="btn btn-solid" href="https://huggingface.co/Maqsudjonpolatov">Open Open data ↗</a><a class="btn" href="../../rss.xml">RSS</a></div>
+    <figure class="hero-shot"><img src="../../img/hfspace.webp" alt="Open data home page" width="800" height="500"></figure>
+    <dl class="facts"><div><dt>Profile</dt><dd><a href="https://huggingface.co/Maqsudjonpolatov">Maqsudjonpolatov</a></dd></div><div><dt>Uzbek lexicon rows</dt><dd>28,052,730</dd></div><div><dt>HSK words</dt><dd>8,296</dd></div><div><dt>Licence</dt><dd>CC BY 4.0</dd></div><div><dt>Lexicon downloads</dt><dd>111 (14 Oct 2026)</dd></div></dl>
+    <div class="prose">
+<p>Two of my products sit on top of data I built myself, and I published both datasets on Hugging Face so that nobody has to build them again.</p>
+<h2 id="uzbek-frequency-lexicon-with-skeleton-index">Uzbek frequency lexicon with skeleton index</h2>
+<p><a href="https://huggingface.co/datasets/Maqsudjonpolatov/uz-lexicon-skeleton">uz-lexicon-skeleton</a> is the data underneath <a href="../../work/chertma/">Chertma</a>. It was counted from 1.75 billion Uzbek word tokens: 1.43 billion from books, 296 million from news and 25.5 million from Telegram channels, taken from the open datasets <code>tahrirchi/uz-books-v2</code> (MIT) and <code>tahrirchi/uz-crawl</code> (Apache-2.0).</p>
+<div class="table"><table><thead><tr><th>File</th><th>Rows</th><th>What is in it</th></tr></thead><tbody><tr><td>unigrams</td><td>4,892,125</td><td>word, count, skeleton</td></tr><tr><td>bigrams</td><td>23,160,605</td><td>word, next word, count</td></tr><tr><td>skeleton index</td><td>4,711,419</td><td>a skeleton and every word that has it</td></tr></tbody></table></div>
+<p>Every word is in the new Latin alphabet, lowercase and normalised. Together, words and word pairs are the 28,052,730 rows.</p>
+<p>The <strong>skeleton</strong> is what makes it useful. Uzbek is written with marks that keyboards lose: <code>ş ç ö ğ</code>, the old <code>oʻ gʻ sh ch</code>, apostrophes, or the Cyrillic letters. The skeleton of a word is what is left when every distinction a keyboard could destroy is folded away, so <code>тўғри</code>, <code>toʻgʻri</code>, <code>togri</code> and <code>töğri</code> all become <code>tOGri</code>. The index answers the question every Uzbek keyboard, spell checker and transliteration model has to answer: the user typed this, which real words could they have meant?</p>
+<p>The word pairs are cut at a count of 6 or more. At a cutoff of 3 the file would have been almost a gigabyte; 6 was the smallest cutoff that kept it under about 500 MB.</p>
+<p>It is under CC BY 4.0: credit the dataset and both sources. As of 14 October 2026 it had been downloaded 111 times.</p>
+<h2 id="hsk-chinese-uzbek-russian-vocabulary">HSK Chinese–Uzbek–Russian Vocabulary</h2>
+<p><a href="https://huggingface.co/datasets/Maqsudjonpolatov/hsk-chinese-uzbek-russian">hsk-chinese-uzbek-russian</a> is the vocabulary of <a href="../../work/zitou/">Zitou</a>. It has <strong>8,296 Chinese words</strong>: every word of HSK levels 1–6 (7,824 words) and 472 everyday words that are on no list, such as 这个, 一个, 不是 and 不会.</p>
+<p>Each word has its simplified and traditional form, pinyin with tone marks and with numbers, the meaning in Uzbek and in Russian, its level in three HSK lists (2025, HSK 3.0 and HSK 2.0) and a frequency rank. When a word has more than one reading, the reading HSK means was chosen, and some were fixed by hand, for example 教 jiāo, 重 zhòng and 得 dé.</p>
+<p>The Uzbek and Russian meanings were written for Zitou with AI assistance. They are reviewed and corrected over time from learners' reports in the app, and both the app and the dataset card say so plainly. Expect some mistakes, especially in rare senses. As far as I know it is the first open Chinese–Uzbek HSK vocabulary.</p>
+<h2 id="the-dictionary-space">The dictionary Space</h2>
+<p>To make the vocabulary usable without code, there is a free <a href="https://huggingface.co/spaces/Maqsudjonpolatov/hsk-uzbek-dictionary">HSK dictionary Space</a>. You can search by character, by pinyin with or without tones, or by an Uzbek or Russian word; browse a level of any of the three HSK lists; and practise ten words at a time with flashcards. The page is in Uzbek, Russian and English, and every word links to its page on zitou.app with stroke order, audio and examples.</p>
+<h2 id="why-publish-it">Why publish it</h2>
+<p>Data for Uzbek is scarce, and data that connects Uzbek to Chinese is scarcer. Publishing them costs nothing, and the next person who builds an Uzbek keyboard or a Chinese course for Uzbek speakers can start from here instead of from zero.</p>
+    </div>
+    <aside class="next"><span>Next note</span><a href="../../log/code-and-steel/">Code and steel →</a></aside>
+  </article>
+  <section class="more" aria-label="More notes">
+    <h2>More notes</h2>
+    <div class="ngrid"><a class="ncard" href="../../work/flarestamina/"><div class="shot"><img src="../../img/flarestamina.webp" alt="" width="800" height="500" loading="lazy"></div><div class="nbody"><span class="nmeta">14 Oct 2026 · 5 min read</span><b>FlareStamina: free IELTS practice, built around a welding job</b><span class="ndesc">How a handful of listening tests became a free IELTS platform with 144 tests, a writing lab, a speaking lab and a news desk, and why the login walls had to come down.</span></div></a><a class="ncard" href="../../work/zitou/"><div class="shot"><img src="../../img/zitou.webp" alt="" width="800" height="500" loading="lazy"></div><div class="nbody"><span class="nmeta">14 Oct 2026 · 4 min read</span><b>Zitou: learning Chinese in Uzbek, ten minutes a day</b><span class="ndesc">A free app that teaches Chinese in Uzbek and nine other languages: a 123,000-word dictionary, all HSK lists, stroke-order writing, spaced repetition, and tools for teachers.</span></div></a><a class="ncard" href="../../work/ailenta/"><div class="shot"><img src="../../img/ailenta.webp" alt="" width="800" height="500" loading="lazy"></div><div class="nbody"><span class="nmeta">14 Oct 2026 · 4 min read</span><b>AI Lenta: an Uzbek AI news wire with nobody in the loop</b><span class="ndesc">How AI Lenta collects AI news from dozens of outlets, writes it in Uzbek, refuses to publish a number it cannot find in the source, and stops the same story from appearing twice.</span></div></a></div>
+  </section>
+</main>
+<footer class="foot wrap"><span>© 2026 Maqsudjon Polatov · tou = to you, gg = given gladly</span><span><a href="../../log/">All notes</a> · <a href="../../rss.xml">RSS</a> · <a href="https://t.me/toudotgg">Telegram</a></span></footer>
+</body>
+</html>

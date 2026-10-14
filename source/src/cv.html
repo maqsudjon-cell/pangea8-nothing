@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{HEAD}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600&family=Onest:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* A one-page CV on white paper, same in every theme so it prints and reads the same. */
+:root {
+  --paper: #FFFFFF;
+  --desk: #F1F2F4;
+  --ink: #0E1014;
+  --muted: #5D6470;
+  --line: #E0E3E8;
+  --accent: #2F49F5;
+  --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --f-body: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--desk); color: var(--ink); font-family: var(--f-body); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; padding: 24px 16px; }
+a { color: inherit; }
+.bar { max-width: 820px; margin: 0 auto 12px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; font-size: 13px; }
+.bar a { text-decoration: none; padding: .45rem .9rem; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); }
+.bar a.pdf { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.page { max-width: 820px; margin: 0 auto; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: clamp(20px, 5vw, 48px); }
+header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem 2rem; align-items: end; padding-bottom: 18px; border-bottom: 2px solid var(--ink); }
+h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(22px, 4vw, 30px); letter-spacing: -.02em; line-height: 1.1; margin: 0 0 6px; }
+.role { margin: 0; color: var(--muted); font-size: 15px; }
+.contacts { text-align: right; font-size: 12.5px; line-height: 1.6; }
+.contacts a { text-decoration: none; }
+.open { margin: 12px 0 0; font-size: 13px; }
+.open b { color: var(--accent); font-weight: 600; }
+.nums { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 18px 0 4px; }
+.nums div { background: var(--desk); border-radius: 10px; padding: 8px 10px; }
+.nums b { display: block; font-family: var(--f-display); font-weight: 600; font-size: 18px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.nums span { color: var(--muted); font-size: 11.5px; }
+h2 { font-family: var(--f-mono); font-weight: 500; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 22px 0 10px; }
+.summary { margin: 0; font-size: 14.5px; max-width: 70ch; }
+.job { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 1rem; margin-bottom: 14px; }
+.job h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.job .where { color: var(--muted); font-size: 13px; }
+.job time { font-family: var(--f-mono); font-size: 12px; color: var(--muted); white-space: nowrap; text-align: right; }
+.job ul { grid-column: 1 / -1; margin: 6px 0 0; padding-left: 18px; display: grid; gap: 3px; }
+.work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 24px; }
+.work div { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.work b { font-weight: 600; }
+.work span { color: var(--muted); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.list { display: grid; gap: 6px; }
+.row { display: flex; justify-content: space-between; gap: 1rem; font-size: 13px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.row b { font-weight: 600; }
+.row span { color: var(--muted); text-align: right; }
+.stack { display: flex; flex-wrap: wrap; gap: 5px; }
+.stack span { font-size: 12px; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line); }
+footer { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11.5px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+@media (max-width: 640px) {
+  header { grid-template-columns: 1fr; }
+  .contacts { text-align: left; }
+  .nums { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .work, .cols { grid-template-columns: 1fr; }
+  .work div { grid-template-columns: 6.5rem minmax(0, 1fr); }
+}
+@page { size: A4; margin: 10mm 11mm; }
+@media print {
+  body { background: #FFFFFF; padding: 0; font-size: 10.5px; line-height: 1.4; }
+  .bar { display: none; }
+  .page { border: 0; border-radius: 0; padding: 0; max-width: none; }
+  header { padding-bottom: 10px; }
+  h1 { font-size: 22px; }
+  .role { font-size: 12.5px; }
+  .contacts { font-size: 10.5px; line-height: 1.45; }
+  .open { margin-top: 8px; font-size: 11px; }
+  h2 { margin: 11px 0 5px; font-size: 9.5px; }
+  .job { margin-bottom: 6px; break-inside: avoid; }
+  .job h3 { font-size: 12px; }
+  .job .where, .job time { font-size: 10.5px; }
+  .job ul { margin-top: 3px; gap: 1px; }
+  .summary { font-size: 11px; max-width: none; }
+  .work { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 16px; }
+  .work div { grid-template-columns: 1fr; gap: 0; font-size: 10px; padding: 2px 0; }
+  .row { font-size: 10px; padding-bottom: 3px; }
+  .list { gap: 3px; }
+  .nums { margin: 10px 0 0; gap: 6px; }
+  .nums div { padding: 5px 8px; }
+  .nums b { font-size: 13px; }
+  .nums span { font-size: 9.5px; }
+  .stack span { font-size: 9.5px; padding: 1px 7px; }
+  footer { margin-top: 10px; padding-top: 6px; font-size: 9.5px; }
+}
+</style>
+</head>
+<body>
+<nav class="bar" aria-label="CV actions">
+  <a href="/">← tou.gg</a>
+  <a class="pdf" href="/Maqsudjon-Polatov-CV.pdf">Download PDF</a>
+</nav>
+
+<main class="page">
+  <header>
+    <div>
+      <h1>Maqsudjon Polatov</h1>
+      <p class="role">Product engineer · Tashkent, Uzbekistan</p>
+    </div>
+    <div class="contacts">
+      <a href="mailto:polatovmaqsudjon1@gmail.com">polatovmaqsudjon1@gmail.com</a><br>
+      <a href="tel:+998959059493">+998 95 905 94 93</a> · <a href="https://t.me/toudotgg">@toudotgg</a><br>
+      <a href="https://tou.gg/">tou.gg</a> · <a href="https://github.com/maqsudjon-cell">github.com/maqsudjon-cell</a><br>
+      <a href="https://huggingface.co/Maqsudjonpolatov">huggingface.co/Maqsudjonpolatov</a>
+    </div>
+  </header>
+  <p class="open"><b>Open to</b> full-time remote (Europe / US / Gulf overlap) or on-site in Tashkent.</p>
+
+  <div class="nums">
+    <div><b>18</b><span>live sites</span></div>
+    <div><b>19</b><span>months solo</span></div>
+    <div><b>191</b><span>public repos</span></div>
+    <div><b>3,146</b><span>commits</span></div>
+    <div><b>14</b><span>domains</span></div>
+  </div>
+
+  <h2>Summary</h2>
+  <p class="summary">Independent product engineer. I direct AI coding agents end to end: spec, architecture, build, DNS and TLS, operations. 18 live sites in 19 months while welding full-time in Tashkent, running on 14 domains, 7 Cloudflare Workers and GitHub Pages. Flagships: FlareStamina (144 free IELTS tests) and Zitou (Chinese for Uzbek speakers, 123,000+ word dictionary).</p>
+
+  <h2>Experience</h2>
+  <div class="job">
+    <div><h3>Independent product engineer</h3><span class="where">tou.gg · Tashkent / remote</span></div>
+    <time>2025 — present</time>
+    <ul>
+      <li>FlareStamina: 144 IELTS tests in production (78 Listening, 53 Reading), AI Writing Lab, Speaking Lab, score converter. Free, no paywall.</li>
+      <li>Zitou: Chinese for Uzbek speakers. 123,000+ word dictionary, 10,057 HSK words, 8,500+ words with native audio; classes, exams and live games for teachers.</li>
+      <li>AI Lenta: unattended Uzbek AI news wire. 27 sources, a GitHub Actions pipeline with hourly updates; every number in a summary is checked against the source.</li>
+      <li>Open data on Hugging Face: uz-lexicon-skeleton (28,052,730 rows, CC BY 4.0, backs Chertma) and an 8,296-word HSK Chinese–Uzbek–Russian vocabulary.</li>
+      <li>Also shipped: Davomat (Telegram attendance), Tadam (wedding photo album via QR), Nullsample (music from code), zh.tou.gg, Chertma, Pierics, Minnos.</li>
+    </ul>
+  </div>
+  <div class="job">
+    <div><h3>Metal fabricator</h3><span class="where">Workshop · Tashkent</span></div>
+    <time>2023 — present</time>
+    <ul>
+      <li>Design, fabricate and install window grilles, balcony railings and canopies.</li>
+      <li>Built KVADRAT, an offline m² calculator used on real jobs, and the workshop catalogues Payvandchi and Reshotkachi.</li>
+    </ul>
+  </div>
+
+  <h2>Live sites</h2>
+  <div class="work">
+    <div><b>FlareStamina</b><span>flarestamina.com · IELTS practice</span></div>
+    <div><b>Zitou</b><span>zitou.app · Chinese in Uzbek</span></div>
+    <div><b>AI Lenta</b><span>ailenta.uz · AI news in Uzbek</span></div>
+    <div><b>zh.tou.gg</b><span>Chinese homework</span></div>
+    <div><b>Davomat</b><span>chzq.uz · attendance in Telegram</span></div>
+    <div><b>Tadam</b><span>tadam.uz · event photo album</span></div>
+    <div><b>Chertma</b><span>chertma.maqsudjon.com · Uzbek spelling</span></div>
+    <div><b>Nullsample</b><span>nullsample.maqsudjon.com · music</span></div>
+    <div><b>Pierics</b><span>pierics.com · vocabulary game</span></div>
+    <div><b>Minnos</b><span>minnos.cc · English idioms</span></div>
+    <div><b>Speaking Lab</b><span>ielts-speaking-lab.pages.dev</span></div>
+    <div><b>KVADRAT</b><span>kvdrt.maqsudjon.com · m² calculator</span></div>
+    <div><b>Payvandchi</b><span>payvandchi.maqsudjon.com · catalogue</span></div>
+    <div><b>Reshotkachi</b><span>reshotkachi.maqsudjon.com · catalogue</span></div>
+    <div><b>ZED AVLOD</b><span>zedavlod.uz · client</span></div>
+    <div><b>CTN</b><span>ctnlc.uz · client</span></div>
+    <div><b>maqsudjon.com</b><span>build log</span></div>
+    <div><b>tou.gg</b><span>this CV's home</span></div>
+  </div>
+
+  <div class="cols">
+    <section>
+      <h2>Education &amp; certificates</h2>
+      <div class="list">
+        <div class="row"><b>BA English Philology</b><span>AIFU, Tashkent · 1st year, evening · 2026 —</span></div>
+        <div class="row"><b>IELTS Academic 6.0</b><span>12 Aug 2026 · L 6.0 · R 5.0 · W 5.5 · S 6.5</span></div>
+        <div class="row"><b>TOPIK 2</b><span>Korean · 2023</span></div>
+        <div class="row"><b>Electrician</b><span>Diploma with honours</span></div>
+        <div class="row"><b>Trucking</b><span>MBA certificate, First Class</span></div>
+      </div>
+    </section>
+    <section>
+      <h2>Languages</h2>
+      <div class="list">
+        <div class="row"><b>Uzbek · C2</b><span>Native</span></div>
+        <div class="row"><b>English · B2</b><span>IELTS 6.0</span></div>
+        <div class="row"><b>Korean · A2</b><span>TOPIK 2</span></div>
+        <div class="row"><b>Russian · A2</b><span>Workplace and reading</span></div>
+        <div class="row"><b>Chinese · A0</b><span>Learning since 19 Sep 2026</span></div>
+      </div>
+    </section>
+  </div>
+
+  <h2>Stack</h2>
+  <div class="stack">
+    <span>JS / TS</span><span>Node</span><span>Python</span><span>Cloudflare Workers</span><span>D1 / R2</span><span>Firebase</span><span>Supabase</span><span>Claude API</span><span>GitHub Actions</span><span>GitHub Pages</span><span>Web Audio</span><span>Canvas</span>
+  </div>
+
+  <footer>
+    <span>Updated 14 Oct 2026</span>
+    <span>tou.gg · to you, given gladly</span>
+  </footer>
+</main>
+</body>
+</html>
