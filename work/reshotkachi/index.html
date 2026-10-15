@@ -7,8 +7,7 @@
 <meta name="description" content="Same welder, same grilles, same photos and prices, built again as a completely different site: 123 real photos arranged as a 3D wall. An experiment in how much design alone changes a business.">
 <link rel="canonical" href="https://tou.gg/work/reshotkachi/">
 <meta name="author" content="Maqsudjon Polatov">
-<meta name="theme-color" content="#F1F2F4" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0B0C0F" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3EEE5">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="tou.gg">
 <meta property="og:title" content="Reshotkachi, hand-bent iron grilles in Tashkent shown as a 3D photo wall · Maqsudjon Polatov">
@@ -28,28 +27,18 @@
 <meta property="article:published_time" content="2026-10-14">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <script data-goatcounter="https://tou.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <style>/* Notes and index pages. Same tokens as the home page; one readable column for the essay. */
 :root {
-  --bg: #F1F2F4; --card: #FFFFFF; --ink: #0E1014; --muted: #5D6470; --line: #E0E3E8;
-  --accent: #2F49F5; --on-accent: #FFFFFF; --shot: #E7E9ED;
-  --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
-  --f-body: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --bg: #F3EEE5; --card: #FBF8F3; --ink: #1B1712; --muted: #7D7468; --line: #E4DCCF;
+  --accent: #C8552D; --on-accent: #FBF8F3; --shot: #E4DCCF;
+  --f-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --f-body: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --r: 12px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0B0C0F; --card: #15171C; --ink: #ECEEF2; --muted: #9AA1AD; --line: #262A31;
-    --accent: #8C9CFF; --on-accent: #0B0C0F; --shot: #1C1F25; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0B0C0F; --card: #15171C; --ink: #ECEEF2; --muted: #9AA1AD; --line: #262A31;
-  --accent: #8C9CFF; --on-accent: #0B0C0F; --shot: #1C1F25; color-scheme: dark;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -67,7 +56,7 @@ img { max-width: 100%; display: block; }
 .nav a { text-decoration: none; font-size: .875rem; color: var(--muted); padding: .4rem .7rem; border-radius: 999px; }
 .nav a:hover { color: var(--ink); background: var(--card); }
 
-.btn { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: .875rem; padding: .7rem 1.1rem; border-radius: 999px; text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); }
+.btn { border-radius: 999px; display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: .875rem; padding: .7rem 1.1rem; border-radius: 999px; text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); }
 .btn-solid { background: var(--ink); color: var(--bg); }
 .btn:hover { border-color: var(--accent); }
 .btn-solid:hover { background: var(--accent); color: var(--on-accent); }
@@ -78,7 +67,7 @@ img { max-width: 100%; display: block; }
 .post { max-width: 46rem; margin-inline: auto; padding-block: clamp(1.5rem, 5vw, 3rem) 1rem; }
 .crumbs { margin: 0 0 1rem; font-size: .875rem; color: var(--muted); }
 .crumbs a { color: var(--muted); }
-.post h1, .index-head h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 1rem; text-wrap: balance; }
+.post h1, .index-head h1 { font-family: var(--f-display); font-weight: 400; letter-spacing: -.035em; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 1rem; text-wrap: balance; }
 .lede { font-size: clamp(1.1rem, 2.2vw, 1.3rem); line-height: 1.5; color: var(--muted); margin: 0 0 1rem; max-width: 40rem; }
 .meta { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; font-family: var(--f-mono); font-size: .75rem; color: var(--muted); margin: 0 0 1.25rem; }
 .tag { border: 1px solid var(--line); border-radius: 999px; padding: .1rem .5rem; }
@@ -91,7 +80,7 @@ img { max-width: 100%; display: block; }
 
 .prose { font-size: 1.0625rem; line-height: 1.75; margin-top: 2.25rem; }
 .prose > * { margin: 0 0 1.25rem; }
-.prose h2 { font-family: var(--f-display); font-weight: 600; font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.25; letter-spacing: -.01em; margin: 2.75rem 0 1rem; text-wrap: balance; }
+.prose h2 { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.25; letter-spacing: -.01em; margin: 2.75rem 0 1rem; text-wrap: balance; }
 .prose h3 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 .75rem; }
 .prose a { color: var(--accent); text-underline-offset: .18em; }
 .prose code { font-family: var(--f-mono); font-size: .88em; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: .05em .35em; }
