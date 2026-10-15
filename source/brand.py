@@ -11,11 +11,11 @@ TMP = Path("/tmp") / "tou-brand"; TMP.mkdir(exist_ok=True)
 PROFILE = TMP / "profile"
 
 MARK = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
-        '<rect width="64" height="64" rx="14" fill="#1B1712"/>'
+        '<rect width="64" height="64" rx="14" fill="#16191D"/>'
         '<rect x="20" y="11" width="10" height="38" rx="2" fill="#FFFFFF"/>'
         '<rect x="12" y="21" width="27" height="9" rx="2" fill="#FFFFFF"/>'
         '<rect x="20" y="41" width="19" height="9" rx="2" fill="#FFFFFF"/>'
-        '<circle cx="48" cy="45" r="6.5" fill="#E0703F"/></svg>')
+        '<circle cx="48" cy="45" r="6.5" fill="#FF7A1A"/></svg>')
 
 def shoot(html_text, name, w, h):
     page = TMP / f"{name}.html"; page.write_text(html_text, encoding="utf-8")
@@ -25,22 +25,22 @@ def shoot(html_text, name, w, h):
                     f"--screenshot={png}", f"file://{page}"], capture_output=True)
     return png
 
-FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..650&family=Geist:wght@500&family=Geist+Mono:wght@500&display=swap">'
+FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Big+Shoulders+Stencil+Display:wght@800&family=Instrument+Sans:wght@500&family=Geist+Mono:wght@500&display=swap">'
 
 def og_html(title, kicker, shot=None):
     img = f'<div class="shot"><img src="file://{SRC / "img" / shot}"></div>' if shot else '<div class="shot nums"><b>18</b><span>live sites</span><b>191</b><span>repos</span><b>3,146</b><span>commits</span></div>'
     return f"""<!doctype html><meta charset="utf-8">{FONTS}<style>
-*{{box-sizing:border-box}}body{{margin:0;width:1200px;height:630px;background:#F3EEE5;font-family:Geist,sans-serif;color:#1B1712;overflow:hidden}}
+*{{box-sizing:border-box}}body{{margin:0;width:1200px;height:630px;background:#0E1012;font-family:'Instrument Sans',sans-serif;color:#ECE6DA;overflow:hidden}}
 .wrap{{position:absolute;inset:0;display:grid;grid-template-columns:600px 1fr;gap:40px;padding:56px 0 56px 64px}}
 .left{{display:flex;flex-direction:column;justify-content:space-between}}
-.logo{{font-family:'Bricolage Grotesque';font-weight:650;font-size:38px;letter-spacing:-.03em}}.logo span{{color:#C8552D}}
-.k{{font-family:'Geist Mono',monospace;font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:#C8552D;margin-bottom:18px}}
-h1{{font-family:'Bricolage Grotesque';font-weight:400;font-size:{58 if len(title) < 60 else 48}px;line-height:1.02;letter-spacing:-.035em;margin:0}}
-.by{{font-size:22px;color:#8C8378}}
-.shot{{border-radius:22px 0 0 22px;overflow:hidden;border:2px solid #E4DCCF;border-right:0;background:#FBF8F3;height:518px}}
+.logo{{font-family:'Big Shoulders Stencil Display';font-weight:800;font-size:44px;letter-spacing:.02em;text-transform:uppercase}}.logo span{{color:#FF7A1A}}
+.k{{font-family:'Geist Mono',monospace;font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:#FF7A1A;margin-bottom:18px}}
+h1{{font-family:'Big Shoulders Display';font-weight:800;text-transform:uppercase;font-size:{70 if len(title) < 60 else 58}px;line-height:.95;letter-spacing:0;margin:0}}
+.by{{font-size:22px;color:#8B9096}}
+.shot{{border-radius:22px 0 0 22px;overflow:hidden;border:2px solid #2A2F35;border-right:0;background:#07080A;height:518px}}
 .shot img{{width:100%;height:100%;object-fit:cover;object-position:top left}}
-.nums{{background:#1B1712;color:#F3EEE5;display:grid;grid-template-columns:auto 1fr;align-content:center;gap:10px 22px;padding:48px;font-family:'Geist Mono',monospace}}
-.nums b{{font-family:'Bricolage Grotesque';font-size:72px;font-weight:400;color:#fff}}.nums span{{font-size:24px;align-self:center;opacity:.7}}
+.nums{{background:#16191D;color:#ECE6DA;display:grid;grid-template-columns:auto 1fr;align-content:center;gap:10px 22px;padding:48px;font-family:'Geist Mono',monospace}}
+.nums b{{font-family:'Big Shoulders Display';font-size:84px;font-weight:800;color:#FF7A1A;color:#fff}}.nums span{{font-size:24px;align-self:center;opacity:.7}}
 </style><div class="wrap"><div class="left"><div class="logo">tou<span>.</span>gg</div>
 <div><div class="k">{html.escape(kicker)}</div><h1>{html.escape(title)}</h1></div>
 <div class="by">Maqsudjon Polatov · Tashkent</div></div>{img}</div>"""

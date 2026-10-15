@@ -3,8 +3,8 @@
   "short_name": "tou.gg",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F3EEE5",
-  "theme_color": "#1B1712",
+  "background_color": "#0E1012",
+  "theme_color": "#0E1012",
   "lang": "en",
   "icons": [
     {

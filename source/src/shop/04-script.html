@@ -1,0 +1,292 @@
+
+<script>
+(() => {
+  const root = document.documentElement;
+  root.classList.add('js');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DPR = Math.min(2, window.devicePixelRatio || 1);
+  const fmt = new Intl.NumberFormat('en-US');
+
+  // ---------- live seconds on the nameplate ----------
+  const START = Date.UTC(2025, 1, 28, 18, 25, 22);
+  const secsEl = document.getElementById('secs');
+  const tickSecs = () => { secsEl.textContent = fmt.format(Math.floor((Date.now() - START) / 1000)); };
+  tickSecs(); setInterval(tickSecs, 1000);
+
+  // ---------- colour of steel as it cools ----------
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ramp = stops => f => {
+    f = Math.min(1, Math.max(0, f));
+    for (let i = 1; i < stops.length; i++) if (f <= stops[i][0]) {
+      const [a, ca] = stops[i - 1], [b, cb] = stops[i], t = (f - a) / (b - a);
+      return [lerp(ca[0], cb[0], t), lerp(ca[1], cb[1], t), lerp(ca[2], cb[2], t)];
+    }
+    return stops[stops.length - 1][1];
+  };
+  // white-hot → yellow → orange → cherry red → dark → cooled steel
+  const heat = ramp([[0, [255, 251, 238]], [.1, [255, 226, 150]], [.25, [255, 152, 52]], [.42, [214, 66, 24]], [.6, [96, 30, 16]], [.78, [62, 58, 58]], [1, [104, 108, 114]]]);
+  // the heat tint that stays around a weld: straw → bronze → purple → blue
+  const tint = ramp([[0, [216, 179, 90]], [.35, [178, 108, 50]], [.65, [114, 74, 150]], [1, [72, 106, 204]]]);
+  const rgba = (c, a) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+
+  // ---------- the hero: a torch writes "tou.gg" ----------
+  const cv = document.getElementById('weld');
+  const ctx = cv.getContext('2d');
+  const hero = cv.parentElement;
+  const haloL = document.createElement('canvas'), haloC = haloL.getContext('2d');
+  const beadL = document.createElement('canvas'), beadC = beadL.getContext('2d');
+  const COOL = 2.4;                       // seconds from white-hot to grey
+  let W = 0, H = 0, S = 1, R = 6, floorY = 0;
+  let beads = [], sparks = [], smoke = [], strokes = [], marks = null;
+  let job = null, torch = null, drawing = null, lastSmoke = 0, chalkT = -1, running = false, visible = true;
+
+  // monoline letters in a unit box: baseline y = 1, x-height y = .42
+  const PI = Math.PI;
+  const line = (x1, y1, x2, y2) => { const n = Math.max(2, Math.ceil(Math.hypot(x2 - x1, y2 - y1) / .01)); return Array.from({ length: n + 1 }, (_, i) => [lerp(x1, x2, i / n), lerp(y1, y2, i / n)]); };
+  const arc = (cx, cy, r, a0, a1) => { const n = Math.max(4, Math.ceil(Math.abs(a1 - a0) * r / .01)); return Array.from({ length: n + 1 }, (_, i) => { const a = lerp(a0, a1, i / n); return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }); };
+  const GLYPHS = [
+    { w: .46, s: [[...line(.16, .06, .16, .84), ...arc(.32, .84, .16, PI, PI / 2)], line(0, .42, .36, .42)] },
+    { w: .66, s: [arc(.29, .71, .29, -PI / 2, PI * 1.5)] },
+    { w: .64, s: [[...line(.04, .42, .04, .74), ...arc(.27, .74, .23, PI, 0), ...line(.5, .74, .5, .42)], line(.5, .42, .5, 1)] },
+    { w: .26, s: [arc(.09, .955, .035, 0, PI * 2)] },
+    { w: .72, s: [arc(.27, .70, .27, -PI / 2, PI * 1.5), [...line(.54, .42, .54, 1.16), ...arc(.3, 1.16, .24, 0, PI)]] },
+    { w: .56, s: [arc(.27, .70, .27, -PI / 2, PI * 1.5), [...line(.54, .42, .54, 1.16), ...arc(.3, 1.16, .24, 0, PI)]] },
+  ];
+
+  function layout() {
+    const r = hero.getBoundingClientRect();
+    W = Math.round(r.width); H = Math.round(r.height);
+    for (const c of [cv, haloL, beadL]) { c.width = W * DPR; c.height = H * DPR; }
+    for (const c of [ctx, haloC, beadC]) c.setTransform(DPR, 0, 0, DPR, 0, 0);
+    const total = GLYPHS.reduce((a, g) => a + g.w, 0);
+    // fit the word between the nav and the headline, leaving room for the chalk notes
+    const footTop = hero.querySelector('.hero-foot').getBoundingClientRect().top - r.top;
+    const topY = W < 700 ? 78 : 96, room = Math.max(60, footTop - topY - (W < 700 ? 34 : 48));
+    S = Math.min(W * (W < 700 ? .84 : .6) / total, room / 1.62);
+    R = Math.max(2.4, S * .042);
+    const ox = (W - total * S) / 2, oy = topY + Math.max(0, (room - 1.62 * S) * .35);
+    floorY = H - 4;
+    strokes = []; let x = ox;
+    GLYPHS.forEach(g => { g.s.forEach(st => strokes.push(st.map(([u, v]) => [x + u * S, oy + v * S]))); x += g.w * S; });
+    // where the chalk notes go: under "tou" and under "gg"
+    marks = { tou: [ox + .7 * S, oy + 1.04 * S], gg: [ox + (total - .62) * S, oy + 1.44 * S], span: [ox, ox + 1.76 * S, oy - .02 * S] };
+    // densify every stroke to an even spacing in pixels
+    const step = Math.max(1.6, R * .42);
+    strokes = strokes.map(pts => { const out = [pts[0]]; let acc = 0;
+      for (let i = 1; i < pts.length; i++) { const [x0, y0] = out[out.length - 1], [x1, y1] = pts[i]; const d = Math.hypot(x1 - x0, y1 - y0); acc = d; if (acc >= step) out.push([x1, y1]); }
+      return out; });
+  }
+
+  // a bead is a little puddle: tint halo underneath, then the metal, with a highlight once it is cool
+  function paintHalo(c, b, f) {
+    if (f < .18) return;
+    const k = Math.min(1, (f - .18) / .82);
+    c.fillStyle = rgba(tint(k * .45), .022 * Math.min(1, k * 2)); c.beginPath(); c.arc(b.x, b.y, b.r * 2.5, 0, PI * 2); c.fill();
+    c.fillStyle = rgba(tint(.55 + k * .45), .045 * Math.min(1, k * 2)); c.beginPath(); c.arc(b.x, b.y, b.r * 1.6, 0, PI * 2); c.fill();
+  }
+  function paintBead(c, b, f) {
+    const rr = b.r * (.9 + .1 * Math.sin(b.p));
+    c.fillStyle = rgba(heat(f), 1); c.beginPath(); c.arc(b.x, b.y, rr, 0, PI * 2); c.fill();
+    if (f > .55) {
+      const a = (f - .55) / .45;
+      c.strokeStyle = rgba([206, 212, 218], .42 * a); c.lineWidth = Math.max(1, rr * .28);
+      c.beginPath(); c.arc(b.x, b.y, rr * .62, PI * 1.05, PI * 1.6); c.stroke();
+      c.strokeStyle = rgba([10, 11, 13], .5 * a); c.lineWidth = Math.max(1, rr * .22);
+      c.beginPath(); c.arc(b.x, b.y, rr * .9, PI * .05, PI * .6); c.stroke();
+    }
+  }
+
+  let bid = 0;
+  function deposit(x, y, now) { beads.push({ x, y, r: R * (drawing ? .8 : 1), t: now, p: bid++ * 1.7 }); }
+  function bake(b) { paintHalo(haloC, b, 1); paintBead(beadC, b, 1); }
+
+  function emit(x, y, n) {
+    for (let i = 0; i < n; i++) {
+      const a = -PI * (.05 + Math.random() * .9), v = (1.5 + Math.random() * 6.5) * (S / 260 + .4);
+      sparks.push({ x, y, vx: Math.cos(a) * v * (Math.random() < .5 ? 1 : -1) * .9, vy: Math.sin(a) * v, life: .45 + Math.random() * .9, age: 0, bounce: 0 });
+    }
+  }
+
+  function startJob(now) { job = { s: 0, i: 0, wait: now + .5, done: false }; }
+
+  function step(now, dt) {
+    // the automatic weld
+    if (job && !job.done && now >= job.wait) {
+      let budget = (S * 3.4) * dt;                     // pixels of bead per frame
+      while (budget > 0 && !job.done) {
+        const st = strokes[job.s];
+        if (job.i >= st.length) { job.s++; job.i = 0; torch = null; if (job.s >= strokes.length) { job.done = true; chalkT = now; } else job.wait = now + .14; break; }
+        const [x, y] = st[job.i]; deposit(x, y, now); torch = { x, y }; job.i++; budget -= Math.max(1.6, R * .42);
+      }
+    }
+    const t = drawing ? drawing : torch;
+    if (t) {
+      emit(t.x, t.y, Math.round((3 + Math.random() * 5) * Math.min(2, dt * 60)));
+      if (now - lastSmoke > .07) { smoke.push({ x: t.x + (Math.random() - .5) * R, y: t.y - R, r: R * 1.2, age: 0 }); lastSmoke = now; }
+    }
+    // cool: finished beads move into the baked layers
+    if (beads.length && now - beads[0].t > COOL) {
+      let k = 0; while (k < beads.length && now - beads[k].t > COOL) { bake(beads[k]); k++; }
+      beads.splice(0, k);
+    }
+    const g = .2 * (S / 260 + .4);
+    for (const p of sparks) {
+      p.age += dt; p.vy += g * dt * 60; p.px = p.x; p.py = p.y; p.x += p.vx * dt * 60; p.y += p.vy * dt * 60;
+      if (p.y > floorY && p.vy > 0) { p.y = floorY; p.vy *= -.32; p.vx *= .6; p.bounce++; }
+    }
+    sparks = sparks.filter(p => p.age < p.life && p.bounce < 3 && p.x > -20 && p.x < W + 20);
+    for (const m of smoke) { m.age += dt; m.y -= 22 * dt; m.x += 6 * dt; m.r += R * .9 * dt; }
+    smoke = smoke.filter(m => m.age < 2.4);
+  }
+
+  function render(now) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.drawImage(haloL, 0, 0, W, H);
+    for (const b of beads) paintHalo(ctx, b, (now - b.t) / COOL);
+    ctx.drawImage(beadL, 0, 0, W, H);
+    for (const b of beads) paintBead(ctx, b, (now - b.t) / COOL);
+    // smoke
+    for (const m of smoke) { const a = .07 * (1 - m.age / 2.4); ctx.fillStyle = `rgba(170,170,175,${a})`; ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, PI * 2); ctx.fill(); }
+    ctx.globalCompositeOperation = 'lighter';
+    // glow of the still-hot bead
+    for (const b of beads) { const f = (now - b.t) / COOL; if (f < .35) { ctx.fillStyle = rgba(heat(f * .8), .05 * (1 - f / .35)); ctx.beginPath(); ctx.arc(b.x, b.y, b.r * 3.2, 0, PI * 2); ctx.fill(); } }
+    // the arc itself, lighting the plate
+    const t = drawing ? drawing : torch;
+    if (t) {
+      const fl = .72 + Math.random() * .28, rad = Math.max(120, S * 1.1) * fl;
+      const gr = ctx.createRadialGradient(t.x, t.y, 0, t.x, t.y, rad);
+      gr.addColorStop(0, `rgba(255,252,240,${.95 * fl})`); gr.addColorStop(.05, `rgba(255,226,160,${.7 * fl})`);
+      gr.addColorStop(.22, `rgba(255,150,60,${.2 * fl})`); gr.addColorStop(1, 'rgba(255,120,40,0)');
+      ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(t.x, t.y, rad, 0, PI * 2); ctx.fill();
+      const amb = ctx.createRadialGradient(t.x, t.y, 0, t.x, t.y, Math.max(W, H) * .7);
+      amb.addColorStop(0, `rgba(255,170,90,${.10 * fl})`); amb.addColorStop(1, 'rgba(255,170,90,0)');
+      ctx.fillStyle = amb; ctx.fillRect(0, 0, W, H);
+    }
+    // sparks as short streaks
+    ctx.lineCap = 'round';
+    for (const p of sparks) {
+      const f = p.age / p.life, c = heat(.05 + f * .5);
+      ctx.strokeStyle = rgba(c, 1 - f); ctx.lineWidth = Math.max(1, 1.8 * (1 - f * .6));
+      ctx.beginPath(); ctx.moveTo(p.px ?? p.x, p.py ?? p.y); ctx.lineTo(p.x + p.vx * .6, p.y + p.vy * .6); ctx.stroke();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    // soapstone notes after the weld is done
+    if (chalkT >= 0 && marks) {
+      const a = Math.min(1, (now - chalkT) / .9) * .8;
+      ctx.fillStyle = `rgba(236,230,218,${a})`; ctx.strokeStyle = `rgba(236,230,218,${a * .8})`; ctx.lineWidth = 1.6;
+      const fs = Math.max(15, S * .13); ctx.font = `400 ${fs}px Kalam, cursive`; ctx.textAlign = 'center';
+      ctx.fillText('tou = to you', marks.tou[0], marks.tou[1] + fs);
+      ctx.fillText('gg = given gladly', marks.gg[0], marks.gg[1] + fs);
+      const [x0, x1, y] = marks.span;
+      ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.moveTo(x0, y - 6); ctx.lineTo(x0, y + 6); ctx.moveTo(x1, y - 6); ctx.lineTo(x1, y + 6); ctx.stroke();
+      ctx.textAlign = 'left';
+    }
+  }
+
+  let lastT = 0;
+  function frame(ms) {
+    const now = ms / 1000, dt = Math.min(.05, now - (lastT || now)); lastT = now;
+    step(now, dt); render(now); railFrame(now, dt);
+    const busy = (job && !job.done) || drawing || beads.length || sparks.length || smoke.length || (chalkT >= 0 && now - chalkT < 1) || railBusy();
+    if (busy && (visible || railBusy())) requestAnimationFrame(frame); else running = false;
+  }
+  const kick = () => { if (!running) { running = true; lastT = 0; requestAnimationFrame(frame); } };
+
+  function finishInstantly() {
+    for (const st of strokes) for (const [x, y] of st) bake({ x, y, r: R, p: bid++ * 1.7 });
+    chalkT = 0; job = { done: true }; render(10); document.getElementById('hint').classList.add('on');
+  }
+
+  function init() {
+    layout(); beads = []; sparks = []; smoke = []; haloC.clearRect(0, 0, W, H); beadC.clearRect(0, 0, W, H); chalkT = -1; torch = null;
+    if (reduce) { finishInstantly(); return; }
+    startJob(performance.now() / 1000); kick();
+    setTimeout(() => document.getElementById('hint').classList.add('on'), 4200);
+  }
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(init);
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { const w = hero.getBoundingClientRect().width; if (Math.abs(w - W) > 40) { const done = job && job.done; layout(); haloC.clearRect(0, 0, W, H); beadC.clearRect(0, 0, W, H); beads = []; if (done || reduce) finishInstantly(); else startJob(performance.now() / 1000); kick(); } }, 200); });
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }).observe(hero);
+
+  // your own bead: drag across the plate
+  const pos = e => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  cv.addEventListener('pointerdown', e => { if (reduce) return; drawing = pos(e); drawing.lx = drawing.x; drawing.ly = drawing.y; kick(); });
+  cv.addEventListener('pointermove', e => {
+    if (!drawing) return; const p = pos(e), now = performance.now() / 1000, sp = Math.max(1.4, R * .34);
+    const d = Math.hypot(p.x - drawing.lx, p.y - drawing.ly), n = Math.floor(d / sp);
+    for (let i = 1; i <= n; i++) deposit(lerp(drawing.lx, p.x, i / n), lerp(drawing.ly, p.y, i / n), now);
+    if (n) { drawing.lx = p.x; drawing.ly = p.y; } drawing.x = p.x; drawing.y = p.y;
+  });
+  const stop = () => { drawing = null; };
+  cv.addEventListener('pointerup', stop); cv.addEventListener('pointerleave', stop); cv.addEventListener('pointercancel', stop);
+
+  // ---------- the seam down the left edge follows the scroll ----------
+  const rail = document.getElementById('seam'), rctx = rail.getContext('2d');
+  let rH = 0, rProg = 0, rTemp = 0, rSparks = [], lastY = scrollY;
+  const railOn = () => getComputedStyle(rail).display !== 'none';
+  function railSize() { rH = innerHeight; rail.width = 44 * DPR; rail.height = rH * DPR; rctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
+  function railBusy() { return railOn() && (rTemp > .02 || rSparks.length > 0); }
+  function railFrame(now, dt) {
+    if (!railOn()) return;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    rProg = max > 0 ? scrollY / max : 0;
+    rTemp = Math.max(0, rTemp - dt * .7);
+    const tipY = 30 + rProg * (rH - 60), x = 22;
+    rctx.clearRect(0, 0, 44, rH);
+    rctx.strokeStyle = 'rgba(236,230,218,.06)'; rctx.lineWidth = 1; rctx.beginPath(); rctx.moveTo(x, 0); rctx.lineTo(x, rH); rctx.stroke();
+    for (let y = 30, i = 0; y <= tipY; y += 3.2, i++) {
+      const fromTip = (tipY - y) / 90, f = Math.min(1, fromTip + (1 - rTemp)), b = { x, y, r: 4.2, p: i * 1.7 };
+      if (f < 1) paintHalo(rctx, b, f); paintBead(rctx, b, f);
+    }
+    if (rTemp > .25 && Math.random() < rTemp) for (let i = 0; i < 2; i++) { const a = -PI * Math.random(); rSparks.push({ x, y: tipY, vx: Math.cos(a) * (1 + Math.random() * 2.5), vy: Math.sin(a) * (1 + Math.random() * 3), age: 0, life: .3 + Math.random() * .4 }); }
+    rctx.globalCompositeOperation = 'lighter';
+    if (rTemp > .02) { const gr = rctx.createRadialGradient(x, tipY, 0, x, tipY, 24); gr.addColorStop(0, `rgba(255,240,200,${.9 * rTemp})`); gr.addColorStop(1, 'rgba(255,140,50,0)'); rctx.fillStyle = gr; rctx.fillRect(0, tipY - 24, 44, 48); }
+    for (const p of rSparks) { p.age += dt; p.vy += .15; p.x += p.vx; p.y += p.vy; const f = p.age / p.life; rctx.strokeStyle = rgba(heat(.05 + f * .4), 1 - f); rctx.lineWidth = 1.2; rctx.beginPath(); rctx.moveTo(p.x - p.vx, p.y - p.vy); rctx.lineTo(p.x, p.y); rctx.stroke(); }
+    rctx.globalCompositeOperation = 'source-over';
+    rSparks = rSparks.filter(p => p.age < p.life);
+  }
+  railSize(); addEventListener('resize', railSize);
+  addEventListener('scroll', () => { if (Math.abs(scrollY - lastY) > 2) { rTemp = Math.min(1, rTemp + .35); lastY = scrollY; } kick(); }, { passive: true });
+  if (!reduce) setTimeout(kick, 50); else { rTemp = 0; requestAnimationFrame(t => railFrame(t / 1000, 0)); addEventListener('scroll', () => railFrame(0, 0), { passive: true }); }
+
+  // ---------- grille joints: tack-welded when the grille comes into view ----------
+  const grille = document.getElementById('grille');
+  function placeJoints() {
+    grille.querySelectorAll('.joint').forEach(j => j.remove());
+    const cells = [...grille.querySelectorAll('.cell')]; if (!cells.length) return;
+    const gr = grille.getBoundingClientRect(), xs = new Set(), ys = new Set();
+    cells.forEach(c => { const r = c.getBoundingClientRect(); xs.add(Math.round(r.left - gr.left)); xs.add(Math.round(r.right - gr.left)); ys.add(Math.round(r.top - gr.top)); ys.add(Math.round(r.bottom - gr.top)); });
+    const bar = parseFloat(getComputedStyle(grille).getPropertyValue('--bar')) || 12;
+    const sx = [...xs].sort((a, b) => a - b), sy = [...ys].sort((a, b) => a - b);
+    const midX = [], midY = [];
+    for (let i = 0; i < sx.length; i += 2) midX.push(i === 0 ? sx[0] - bar / 2 : (sx[i - 1] + sx[i]) / 2);
+    midX.push(sx[sx.length - 1] + bar / 2);
+    for (let i = 0; i < sy.length; i += 2) midY.push(i === 0 ? sy[0] - bar / 2 : (sy[i - 1] + sy[i]) / 2);
+    midY.push(sy[sy.length - 1] + bar / 2);
+    let k = 0;
+    for (const y of [...new Set(midY)]) for (const x of [...new Set(midX)]) {
+      const j = document.createElement('span'); j.className = 'joint'; j.style.left = x + 'px'; j.style.top = y + 'px'; j.style.setProperty('--d', (k++ * .06) + 's'); grille.appendChild(j);
+    }
+  }
+  placeJoints(); addEventListener('resize', () => { clearTimeout(placeJoints.t); placeJoints.t = setTimeout(placeJoints, 200); });
+
+  // ---------- reveal, count-up, tack welds ----------
+  const fresh = [...document.querySelectorAll('.rv')].filter(el => el.getBoundingClientRect().top > innerHeight);
+  const countUp = el => { const end = +el.dataset.count, t0 = performance.now(); const f = n => { const p = Math.min(1, (n - t0) / 1300), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt.format(Math.round(end * e)); if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); };
+  if (!reduce && 'IntersectionObserver' in window) {
+    fresh.forEach(el => el.classList.add('pre'));
+    const io = new IntersectionObserver(es => es.forEach(en => {
+      if (!en.isIntersecting) return; const el = en.target; io.unobserve(el);
+      if (el === grille) { grille.classList.add('welding'); return; }
+      el.classList.remove('pre'); const n = el.querySelector('[data-count]') || (el.dataset.count ? el : null); if (n && fresh.includes(el)) countUp(n);
+    }), { threshold: .15 });
+    fresh.forEach(el => io.observe(el)); io.observe(grille);
+  }
+
+  // ---------- copy buttons ----------
+  document.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', () => {
+    const show = t => { btn.textContent = t; clearTimeout(btn._t); btn._t = setTimeout(() => { btn.textContent = 'Copy'; }, 1600); };
+    const sel = () => { const el = document.getElementById(btn.getAttribute('aria-controls')); if (el) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } show('Selected'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(btn.dataset.copy).then(() => show('Copied'), sel); else sel();
+  }));
+})();
+</script>

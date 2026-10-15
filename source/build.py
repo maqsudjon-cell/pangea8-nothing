@@ -28,8 +28,9 @@ GSC_TOKEN = "On9oW2bT9G3wndosR-K_KcL85-D6v_XpetjXbPEVUaY"   # Search Console HTM
 GOATCOUNTER = '<script data-goatcounter="https://tou.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700'
-         '&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">')
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800'
+         '&family=Big+Shoulders+Stencil+Display:wght@700;800&family=Instrument+Sans:wght@400;500;600&family=Kalam:wght@400;700'
+         '&family=Geist+Mono:wght@400;500&display=swap">')
 
 # Old URLs that no longer have a page of their own, and where they went.
 LANGS = ["uz", "ru", "zh"]
@@ -136,7 +137,7 @@ def head(title, description, path, image="/brand/og.jpg", kind="website", extra_
         f'<meta name="description" content="{html.escape(description)}">',
         f'<link rel="canonical" href="{url}">',
         f'<meta name="author" content="{AUTHOR}">',
-        '<meta name="theme-color" content="#F3EEE5">',
+        '<meta name="theme-color" content="#0E1012">',
         f'<meta property="og:type" content="{kind}">',
         '<meta property="og:site_name" content="tou.gg">',
         f'<meta property="og:title" content="{html.escape(title)}">',
@@ -385,7 +386,7 @@ def main():
             write(out, "CNAME", "tou.gg\n")
             write(out, "site.webmanifest", json.dumps({
                 "name": "tou.gg · Maqsudjon Polatov", "short_name": "tou.gg", "start_url": "/", "display": "standalone",
-                "background_color": "#F3EEE5", "theme_color": "#1B1712", "lang": "en",
+                "background_color": "#0E1012", "theme_color": "#0E1012", "lang": "en",
                 "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
                           {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"},
                           {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
