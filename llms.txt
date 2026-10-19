@@ -12,7 +12,7 @@
 ## Notes
 
 - [FlareStamina: free IELTS practice, built around a welding job](https://tou.gg/work/flarestamina/): How a handful of listening tests became a free IELTS platform with 144 tests, a writing lab, a speaking lab and a news desk, and why the login walls had to come down.
-- [Zitou: learning Chinese in Uzbek, ten minutes a day](https://tou.gg/work/zitou/): A free app that teaches Chinese in Uzbek and nine other languages: a 123,000-word dictionary, all HSK lists, stroke-order writing, spaced repetition, and tools for teachers.
+- [Zitou: learning Chinese in Uzbek, ten minutes a day](https://tou.gg/work/zitou/): A free app that teaches Chinese in Uzbek and nine other languages: a 124,000-word dictionary, all HSK lists, an HSK 1 course for the classroom, stroke-order writing, spaced repetition, and tools for teachers.
 - [AI Lenta: an Uzbek AI news wire with nobody in the loop](https://tou.gg/work/ailenta/): How AI Lenta collects AI news from dozens of outlets, writes it in Uzbek, refuses to publish a number it cannot find in the source, and stops the same story from appearing twice.
 - [zh.tou.gg: Chinese homework, in the order of the slides](https://tou.gg/work/zh-tou-gg/): A small free app that turns a Chinese teacher's slides, homework text and textbook audio into numbered practice: stroke order by finger, tone tests, pinyin and dialogues you can replay sentence by sentence.
 - [Chertma: type plain ASCII, get correct Uzbek](https://tou.gg/work/chertma/): Uzbekistan is moving to a new Latin alphabet that no phone keyboard has. Chertma restores ş ç ö ğ from plain typing, offline, using a 4.9-million-word lexicon, and refuses to touch anything it is not sure about.
@@ -30,5 +30,6 @@
 - [maqsudjon.com: the lab, rebuilt until it was fast](https://tou.gg/work/maqsudjon-com/): My first personal site and still the lab: a live colour ASCII engine fed by F1 footage, a terminal in the header, an installable app, and a build log with more than forty entries.
 - [tou.gg: the front door, and why it was rebuilt](https://tou.gg/work/tou-gg/): Why my main site has a three-letter name, what the first version was, and why the second one is made of pictures, numbers and long notes instead of rows of text.
 - [Open data: Uzbek words, Chinese HSK, and music with exact labels](https://tou.gg/work/open-data/): Three datasets and one Space on Hugging Face: 28 million rows of Uzbek word frequencies with a skeleton index, 8,296 HSK words with Uzbek and Russian meanings, and 20 synthetic music tracks with stems, MIDI and exact annotations.
+- [Zitou gets zitou.uz](https://tou.gg/log/zitou-uz/): The Uzbek pages of Zitou moved to their own .uz address, the HSK 1 course reached lesson 6, and a class now joins with one short link.
 - [Code and steel](https://tou.gg/log/code-and-steel/): The workshop is the engineering school. Measure, join, load-test the seam.
 - [Why a three-letter .gg](https://tou.gg/log/why-tou/): maqsudjon.com stays the lab. tou.gg is the front door.

@@ -6,7 +6,28 @@
   <atom:link href="https://tou.gg/rss.xml" rel="self" type="application/rss+xml"/>
   <description>Long notes on every project: what it does, how it was built, and what went wrong. Tashkent, in code and steel.</description>
   <language>en</language>
-  <lastBuildDate>Wed, 14 Oct 2026 00:00:00 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 19 Oct 2026 00:00:00 +0000</lastBuildDate>
+  <item>
+    <title>Zitou gets zitou.uz</title>
+    <link>https://tou.gg/log/zitou-uz/</link>
+    <guid isPermaLink="true">https://tou.gg/log/zitou-uz/</guid>
+    <pubDate>Mon, 19 Oct 2026 00:00:00 +0000</pubDate>
+    <description>The Uzbek pages of Zitou moved to their own .uz address, the HSK 1 course reached lesson 6, and a class now joins with one short link.</description>
+    <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/zitou-uz.jpg" alt=""></p><p>On 19 October I bought zitou.uz and moved the Uzbek half of <a href="https://tou.gg/work/zitou/">Zitou</a> onto it. Here is what changed on 18 and 19 October, and why.</p>
+<h2 id="two-addresses-one-app">Two addresses, one app</h2>
+<p><a href="https://zitou.uz">zitou.uz</a> is now the Uzbek site: the home page, 7,823 word pages, the dictionary guide, HSK lists, grammar, the mock test, articles and China news. <a href="https://zitou.app">zitou.app</a> keeps the other nine languages and the app.</p>
+<p>The split follows one rule. Anything that holds a sign-in or saved progress stays on zitou.app, because a browser keeps those per address, and moving the app would have split every learner in two. Pages people read moved freely: a 301 sends each old URL to its new home, and zitou.app on its own sends a visitor to their language, or to zitou.uz if that language is Uzbek.</p>
+<p>The .uz is on purpose. Google treats a country domain as a signal for that country, and a teacher in Tashkent can say "zitou nuqta uz" in class without spelling anything.</p>
+<p>Each address has its own sitemaps, robots file, Search Console and Bing Webmaster properties. <a href="https://zitou.uz/feed.xml">zitou.uz/feed.xml</a> is one full feed: release notes, articles, guides and the latest news together.</p>
+<h2 id="a-class-joins-with-one-link">A class joins with one link</h2>
+<p>A teacher shows a six-digit code. Students type zitou.uz/ and the code. The Worker checks whether a live lesson or a live game has that code and sends them in.</p>
+<h2 id="lesson-6-with-open-voices">Lesson 6, with open voices</h2>
+<p>The HSK 1 course now has all six lessons: slides for the big screen, 162 words to learn five a day, and a word notebook. Lesson 6 is the telephone, shopping, food and the taxi.</p>
+<p>The textbook's own recordings are copyrighted, so I did not use them. The words are spoken by native speakers from <a href="https://github.com/hugolpz/audio-cmn">audio-cmn</a> (CC BY-SA), and the sentences by an open speech model, Kokoro.</p>
+<h2 id="the-small-things">The small things</h2>
+<p>Questions now go to salom@zitou.uz. The footer on every page is sorted into columns: learn, the HSK 1 course, read, info. The Telegram bot's Uzbek profile and the A4 classroom posters point to zitou.uz.</p>
+<p>Two numbers to watch over the next month: how Uzbek searches move in Search Console, and, once the posters are up, how many visits come from their QR codes.</p>]]></content:encoded>
+  </item>
   <item>
     <title>FlareStamina: free IELTS practice, built around a welding job</title>
     <link>https://tou.gg/work/flarestamina/</link>
@@ -46,18 +67,19 @@
     <link>https://tou.gg/work/zitou/</link>
     <guid isPermaLink="true">https://tou.gg/work/zitou/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
-    <description>A free app that teaches Chinese in Uzbek and nine other languages: a 123,000-word dictionary, all HSK lists, stroke-order writing, spaced repetition, and tools for teachers.</description>
-    <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/zitou.jpg" alt=""></p><p>I started learning Chinese on 19 September 2026. Four days later, on 23 September, the first version of the Cloudflare Worker that now serves <strong>Zitou</strong> went up. On 1 October it moved to its own domain, <a href="https://zitou.app">zitou.app</a>.</p>
+    <description>A free app that teaches Chinese in Uzbek and nine other languages: a 124,000-word dictionary, all HSK lists, an HSK 1 course for the classroom, stroke-order writing, spaced repetition, and tools for teachers.</description>
+    <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/zitou.jpg" alt=""></p><p>I started learning Chinese on 19 September 2026. Four days later, on 23 September, the first version of the Cloudflare Worker that now serves <strong>Zitou</strong> went up. On 1 October it moved to its own domain, <a href="https://zitou.app">zitou.app</a>, and on 19 October the Uzbek pages got their own address, <a href="https://zitou.uz">zitou.uz</a>.</p>
 <p>Zitou is a free app for learning Chinese in Uzbek. It also works in English, Russian, Chinese, Spanish, Portuguese, French, German, Turkish and Indonesian, so ten interface languages in all. You do not need an account to start, and it runs in the browser on a phone, a tablet or a computer.</p>
 <h2 id="what-is-in-it">What is in it</h2>
-<p>The core is a dictionary and a course. The dictionary has more than 123,000 words. You can search by character, by pinyin with or without tones, or by the meaning in Uzbek, Russian or English. The course follows the HSK word lists, and Zitou carries three of them: the newest list from 2025, HSK 3.0 from 2021 and HSK 2.0 from 2012. Each level of each list is its own course.</p>
+<p>The core is a dictionary and a course. The dictionary has more than 124,000 words. You can search by character, by pinyin with or without tones, or by the meaning in Uzbek, Russian or English. The course follows the HSK word lists, and Zitou carries three of them: the newest list from 2025, HSK 3.0 from 2021 and HSK 2.0 from 2012. Each level of each list is its own course.</p>
 <p>A new word arrives as character, sound and meaning. Then come questions: reading, listening, translation and writing. More than 8,500 words are recorded by a native speaker; the rest use the device's Chinese voice.</p>
 <ul><li><strong>Stroke order.</strong> Every character is shown first, then traced over a grey outline, then written from memory with a finger.</li><li><strong>Tones in colour.</strong> First tone red, second orange, third green, fourth blue, so you remember a tone with your eyes as well as your ears.</li><li><strong>Spaced repetition.</strong> Words come back just before you would forget them, scheduled with the FSRS algorithm. You only press Start.</li><li><strong>Grammar.</strong> 103 topics for HSK 1–4, each with a pattern, a short rule, examples with pinyin, the common mistake, and a two-minute exercise.</li><li><strong>Picture stories.</strong> Short tales read by a native speaker, with pinyin over every word and the meaning on tap.</li><li><strong>A rhythm game for tones.</strong> One syllable per beat: tāng, táng, tǎng, tàng.</li><li><strong>HSK mock exams.</strong> HSK 1–4 in the real HSK 2.0 format, with the listening played like the exam, the timer, 100-point sections and a pass mark. A first HSK 3.0 level-1 paper is there too.</li></ul>
 <p>Around the course are small tools: a translator for text, voice or a photo, with pinyin; a phrasebook of more than 80 phrases for a trip to China (halal food, taxi, hotel, market, wholesale, cargo); your name written in Chinese with each character explained; a daily set of five questions that everyone at your level gets, so you can send it to a friend; and a news section on visas, study grants, HSK, trade and cargo between China and Uzbekistan, each item with its source.</p>
 <h2 id="for-teachers">For teachers</h2>
 <p>A class is a link. A teacher opens a class, drops the link in the group chat, and sees one table: who practised today, weekly XP, streaks and how many words each student knows.</p>
 <p>Exams are built from all the words of an HSK level or from the teacher's own list. Each student gets their own sheet, a time limit and a deadline, and the answer key stays on the server.</p>
-<p>The live game turns a lesson into a quiz. A PIN goes on the screen, students join from their phones without accounts and pick a character, points come for speed, there are streaks and teams, and at the end everyone sees the words they got wrong.</p>
+<p>The HSK 1 course is built for the classroom. Lessons 1 to 6 are slides a teacher shows on the big screen (<a href="https://zitou.app/dars/">zitou.app/dars</a>), and students join from their phones with a six-digit code and answer together. Between lessons they learn the course's 162 words five a day, with sound (<a href="https://zitou.app/vocab/">vocab</a>), and keep a word notebook with each word's character, pinyin, meaning, stroke order and audio (<a href="https://zitou.app/daftar/">daftar</a>).</p>
+<p>The live game turns a lesson into a quiz. A PIN goes on the screen, students join from their phones without accounts and pick a character, points come for speed, there are streaks and teams, and at the end everyone sees the words they got wrong. One short link works for both the lesson and the game: a student types zitou.uz/ and the code, and lands in whichever is running.</p>
 <h2 id="free-and-what-pro-is-for">Free, and what Pro is for</h2>
 <p>Everything you need to learn every day is free: the dictionary, the HSK course, practice, audio, writing and tone drills. Pro is for people preparing for an exam and for teachers who run several classes.</p>
 <div class="table"><table><thead><tr><th></th><th>Free</th><th>Pro</th></tr></thead><tbody><tr><td>HSK mock exam</td><td>1 per week</td><td>unlimited</td></tr><tr><td>Pronunciation check</td><td>5 per day</td><td>unlimited</td></tr><tr><td>Classes</td><td>1, up to 30 students</td><td>20, up to 200 each</td></tr><tr><td>Exams per class</td><td>3</td><td>200</td></tr><tr><td>Live game</td><td>30 players</td><td>100 players</td></tr><tr><td>Results as CSV</td><td>no</td><td>yes</td></tr></tbody></table></div>
@@ -67,8 +89,9 @@
 <p>The vocabulary behind the course is public. I published it on Hugging Face as <a href="https://huggingface.co/datasets/Maqsudjonpolatov/hsk-chinese-uzbek-russian">HSK Chinese–Uzbek–Russian Vocabulary</a>: 8,296 words, every word of HSK levels 1–6 plus 472 everyday words that are on no list, each with pinyin, the traditional form, the meaning in Uzbek and Russian, and its level in all three HSK lists. The Uzbek and Russian meanings were written with AI assistance and are corrected over time from learners' reports, and both the app and the dataset card say so. There is also a <a href="https://huggingface.co/spaces/Maqsudjonpolatov/hsk-uzbek-dictionary">free dictionary Space</a> for searching it and practising with flashcards. More on that in the note on <a href="https://tou.gg/work/open-data/">open data</a>.</p>
 <h2 id="why-build-it-this-way">Why build it this way</h2>
 <p>Zitou teaches Chinese straight from Uzbek, so a learner in Tashkent does not have to go through English in the middle.</p>
+<p>Since 19 October it has two addresses. zitou.uz is the Uzbek site: the word pages, HSK lists, grammar, the mock test, articles and news, the pages people in Uzbekistan find in search. zitou.app keeps the other nine languages and the app itself, because a browser keeps sign-ins and saved progress per address, and moving the app would have split every learner's progress in two. Opening zitou.app sends a visitor to their language, and to zitou.uz if it is Uzbek. More in the note <a href="https://tou.gg/log/zitou-uz/">Zitou gets zitou.uz</a>.</p>
 <p>It runs on Cloudflare Workers, the same way most of my newer products do, and it is still early: the App Store and Google Play versions are marked "coming soon" on the site. I am a beginner in the language I am building for, which keeps me honest about what a beginner needs on day one.</p>
-<p>Try it at <a href="https://zitou.app">zitou.app</a>. Start with HSK 1, or search for your own name.</p>]]></content:encoded>
+<p>Try it at <a href="https://zitou.uz">zitou.uz</a> in Uzbek or <a href="https://zitou.app">zitou.app</a> in any other language. Start with HSK 1, or search for your own name. Questions go to <a href="mailto:salom@zitou.uz">salom@zitou.uz</a>.</p>]]></content:encoded>
   </item>
   <item>
     <title>AI Lenta: an Uzbek AI news wire with nobody in the loop</title>

@@ -5,26 +5,29 @@ slug: zitou
 section: work
 order: 2
 date: 2026-10-14
+updated: 2026-10-19
 project: Zitou
 url: https://zitou.app
 image: zitou.webp
 tags: Chinese, HSK, Education, Cloudflare Workers
-description: A free app that teaches Chinese in Uzbek and nine other languages: a 123,000-word dictionary, all HSK lists, stroke-order writing, spaced repetition, and tools for teachers.
+description: A free app that teaches Chinese in Uzbek and nine other languages: a 124,000-word dictionary, all HSK lists, an HSK 1 course for the classroom, stroke-order writing, spaced repetition, and tools for teachers.
 facts:
-  - Live: [zitou.app](https://zitou.app)
-  - Dictionary: 123,000+ words
+  - Live: [zitou.app](https://zitou.app) · in Uzbek: [zitou.uz](https://zitou.uz)
+  - Dictionary: 124,000+ words
   - HSK words (2025 list): 10,057
   - Native-speaker audio: 8,500+ words
   - Example sentences: 17,000+
+  - HSK 1 course: lessons 1–6, 162 words
   - Interface: 10 languages
+  - Contact: [salom@zitou.uz](mailto:salom@zitou.uz)
 ---
-I started learning Chinese on 19 September 2026. Four days later, on 23 September, the first version of the Cloudflare Worker that now serves **Zitou** went up. On 1 October it moved to its own domain, [zitou.app](https://zitou.app).
+I started learning Chinese on 19 September 2026. Four days later, on 23 September, the first version of the Cloudflare Worker that now serves **Zitou** went up. On 1 October it moved to its own domain, [zitou.app](https://zitou.app), and on 19 October the Uzbek pages got their own address, [zitou.uz](https://zitou.uz).
 
 Zitou is a free app for learning Chinese in Uzbek. It also works in English, Russian, Chinese, Spanish, Portuguese, French, German, Turkish and Indonesian, so ten interface languages in all. You do not need an account to start, and it runs in the browser on a phone, a tablet or a computer.
 
 ## What is in it
 
-The core is a dictionary and a course. The dictionary has more than 123,000 words. You can search by character, by pinyin with or without tones, or by the meaning in Uzbek, Russian or English. The course follows the HSK word lists, and Zitou carries three of them: the newest list from 2025, HSK 3.0 from 2021 and HSK 2.0 from 2012. Each level of each list is its own course.
+The core is a dictionary and a course. The dictionary has more than 124,000 words. You can search by character, by pinyin with or without tones, or by the meaning in Uzbek, Russian or English. The course follows the HSK word lists, and Zitou carries three of them: the newest list from 2025, HSK 3.0 from 2021 and HSK 2.0 from 2012. Each level of each list is its own course.
 
 A new word arrives as character, sound and meaning. Then come questions: reading, listening, translation and writing. More than 8,500 words are recorded by a native speaker; the rest use the device's Chinese voice.
 
@@ -44,7 +47,9 @@ A class is a link. A teacher opens a class, drops the link in the group chat, an
 
 Exams are built from all the words of an HSK level or from the teacher's own list. Each student gets their own sheet, a time limit and a deadline, and the answer key stays on the server.
 
-The live game turns a lesson into a quiz. A PIN goes on the screen, students join from their phones without accounts and pick a character, points come for speed, there are streaks and teams, and at the end everyone sees the words they got wrong.
+The HSK 1 course is built for the classroom. Lessons 1 to 6 are slides a teacher shows on the big screen ([zitou.app/dars](https://zitou.app/dars/)), and students join from their phones with a six-digit code and answer together. Between lessons they learn the course's 162 words five a day, with sound ([vocab](https://zitou.app/vocab/)), and keep a word notebook with each word's character, pinyin, meaning, stroke order and audio ([daftar](https://zitou.app/daftar/)).
+
+The live game turns a lesson into a quiz. A PIN goes on the screen, students join from their phones without accounts and pick a character, points come for speed, there are streaks and teams, and at the end everyone sees the words they got wrong. One short link works for both the lesson and the game: a student types zitou.uz/ and the code, and lands in whichever is running.
 
 ## Free, and what Pro is for
 
@@ -71,6 +76,8 @@ The vocabulary behind the course is public. I published it on Hugging Face as [H
 
 Zitou teaches Chinese straight from Uzbek, so a learner in Tashkent does not have to go through English in the middle.
 
+Since 19 October it has two addresses. zitou.uz is the Uzbek site: the word pages, HSK lists, grammar, the mock test, articles and news, the pages people in Uzbekistan find in search. zitou.app keeps the other nine languages and the app itself, because a browser keeps sign-ins and saved progress per address, and moving the app would have split every learner's progress in two. Opening zitou.app sends a visitor to their language, and to zitou.uz if it is Uzbek. More in the note [Zitou gets zitou.uz](/log/zitou-uz/).
+
 It runs on Cloudflare Workers, the same way most of my newer products do, and it is still early: the App Store and Google Play versions are marked "coming soon" on the site. I am a beginner in the language I am building for, which keeps me honest about what a beginner needs on day one.
 
-Try it at [zitou.app](https://zitou.app). Start with HSK 1, or search for your own name.
+Try it at [zitou.uz](https://zitou.uz) in Uzbek or [zitou.app](https://zitou.app) in any other language. Start with HSK 1, or search for your own name. Questions go to [salom@zitou.uz](mailto:salom@zitou.uz).
