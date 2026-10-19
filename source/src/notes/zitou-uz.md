@@ -33,4 +33,6 @@ The textbook's own recordings are copyrighted, so I did not use them. The words 
 
 Questions now go to salom@zitou.uz. The footer on every page is sorted into columns: learn, the HSK 1 course, read, info. The Telegram bot's Uzbek profile and the A4 classroom posters point to zitou.uz.
 
+The long version, with screenshots of every part and how it is built, is on my build log: [Zitou: Chinese in Uzbek, at zitou.uz and zitou.app](https://maqsudjon.com/log/log-2026-10-19-zitou-chinese-in-uzbek.html).
+
 Two numbers to watch over the next month: how Uzbek searches move in Search Console, and, once the posters are up, how many visits come from their QR codes.

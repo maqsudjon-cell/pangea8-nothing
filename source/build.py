@@ -288,24 +288,32 @@ def rss(notes):
         url = SITE + "/" + n["path"]
         content = relink(n["body"], 0, False).replace('href="', 'href="').replace('src="img/', f'src="{SITE}/img/')
         content = re.sub(r'(href|src)="(?!https?:|mailto:|#)([^"]*)"', lambda m: f'{m.group(1)}="{SITE}/{m.group(2)}"', content)
+        # the note's tags as RSS categories, and whether it is a project page or a note
+        cats = "".join(f"\n    <category>{html.escape(t.strip())}</category>" for t in ["Projects" if n["section"] == "work" else "Notes", *n.get("tags", "").split(",")] if t.strip())
         items.append(f"""  <item>
     <title>{html.escape(n["title"])}</title>
     <link>{url}</link>
     <guid isPermaLink="true">{url}</guid>
     <pubDate>{format_datetime(n["dt"])}</pubDate>
+    <dc:creator>{AUTHOR}</dc:creator>{cats}
     <description>{html.escape(n["description"])}</description>
     <content:encoded><![CDATA[<p><img src="{SITE}/brand/og/{n['slug']}.jpg" alt=""></p>{content}]]></content:encoded>
+    <media:content url="{SITE}/brand/og/{n['slug']}.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>""")
     newest = max(n["dt"] for n in notes)
     return f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>tou.gg · notes by Maqsudjon Polatov</title>
   <link>{SITE}/log/</link>
   <atom:link href="{SITE}/rss.xml" rel="self" type="application/rss+xml"/>
+  <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub"/>
   <description>Long notes on every project: what it does, how it was built, and what went wrong. Tashkent, in code and steel.</description>
   <language>en</language>
   <lastBuildDate>{format_datetime(newest)}</lastBuildDate>
+  <copyright>© {newest.year} {AUTHOR}</copyright>
+  <ttl>720</ttl>
+  <image><url>{SITE}/icon-512.png</url><title>tou.gg · notes by {AUTHOR}</title><link>{SITE}/log/</link></image>
 {chr(10).join(items)}
 </channel>
 </rss>

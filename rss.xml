@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>tou.gg · notes by Maqsudjon Polatov</title>
   <link>https://tou.gg/log/</link>
   <atom:link href="https://tou.gg/rss.xml" rel="self" type="application/rss+xml"/>
+  <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub"/>
   <description>Long notes on every project: what it does, how it was built, and what went wrong. Tashkent, in code and steel.</description>
   <language>en</language>
   <lastBuildDate>Mon, 19 Oct 2026 00:00:00 +0000</lastBuildDate>
+  <copyright>© 2026 Maqsudjon Polatov</copyright>
+  <ttl>720</ttl>
+  <image><url>https://tou.gg/icon-512.png</url><title>tou.gg · notes by Maqsudjon Polatov</title><link>https://tou.gg/log/</link></image>
   <item>
     <title>Zitou gets zitou.uz</title>
     <link>https://tou.gg/log/zitou-uz/</link>
     <guid isPermaLink="true">https://tou.gg/log/zitou-uz/</guid>
     <pubDate>Mon, 19 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Notes</category>
+    <category>Zitou</category>
+    <category>Domains</category>
+    <category>Chinese</category>
+    <category>Education</category>
     <description>The Uzbek pages of Zitou moved to their own .uz address, the HSK 1 course reached lesson 6, and a class now joins with one short link.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/zitou-uz.jpg" alt=""></p><p>On 19 October I bought zitou.uz and moved the Uzbek half of <a href="https://tou.gg/work/zitou/">Zitou</a> onto it. Here is what changed on 18 and 19 October, and why.</p>
 <h2 id="two-addresses-one-app">Two addresses, one app</h2>
@@ -26,13 +36,20 @@
 <p>The textbook's own recordings are copyrighted, so I did not use them. The words are spoken by native speakers from <a href="https://github.com/hugolpz/audio-cmn">audio-cmn</a> (CC BY-SA), and the sentences by an open speech model, Kokoro.</p>
 <h2 id="the-small-things">The small things</h2>
 <p>Questions now go to salom@zitou.uz. The footer on every page is sorted into columns: learn, the HSK 1 course, read, info. The Telegram bot's Uzbek profile and the A4 classroom posters point to zitou.uz.</p>
+<p>The long version, with screenshots of every part and how it is built, is on my build log: <a href="https://maqsudjon.com/log/log-2026-10-19-zitou-chinese-in-uzbek.html">Zitou: Chinese in Uzbek, at zitou.uz and zitou.app</a>.</p>
 <p>Two numbers to watch over the next month: how Uzbek searches move in Search Console, and, once the posters are up, how many visits come from their QR codes.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/zitou-uz.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>FlareStamina: free IELTS practice, built around a welding job</title>
     <link>https://tou.gg/work/flarestamina/</link>
     <guid isPermaLink="true">https://tou.gg/work/flarestamina/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>IELTS</category>
+    <category>Education</category>
+    <category>Firebase</category>
     <description>How a handful of listening tests became a free IELTS platform with 144 tests, a writing lab, a speaking lab and a news desk, and why the login walls had to come down.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/flarestamina.jpg" alt=""></p><p>FlareStamina is a free IELTS practice platform. Today its hub lists 144 tests: 78 Listening papers, 53 Reading papers and the rest spread over Writing, Speaking and full mocks. It has a Writing Lab that gives an AI band estimate, a Speaking Lab, a score converter, a deadline tracker for scholarships, a study plan generator and a news section. There is no paywall in front of practice.</p>
 <p>I built it alone, in the evenings, while working full-time as a welder in Tashkent. That constraint shaped almost every decision in it.</p>
@@ -61,12 +78,19 @@
 <h2 id="what-i-would-keep">What I would keep</h2>
 <p>Free, on purpose. Static pages wherever possible. Every claim on the site checkable: no invented student counts, no made-up ratings in the structured data. And a rule I learned in the workshop before I learned it in code: watch the thing after you think you are done, because that is when the scheduled job wakes up and undoes your weekend.</p>
 <p>FlareStamina is at <a href="https://flarestamina.com">flarestamina.com</a>. If you are preparing for IELTS, start with any Listening paper. If you teach, the <a href="https://flarestamina.com">Speaking Lab</a> and the article form are there for your class.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/flarestamina.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Zitou: learning Chinese in Uzbek, ten minutes a day</title>
     <link>https://tou.gg/work/zitou/</link>
     <guid isPermaLink="true">https://tou.gg/work/zitou/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Chinese</category>
+    <category>HSK</category>
+    <category>Education</category>
+    <category>Cloudflare Workers</category>
     <description>A free app that teaches Chinese in Uzbek and nine other languages: a 124,000-word dictionary, all HSK lists, an HSK 1 course for the classroom, stroke-order writing, spaced repetition, and tools for teachers.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/zitou.jpg" alt=""></p><p>I started learning Chinese on 19 September 2026. Four days later, on 23 September, the first version of the Cloudflare Worker that now serves <strong>Zitou</strong> went up. On 1 October it moved to its own domain, <a href="https://zitou.app">zitou.app</a>, and on 19 October the Uzbek pages got their own address, <a href="https://zitou.uz">zitou.uz</a>.</p>
 <p>Zitou is a free app for learning Chinese in Uzbek. It also works in English, Russian, Chinese, Spanish, Portuguese, French, German, Turkish and Indonesian, so ten interface languages in all. You do not need an account to start, and it runs in the browser on a phone, a tablet or a computer.</p>
@@ -92,12 +116,19 @@
 <p>Since 19 October it has two addresses. zitou.uz is the Uzbek site: the word pages, HSK lists, grammar, the mock test, articles and news, the pages people in Uzbekistan find in search. zitou.app keeps the other nine languages and the app itself, because a browser keeps sign-ins and saved progress per address, and moving the app would have split every learner's progress in two. Opening zitou.app sends a visitor to their language, and to zitou.uz if it is Uzbek. More in the note <a href="https://tou.gg/log/zitou-uz/">Zitou gets zitou.uz</a>.</p>
 <p>It runs on Cloudflare Workers, the same way most of my newer products do, and it is still early: the App Store and Google Play versions are marked "coming soon" on the site. I am a beginner in the language I am building for, which keeps me honest about what a beginner needs on day one.</p>
 <p>Try it at <a href="https://zitou.uz">zitou.uz</a> in Uzbek or <a href="https://zitou.app">zitou.app</a> in any other language. Start with HSK 1, or search for your own name. Questions go to <a href="mailto:salom@zitou.uz">salom@zitou.uz</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/zitou.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>AI Lenta: an Uzbek AI news wire with nobody in the loop</title>
     <link>https://tou.gg/work/ailenta/</link>
     <guid isPermaLink="true">https://tou.gg/work/ailenta/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>AI</category>
+    <category>News</category>
+    <category>Uzbek</category>
+    <category>GitHub Actions</category>
     <description>How AI Lenta collects AI news from dozens of outlets, writes it in Uzbek, refuses to publish a number it cannot find in the source, and stops the same story from appearing twice.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/ailenta.jpg" alt=""></p><p>AI news in Uzbek used to come in two forms: a Russian translation with the names left untranslated, or nothing. People who wanted a news wire in their own language got a reposted Facebook dump.</p>
 <p><strong>AI Lenta</strong> at <a href="https://ailenta.uz">ailenta.uz</a> is my answer. It collects artificial intelligence news from open sources, writes a headline and a short summary in Uzbek for each story, links every item to the original, and publishes on its own, every hour. As I write this the front page shows 60 stories from 27 sources. The most important ones also go out on the Telegram channel <a href="https://t.me/ailentauz">@ailentauz</a>.</p>
@@ -120,12 +151,18 @@
 <h2 id="what-it-taught-me">What it taught me</h2>
 <p>Uzbek language-model output is good enough to be useful and bad enough that you cannot trust it without checks. The link back to the original is the load-bearing wall of the whole site: it is what lets a reader verify anything I publish, and it is what keeps me honest when nobody is watching the pipeline.</p>
 <p>Read it at <a href="https://ailenta.uz">ailenta.uz</a>, or follow <a href="https://t.me/ailentauz">@ailentauz</a> on Telegram.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/ailenta.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>zh.tou.gg: Chinese homework, in the order of the slides</title>
     <link>https://tou.gg/work/zh-tou-gg/</link>
     <guid isPermaLink="true">https://tou.gg/work/zh-tou-gg/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Chinese</category>
+    <category>Education</category>
+    <category>Offline</category>
     <description>A small free app that turns a Chinese teacher&#x27;s slides, homework text and textbook audio into numbered practice: stroke order by finger, tone tests, pinyin and dialogues you can replay sentence by sentence.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/zh-tou-gg.jpg" alt=""></p><p><strong>zh.tou.gg</strong> is the smaller sibling of <a href="https://tou.gg/work/zitou/">Zitou</a>. Zitou is a full course. zh.tou.gg does one job: it takes what a Chinese teacher sends after a lesson and turns it into practice you can do in order.</p>
 <p>I started learning Chinese on 19 September 2026. The Worker behind zh.tou.gg went up two days later, on 21 September.</p>
@@ -141,12 +178,19 @@
 <p>It is free and has no ads. Lessons and results are kept on your own device. Visits are counted anonymously with GoatCounter, without cookies, and nothing about you is recorded. It works on a phone and a computer, and after the first visit it works without internet; on a phone you can add it to the home screen.</p>
 <p>Two features are still limited to my own account for now: reading photos automatically, and syncing across several devices. The interface is in Uzbek, English, Russian and Chinese, and the lesson content always stays exactly as the teacher wrote it.</p>
 <p>Open <a href="https://zh.tou.gg">zh.tou.gg</a>. If you are past HSK 1 or want a full course, <a href="https://tou.gg/work/zitou/">Zitou</a> is the bigger app.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/zh-tou-gg.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Chertma: type plain ASCII, get correct Uzbek</title>
     <link>https://tou.gg/work/chertma/</link>
     <guid isPermaLink="true">https://tou.gg/work/chertma/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Uzbek</category>
+    <category>NLP</category>
+    <category>Open source</category>
+    <category>Offline</category>
     <description>Uzbekistan is moving to a new Latin alphabet that no phone keyboard has. Chertma restores ş ç ö ğ from plain typing, offline, using a 4.9-million-word lexicon, and refuses to touch anything it is not sure about.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/chertma.jpg" alt=""></p><p>Uzbekistan is moving its Latin alphabet from <code>sh ch oʻ gʻ</code> to <code>ş ç ö ğ</code>. For years people will write in three scripts at once: the old Latin, the new Latin and Cyrillic. No phone keyboard has the new letters, so people skip the marks, search breaks, and every text ends up a little wrong.</p>
 <p><strong>Chertma</strong> fixes that from the keyboard you already have. You type <code>togri gap, ozbekcha yozish oson</code> and get <code>töğri gap, özbekça yoziş oson</code> in the new Latin, <code>toʻgʻri gap, oʻzbekcha yozish oson</code> in the old one, or the same sentence in Cyrillic. It also understands Uzbek typed on a Russian layout: <code>хозир келаман, рахмат</code> comes back as <code>hozir kelaman, rahmat</code>.</p>
@@ -168,12 +212,19 @@
 <p>If you live in Telegram, <a href="https://t.me/chertmabot">@Chertmabot</a> does the same job in a chat.</p>
 <h2 id="what-is-next">What is next</h2>
 <p>An open benchmark for the new alphabet, uz-alphabet-bench, is being checked by hand and will be published when it is ready. Until then: open <a href="https://chertma.maqsudjon.com">chertma.maqsudjon.com</a>, type the way you always type, and copy out correct Uzbek.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/chertma.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Davomat: group attendance in four taps, inside Telegram</title>
     <link>https://tou.gg/work/davomat/</link>
     <guid isPermaLink="true">https://tou.gg/work/davomat/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Telegram</category>
+    <category>Tools</category>
+    <category>Offline</category>
+    <category>Privacy</category>
     <description>A free attendance app for university group monitors: mark 25 students in four taps, let the bot ask absentees why, and never miss a birthday. Built by a student for his own group.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/davomat.jpg" alt=""></p><p>At my university every group has a monitor, a <em>sardor</em>, and the monitor has the same three chores every day: take attendance, find out why the absent people are absent, and remember birthdays. I am a student at AIFU too, and taking attendance on paper at the start of every class, then chasing people to ask where they were, took far too long. So I built <strong>Davomat</strong> for my own group. When it worked, I opened it to other groups.</p>
 <p>It lives at <a href="https://chzq.uz">chzq.uz</a> and runs inside Telegram through <a href="https://t.me/chzquzbot">@Chzquzbot</a>. The domain used to host my web studio, Chiziq; it now hosts Davomat.</p>
@@ -191,12 +242,19 @@
 <ul><li>Only the monitor and the deputy can see contacts. Nobody else.</li><li>A student can never see another student's phone number or address.</li><li>The list shows names only. An address is loaded only when someone asks for it, and every time someone opens an address it is logged, so you know who looked.</li></ul>
 <p>No ads, no data sold, nothing paid inside. It was made by a student for students and it will stay free. If something is wrong or missing, write to the bot; I read it myself.</p>
 <p>Open it at <a href="https://chzq.uz">chzq.uz</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/davomat.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Tadam: every wedding photo in one album, with no app and no database</title>
     <link>https://tou.gg/work/tadam/</link>
     <guid isPermaLink="true">https://tou.gg/work/tadam/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Product</category>
+    <category>Cloudflare Workers</category>
+    <category>R2</category>
+    <category>Security</category>
     <description>Guests scan one QR code on the table and add the photos already on their phones; the couple downloads everything as one ZIP. How it works without an app, an account or a database.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/tadam.jpg" alt=""></p><p>At an Uzbek wedding there are three hundred guests and three hundred phones. By the end of the night those phones hold the only photographs that show anything real: the tables, the dancing, a grandmother laughing at something off camera. The couple will see about twenty of them, forwarded into a group chat and compressed into mush.</p>
 <p><strong>Tadam</strong> fixes that with a QR code on the table. It went live at <a href="https://tadam.uz">tadam.uz</a> on 27 August 2026.</p>
@@ -220,12 +278,19 @@
 <h2 id="what-i-am-not-claiming">What I am not claiming</h2>
 <p>I was tempted to write "the first and only service of its kind in Uzbekistan" on the home page. I did not, because I have not checked every competitor in the country and I cannot prove it. Everything on a product with my name on it has to hold up.</p>
 <p>Make an album at <a href="https://tadam.uz">tadam.uz</a>. It takes about a minute.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/tadam.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Nullsample: music built from arithmetic, with zero samples</title>
     <link>https://tou.gg/work/nullsample/</link>
     <guid isPermaLink="true">https://tou.gg/work/nullsample/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Music</category>
+    <category>Web Audio</category>
+    <category>Open source</category>
+    <category>DSP</category>
     <description>A music generator where every sound is computed from code, the same seed gives the same track on any browser, and the six stems come out separate because they were never mixed.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/nullsample.jpg" alt=""></p><p>Before any of the software, I made music. I release UK garage under the name Matsumi; the album <em>HOME</em> is on Spotify, and most of its listeners are in the UK, which is where that sound lives. <strong>Nullsample</strong> is what happened when the two halves met.</p>
 <p>It is a music generator in the browser. Press once and a track exists. There is no sample anywhere: no one-shots, no loops, no recorded impulse for the reverb, no trained model. Every sound is computed at runtime on your own device from oscillators, noise, envelopes, filters and distortion stages.</p>
@@ -245,12 +310,18 @@
 <h2 id="a-dataset-with-exact-answers">A dataset with exact answers</h2>
 <p>Because every note and every drum hit comes from a score the engine wrote itself, Nullsample can do something recorded music cannot: hand you the right answers. I published <a href="https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack">Nullsample Multitrack</a> on Hugging Face: 20 tracks, each with its mix, six stems, a MIDI file and exact annotations for tempo, downbeats, key, chords, sections, 40,060 drum hits and 32,919 notes over 37 minutes. Researchers can use it to test source separation, transcription, beat tracking and chord recognition against ground truth. More in the note on <a href="https://tou.gg/work/open-data/">open data</a>.</p>
 <p>The source is public on <a href="https://github.com/maqsudjon-cell/nullsample">GitHub</a>. Hear it at <a href="https://nullsample.maqsudjon.com">nullsample.maqsudjon.com</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/nullsample.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Pierics: a five-letter word game that teaches IELTS vocabulary</title>
     <link>https://tou.gg/work/pierics/</link>
     <guid isPermaLink="true">https://tou.gg/work/pierics/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Game</category>
+    <category>IELTS</category>
+    <category>Vocabulary</category>
     <description>My own take on Wordle: guess the hidden five-letter word in six tries, then learn its definition and an example sentence. Small rules, instant feedback, no account.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/pierics.jpg" alt=""></p><p><strong>Pierics</strong> is a word game in the spirit of Wordle. There is a hidden five-letter word and you have six tries to find it. After each guess the tiles tell you how close you are: green for the right letter in the right place, amber for a letter that is in the word but somewhere else, grey for a letter that is not there at all.</p>
 <p>The IELTS part comes after you solve it. Every answer shows the word's definition and an example sentence, so each round ends with one more word you can actually use in an essay. No account, no sign-up. It sits on its own domain, <a href="https://pierics.com">pierics.com</a>, and runs entirely in the browser.</p>
@@ -260,12 +331,18 @@
 <h2 id="why-a-game">Why a game</h2>
 <p>Small, self-contained games with tight rules and instant feedback are the kind of build I enjoy most. They are also honest about what they are: you open it, you play one round, you learn one word, you close it. That is a good fit for vocabulary, which is mostly about seeing a word again and again in a way you remember.</p>
 <p>If you are studying for IELTS, it pairs well with the tests on <a href="https://tou.gg/work/flarestamina/">FlareStamina</a>. Play at <a href="https://pierics.com">pierics.com</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/pierics.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Minnos: a cat who brings you English idioms</title>
     <link>https://tou.gg/work/minnos/</link>
     <guid isPermaLink="true">https://tou.gg/work/minnos/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>English</category>
+    <category>Idioms</category>
+    <category>Small web</category>
     <description>Cats leave little gifts on the doorstep. Minnos leaves English idioms, every one of them about cats. Pet her, collect all 26, and read each one explained in Uzbek.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/minnos.jpg" alt=""></p><p>Cats leave little gifts on the doorstep. <strong>Minnos</strong> leaves you English.</p>
 <p><a href="https://minnos.cc">minnos.cc</a> is a very small site with a cat on it. You give her a pet, and she brings you something she found: an English idiom, and every one of them is about cats. <em>Curiosity killed the cat. Let the cat out of the bag. Raining cats and dogs.</em> There are 26 of them to collect.</p>
@@ -274,12 +351,19 @@
 <p>Most of what I build is a tool with a job. Minnos is the opposite: a cosy, low-pressure way to meet a handful of phrases that native speakers use all the time. Idioms are hard to learn from a list because they make no literal sense. Attached to a cat, a tap and a small reward, they stick.</p>
 <p>It is also a reminder to myself that the small web is allowed to be playful. Not every page has to convert anybody.</p>
 <p>Meet her at <a href="https://minnos.cc">minnos.cc</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/minnos.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Speaking Lab: talking to an AI IELTS examiner like a voice call</title>
     <link>https://tou.gg/work/speaking-lab/</link>
     <guid isPermaLink="true">https://tou.gg/work/speaking-lab/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>IELTS</category>
+    <category>AI</category>
+    <category>Experiment</category>
+    <category>Gemini</category>
     <description>An experiment: an IELTS Speaking examiner you talk to out loud, with the January–April 2026 topics for Parts 1–3, band-score feedback, and a camera mode you control with hand gestures.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/speaking-lab.jpg" alt=""></p><p>The Speaking Lab is an experiment. Most IELTS speaking practice is reading a question and recording an answer. Here you talk to an examiner, out loud, like a voice call.</p>
 <p>You pick a topic from the January–April 2026 question bank for Parts 1, 2 and 3, the examiner asks the questions, you answer, and at the end you get band-score feedback. You can also add your own topic: a cue card and a list of questions, one per line, saved on your device.</p>
@@ -292,12 +376,19 @@
 <h2 id="how-it-fits-with-flarestamina">How it fits with FlareStamina</h2>
 <p>This is not the same as the Speaking section of <a href="https://tou.gg/work/flarestamina/">FlareStamina</a>. That one is for classes: students record answers to 166 official topics and a teacher listens and leaves a band and notes. The Speaking Lab is for practising alone, with a machine on the other side, when no teacher is available.</p>
 <p>Try it at <a href="https://ielts-speaking-lab.pages.dev">ielts-speaking-lab.pages.dev</a>. It works best with headphones and a quiet room.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/speaking-lab.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>KVADRAT: the square-metre calculator I use on grille jobs</title>
     <link>https://tou.gg/work/kvadrat/</link>
     <guid isPermaLink="true">https://tou.gg/work/kvadrat/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Welding</category>
+    <category>Tools</category>
+    <category>Offline</category>
+    <category>PDF</category>
     <description>Three numbers in, a priceable area out. A calculator for window grilles that projects from the wall, built for a dusty phone held in one hand while the other holds a tape measure.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/kvadrat.jpg" alt=""></p><p><strong>KVADRAT</strong> is the least glamorous thing I have built and probably the one I use most. It calculates the square metres of a window grille, which is how grilles are priced.</p>
 <p>Welders in Tashkent, me included, used to price this on paper and then argue about the square metres on site. The calculator on the phone was a notes app and a guess.</p>
@@ -314,12 +405,18 @@
 <h2 id="built-for-the-shop">Built for the shop</h2>
 <p>It works offline, because a construction site does not always have a signal. It is in Uzbek, and it understands Russian shorthand in the input, because that is how people in the trade write. It is used on real jobs, not as a portfolio piece.</p>
 <p>It sits next to the workshop's two catalogues, <a href="https://tou.gg/work/payvandchi/">Payvandchi</a> and <a href="https://tou.gg/work/reshotkachi/">Reshotkachi</a>. Open it at <a href="https://kvdrt.maqsudjon.com">kvdrt.maqsudjon.com</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/kvadrat.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Payvandchi: my own welding workshop, finally online</title>
     <link>https://tou.gg/work/payvandchi/</link>
     <guid isPermaLink="true">https://tou.gg/work/payvandchi/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Welding</category>
+    <category>Local business</category>
+    <category>Performance</category>
     <description>A catalogue for the workshop where I weld: window and balcony grilles, railings and canopies, with real photos of real jobs, and nothing on the site we cannot actually make.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/payvandchi.jpg" alt=""></p><p>I weld metal grilles in Tashkent for a living. On 1 August 2026 the workshop got a site of its own: <strong>Payvandchi</strong>, at <a href="https://payvandchi.maqsudjon.com">payvandchi.maqsudjon.com</a>.</p>
 <p>It sells four things: window grilles, balcony grilles, stair railings and canopies. Everything is made from 10×10 mm bar, priced from 175,000 so'm per square metre, made in 7 to 10 days and installed for free, up to the 25th floor. The customer looks through the catalogue, says the number of the design they like (each photo has one, like № 077), and we measure, make, paint and install it. The pattern can be changed as much as they like.</p>
@@ -332,12 +429,18 @@
 <h2 id="two-sites-for-one-workshop">Two sites for one workshop</h2>
 <p>Three days later I built the same workshop a second time, with the same photos, as a completely different site: <a href="https://tou.gg/work/reshotkachi/">Reshotkachi</a>. Pricing is done with <a href="https://tou.gg/work/kvadrat/">KVADRAT</a>.</p>
 <p>See the catalogue at <a href="https://payvandchi.maqsudjon.com">payvandchi.maqsudjon.com</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/payvandchi.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Reshotkachi: the same workshop, built a second time</title>
     <link>https://tou.gg/work/reshotkachi/</link>
     <guid isPermaLink="true">https://tou.gg/work/reshotkachi/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Welding</category>
+    <category>Design</category>
+    <category>3D</category>
     <description>Same welder, same grilles, same photos and prices, built again as a completely different site: 123 real photos arranged as a 3D wall. An experiment in how much design alone changes a business.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/reshotkachi.jpg" alt=""></p><p>Three days after <a href="https://tou.gg/work/payvandchi/">Payvandchi</a> went live, I built the same workshop again. Same photographs, same welder, same grilles, same prices. A completely different site.</p>
 <p>It was not laziness. It was a test: if the product is identical, how much does design alone change how a business reads?</p>
@@ -347,12 +450,18 @@
 <h2 id="why-keep-both">Why keep both</h2>
 <p>Keeping two sites for one workshop sounds wasteful, but it turned out to be useful. When a customer, or a client for a website, says they want something that "looks serious", I can show two serious options instead of describing one. And I learned something I could not have learned from one site: presentation changes what people think they are buying, even when nothing else changes.</p>
 <p>Walk the wall at <a href="https://reshotkachi.maqsudjon.com">reshotkachi.maqsudjon.com</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/reshotkachi.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>ZED AVLOD School: real results, no invented ones</title>
     <link>https://tou.gg/work/zed-avlod/</link>
     <guid isPermaLink="true">https://tou.gg/work/zed-avlod/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Client</category>
+    <category>Education</category>
+    <category>SEO</category>
     <description>A website for a family language school in To&#x27;raqo&#x27;rg&#x27;on, Namangan. The part I care about is a results table of thirteen real CEFR scores, each one checkable, and the things I deliberately left out.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/zed-avlod.jpg" alt=""></p><p><strong>ZED AVLOD School</strong> is a language school in To'raqo'rg'on, in the Namangan region, running since 2020. It prepares students for English, IELTS and CEFR, for the entrance exams of the Ibrat, Presidential, Ijod and Agency schools, and for university entrance subjects. It is also family, which raised the bar rather than lowering it.</p>
 <p>The site went live at <a href="https://zedavlod.uz">zedavlod.uz</a> on 23 July 2026, in Uzbek, Russian and English.</p>
@@ -365,12 +474,18 @@
 <h2 id="built-to-be-found">Built to be found</h2>
 <p>A new school in a district town is found through search, so the site got the full treatment from day one: an FAQ section marked up as an FAQ for search engines, structured data for an educational organisation with its real coordinates, language alternates for the three versions, its own cookieless analytics, and Search Console verified with the sitemap submitted on the first day.</p>
 <p>See it at <a href="https://zedavlod.uz">zedavlod.uz</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/zed-avlod.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>CTN Language Centre: a whole school website in one file</title>
     <link>https://tou.gg/work/ctn/</link>
     <guid isPermaLink="true">https://tou.gg/work/ctn/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Client</category>
+    <category>Education</category>
+    <category>Single file</category>
     <description>A trilingual site for an English school in Tashkent, built as a single HTML file, with a lead form that opens Telegram, brand images generated by code, and one near-miss with 40 MB of audio.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/ctn.jpg" alt=""></p><p>CTN Language Centre is an English school in Mirzo Ulug'bek district, Tashkent. It teaches General English from A1 to C1, IELTS, a Kids course for ages 6 to 12, a speaking club and more, in groups of 8 to 12, and the first lesson is a free trial.</p>
 <p>The site at <a href="https://ctnlc.uz">ctnlc.uz</a> went live on 21 July 2026, and it is <strong>one self-contained HTML file</strong>.</p>
@@ -384,12 +499,19 @@
 <h2 id="honest-structured-data">Honest structured data</h2>
 <p>Search Console was verified the same day and the sitemap submitted. The structured data describes an educational organisation and a local business, with <strong>no rating</strong>, because there is no rating yet, and a made-up one would be exactly the kind of claim that should not be on a page with my work on it.</p>
 <p>Visit <a href="https://ctnlc.uz">ctnlc.uz</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/ctn.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>maqsudjon.com: the lab, rebuilt until it was fast</title>
     <link>https://tou.gg/work/maqsudjon-com/</link>
     <guid isPermaLink="true">https://tou.gg/work/maqsudjon-com/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Lab</category>
+    <category>ASCII</category>
+    <category>Canvas</category>
+    <category>PWA</category>
     <description>My first personal site and still the lab: a live colour ASCII engine fed by F1 footage, a terminal in the header, an installable app, and a build log with more than forty entries.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/maqsudjon-com.jpg" alt=""></p><p><a href="https://maqsudjon.com">maqsudjon.com</a> is where everything started. It calls itself "a one-person lab for acting in code and steel", and it is the place I try things before they go anywhere else. Since <a href="https://tou.gg/work/tou-gg/">tou.gg</a> became the front door, maqsudjon.com stays the lab and the build log.</p>
 <p>Several of my tools live on its subdomains: <a href="https://tou.gg/work/chertma/">Chertma</a>, <a href="https://tou.gg/work/kvadrat/">KVADRAT</a>, <a href="https://tou.gg/work/nullsample/">Nullsample</a>, <a href="https://tou.gg/work/payvandchi/">Payvandchi</a> and <a href="https://tou.gg/work/reshotkachi/">Reshotkachi</a>.</p>
@@ -404,12 +526,18 @@
 <h2 id="the-build-log">The build log</h2>
 <p>The most useful thing on the site is not visual. It is the <a href="https://maqsudjon.com/log/">build log</a>: more than forty dated entries between May and August 2026, one for nearly every ship, including the ones that went wrong. Much of what you read in these notes was first written there.</p>
 <p>Visit <a href="https://maqsudjon.com">maqsudjon.com</a>, and try typing <code>snake</code>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/maqsudjon-com.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>tou.gg: the front door, and why it was rebuilt</title>
     <link>https://tou.gg/work/tou-gg/</link>
     <guid isPermaLink="true">https://tou.gg/work/tou-gg/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Meta</category>
+    <category>Static site</category>
+    <category>SEO</category>
     <description>Why my main site has a three-letter name, what the first version was, and why the second one is made of pictures, numbers and long notes instead of rows of text.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/tou-gg.jpg" alt=""></p><p><strong>tou</strong> means <em>to you</em>. <strong>gg</strong> means <em>given gladly</em>. Everything I build is pointed at somebody: a student in Namangan, a welder pricing a grille, a guest at a wedding with a phone full of photos. Not at a category.</p>
 <h2 id="why-a-three-letter-domain">Why a three-letter domain</h2>
@@ -424,12 +552,19 @@
 <p>It is still a static site on GitHub Pages, now built by a small Python script. The notes are written in plain text with a little Markdown and turned into pages, an RSS feed, a sitemap and structured data for search engines. Visits are counted by GoatCounter, without cookies. The old design is not deleted: it is kept in its own branch in the repository.</p>
 <p>One thing was lost: for now the site is English only. The old Uzbek, Russian and Chinese addresses redirect to the English pages instead of breaking.</p>
 <p>You are reading it. <a href="https://tou.gg/./">Back to the front page</a>.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/tou-gg.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Open data: Uzbek words, Chinese HSK, and music with exact labels</title>
     <link>https://tou.gg/work/open-data/</link>
     <guid isPermaLink="true">https://tou.gg/work/open-data/</guid>
     <pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Projects</category>
+    <category>Open data</category>
+    <category>Hugging Face</category>
+    <category>Uzbek</category>
+    <category>Chinese</category>
     <description>Three datasets and one Space on Hugging Face: 28 million rows of Uzbek word frequencies with a skeleton index, 8,296 HSK words with Uzbek and Russian meanings, and 20 synthetic music tracks with stems, MIDI and exact annotations.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/open-data.jpg" alt=""></p><p>Three of my products sit on top of data I built myself, and I published each dataset on Hugging Face so that nobody has to build it again.</p>
 <h2 id="uzbek-frequency-lexicon-with-skeleton-index">Uzbek frequency lexicon with skeleton index</h2>
@@ -453,29 +588,41 @@
 <p>To make the vocabulary usable without code, there is a free <a href="https://huggingface.co/spaces/Maqsudjonpolatov/hsk-uzbek-dictionary">HSK dictionary Space</a>. You can search by character, by pinyin with or without tones, or by an Uzbek or Russian word; browse a level of any of the three HSK lists; and practise ten words at a time with flashcards. The page is in Uzbek, Russian and English, and every word links to its page on zitou.app with stroke order, audio and examples.</p>
 <h2 id="why-publish-it">Why publish it</h2>
 <p>Data for Uzbek is scarce, data that connects Uzbek to Chinese is scarcer, and music with exact, complete labels is rare in any language. Publishing them costs nothing, and the next person who builds an Uzbek keyboard or a Chinese course for Uzbek speakers can start from here instead of from zero. The same goes for anyone testing a music model who needs the right answers in advance.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/open-data.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Code and steel</title>
     <link>https://tou.gg/log/code-and-steel/</link>
     <guid isPermaLink="true">https://tou.gg/log/code-and-steel/</guid>
     <pubDate>Sat, 19 Sep 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Notes</category>
+    <category>Writing</category>
+    <category>Welding</category>
+    <category>Engineering</category>
     <description>The workshop is the engineering school. Measure, join, load-test the seam.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/code-and-steel.jpg" alt=""></p><p>The shop is loud. Steel does not autocomplete. You measure the opening. You cut. You tack. You check the square. You run the seam. Then you hang your weight on it, or you do not ship it to a balcony on the fifth floor.</p>
 <p>That is the whole engineering loop. Software pretends the loop is optional, because the failure is a 500 and not a railing that lets go.</p>
 <p>I weld during the day in Tashkent. I specify for agents at night. The method is the same: write the joint, inspect the bead, load-test. If the agent hallucinated a library, that is a cold shut. Grind it out, run it again.</p>
 <p>People treat the welding as a plot twist. It is the school. The useful diploma is the habit of not shipping a seam you would not stand on.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/code-and-steel.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
   <item>
     <title>Why a three-letter .gg</title>
     <link>https://tou.gg/log/why-tou/</link>
     <guid isPermaLink="true">https://tou.gg/log/why-tou/</guid>
     <pubDate>Sat, 19 Sep 2026 00:00:00 +0000</pubDate>
+    <dc:creator>Maqsudjon Polatov</dc:creator>
+    <category>Notes</category>
+    <category>Writing</category>
+    <category>Naming</category>
     <description>maqsudjon.com stays the lab. tou.gg is the front door.</description>
     <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/why-tou.jpg" alt=""></p><p>I already had a site. maqsudjon.com is the lab: the ASCII engine, the build log, the long name on the certificate. It is a good lab. It is a bad front door.</p>
 <p>I wanted a shape that does not pin the work to a country or to one product. Three letters and a neutral TLD do that. A course, a tool, a stream can all live under it, and the root still means the person.</p>
 <p>TOU is "to you." The work is pointed at a student in Namangan, a welder pricing a grille, a guest at a wedding with a phone full of photos. Not at a category. Not at an "ecosystem."</p>
 <p>.uz is home, and I will keep shipping .uz products. .gg is the handshake for everything else: lab.tou.gg, chat.tou.gg, whatever gets built next, without renaming the person every six months.</p>
 <p>pangea8 became FlareStamina because a product should be allowed to grow a real name. The umbrella should not have to. That is why this domain is three letters and a joke that is not a joke: shipped to you.</p>]]></content:encoded>
+    <media:content url="https://tou.gg/brand/og/why-tou.jpg" medium="image" type="image/jpeg" width="1200" height="630"/>
   </item>
 </channel>
 </rss>
