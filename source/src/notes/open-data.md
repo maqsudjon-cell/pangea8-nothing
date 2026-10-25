@@ -16,7 +16,6 @@ facts:
   - HSK words: 8,296
   - Music tracks with exact labels: 20
   - Licence: CC BY 4.0
-  - Lexicon downloads: 111 (14 Oct 2026)
 ---
 Three of my products sit on top of data I built myself, and I published each dataset on Hugging Face so that nobody has to build it again.
 
@@ -36,7 +35,7 @@ The **skeleton** is what makes it useful. Uzbek is written with marks that keybo
 
 The word pairs are cut at a count of 6 or more. At a cutoff of 3 the file would have been almost a gigabyte; 6 was the smallest cutoff that kept it under about 500 MB.
 
-It is under CC BY 4.0: credit the dataset and both sources. As of 14 October 2026 it had been downloaded 111 times.
+It is under CC BY 4.0: credit the dataset and both sources.
 
 ## HSK Chinese–Uzbek–Russian Vocabulary
 

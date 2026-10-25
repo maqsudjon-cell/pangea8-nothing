@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 P = [
  ("flarestamina","FlareStamina","IELTS","144 free IELTS tests in real exam mode.","flarestamina.webp"),
- ("zitou","Zitou","Chinese","Chinese in Uzbek, ten minutes a day.","zitou.webp"),
+ ("zitou","Zitou","Chinese","Chinese in Uzbek, at zitou.uz.","zitou.webp"),
  ("ailenta","AI Lenta","News","AI news in Uzbek, every number checked.","ailenta.webp"),
  ("zh-tou-gg","zh.tou.gg","Chinese","Homework in the order of the slides.","zh.webp"),
  ("chertma","Chertma","Uzbek","Plain ASCII in, correct Uzbek out.","chertma.webp"),
@@ -23,6 +23,8 @@ P = [
  ("maqsudjon-com","maqsudjon.com","Lab","The lab and the build log.","maqsudjon.webp"),
  ("tou-gg","tou.gg","You are here","This page, and how it is built.",None),
 ]
+KEEP = ['flarestamina', 'zitou', 'ailenta', 'chertma', 'davomat', 'tadam', 'nullsample', 'payvandchi', 'kvadrat']
+P = sorted([p for p in P if p[0] in KEEP], key=lambda p: KEEP.index(p[0]))
 cells = []
 for slug, name, tag, line, img in P:
     pic = f'<img src="/img/{img}" alt="" width="800" height="500" loading="lazy">' if img else ''

@@ -109,6 +109,18 @@
 footer { padding-block: 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; color: var(--dim); font-size: .85rem; }
 footer a { color: var(--dim); }
 
+
+/* ---------- about ---------- */
+.about { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2rem 3rem; align-items: start; }
+.bio p { margin: 0 0 1rem; color: #CFCAC0; font-size: 1.05rem; max-width: 36rem; }
+.bio .lead { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.08; text-transform: uppercase; color: var(--chalk); letter-spacing: .005em; }
+.bio .now { display: flex; gap: .75rem; align-items: baseline; padding: .8rem 1rem; border: 1px solid var(--edge); border-radius: 4px; background: rgb(255 255 255 / .02); font-size: .98rem; }
+.bio .now span { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--hot); flex: none; }
+.bio .now a { color: var(--chalk); }
+.all { margin: 1.5rem 0 0; display: flex; justify-content: center; }
+.head .chalk a { color: inherit; }
+@media (max-width: 720px) { .about { grid-template-columns: 1fr; } }
+
 /* ---------- reveal (only for things that start below the first screen) ---------- */
 .js .rv.pre { opacity: 0; transform: translateY(26px); }
 .js .rv { transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0s); }

@@ -342,7 +342,7 @@ def main():
     notes_order = work + [n for n in notes if n["section"] != "work"]
 
     home_src = (SRC / "home.html").read_text(encoding="utf-8")
-    latest = "".join(card(n) for n in work[:6])
+    latest = "".join(card(n) for n in notes[:3])
     home_src = home_src.replace("<!--LATEST_NOTES-->", latest).replace("<!--NOTE_COUNT-->", str(len(notes)))
     home_body = re.sub(r"^<title>.*?</title>\s*", "", home_src, flags=re.S)
     home_body = re.sub(r'<link rel="(preconnect|stylesheet)"[^>]*>\s*', "", home_body)

@@ -185,6 +185,7 @@
 
   let lastT = 0;
   function frame(ms) {
+    if (!W || !H) { running = false; return; }   // not laid out yet: init() will start the loop
     const now = ms / 1000, dt = Math.min(.05, now - (lastT || now)); lastT = now;
     step(now, dt); render(now); railFrame(now, dt);
     const busy = (job && !job.done) || drawing || beads.length || sparks.length || smoke.length || (chalkT >= 0 && now - chalkT < 1) || railBusy();
@@ -220,10 +221,10 @@
   cv.addEventListener('pointerup', stop); cv.addEventListener('pointerleave', stop); cv.addEventListener('pointercancel', stop);
 
   // ---------- the seam down the left edge follows the scroll ----------
-  const rail = document.getElementById('seam'), rctx = rail.getContext('2d');
+  const rail = document.getElementById('seam'), rctx = rail ? rail.getContext('2d') : null;
   let rH = 0, rProg = 0, rTemp = 0, rSparks = [], lastY = scrollY;
-  const railOn = () => getComputedStyle(rail).display !== 'none';
-  function railSize() { rH = innerHeight; rail.width = 44 * DPR; rail.height = rH * DPR; rctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
+  const railOn = () => !!rail && getComputedStyle(rail).display !== 'none';
+  function railSize() { if (!rail) return; rH = innerHeight; rail.width = 44 * DPR; rail.height = rH * DPR; rctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
   function railBusy() { return railOn() && (rTemp > .02 || rSparks.length > 0); }
   function railFrame(now, dt) {
     if (!railOn()) return;
@@ -246,7 +247,7 @@
   }
   railSize(); addEventListener('resize', railSize);
   addEventListener('scroll', () => { if (Math.abs(scrollY - lastY) > 2) { rTemp = Math.min(1, rTemp + .35); lastY = scrollY; } kick(); }, { passive: true });
-  if (!reduce) setTimeout(kick, 50); else { rTemp = 0; requestAnimationFrame(t => railFrame(t / 1000, 0)); addEventListener('scroll', () => railFrame(0, 0), { passive: true }); }
+  if (reduce) { rTemp = 0; requestAnimationFrame(t => railFrame(t / 1000, 0)); addEventListener('scroll', () => railFrame(0, 0), { passive: true }); }
 
   // ---------- grille joints: tack-welded when the grille comes into view ----------
   const grille = document.getElementById('grille');
