@@ -12,6 +12,7 @@ tags: AI, News, Uzbek, GitHub Actions
 description: How AI Lenta collects AI news from dozens of outlets, writes it in Uzbek, refuses to publish a number it cannot find in the source, and stops the same story from appearing twice.
 facts:
   - Live: [ailenta.uz](https://ailenta.uz)
+  - Sources on the front page: 27
   - Feeds collected: 50 + Hacker News + Google News
   - Updates: hourly
   - Server: none
@@ -19,7 +20,7 @@ facts:
 ---
 AI news in Uzbek used to come in two forms: a Russian translation with the names left untranslated, or nothing. People who wanted a news wire in their own language got a reposted Facebook dump.
 
-**AI Lenta** at [ailenta.uz](https://ailenta.uz) is my answer. It collects artificial intelligence news from open sources, writes a headline and a short summary in Uzbek for each story, links every item to the original, and publishes on its own, every hour. On 14 October 2026 the front page showed 60 stories from 27 sources; the number moves every hour. The most important ones also go out on the Telegram channel [@ailentauz](https://t.me/ailentauz).
+**AI Lenta** at [ailenta.uz](https://ailenta.uz) is my answer. It collects artificial intelligence news from open sources, writes a headline and a short summary in Uzbek for each story, links every item to the original, and publishes on its own, every hour. As I write this the front page shows 60 stories from 27 sources. The most important ones also go out on the Telegram channel [@ailentauz](https://t.me/ailentauz).
 
 The constraint was the same as for everything I build. I cannot sit on a news desk. It has to publish while I am on a balcony with a grinder in my hand.
 

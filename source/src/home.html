@@ -202,18 +202,6 @@ h1 .night { color: var(--hot); text-shadow: 0 0 22px rgb(255 122 26 / .45); }
 footer { padding-block: 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; color: var(--dim); font-size: .85rem; }
 footer a { color: var(--dim); }
 
-
-/* ---------- about ---------- */
-.about { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2rem 3rem; align-items: start; }
-.bio p { margin: 0 0 1rem; color: #CFCAC0; font-size: 1.05rem; max-width: 36rem; }
-.bio .lead { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.08; text-transform: uppercase; color: var(--chalk); letter-spacing: .005em; }
-.bio .now { display: flex; gap: .75rem; align-items: baseline; padding: .8rem 1rem; border: 1px solid var(--edge); border-radius: 4px; background: rgb(255 255 255 / .02); font-size: .98rem; }
-.bio .now span { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--hot); flex: none; }
-.bio .now a { color: var(--chalk); }
-.all { margin: 1.5rem 0 0; display: flex; justify-content: center; }
-.head .chalk a { color: inherit; }
-@media (max-width: 720px) { .about { grid-template-columns: 1fr; } }
-
 /* ---------- reveal (only for things that start below the first screen) ---------- */
 .js .rv.pre { opacity: 0; transform: translateY(26px); }
 .js .rv { transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0s); }
@@ -239,13 +227,14 @@ footer a { color: var(--dim); }
 }
 </style>
 
+<canvas id="seam" aria-hidden="true"></canvas>
 <header class="hero" id="top">
   <div class="grid-lines" aria-hidden="true"></div>
   <canvas id="weld" aria-hidden="true"></canvas>
   <nav class="nav" aria-label="Site">
     <div class="wrap">
       <a class="logo" href="#top">TOU<span>.</span>GG</a>
-      <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="/log/">Notes</a><a href="/cv/">CV</a><a class="tg" href="https://t.me/toudotgg">Telegram ↗</a></div>
+      <div class="links"><a href="#work">Sites</a><a href="#data">Data</a><a href="/log/">Notes</a><a href="/cv/">CV</a><a class="tg" href="https://t.me/toudotgg">Telegram ↗</a></div>
     </div>
   </nav>
   <div class="wrap hero-foot">
@@ -256,71 +245,98 @@ footer a { color: var(--dim); }
     </div>
     <div class="plate" aria-label="Live counter">
       <div class="k">Seconds since the first repo · 28 Feb 2025</div>
-      <div class="v" id="secs">52,195,798</div>
-      <div class="row"><span>Live sites <b>18</b></span><span>Repos <b>191</b></span><span>Commits <b>3,400+</b></span></div>
+      <div class="v" id="secs">51,206,078</div>
+      <div class="row"><span>Live sites <b>18</b></span><span>Repos <b>191</b></span><span>Commits <b>3,146</b></span></div>
     </div>
   </div>
 </header>
 
 <main>
+  <section class="wrap sec" aria-labelledby="h-log">
+    <div class="head"><h2 id="h-log" class="rv"><small>Job tickets</small>Build log</h2><p class="chalk rv">real entries, pinned up the day they shipped</p></div>
+    <div class="tickets">
+      <article class="ticket rv" style="--rot:-1.6deg"><div class="no"><span>No. 001</span><span>27 May 2026</span></div><p>Launched flarestamina.com. Free IELTS tests. One afternoon of DNS.</p><span class="by">— M.P.</span><span class="stamp">Live</span></article>
+      <article class="ticket rv" style="--rot:1.2deg;--d:.08s"><div class="no"><span>No. 002</span><span>24 Aug 2026</span></div><p>Took down three login walls. Signing in is optional now.</p><span class="by">— M.P.</span><span class="stamp">Done</span></article>
+      <article class="ticket rv" style="--rot:-.6deg;--d:.16s"><div class="no"><span>No. 003</span><span>27 Aug 2026</span></div><p>Tadam: one QR on the table. No app, no database.</p><span class="by">— M.P.</span><span class="stamp">Live</span></article>
+      <article class="ticket rv" style="--rot:.8deg"><div class="no"><span>No. 004</span><span>Every hour</span></div><p>AI Lenta published by itself. Every number checked against the source.</p><span class="by">— the pipeline</span><span class="stamp">Auto</span></article>
+      <article class="ticket rv" style="--rot:-1.1deg;--d:.08s"><div class="no"><span>No. 005</span><span>1 Oct 2026</span></div><p>Zitou moved to zitou.app. Chinese, taught in Uzbek.</p><span class="by">— M.P.</span><span class="stamp">Live</span></article>
+      <article class="ticket rv" style="--rot:1.5deg;--d:.16s"><div class="no"><span>No. 006</span><span>14 Oct 2026</span></div><p>Published Nullsample Multitrack: 20 tracks with exact labels.</p><span class="by">— M.P.</span><span class="stamp">Open</span></article>
+      <article class="ticket rv" style="--rot:-.9deg"><div class="no"><span>No. 007</span><span>18 Oct 2026</span></div><p>Zitou HSK 1 course: six lessons, one code to join the class.</p><span class="by">— M.P.</span><span class="stamp">Live</span></article>
+      <article class="ticket rv" style="--rot:1.1deg;--d:.08s"><div class="no"><span>No. 008</span><span>19 Oct 2026</span></div><p>Bought zitou.uz. Chinese in Uzbek, at a .uz address.</p><span class="by">— M.P.</span><span class="stamp">Live</span></article>
+    </div>
+  </section>
+
   <section class="wrap sec" id="work" aria-labelledby="h-work">
-    <div class="head"><h2 id="h-work" class="rv"><small>Selected work · 9 of 18</small>Behind the grille</h2><p class="chalk rv">hover a pane and the light comes on</p></div>
+    <div class="head"><h2 id="h-work" class="rv"><small>18 live sites</small>Behind the grille</h2><p class="chalk rv">hover a pane and the light comes on. every pane opens the story.</p></div>
     <div class="grille" id="grille">
       <a class="cell" href="/work/flarestamina/"><img src="/img/flarestamina.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">IELTS</span><b>FlareStamina</b><span class="l">144 free IELTS tests in real exam mode.</span></span></a>
-      <a class="cell" href="/work/zitou/"><img src="/img/zitou.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Chinese</span><b>Zitou</b><span class="l">Chinese in Uzbek, at zitou.uz.</span></span></a>
+      <a class="cell" href="/work/zitou/"><img src="/img/zitou.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Chinese</span><b>Zitou</b><span class="l">Chinese in Uzbek, ten minutes a day.</span></span></a>
       <a class="cell" href="/work/ailenta/"><img src="/img/ailenta.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">News</span><b>AI Lenta</b><span class="l">AI news in Uzbek, every number checked.</span></span></a>
+      <a class="cell" href="/work/zh-tou-gg/"><img src="/img/zh.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Chinese</span><b>zh.tou.gg</b><span class="l">Homework in the order of the slides.</span></span></a>
       <a class="cell" href="/work/chertma/"><img src="/img/chertma.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Uzbek</span><b>Chertma</b><span class="l">Plain ASCII in, correct Uzbek out.</span></span></a>
       <a class="cell" href="/work/davomat/"><img src="/img/davomat.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Telegram</span><b>Davomat</b><span class="l">Group attendance in four taps.</span></span></a>
       <a class="cell" href="/work/tadam/"><img src="/img/tadam.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Events</span><b>Tadam</b><span class="l">Every wedding photo in one album.</span></span></a>
       <a class="cell" href="/work/nullsample/"><img src="/img/nullsample.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Music</span><b>Nullsample</b><span class="l">Music from arithmetic, zero samples.</span></span></a>
-      <a class="cell" href="/work/payvandchi/"><img src="/img/payvandchi.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Workshop</span><b>Payvandchi</b><span class="l">Grilles, railings and canopies.</span></span></a>
+      <a class="cell" href="/work/pierics/"><img src="/img/pierics.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Game</span><b>Pierics</b><span class="l">A five-letter word game for IELTS.</span></span></a>
+      <a class="cell" href="/work/minnos/"><img src="/img/minnos.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">English</span><b>Minnos</b><span class="l">A cat who brings you idioms.</span></span></a>
+      <a class="cell" href="/work/speaking-lab/"><img src="/img/speaking.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Experiment</span><b>Speaking Lab</b><span class="l">Talk to an AI IELTS examiner.</span></span></a>
       <a class="cell" href="/work/kvadrat/"><img src="/img/kvadrat.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Workshop</span><b>KVADRAT</b><span class="l">Square metres for grilles, offline.</span></span></a>
-    </div>
-    <p class="all rv"><a class="btn ghost" href="/work/">All 18 projects →</a></p>
-  </section>
-
-  <section class="wrap sec" id="about" aria-labelledby="h-about">
-    <div class="head"><h2 id="h-about" class="rv"><small>About</small>Me, in short</h2><p class="chalk rv">facts only. checked 26 oct 2026.</p></div>
-    <div class="about">
-      <div class="bio rv">
-        <p class="lead">I'm Maqsudjon Polatov, from Tashkent. By day I make window grilles, railings and canopies in a metal workshop, as I have since 2023.</p>
-        <p>In the evenings I build software. I taught myself web, Python and AI, and since February 2025 I have shipped 18 live sites on my own. I write the spec, direct AI coding agents, and own the architecture, the build, the DNS and the bill.</p>
-        <p>I study English Philology at AIFU in the evenings, and I have been learning Chinese since 19 September 2026. Once in a while I still make UK garage as Matsumi.</p>
-        <p class="now"><span>Now</span>Zitou's HSK 1 course at <a href="https://zitou.uz">zitou.uz</a>, and my first year at AIFU.</p>
-        <div class="cv-actions"><a class="btn" href="/cv/">Full CV</a><a class="btn ghost" href="/Maqsudjon-Polatov-CV.pdf">PDF</a></div>
-      </div>
-      <div class="spec rv" style="--d:.08s">
-        <h3>M. Polatov</h3>
-        <dl>
-          <dt>Based</dt><dd>Tashkent, Uzbekistan</dd>
-          <dt>Open to</dt><dd>Remote (EU · US · Gulf overlap) or on-site</dd>
-          <dt>Work</dt><dd>Metal fabricator, 2023– · Product engineer, 2025–</dd>
-          <dt>Study</dt><dd>BA English Philology, AIFU · 1st year, evening</dd>
-          <dt>Output</dt><dd>18 live sites · 191 repos · 3,400+ commits</dd>
-          <dt>English</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>B2 · IELTS 6.0, Aug 2026</dd>
-          <dt>Uzbek</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>Native</dd>
-          <dt>Korean</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span>A2 · TOPIK 2</dd>
-          <dt>Russian</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span>A2</dd>
-          <dt>Chinese</dt><dd><span class="gauge"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Beginner, since Sep 2026</dd>
-          <dt>Papers</dt><dd>Electrician, diploma with honours · Trucking MBA certificate, First Class</dd>
-        </dl>
-      </div>
+      <a class="cell" href="/work/payvandchi/"><img src="/img/payvandchi.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Workshop</span><b>Payvandchi</b><span class="l">Grilles, railings and canopies.</span></span></a>
+      <a class="cell" href="/work/reshotkachi/"><img src="/img/reshotkachi.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Workshop</span><b>Reshotkachi</b><span class="l">123 real photos on a 3D wall.</span></span></a>
+      <a class="cell" href="/work/zed-avlod/"><img src="/img/zedavlod.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Client</span><b>ZED AVLOD</b><span class="l">A school with real results.</span></span></a>
+      <a class="cell" href="/work/ctn/"><img src="/img/ctnlc.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Client</span><b>CTN</b><span class="l">A whole school site in one file.</span></span></a>
+      <a class="cell" href="/work/maqsudjon-com/"><img src="/img/maqsudjon.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Lab</span><b>maqsudjon.com</b><span class="l">The lab and the build log.</span></span></a>
+      <a class="cell" href="/work/tou-gg/"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">You are here</span><b>tou.gg</b><span class="l">This page, and how it is built.</span></span></a>
     </div>
   </section>
 
   <section class="wrap sec" id="data" aria-labelledby="h-data">
-    <div class="head"><h2 id="h-data" class="rv"><small>Hugging Face · CC BY 4.0</small>Open data</h2><p class="chalk rv"><a href="/work/open-data/">how it was made</a></p></div>
+    <div class="head"><h2 id="h-data" class="rv"><small>Hugging Face · CC BY 4.0</small>Open stock</h2><p class="chalk rv">cut from it freely. <a href="/work/open-data/">how it was made</a></p></div>
     <div class="tags">
-      <a class="stock rv" href="https://huggingface.co/datasets/Maqsudjonpolatov/uz-lexicon-skeleton"><span class="k">Dataset · Uzbek</span><span class="n" data-count="28052730">28,052,730</span><p>rows of Uzbek word counts with a skeleton index.</p><span class="u">uz-lexicon-skeleton ↗</span></a>
-      <a class="stock rv" href="https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack" style="--d:.06s"><span class="k">Dataset · music</span><span class="n" data-count="20">20</span><p>tracks from code, with stems, MIDI and exact labels.</p><span class="u">nullsample-multitrack ↗</span></a>
-      <a class="stock rv" href="https://huggingface.co/datasets/Maqsudjonpolatov/hsk-chinese-uzbek-russian" style="--d:.12s"><span class="k">Dataset · Chinese</span><span class="n" data-count="8296">8,296</span><p>HSK words in Uzbek and Russian.</p><span class="u">hsk-chinese-uzbek-russian ↗</span></a>
-      <a class="stock rv" href="https://huggingface.co/spaces/Maqsudjonpolatov/hsk-uzbek-dictionary" style="--d:.18s"><span class="k">Space · dictionary</span><span class="n">HSK 1–6</span><p>Search and flashcards.</p><span class="u">hsk-uzbek-dictionary ↗</span></a>
+      <a class="stock rv" href="https://huggingface.co/datasets/Maqsudjonpolatov/uz-lexicon-skeleton"><span class="k">Dataset · Uzbek</span><span class="n" data-count="28052730">28,052,730</span><p>rows of Uzbek word and word-pair counts with a skeleton index. Chertma runs on it.</p><span class="u">uz-lexicon-skeleton ↗</span></a>
+      <a class="stock rv" href="https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack" style="--d:.06s"><span class="k">Dataset · music</span><span class="n" data-count="20">20</span><p>tracks made from code, each with six stems, MIDI and exact labels.</p><span class="u">nullsample-multitrack ↗</span></a>
+      <a class="stock rv" href="https://huggingface.co/datasets/Maqsudjonpolatov/hsk-chinese-uzbek-russian" style="--d:.12s"><span class="k">Dataset · Chinese</span><span class="n" data-count="8296">8,296</span><p>HSK words with Uzbek and Russian meanings. The vocabulary behind Zitou.</p><span class="u">hsk-chinese-uzbek-russian ↗</span></a>
+      <a class="stock rv" href="https://huggingface.co/spaces/Maqsudjonpolatov/hsk-uzbek-dictionary" style="--d:.18s"><span class="k">Space · dictionary</span><span class="n">HSK 1–6</span><p>Search by character, pinyin or Uzbek, and learn with flashcards.</p><span class="u">hsk-uzbek-dictionary ↗</span></a>
     </div>
+    <div class="bots rv"><a href="https://t.me/zitouggbot">@zitouggbot</a><a href="https://t.me/zitougg">@zitougg</a><a href="https://t.me/ailentauz">@ailentauz</a><a href="https://t.me/chertmabot">@Chertmabot</a><a href="https://t.me/chzquzbot">@Chzquzbot</a></div>
   </section>
 
   <section class="wrap sec" id="notes" aria-labelledby="h-notes">
-    <div class="head"><h2 id="h-notes" class="rv"><small><!--NOTE_COUNT--> notes · RSS</small>Latest notes</h2><p class="chalk rv"><a href="/log/">all notes</a> · <a href="/rss.xml">rss</a></p></div>
+    <div class="head"><h2 id="h-notes" class="rv"><small><!--NOTE_COUNT--> notes · RSS</small>Shop notes</h2><p class="chalk rv">the long story behind every weld</p></div>
     <div class="ngrid"><!--LATEST_NOTES--></div>
+    <div class="cv-actions rv"><a class="btn" href="/log/">All notes</a><a class="btn ghost" href="/rss.xml">RSS feed</a></div>
+  </section>
+
+  <section class="wrap sec" id="cv" aria-labelledby="h-cv">
+    <div class="head"><h2 id="h-cv" class="rv"><small>Curriculum vitae</small>Spec plate</h2><p class="chalk rv">one page. checked 14 oct 2026.</p></div>
+    <div class="cv">
+      <div class="spec rv">
+        <h3>M. Polatov</h3>
+        <dl>
+          <dt>Model</dt><dd>Product engineer</dd>
+          <dt>Built in</dt><dd>Tashkent · open to remote</dd>
+          <dt>In service</dt><dd>Steel since 2023 · code since Feb 2025</dd>
+          <dt>Output</dt><dd>18 sites · 191 repos · 3,146 commits</dd>
+          <dt>Uzbek</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>C2</dd>
+          <dt>English</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>B2 · IELTS 6.0</dd>
+          <dt>Korean</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span>A2 · TOPIK 2</dd>
+          <dt>Russian</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span>A2</dd>
+          <dt>Chinese</dt><dd><span class="gauge"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>A0 · since 19 Sep 2026</dd>
+          <dt>Papers</dt><dd>BA English Philology (AIFU) · Electrician, honours · Trucking, First Class</dd>
+        </dl>
+      </div>
+      <div class="rv" style="--d:.1s">
+        <ol class="chalkline">
+          <li><time>2023</time>Metal fabricator. <span>Grilles, railings, canopies.</span></li>
+          <li><time>Feb 2025</time>First repo. <span>Independent product engineer, solo.</span></li>
+          <li><time>Jun 2026</time>FlareStamina goes live. <span>Free IELTS tests, now 144.</span></li>
+          <li><time>Aug 2026</time>IELTS Academic 6.0 · Tadam. <span>CEFR B2. A wedding album with no app.</span></li>
+          <li><time>Sep 2026</time>AI Lenta · Davomat · tou.gg. <span>BA begins. Chinese, day one.</span></li>
+          <li><time>Oct 2026</time>Zitou on zitou.uz. <span>HSK 1 course, three open datasets. Now.</span></li>
+        </ol>
+        <div class="cv-actions"><a class="btn" href="/cv/">Full CV</a><a class="btn ghost" href="/Maqsudjon-Polatov-CV.pdf">PDF</a></div>
+      </div>
+    </div>
   </section>
 
   <section class="wrap" id="contact" aria-labelledby="h-contact">
@@ -335,7 +351,7 @@ footer a { color: var(--dim); }
     </div>
   </section>
 </main>
-<footer class="wrap"><span>© 2026 Maqsudjon Polatov · tou = to you · gg = given gladly</span><span>Numbers checked 26 Oct 2026 · <a href="/log/">Notes</a> · <a href="/rss.xml">RSS</a></span></footer>
+<footer class="wrap"><span>© 2026 Maqsudjon Polatov · tou = to you · gg = given gladly</span><span>Numbers checked 14 Oct 2026 · <a href="/log/">Notes</a> · <a href="/rss.xml">RSS</a></span></footer>
 
 <script>
 (() => {
@@ -523,7 +539,6 @@ footer a { color: var(--dim); }
 
   let lastT = 0;
   function frame(ms) {
-    if (!W || !H) { running = false; return; }   // not laid out yet: init() will start the loop
     const now = ms / 1000, dt = Math.min(.05, now - (lastT || now)); lastT = now;
     step(now, dt); render(now); railFrame(now, dt);
     const busy = (job && !job.done) || drawing || beads.length || sparks.length || smoke.length || (chalkT >= 0 && now - chalkT < 1) || railBusy();
@@ -559,10 +574,10 @@ footer a { color: var(--dim); }
   cv.addEventListener('pointerup', stop); cv.addEventListener('pointerleave', stop); cv.addEventListener('pointercancel', stop);
 
   // ---------- the seam down the left edge follows the scroll ----------
-  const rail = document.getElementById('seam'), rctx = rail ? rail.getContext('2d') : null;
+  const rail = document.getElementById('seam'), rctx = rail.getContext('2d');
   let rH = 0, rProg = 0, rTemp = 0, rSparks = [], lastY = scrollY;
-  const railOn = () => !!rail && getComputedStyle(rail).display !== 'none';
-  function railSize() { if (!rail) return; rH = innerHeight; rail.width = 44 * DPR; rail.height = rH * DPR; rctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
+  const railOn = () => getComputedStyle(rail).display !== 'none';
+  function railSize() { rH = innerHeight; rail.width = 44 * DPR; rail.height = rH * DPR; rctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
   function railBusy() { return railOn() && (rTemp > .02 || rSparks.length > 0); }
   function railFrame(now, dt) {
     if (!railOn()) return;
@@ -585,7 +600,7 @@ footer a { color: var(--dim); }
   }
   railSize(); addEventListener('resize', railSize);
   addEventListener('scroll', () => { if (Math.abs(scrollY - lastY) > 2) { rTemp = Math.min(1, rTemp + .35); lastY = scrollY; } kick(); }, { passive: true });
-  if (reduce) { rTemp = 0; requestAnimationFrame(t => railFrame(t / 1000, 0)); addEventListener('scroll', () => railFrame(0, 0), { passive: true }); }
+  if (!reduce) setTimeout(kick, 50); else { rTemp = 0; requestAnimationFrame(t => railFrame(t / 1000, 0)); addEventListener('scroll', () => railFrame(0, 0), { passive: true }); }
 
   // ---------- grille joints: tack-welded when the grille comes into view ----------
   const grille = document.getElementById('grille');
