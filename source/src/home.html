@@ -539,6 +539,7 @@ footer a { color: var(--dim); }
 
   let lastT = 0;
   function frame(ms) {
+    if (!W || !H) { running = false; return; }   // not laid out yet: init() will start the loop
     const now = ms / 1000, dt = Math.min(.05, now - (lastT || now)); lastT = now;
     step(now, dt); render(now); railFrame(now, dt);
     const busy = (job && !job.done) || drawing || beads.length || sparks.length || smoke.length || (chalkT >= 0 && now - chalkT < 1) || railBusy();
