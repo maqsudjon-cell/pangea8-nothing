@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="Yangi HSK 1 kitobining 1–8-darslari: mnemonika, faol eslash, oraliqli takrorlash, hanzi yozish va topish o‘yini.">
+  <title>Hanzi — HSK 1, 1–8-darslar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Hanzi bosh sahifasi">
+        <span class="brand-mark" lang="zh">汉字</span>
+        <span><strong>Hanzi</strong><small>O‘rganish oson</small></span>
+      </a>
+      <label class="lesson-picker" for="lesson-select"><span>Darsni tanlang</span><select id="lesson-select" aria-label="Darsni tanlang"></select></label>
+      <nav class="main-nav" aria-label="Asosiy menyu">
+        <button class="nav-item active" data-view="words" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5zM4 5.5v16M8 7h8M8 11h6"/></svg><span>So‘zlar</span>
+        </button>
+        <button class="nav-item" data-view="cards">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><span>Yodlash</span>
+        </button>
+        <button class="nav-item" data-view="find">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M8 10.5h5M10.5 8v5"/></svg><span>Topish</span>
+        </button>
+        <button class="nav-item" data-view="write">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5 5 5M4 20l3.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11zM13 20h7"/></svg><span>Yozish</span>
+        </button>
+        <button class="nav-item" data-view="quiz">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.3 2.3 0 1 1 3.4 2c-.8.5-1.2.9-1.2 2M12 17h.01"/></svg><span>Test</span>
+        </button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <section class="goal-card" aria-label="Dars natijasi">
+        <div class="goal-top"><span id="goal-label">1-dars natijasi</span><strong id="goal-percent">0%</strong></div>
+        <div class="progress-track"><span id="goal-bar"></span></div>
+        <p><strong id="goal-count">0</strong> / <span id="goal-total">13</span> ta so‘z o‘rganildi</p>
+        <p class="due-line"><strong id="due-count">13</strong> tasi takror kutmoqda</p>
+      </section>
+      <button class="reset-progress" id="reset-progress">Natijani tozalash</button>
+      <p class="sidebar-note">Oraliqli takrorlash yoqilgan.<br>Natijalar shu qurilmada saqlanadi.</p>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="topbar-kicker">Yangi HSK 1 · <span id="topbar-lesson">1-dars</span></p><p class="topbar-date" id="today"></p></div>
+        <span class="offline-badge"><i></i> Internet kerak emas</span>
+      </header>
+
+      <section class="view active" id="view-words" aria-labelledby="words-title">
+        <div class="lesson-hero">
+          <div class="hero-copy">
+            <span class="lesson-label" id="lesson-label">1-DARS · TANISHUV</span>
+            <h1 id="words-title">Salom deyishdan<br>boshlaymiz.</h1>
+            <p id="lesson-description"></p>
+            <button class="primary-button" data-go="cards">Yodlashni boshlash <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="hero-character" aria-hidden="true"><span lang="zh" id="hero-character">你好</span><small id="hero-pinyin">nǐ hǎo · salom</small></div>
+        </div>
+
+        <div class="method-strip" aria-label="O‘rganish metodi">
+          <div><span>01</span><p><strong>Bog‘lang</strong><small>Mnemonik hikoya orqali tanish obraz yarating.</small></p></div>
+          <i>→</i><div><span>02</span><p><strong>Faol eslang</strong><small>Javobni ko‘rishdan oldin o‘zingiz topishga harakat qiling.</small></p></div>
+          <i>→</i><div><span>03</span><p><strong>Takrorlang</strong><small>Qiyin so‘z tezroq, oson so‘z keyinroq qaytadi.</small></p></div>
+        </div>
+
+        <div class="stats-row" aria-label="Dars natijalari">
+          <div class="stat"><span class="stat-icon red" lang="zh">字</span><div><strong id="words-stat">13</strong><small>Darsdagi so‘zlar</small></div></div>
+          <div class="stat"><span class="stat-icon green">✓</span><div><strong id="learned-stat">0</strong><small>O‘rganilgan</small></div></div>
+          <div class="stat"><span class="stat-icon amber">%</span><div><strong id="best-stat">—</strong><small>Eng yaxshi test</small></div></div>
+        </div>
+
+        <div class="section-heading"><div><span class="section-kicker">SO‘Z BOYLIGI</span><h2>Barcha so‘zlar</h2></div><span class="word-count" id="visible-count">13 ta so‘z</span></div>
+        <div class="toolbar">
+          <label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><span class="sr-only">So‘z qidirish</span><input id="search" type="search" placeholder="Hanzi, pinyin yoki ma’no..." autocomplete="off"></label>
+          <div class="filter-group" aria-label="So‘zlarni filtrlash"><button class="filter active" data-filter="all">Barchasi</button><button class="filter" data-filter="learning">O‘rganilmoqda</button><button class="filter" data-filter="learned">O‘rganilgan</button></div>
+        </div>
+        <div class="word-grid" id="word-grid"></div>
+        <div class="empty-state" id="empty-state" hidden><span lang="zh">找</span><h3>Hech narsa topilmadi</h3><p>Boshqa so‘z kiriting yoki filtrni o‘zgartiring.</p></div>
+      </section>
+
+      <section class="view" id="view-cards" aria-labelledby="cards-title" hidden>
+        <div class="view-header">
+          <div><span class="section-kicker">FAOL ESLASH · ORALIQILI TAKRORLASH</span><h1 id="cards-title">Eslash va takrorlash</h1><p>Javobni xayolingizda ayting, keyin ochib tekshiring va o‘zingizni baholang.</p></div>
+          <button class="secondary-button" data-go="words">So‘zlar ro‘yxati</button>
+        </div>
+        <div class="recall-switch" aria-label="Eslash yo‘nalishi"><button data-direction="meaning" class="active">Ma’no → Hanzi</button><button data-direction="hanzi">Hanzi → Ma’no</button></div>
+        <div class="flashcard-progress"><span id="card-position">1 / 13</span><div class="progress-track"><span id="card-bar"></span></div><button class="text-button" id="shuffle-card">Aralashtirish</button></div>
+        <div class="flashcard-wrap">
+          <article class="flashcard" id="flashcard">
+            <div class="flashcard-top"><span class="type-pill" id="card-type"></span><button class="icon-button" id="card-speak" aria-label="Talaffuzni tinglash"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4zM17 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></button></div>
+            <div class="flashcard-center"><span class="recall-prompt" id="recall-prompt"></span><h2 lang="zh" id="card-hanzi"></h2><p class="card-pinyin" id="card-pinyin"></p><div class="card-answer" id="card-answer"><span id="answer-label">O‘ZBEKCHA MA’NOSI</span><strong id="card-meaning"></strong></div></div>
+            <button class="reveal-button" id="reveal-card">Javobni ko‘rsatish <kbd>Space</kbd></button>
+          </article>
+          <aside class="mnemonic-panel" id="card-note" hidden><div><span>BOG‘LASH UCHUN HIKOYA</span><p id="card-story"></p></div><div><span>QISMLARI</span><p id="card-parts"></p></div><small>Bu hikoya faqat yodlash uchun, ilmiy etimologiya emas.</small></aside>
+          <p class="rating-prompt">Javob sizga qanday bo‘ldi?</p>
+          <div class="review-actions"><button class="review-button hard" id="review-hard"><strong>Qiyin</strong><small>10 daqiqadan keyin</small></button><button class="review-button good" id="review-good"><strong>Yaxshi</strong><small id="good-interval">1 kundan keyin</small></button><button class="review-button easy" id="review-easy"><strong>Oson</strong><small id="easy-interval">4 kundan keyin</small></button></div>
+          <div class="card-navigation"><button class="text-button" id="prev-card">← Oldingi</button><button class="text-button" id="next-card">Keyingi →</button></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-find" aria-labelledby="find-title" hidden>
+        <div class="view-header"><div><span class="section-kicker" id="find-kicker">1-DARS · HANZINI TOPISH</span><h1 id="find-title">Doskadan to‘g‘ri hanzini toping</h1><p>Pinyin va o‘zbekcha ma’noga qarab doskadagi to‘g‘ri hanzini bosing.</p></div><button class="secondary-button" data-go="cards">Avval yodlash</button></div>
+        <div id="find-area"></div>
+      </section>
+
+      <section class="view" id="view-write" aria-labelledby="write-title" hidden>
+        <div class="view-header"><div><span class="section-kicker">MUSHAK XOTIRASI · CHIZIQLAR TARTIBI</span><h1 id="write-title">Qo‘lda yozib mustahkamlang</h1><p>Avval namunani tomosha qiling, keyin kulrang shablon ustidan yoki yoddan yozing.</p></div><button class="secondary-button" data-go="cards">Yodlashga qaytish</button></div>
+        <div class="writing-layout">
+          <aside class="character-picker"><label for="write-character">Hanzini tanlang</label><select id="write-character"></select><div id="character-list" class="character-list"></div></aside>
+          <div class="writing-workspace">
+            <div class="writing-info"><div><h2 lang="zh" id="write-hanzi">你</h2><p id="write-pinyin">nǐ</p></div><div><strong id="write-meaning">sen</strong><p id="write-parts">亻 + 尔</p></div></div>
+            <div class="writer-frame"><div class="practice-grid" aria-hidden="true"></div><div id="hanzi-writer"></div></div>
+            <p class="writer-status" id="writer-status">Namunani kuzating yoki mashqni boshlang.</p>
+            <div class="writer-controls"><button class="secondary-button" id="animate-writer">Namunani ijro etish</button><button class="primary-button" id="trace-writer">Ko‘rib yozish</button><button class="know-button" id="recall-writer">Yoddan yozish</button></div>
+            <div class="writing-note"><span>YODLASH HIKOYASI</span><p id="write-story"></p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-quiz" aria-labelledby="quiz-title" hidden>
+        <div class="view-header"><div><span class="section-kicker" id="quiz-kicker">1-DARS · TEST</span><h1 id="quiz-title">Bilimingizni sinang</h1><p>Har bir hanzi uchun to‘g‘ri o‘zbekcha ma’noni tanlang.</p></div><button class="secondary-button" data-go="words">So‘zlar ro‘yxati</button></div>
+        <div id="quiz-area"></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="vendor/hanzi-writer.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
