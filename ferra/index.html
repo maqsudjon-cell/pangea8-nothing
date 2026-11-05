@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f6f3">
+  <meta name="description" content="Ferra is a focused AI workspace for iPhone. Create an agent, choose its model and keep control of every external action.">
+  <meta property="og:title" content="Ferra — AI agents that work for you">
+  <meta property="og:description" content="One clear task. Your choice of AI model. Your approval before an agent acts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tou.gg/ferra/">
+  <meta property="og:image" content="https://tou.gg/ferra/ferra-icon.png">
+  <link rel="canonical" href="https://tou.gg/ferra/">
+  <link rel="icon" href="ferra-icon.png">
+  <link rel="apple-touch-icon" href="ferra-icon.png">
+  <title>Ferra — AI agents that work for you</title>
+  <style>
+    :root{--paper:#f6f6f3;--ink:#17191f;--muted:#6b6c72;--line:rgba(23,25,31,.09);--gold:#e8b64c;--indigo:#1a1f3d;--glass:rgba(255,255,255,.66)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:5px}.wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+    .nav{position:sticky;top:0;z-index:10;border-bottom:1px solid transparent;background:rgba(246,246,243,.72);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%)}.nav-inner{height:78px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font-size:22px;font-weight:650;letter-spacing:-.6px}.brand img{width:36px;height:36px;border-radius:10px}.nav-links{display:flex;gap:30px;align-items:center;color:var(--muted);font-size:14px}.nav-links a:hover{color:var(--ink)}
+    .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:50px;align-items:center;min-height:720px;padding:74px 0 86px}.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:650;letter-spacing:1.7px;text-transform:uppercase;color:#816227}.eyebrow:before{content:"";display:block;width:7px;height:7px;border-radius:50%;background:var(--gold)}h1{font-size:clamp(46px,5.5vw,76px);line-height:1.02;letter-spacing:-3.8px;font-weight:680;margin:26px 0 24px;max-width:650px}.intro{font-size:20px;line-height:1.55;color:var(--muted);max-width:510px;margin:0}.uz{font-size:15px;line-height:1.6;color:var(--muted);margin-top:14px}.actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:34px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:53px;border-radius:28px;padding:0 24px;font-size:15px;font-weight:600}.button.primary{background:var(--ink);color:#fff}.button.secondary{border:1px solid var(--line);background:rgba(255,255,255,.4)}.button[aria-disabled=true]{cursor:default}.note{font-size:12px;color:var(--muted);margin-top:15px}.trust{display:flex;gap:0;margin-top:42px;color:var(--muted);font-size:12px}.trust span{padding:0 18px;border-left:1px solid var(--line)}.trust span:first-child{padding-left:0;border:0}
+    .stage{position:relative;display:grid;place-items:center;min-height:570px}.halo{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(232,182,76,.25),rgba(232,182,76,0) 70%);filter:blur(14px)}.phone{position:relative;width:292px;height:596px;border:7px solid #fff;border-radius:48px;background:#fafaf9;box-shadow:0 30px 80px rgba(26,31,61,.15),0 2px 8px rgba(26,31,61,.06);padding:19px 18px;overflow:hidden;transform:rotate(3deg)}.island{width:84px;height:23px;border-radius:15px;background:#151515;margin:0 auto 26px}.phone-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.mini-avatar{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:600}.plus{font-size:25px;font-weight:300}.phone h2{font-size:34px;letter-spacing:-1.2px;margin:0 0 7px}.phone-sub{font-size:10px;color:var(--muted);margin:0 0 22px}.agent-row{display:flex;gap:19px;margin-bottom:29px}.agent-mini{text-align:center;font-size:9px;color:var(--muted)}.agent-icon{display:grid;place-items:center;width:53px;height:53px;border-radius:16px;background:#f9eed6;color:#3c3426;font-size:23px;font-weight:500;margin-bottom:8px}.agent-mini:nth-child(2) .agent-icon{background:#e1f2e8}.agent-mini:nth-child(3) .agent-icon{background:#e4e6f6}.section-label{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin:0 0 10px}.agent-card{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.8);border:1px solid rgba(23,25,31,.05);border-radius:19px;padding:12px;margin-top:9px;box-shadow:0 3px 12px rgba(23,25,31,.025)}.agent-card .agent-icon{width:37px;height:37px;border-radius:12px;font-size:17px;margin:0}.agent-card strong{font-size:11px;font-weight:600}.agent-card p{font-size:8px;color:var(--muted);margin:4px 0 0}.search{position:absolute;left:38px;right:38px;bottom:26px;height:41px;border-radius:22px;background:rgba(255,255,255,.7);border:1px solid var(--line);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;gap:7px;color:var(--muted);font-size:10px}.float-card{position:absolute;right:0;bottom:55px;width:205px;padding:17px;border-radius:22px;background:var(--glass);border:1px solid rgba(255,255,255,.8);box-shadow:0 15px 38px rgba(26,31,61,.1);backdrop-filter:blur(22px);font-size:11px}.float-card strong{display:block;font-size:12px;margin:7px 0}.float-card p{color:var(--muted);line-height:1.45;margin:0}.gold-dot{width:8px;height:8px;background:var(--gold);border-radius:50%}
+    .principles{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);padding:29px 0}.principle{text-align:center;font-size:14px;color:var(--muted);border-left:1px solid var(--line)}.principle:first-child{border:0}.principle strong{color:var(--ink);font-weight:600}
+    .section{padding:110px 0}.section-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:48px}h2.section-title{font-size:clamp(34px,4vw,52px);line-height:1.08;letter-spacing:-2.1px;margin:0;font-weight:650}.section-copy{font-size:17px;line-height:1.65;color:var(--muted);margin:0;max-width:440px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{padding:30px 28px;min-height:214px;border-radius:25px;border:1px solid var(--line);background:rgba(255,255,255,.5)}.feature-number{font-size:11px;letter-spacing:1px;color:#937127}.feature h3{font-size:21px;letter-spacing:-.5px;margin:29px 0 10px;font-weight:600}.feature p{font-size:14px;line-height:1.65;color:var(--muted);margin:0}
+    .control{border-radius:34px;background:var(--indigo);color:#fff;padding:64px;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}.control .eyebrow{color:var(--gold)}.control h2{font-size:42px;line-height:1.1;letter-spacing:-1.8px;margin:20px 0}.control p{color:#b9bdcc;line-height:1.65;font-size:15px}.approval{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:24px;box-shadow:inset 0 1px rgba(255,255,255,.07)}.approval-label{font-size:10px;text-transform:uppercase;letter-spacing:1.1px;color:var(--gold)}.approval h3{font-size:19px;margin:13px 0}.approval .email{font-size:12px;color:#b9bdcc;line-height:1.6}.approval-actions{display:flex;gap:9px;margin-top:22px}.approval-actions span{flex:1;text-align:center;padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.13);font-size:12px}.approval-actions span:last-child{background:#fff;color:var(--indigo);font-weight:600}
+    .privacy-summary{display:flex;justify-content:space-between;align-items:end;gap:40px;padding-top:100px}.privacy-summary h2{font-size:36px;letter-spacing:-1.4px;margin:0 0 14px}.privacy-summary p{font-size:15px;color:var(--muted);line-height:1.65;max-width:640px;margin:0}.text-link{font-size:14px;font-weight:600;white-space:nowrap;border-bottom:1px solid var(--gold);padding-bottom:5px}footer{margin-top:100px;border-top:1px solid var(--line);padding:32px 0 42px;display:flex;justify-content:space-between;gap:25px;color:var(--muted);font-size:12px}.footer-links{display:flex;gap:24px}.footer-links a:hover{color:var(--ink)}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:10px;padding-top:65px}.intro{max-width:600px}.stage{margin-top:25px}.features{grid-template-columns:repeat(2,1fr)}.section-head{grid-template-columns:1fr;gap:20px}.control{padding:42px;grid-template-columns:1fr}.float-card{right:calc(50% - 225px)}.privacy-summary{padding-top:80px}}
+    @media(max-width:560px){.wrap{width:calc(100% - 36px)}.nav-inner{height:68px}.nav-links{gap:17px;font-size:12px}.nav-links a:first-child{display:none}.hero{padding:52px 0 52px;min-height:auto}h1{letter-spacing:-2.3px}.intro{font-size:17px}.trust{font-size:11px}.trust span{padding:0 11px}.stage{min-height:600px}.phone{transform:none}.float-card{right:0;bottom:35px;width:180px}.principles{grid-template-columns:1fr;padding:0}.principle{padding:18px;border-left:0;border-top:1px solid var(--line)}.principle:first-child{border:0}.section{padding:75px 0}.features{grid-template-columns:1fr}.feature{min-height:0}.feature h3{margin-top:20px}.control{padding:30px 24px;border-radius:26px}.control h2{font-size:33px}.privacy-summary{display:block;padding-top:70px}.text-link{display:inline-block;margin-top:24px}footer{margin-top:70px;flex-direction:column}.footer-links{flex-wrap:wrap}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation"><div class="wrap nav-inner">
+    <a class="brand" href="./" aria-label="Ferra home"><img src="ferra-icon.png" alt="" width="36" height="36">Ferra</a>
+    <div class="nav-links"><a href="#features">Features</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></div>
+  </div></nav>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Your personal AI workspace</div>
+        <h1>AI agents that<br>work for you.</h1>
+        <p class="intro">A focused agent for every task. Choose from hundreds of AI models, chat in your language and decide what happens next.</p>
+        <p class="uz" lang="uz">Ferra — siz uchun ishlaydigan AI agentlari.</p>
+        <div class="actions"><a class="button primary" aria-disabled="true">Download on the App Store</a><a class="button secondary" href="#features">Explore Ferra</a></div>
+        <p class="note">The App Store link will be enabled after review.</p>
+        <div class="trust"><span>400+ models</span><span>Your own key</span><span>No tracking</span></div>
+      </div>
+      <div class="stage" aria-label="Ferra agent list preview" role="img">
+        <div class="halo"></div>
+        <div class="phone">
+          <div class="island"></div><div class="phone-top"><span class="mini-avatar">M</span><span class="plus">+</span></div>
+          <h2>Ferra</h2><p class="phone-sub">Your agents, ready to work.</p>
+          <div class="agent-row"><div class="agent-mini"><div class="agent-icon">R</div>Researcher</div><div class="agent-mini"><div class="agent-icon">E</div>Email</div><div class="agent-mini"><div class="agent-icon">T</div>Translator</div></div>
+          <p class="section-label">All agents</p>
+          <div class="agent-card"><div class="agent-icon">R</div><div><strong>Researcher</strong><p>Find, compare and summarize</p></div></div>
+          <div class="agent-card"><div class="agent-icon">E</div><div><strong>Email assistant</strong><p>Your draft is ready to review</p></div></div>
+          <div class="agent-card"><div class="agent-icon">T</div><div><strong>Translator</strong><p>Clear translations, in context</p></div></div>
+          <div class="search">⌕ Search</div>
+        </div>
+        <div class="float-card"><div class="gold-dot"></div><strong>You stay in control</strong><p>Nothing is sent externally without your approval.</p></div>
+      </div>
+    </section>
+    <div class="principles"><div class="principle"><strong>One agent.</strong> One clear task.</div><div class="principle"><strong>Any model.</strong> Live from OpenRouter.</div><div class="principle"><strong>Your choice.</strong> Before external actions.</div></div>
+    <section class="section" id="features">
+      <div class="section-head"><h2 class="section-title">Less setup.<br>More useful work.</h2><p class="section-copy">Ferra keeps the interface simple and the important choices visible: what your agent is for, which model it uses and what it is allowed to do.</p></div>
+      <div class="features">
+        <article class="feature"><span class="feature-number">01</span><h3>A clear job for each agent</h3><p>Create an agent with a name and one focused task. Keep research, writing and translation in their own spaces.</p></article>
+        <article class="feature"><span class="feature-number">02</span><h3>Choose the intelligence</h3><p>Browse a live catalog of more than 400 OpenRouter models. Compare context and pricing, then choose per agent.</p></article>
+        <article class="feature"><span class="feature-number">03</span><h3>Conversations with context</h3><p>Keep separate chat threads for each piece of work. Switch between English and Uzbek whenever you like.</p></article>
+        <article class="feature"><span class="feature-number">04</span><h3>Start free. Bring your key.</h3><p>Try Ferra with a daily free allowance, or connect your own OpenRouter key. Your key is encrypted on the server and never sent back to your iPhone.</p></article>
+        <article class="feature"><span class="feature-number">05</span><h3>See where usage goes</h3><p>Review requests, tokens and model-reported cost by agent and model. Your remaining free allowance is visible too.</p></article>
+        <article class="feature"><span class="feature-number">06</span><h3>Safety is part of the flow</h3><p>Report an AI response in a few taps to hide it. Safety filtering and explicit action approval are built into the experience.</p></article>
+      </div>
+    </section>
+    <section class="control" id="control"><div><div class="eyebrow">Actions need your approval</div><h2>Your agent can suggest.<br>You decide.</h2><p>When an agent wants to send an email or message, Ferra shows the recipient and content first. Only your explicit approval lets the server perform the action.</p></div><div class="approval"><span class="approval-label">Approval required</span><h3>Send research email?</h3><div class="email">To: aziza@example.com<br>Subject: Research summary<br><br>Review the complete message before making a choice.</div><div class="approval-actions"><span>Deny</span><span>Approve</span></div></div></section>
+    <section class="privacy-summary"><div><h2>Built without tracking.</h2><p>Sign in privately with Apple. No ads, no analytics SDK and no selling of personal data. Read exactly what Ferra stores, what is sent to OpenRouter and how to delete your account in the app.</p></div><a class="text-link" href="privacy/">Read the Privacy Policy</a></section>
+  </main>
+  <div class="wrap"><footer><span>Ferra by <a href="https://tou.gg/">Maqsudjon Polatov</a></span><div class="footer-links"><a href="privacy/">Privacy Policy</a><a href="terms/">Terms of Use</a><a href="mailto:polatovmaqsudjon1@gmail.com">Support</a></div></footer></div>
+</body>
+</html>
