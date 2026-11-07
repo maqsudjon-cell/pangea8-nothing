@@ -1,0 +1,109 @@
+# Ferra AI Agents
+
+> Ferra is a personal AI-agent app for iPhone. Each agent has a name, one focused task, its own OpenRouter model and separate chat threads. Ferra supports text and selected-image input, optional encrypted BYOK, visible usage and explicit approval before external actions.
+
+- Official website: https://tou.gg/ferra/
+- Full App Store listing name: Ferra AI Agents
+- Platform: iPhone, iOS 17 or later
+- Current product version: 1.0.0 (build 4)
+- Current availability: Apple review is complete. Ferra 1.0.0 is publicly available on the App Store as of November 7, 2026: https://apps.apple.com/app/id6831706335
+- Price: Free App Store price; 20 free messages per day in the current free-start configuration. No in-app purchases or subscriptions.
+- Optional BYOK: users can connect their own OpenRouter account; provider charges and terms apply.
+- Developer: Maqsudjon Polatov, product engineer in Tashkent — https://tou.gg/cv/
+- Name: Ferra is named after the developer's daughter.
+- Contact: polatovmaqsudjon1@gmail.com
+- Product facts updated: November 8, 2026
+- Not to be confused with: unrelated products or personal names containing Ferra. This is the iPhone AI-agent app at tou.gg/ferra.
+
+## What Ferra does
+
+- Sign in with Apple is the only login method; Ferra never receives the user's Apple password.
+- Users create an agent with a name, one task and a separate model, or add a built-in starter.
+- The live OpenRouter catalog provides hundreds of models from many providers. Catalog size and availability change.
+- Agents have separate chat threads. Selected images can be attached when the chosen model supports image input.
+- AI answers support readable Markdown formatting, loading states, reporting and blocking.
+- Free start uses the developer's OpenRouter account with a server-enforced daily limit.
+- BYOK keys travel over HTTPS, are validated with OpenRouter and stored encrypted on the server. The plaintext key is not stored on the iPhone and is never returned after submission.
+- Usage shows requests, tokens, model-reported cost and the remaining daily free allowance by agent and model.
+- Email and message proposals require in-app approval. Apple Mail or Messages then opens, and the user makes the final sending decision there. A proposal or approval is not proof of delivery.
+- Ferra's Open Ferra shortcut works with Siri and supported iPhone Action Buttons. It opens the app; it does not silently read the screen or change hardware settings.
+- The interface supports English and Uzbek.
+- Settings → Delete Account removes account and active app data without requiring a support request.
+
+## Built-in starter agents
+
+- Researcher: Find, compare and summarize reliable information. Be concise and note uncertainty. Guide: https://tou.gg/ferra/agents/researcher/
+- Inbox Manager: Draft clear, friendly emails and organize communication. Never send anything without explicit approval. Guide: https://tou.gg/ferra/agents/inbox-manager/
+- Study Coach: Explain concepts step by step, create practice questions and help the user learn. Guide: https://tou.gg/ferra/agents/study-coach/
+
+## What Ferra does not do in version 1.0.0
+
+- No Android, desktop or web app.
+- No public bot marketplace, general plugin catalog or custom MCP connector.
+- No scheduled routines, cross-agent delegation or always-on background agent work.
+- No silent external sends, automatic hardware configuration or claim of delivery without native confirmation.
+- No advertising trackers, third-party analytics SDK, data sale or in-app subscription.
+- Image input requires a model with image capability.
+- AI responses can be wrong. Users should check important information and avoid submitting unnecessary sensitive data.
+
+## Privacy and account control
+
+- Ferra stores account identifiers, agent configuration, chats, selected images, actions, reports and usage needed to provide the service.
+- OpenRouter and selected model providers process content needed to answer requests. Cloudflare hosts the backend and D1 database.
+- The app uses HTTPS, verifies Apple identity tokens and encrypts stored BYOK credentials.
+- Users can remove BYOK, delete individual agents and chats, report AI responses or delete the whole account in the app.
+- Privacy Policy: https://tou.gg/ferra/privacy/
+- Terms of Use: https://tou.gg/ferra/terms/
+- Deletion guide: https://tou.gg/ferra/delete-account/
+
+## Comparison position
+
+- Ferra focuses on separate one-job agents, English/Uzbek support, image-capable chats, iOS 17+ and no in-app subscription.
+- Stormi offers coordinated bot teams, server-side routines, plugins and a public marketplace, with optional paid plans.
+- Ferra does not claim to offer those Stormi features in version 1.0.0.
+- Full sourced comparison: https://tou.gg/ferra/vs/stormi/
+
+## Official pages
+
+- [Home](https://tou.gg/ferra/): product overview, interactive starters, features, approvals, Action Button, FAQ and comparison summary.
+- [Privacy Policy](https://tou.gg/ferra/privacy/)
+- [Terms of Use](https://tou.gg/ferra/terms/)
+- [Features — Ferra AI Agents](https://tou.gg/ferra/features/): Explore Ferra’s real features: focused agents, live OpenRouter models, text and image chat, BYOK, usage, approvals and account deletion.
+- [How Ferra works — from an idea to an AI agent](https://tou.gg/ferra/how-it-works/): Learn exactly how to sign in, add a Ferra agent, choose its OpenRouter model, chat with text or images and approve external actions.
+- [Ferra use cases — research, email drafts and learning](https://tou.gg/ferra/use-cases/): See practical ways to use Ferra’s Researcher, Inbox Manager, Study Coach and custom one-job agents without giving up approval or privacy.
+- [Ferra pricing — free start and optional BYOK](https://tou.gg/ferra/pricing/): Ferra is free to download with 20 free messages per day, no in-app subscription and optional OpenRouter BYOK with visible usage.
+- [Ferra changelog — version 1.0.0](https://tou.gg/ferra/changelog/): The factual Ferra 1.0.0 release record: starter agents, per-agent OpenRouter models, image chat, BYOK, usage, approvals and account deletion.
+- [Open Ferra with Siri or the iPhone Action Button](https://tou.gg/ferra/action-button/): Set up Ferra’s Open Ferra shortcut with Siri or a supported iPhone Action Button. You choose the shortcut; Ferra never changes hardware settings.
+- [Compare Ferra with other AI agent apps](https://tou.gg/ferra/compare/): Read Ferra’s factual, sourced comparison with Stormi, including model choice, agent structure, tools, automation, platforms and starting price.
+- [Ferra vs Stormi — focused agents or connected automation](https://tou.gg/ferra/vs/stormi/): Compare Ferra and Stormi on agent structure, OpenRouter models, actions, routines, platforms and price, with an official source and clear trade-offs.
+- [Learn about AI agents, OpenRouter and BYOK](https://tou.gg/ferra/learn/): Practical Ferra guides explain AI agents, one-job instructions, OpenRouter model choice, encrypted BYOK keys, approvals and account control.
+- [What is an AI agent? A practical Ferra guide](https://tou.gg/ferra/learn/what-is-an-ai-agent/): Learn what an AI agent is, how it differs from a general chat, why one job improves focus and how approvals keep external actions under your control.
+- [OpenRouter and model choice, explained by Ferra](https://tou.gg/ferra/learn/openrouter/): Learn how Ferra uses OpenRouter’s live model catalog, per-agent models, image capabilities, model-reported costs and free or BYOK accounts.
+- [BYOK and privacy — how Ferra protects your OpenRouter key](https://tou.gg/ferra/learn/byok/): Understand Ferra’s optional OpenRouter BYOK flow: HTTPS, encrypted server storage, no plaintext key on iPhone, usage visibility and key removal.
+- [About Ferra and Maqsudjon Polatov](https://tou.gg/ferra/about/): Ferra is an independent iPhone AI-agent app built by Maqsudjon Polatov in Tashkent and named after his daughter, with a focus on clear tasks and user control.
+- [Ferra support — sign-in, models, images, BYOK and actions](https://tou.gg/ferra/support/): Get practical help with Ferra sign-in, model selection, image attachments, free limits, BYOK, Mail and Messages approvals, reporting and account deletion.
+- [Delete your Ferra account and app data](https://tou.gg/ferra/delete-account/): Delete your Ferra account in Settings. Remove agents, chats, images, reports, usage, sessions and your encrypted OpenRouter key from the active database.
+- [Ferra agent library — Researcher, Inbox Manager and Study Coach](https://tou.gg/ferra/agents/): Meet Ferra’s three built-in starter agents. See each real job, example prompts and how to add the agent inside the iPhone app.
+- [Researcher — Ferra starter agent](https://tou.gg/ferra/agents/researcher/): Researcher in Ferra: Find, compare and summarize reliable information. Be concise and note uncertainty. See example prompts, the real agent job and how to add it in the iPhone app.
+- [Inbox Manager — Ferra starter agent](https://tou.gg/ferra/agents/inbox-manager/): Inbox Manager in Ferra: Draft clear, friendly emails and organize communication. Never send anything without explicit approval. See example prompts, the real agent job and how to add it in the iPhone app.
+- [Study Coach — Ferra starter agent](https://tou.gg/ferra/agents/study-coach/): Study Coach in Ferra: Explain concepts step by step, create practice questions and help the user learn. See example prompts, the real agent job and how to add it in the iPhone app.
+
+## Frequently asked questions
+
+Q: What is Ferra?
+A: Ferra is a personal AI-agent app for iPhone. Each agent has a name, one focused task, its own model and separate chat threads. Users can start with a ready-made agent or create their own.
+
+Q: Is Ferra free?
+A: Ferra is free to download and currently includes 20 free messages per day. There is no in-app subscription. With BYOK, OpenRouter charges and terms apply to the user's own account.
+
+Q: Which AI models can agents use?
+A: Ferra loads OpenRouter's live catalog, including models from OpenAI, Google, Anthropic, Meta and others. Each agent can use a different model. Image attachments require an image-capable model.
+
+Q: Can an agent send email or messages on its own?
+A: No. Ferra asks for approval, then opens Apple Mail or Messages, where the user makes the final choice. Preparing or approving a draft is not treated as proof that it was sent.
+
+Q: What happens to an OpenRouter key?
+A: It travels over HTTPS and is stored encrypted on Ferra's backend. The plaintext key is not stored in the app and is never returned to the iPhone after submission. Users can remove it in Settings.
+
+Q: How is an account deleted?
+A: Open Settings → Delete Account. This removes the account, agents, chats, image attachments, actions, reports, usage history, sessions and encrypted OpenRouter key from Ferra's active database. Provider logs or backups may expire separately under their retention schedules.

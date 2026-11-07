@@ -3,78 +3,744 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f6f3">
-  <meta name="description" content="Ferra is a focused AI workspace for iPhone. Create an agent, choose its model and keep control of every external action.">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="description" content="Meet Ferra: personal AI agents for iPhone. Choose from hundreds of models, chat with text or images and approve every external action.">
   <meta property="og:title" content="Ferra — AI agents that work for you">
-  <meta property="og:description" content="One clear task. Your choice of AI model. Your approval before an agent acts.">
+  <meta property="og:description" content="One name. One job. Any model. A personal team of AI agents, always under your control.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tou.gg/ferra/">
-  <meta property="og:image" content="https://tou.gg/ferra/ferra-icon.png">
+  <meta property="og:image" content="https://tou.gg/ferra/ferra-header.png">
+  <meta property="og:image:width" content="3840">
+  <meta property="og:image:height" content="1646">
+  <meta property="og:image:alt" content="Ferra — AI agents that work for you">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://tou.gg/ferra/">
   <link rel="icon" href="ferra-icon.png">
   <link rel="apple-touch-icon" href="ferra-icon.png">
   <title>Ferra — AI agents that work for you</title>
   <style>
-    :root{--paper:#f6f6f3;--ink:#17191f;--muted:#6b6c72;--line:rgba(23,25,31,.09);--gold:#e8b64c;--indigo:#1a1f3d;--glass:rgba(255,255,255,.66)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:5px}.wrap{width:min(1180px,calc(100% - 48px));margin:auto}
-    .nav{position:sticky;top:0;z-index:10;border-bottom:1px solid transparent;background:rgba(246,246,243,.72);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%)}.nav-inner{height:78px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font-size:22px;font-weight:650;letter-spacing:-.6px}.brand img{width:36px;height:36px;border-radius:10px}.nav-links{display:flex;gap:30px;align-items:center;color:var(--muted);font-size:14px}.nav-links a:hover{color:var(--ink)}
-    .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:50px;align-items:center;min-height:720px;padding:74px 0 86px}.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:650;letter-spacing:1.7px;text-transform:uppercase;color:#816227}.eyebrow:before{content:"";display:block;width:7px;height:7px;border-radius:50%;background:var(--gold)}h1{font-size:clamp(46px,5.5vw,76px);line-height:1.02;letter-spacing:-3.8px;font-weight:680;margin:26px 0 24px;max-width:650px}.intro{font-size:20px;line-height:1.55;color:var(--muted);max-width:510px;margin:0}.uz{font-size:15px;line-height:1.6;color:var(--muted);margin-top:14px}.actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:34px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:53px;border-radius:28px;padding:0 24px;font-size:15px;font-weight:600}.button.primary{background:var(--ink);color:#fff}.button.secondary{border:1px solid var(--line);background:rgba(255,255,255,.4)}.button[aria-disabled=true]{cursor:default}.note{font-size:12px;color:var(--muted);margin-top:15px}.trust{display:flex;gap:0;margin-top:42px;color:var(--muted);font-size:12px}.trust span{padding:0 18px;border-left:1px solid var(--line)}.trust span:first-child{padding-left:0;border:0}
-    .stage{position:relative;display:grid;place-items:center;min-height:570px}.halo{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(232,182,76,.25),rgba(232,182,76,0) 70%);filter:blur(14px)}.phone{position:relative;width:292px;height:596px;border:7px solid #fff;border-radius:48px;background:#fafaf9;box-shadow:0 30px 80px rgba(26,31,61,.15),0 2px 8px rgba(26,31,61,.06);padding:19px 18px;overflow:hidden;transform:rotate(3deg)}.island{width:84px;height:23px;border-radius:15px;background:#151515;margin:0 auto 26px}.phone-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.mini-avatar{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:600}.plus{font-size:25px;font-weight:300}.phone h2{font-size:34px;letter-spacing:-1.2px;margin:0 0 7px}.phone-sub{font-size:10px;color:var(--muted);margin:0 0 22px}.agent-row{display:flex;gap:19px;margin-bottom:29px}.agent-mini{text-align:center;font-size:9px;color:var(--muted)}.agent-icon{display:grid;place-items:center;width:53px;height:53px;border-radius:16px;background:#f9eed6;color:#3c3426;font-size:23px;font-weight:500;margin-bottom:8px}.agent-mini:nth-child(2) .agent-icon{background:#e1f2e8}.agent-mini:nth-child(3) .agent-icon{background:#e4e6f6}.section-label{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin:0 0 10px}.agent-card{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.8);border:1px solid rgba(23,25,31,.05);border-radius:19px;padding:12px;margin-top:9px;box-shadow:0 3px 12px rgba(23,25,31,.025)}.agent-card .agent-icon{width:37px;height:37px;border-radius:12px;font-size:17px;margin:0}.agent-card strong{font-size:11px;font-weight:600}.agent-card p{font-size:8px;color:var(--muted);margin:4px 0 0}.search{position:absolute;left:38px;right:38px;bottom:26px;height:41px;border-radius:22px;background:rgba(255,255,255,.7);border:1px solid var(--line);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;gap:7px;color:var(--muted);font-size:10px}.float-card{position:absolute;right:0;bottom:55px;width:205px;padding:17px;border-radius:22px;background:var(--glass);border:1px solid rgba(255,255,255,.8);box-shadow:0 15px 38px rgba(26,31,61,.1);backdrop-filter:blur(22px);font-size:11px}.float-card strong{display:block;font-size:12px;margin:7px 0}.float-card p{color:var(--muted);line-height:1.45;margin:0}.gold-dot{width:8px;height:8px;background:var(--gold);border-radius:50%}
-    .principles{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);padding:29px 0}.principle{text-align:center;font-size:14px;color:var(--muted);border-left:1px solid var(--line)}.principle:first-child{border:0}.principle strong{color:var(--ink);font-weight:600}
-    .section{padding:110px 0}.section-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:48px}h2.section-title{font-size:clamp(34px,4vw,52px);line-height:1.08;letter-spacing:-2.1px;margin:0;font-weight:650}.section-copy{font-size:17px;line-height:1.65;color:var(--muted);margin:0;max-width:440px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{padding:30px 28px;min-height:214px;border-radius:25px;border:1px solid var(--line);background:rgba(255,255,255,.5)}.feature-number{font-size:11px;letter-spacing:1px;color:#937127}.feature h3{font-size:21px;letter-spacing:-.5px;margin:29px 0 10px;font-weight:600}.feature p{font-size:14px;line-height:1.65;color:var(--muted);margin:0}
-    .control{border-radius:34px;background:var(--indigo);color:#fff;padding:64px;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}.control .eyebrow{color:var(--gold)}.control h2{font-size:42px;line-height:1.1;letter-spacing:-1.8px;margin:20px 0}.control p{color:#b9bdcc;line-height:1.65;font-size:15px}.approval{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:24px;box-shadow:inset 0 1px rgba(255,255,255,.07)}.approval-label{font-size:10px;text-transform:uppercase;letter-spacing:1.1px;color:var(--gold)}.approval h3{font-size:19px;margin:13px 0}.approval .email{font-size:12px;color:#b9bdcc;line-height:1.6}.approval-actions{display:flex;gap:9px;margin-top:22px}.approval-actions span{flex:1;text-align:center;padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.13);font-size:12px}.approval-actions span:last-child{background:#fff;color:var(--indigo);font-weight:600}
-    .privacy-summary{display:flex;justify-content:space-between;align-items:end;gap:40px;padding-top:100px}.privacy-summary h2{font-size:36px;letter-spacing:-1.4px;margin:0 0 14px}.privacy-summary p{font-size:15px;color:var(--muted);line-height:1.65;max-width:640px;margin:0}.text-link{font-size:14px;font-weight:600;white-space:nowrap;border-bottom:1px solid var(--gold);padding-bottom:5px}footer{margin-top:100px;border-top:1px solid var(--line);padding:32px 0 42px;display:flex;justify-content:space-between;gap:25px;color:var(--muted);font-size:12px}.footer-links{display:flex;gap:24px}.footer-links a:hover{color:var(--ink)}
-    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:10px;padding-top:65px}.intro{max-width:600px}.stage{margin-top:25px}.features{grid-template-columns:repeat(2,1fr)}.section-head{grid-template-columns:1fr;gap:20px}.control{padding:42px;grid-template-columns:1fr}.float-card{right:calc(50% - 225px)}.privacy-summary{padding-top:80px}}
-    @media(max-width:560px){.wrap{width:calc(100% - 36px)}.nav-inner{height:68px}.nav-links{gap:17px;font-size:12px}.nav-links a:first-child{display:none}.hero{padding:52px 0 52px;min-height:auto}h1{letter-spacing:-2.3px}.intro{font-size:17px}.trust{font-size:11px}.trust span{padding:0 11px}.stage{min-height:600px}.phone{transform:none}.float-card{right:0;bottom:35px;width:180px}.principles{grid-template-columns:1fr;padding:0}.principle{padding:18px;border-left:0;border-top:1px solid var(--line)}.principle:first-child{border:0}.section{padding:75px 0}.features{grid-template-columns:1fr}.feature{min-height:0}.feature h3{margin-top:20px}.control{padding:30px 24px;border-radius:26px}.control h2{font-size:33px}.privacy-summary{display:block;padding-top:70px}.text-link{display:inline-block;margin-top:24px}footer{margin-top:70px;flex-direction:column}.footer-links{flex-wrap:wrap}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    :root {
+      --paper: #f5f5f7;
+      --ink: #171923;
+      --muted: #686b78;
+      --line: rgba(23, 25, 35, .09);
+      --gold: #e8b64c;
+      --gold-dark: #886619;
+      --indigo: #1a1f3d;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(1200px, calc(100% - 48px)); margin-inline: auto; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(23, 25, 35, .055);
+      background: rgba(245, 245, 247, .78);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+    }
+    .nav-inner { height: 78px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-size: 23px; font-weight: 680; letter-spacing: -.7px; }
+    .brand img { width: 38px; height: 38px; border-radius: 11px; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: var(--muted); font-size: 14px; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--ink); }
+    .hero { position: relative; padding: 72px 0 58px; }
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 680px;
+      height: 680px;
+      top: -160px;
+      right: -160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232, 182, 76, .2), rgba(232, 182, 76, 0) 68%);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 44px; align-items: center; min-height: 690px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--gold-dark); font-size: 12px; font-weight: 680; letter-spacing: 1.6px; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 5px rgba(232, 182, 76, .12); }
+    h1 { max-width: 630px; margin: 25px 0 25px; font-size: clamp(54px, 5.7vw, 82px); line-height: .99; letter-spacing: -4.4px; font-weight: 700; }
+    h1 span { color: var(--gold-dark); }
+    .intro { max-width: 530px; margin: 0; color: var(--muted); font-size: 20px; line-height: 1.55; letter-spacing: -.2px; }
+    .uz { margin: 16px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 33px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 24px; border: 1px solid var(--line); border-radius: 28px; font-size: 15px; font-weight: 620; }
+    .button-primary { border-color: var(--ink); background: var(--ink); color: #fff; box-shadow: 0 8px 24px rgba(23, 25, 35, .12); }
+    .button-secondary { background: rgba(255, 255, 255, .58); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); transition: background .2s ease, transform .2s ease; }
+    .button-secondary:hover { background: #fff; transform: translateY(-1px); }
+    .button-secondary span { margin-left: 10px; font-size: 18px; }
+    .is-disabled { opacity: .88; }
+    .review-note { margin: 13px 0 0; color: var(--muted); font-size: 12px; }
+    .trust { display: flex; flex-wrap: wrap; gap: 18px; margin: 34px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 12px; }
+    .trust li { display: flex; align-items: center; gap: 7px; }
+    .trust svg { width: 15px; height: 15px; color: var(--gold-dark); }
+    .stage { position: relative; min-height: 680px; display: grid; place-items: center; }
+    .stage::before { content: ""; position: absolute; width: 440px; height: 540px; border-radius: 48%; background: rgba(255, 255, 255, .72); filter: blur(35px); transform: rotate(-12deg); }
+    .phone { position: relative; width: 310px; margin: 0; transform: rotate(3deg); }
+    .phone img { width: 100%; height: auto; border: 7px solid rgba(255, 255, 255, .94); border-radius: 48px; box-shadow: 0 34px 80px rgba(26, 31, 61, .17), 0 3px 10px rgba(26, 31, 61, .06); }
+    .float-card { position: absolute; z-index: 2; border: 1px solid rgba(255, 255, 255, .88); background: rgba(255, 255, 255, .7); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); box-shadow: 0 16px 44px rgba(26, 31, 61, .12); }
+    .models-float { top: 88px; left: -8px; width: 176px; padding: 18px; border-radius: 24px; transform: rotate(-4deg); }
+    .float-label { color: var(--muted); font-size: 11px; }
+    .float-value { display: block; margin-top: 5px; font-size: 25px; line-height: 1.1; letter-spacing: -1px; }
+    .float-sub { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; }
+    .approval-float { right: -10px; bottom: 83px; width: 206px; padding: 18px; border-radius: 24px; }
+    .approval-icon { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: rgba(232, 182, 76, .18); color: var(--gold-dark); }
+    .approval-icon svg { width: 17px; height: 17px; }
+    .approval-float strong { display: block; margin: 10px 0 5px; font-size: 13px; }
+    .approval-float p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .proof { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 30px; overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: rgba(255, 255, 255, .5); }
+    .proof-item { padding: 27px 32px; border-left: 1px solid var(--line); }
+    .proof-item:first-child { border-left: 0; }
+    .proof-item strong { display: block; margin-bottom: 4px; font-size: 27px; line-height: 1.2; letter-spacing: -1px; }
+    .proof-item span { color: var(--muted); font-size: 13px; }
+    .section { padding: 112px 0; }
+    .section-head { display: grid; grid-template-columns: 1.1fr .9fr; align-items: end; gap: 60px; margin-bottom: 47px; }
+    .section-title { margin: 16px 0 0; font-size: clamp(38px, 4.4vw, 57px); line-height: 1.06; letter-spacing: -2.6px; font-weight: 670; }
+    .section-copy { max-width: 450px; margin: 0 0 3px; color: var(--muted); font-size: 17px; line-height: 1.65; }
+    .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px; }
+    .feature { position: relative; overflow: hidden; border: 1px solid rgba(23, 25, 35, .065); border-radius: 32px; background: rgba(255, 255, 255, .68); }
+    .feature h3 { margin: 13px 0 11px; font-size: 28px; line-height: 1.13; letter-spacing: -1.1px; font-weight: 640; }
+    .feature p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .feature-copy { position: relative; z-index: 2; padding: 34px; }
+    .feature-tag { color: var(--gold-dark); font-size: 11px; font-weight: 680; letter-spacing: 1.3px; text-transform: uppercase; }
+    .models-card { grid-column: span 7; display: grid; grid-template-columns: .86fr 1.14fr; min-height: 550px; }
+    .models-card .feature-copy { padding-right: 8px; }
+    .models-window { align-self: end; height: 500px; margin: 50px 24px 0 24px; overflow: hidden; border-radius: 30px 30px 0 0; box-shadow: 0 18px 42px rgba(26, 31, 61, .08); }
+    .models-window img { width: 100%; height: auto; }
+    .chat-card { grid-column: span 5; min-height: 550px; background: #f0f0f4; }
+    .chat-window { position: absolute; right: 24px; bottom: 0; left: 24px; overflow: hidden; border-radius: 28px 28px 0 0; box-shadow: 0 -10px 35px rgba(26, 31, 61, .05); }
+    .chat-window img { width: 100%; height: auto; }
+    .usage-card { grid-column: span 5; min-height: 570px; }
+    .usage-window { position: absolute; right: 30px; bottom: 0; left: 30px; height: 340px; overflow: hidden; border-radius: 30px 30px 0 0; box-shadow: 0 18px 42px rgba(26, 31, 61, .08); }
+    .usage-window img { width: 100%; height: auto; }
+    .key-card { grid-column: span 7; min-height: 570px; background: var(--indigo); color: #fff; }
+    .key-card .feature-tag { color: var(--gold); }
+    .key-card p { color: #bdc2d2; }
+    .key-flow { position: absolute; right: 34px; bottom: 46px; left: 34px; display: grid; gap: 12px; }
+    .key-step { display: flex; align-items: center; gap: 16px; padding: 19px; border: 1px solid rgba(255, 255, 255, .12); border-radius: 22px; background: rgba(255, 255, 255, .075); }
+    .key-step-icon { display: grid; place-items: center; flex: 0 0 40px; height: 40px; border-radius: 13px; background: rgba(232, 182, 76, .13); color: var(--gold); }
+    .key-step svg { width: 20px; height: 20px; }
+    .key-step strong { display: block; margin-bottom: 3px; font-size: 14px; font-weight: 600; }
+    .key-step span { color: #bdc2d2; font-size: 12px; line-height: 1.5; }
+    .control { position: relative; display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 66px; overflow: hidden; padding: 64px; border-radius: 38px; background: #151a36; color: #fff; }
+    .control::after { content: ""; position: absolute; right: -160px; bottom: -240px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(232, 182, 76, .15), transparent 68%); pointer-events: none; }
+    .control-copy { position: relative; z-index: 1; }
+    .control .eyebrow { color: var(--gold); }
+    .control h2 { margin: 21px 0 20px; font-size: 44px; line-height: 1.08; letter-spacing: -2px; }
+    .control-copy > p { margin: 0; color: #bdc2d2; font-size: 15px; line-height: 1.7; }
+    .control-points { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 25px; color: #e5e7ee; font-size: 12px; }
+    .control-points span { display: inline-flex; align-items: center; gap: 6px; }
+    .control-points span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+    .approval { position: relative; z-index: 1; padding: 27px; border: 1px solid rgba(255, 255, 255, .16); border-radius: 28px; background: rgba(255, 255, 255, .085); box-shadow: inset 0 1px rgba(255, 255, 255, .07), 0 28px 60px rgba(0, 0, 0, .13); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+    .approval-label { color: var(--gold); font-size: 10px; font-weight: 650; letter-spacing: 1.3px; text-transform: uppercase; }
+    .approval h3 { margin: 15px 0 13px; font-size: 23px; letter-spacing: -.7px; }
+    .approval-email { color: #c3c7d5; font-size: 13px; line-height: 1.65; }
+    .approval-divider { height: 1px; margin: 23px 0; background: rgba(255, 255, 255, .12); }
+    .approval-question { margin: 0; color: #e5e7ee; font-size: 13px; }
+    .approval-actions { display: flex; gap: 10px; margin-top: 22px; }
+    .approval-actions span { flex: 1; padding: 13px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 20px; text-align: center; font-size: 13px; }
+    .approval-actions span:last-child { background: #fff; color: var(--indigo); font-weight: 650; }
+    .privacy { display: grid; grid-template-columns: 1fr .8fr; align-items: center; gap: 70px; padding: 112px 0; }
+    .privacy h2 { margin: 16px 0 16px; font-size: 42px; line-height: 1.08; letter-spacing: -1.9px; }
+    .privacy-copy p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .legal-links { display: grid; gap: 12px; }
+    .legal-link { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 23px 25px; border: 1px solid var(--line); border-radius: 24px; background: rgba(255, 255, 255, .52); transition: background .2s ease, transform .2s ease; }
+    .legal-link:hover { background: #fff; transform: translateY(-2px); }
+    .legal-link strong { display: block; margin-bottom: 4px; font-size: 15px; }
+    .legal-link span { color: var(--muted); font-size: 12px; }
+    .legal-arrow { color: var(--gold-dark) !important; font-size: 22px !important; }
+    .closing { padding: 68px 30px; border: 1px solid var(--line); border-radius: 34px; background: rgba(255, 255, 255, .58); text-align: center; }
+    .closing img { width: 66px; height: 66px; margin: 0 auto 23px; border-radius: 19px; box-shadow: 0 12px 30px rgba(26, 31, 61, .14); }
+    .closing h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.1; letter-spacing: -2px; }
+    .closing p { margin: 14px 0 25px; color: var(--muted); font-size: 15px; }
+    footer { display: flex; justify-content: space-between; gap: 25px; margin-top: 65px; padding: 31px 0 42px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .footer-links { display: flex; gap: 24px; }
+    footer a:hover { color: var(--ink); }
+    @media (max-width: 1050px) {
+      .hero-grid { gap: 18px; }
+      h1 { font-size: 64px; letter-spacing: -3.5px; }
+      .phone { width: 282px; }
+      .stage { min-height: 630px; }
+      .models-float { left: 0; }
+      .approval-float { right: 0; }
+      .control { gap: 38px; padding: 48px; }
+      .control h2 { font-size: 38px; }
+      .feature-copy { padding: 28px; }
+      .models-card .feature-copy { padding-right: 0; }
+    }
+    @media (max-width: 820px) {
+      .hero { padding-top: 58px; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-copy { display: flex; flex-direction: column; align-items: center; }
+      h1 { max-width: 680px; font-size: clamp(54px, 10vw, 76px); }
+      .intro { max-width: 600px; }
+      .trust { justify-content: center; }
+      .stage { width: min(560px, 100%); min-height: 670px; margin: 10px auto 0; }
+      .phone { width: 304px; }
+      .models-float { left: 24px; }
+      .approval-float { right: 20px; }
+      .proof-item { padding: 24px; }
+      .section { padding: 88px 0; }
+      .section-head { grid-template-columns: 1fr; gap: 20px; }
+      .section-copy { max-width: 600px; }
+      .models-card, .chat-card, .usage-card, .key-card { grid-column: span 12; }
+      .models-card { grid-template-columns: 1fr 1fr; }
+      .control { grid-template-columns: 1fr; padding: 46px; }
+      .control-copy > p { max-width: 620px; }
+      .approval { max-width: 480px; }
+      .privacy { grid-template-columns: 1fr; gap: 35px; padding: 88px 0; }
+      .legal-links { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: calc(100% - 32px); }
+      .nav-inner { height: 66px; }
+      .brand { font-size: 21px; }
+      .brand img { width: 34px; height: 34px; border-radius: 10px; }
+      .nav-links { gap: 18px; font-size: 12px; }
+      .nav-links a:first-child { display: none; }
+      .hero { padding: 48px 0 36px; }
+      .hero-grid { min-height: 0; }
+      .eyebrow { font-size: 10px; letter-spacing: 1.3px; }
+      h1 { margin: 22px 0; font-size: 50px; letter-spacing: -2.7px; }
+      .intro { font-size: 17px; }
+      .uz { font-size: 13px; }
+      .actions { justify-content: center; margin-top: 28px; }
+      .button { width: 100%; min-height: 52px; }
+      .review-note { text-align: center; }
+      .trust { gap: 12px; margin-top: 25px; font-size: 11px; }
+      .stage { min-height: 580px; margin-top: 18px; }
+      .phone { width: 250px; transform: rotate(2deg); }
+      .phone img { border-width: 5px; border-radius: 39px; }
+      .models-float { top: 65px; left: -2px; width: 137px; padding: 14px; border-radius: 20px; text-align: left; }
+      .float-value { font-size: 22px; }
+      .float-label, .float-sub { font-size: 10px; }
+      .approval-float { right: -2px; bottom: 45px; width: 165px; padding: 15px; border-radius: 20px; text-align: left; }
+      .approval-float strong { font-size: 12px; }
+      .approval-float p { font-size: 10px; }
+      .proof { margin-top: 20px; border-radius: 23px; }
+      .proof-item { padding: 18px 10px; text-align: center; }
+      .proof-item strong { font-size: 24px; }
+      .proof-item span { font-size: 10px; line-height: 1.4; }
+      .section { padding: 74px 0; }
+      .section-head { margin-bottom: 32px; }
+      .section-title { font-size: 38px; letter-spacing: -1.8px; }
+      .section-copy { font-size: 15px; }
+      .bento { gap: 14px; }
+      .feature { border-radius: 27px; }
+      .feature h3 { font-size: 27px; }
+      .feature-copy { padding: 27px; }
+      .models-card { display: block; min-height: 690px; }
+      .models-card .feature-copy { padding-right: 27px; }
+      .models-window { height: 400px; margin: 14px 27px 0; }
+      .chat-card { min-height: 480px; }
+      .chat-window { right: 18px; left: 18px; }
+      .usage-card { min-height: 560px; }
+      .usage-window { right: 22px; left: 22px; height: 325px; }
+      .key-card { min-height: 570px; }
+      .key-flow { right: 22px; bottom: 25px; left: 22px; }
+      .key-step { gap: 12px; padding: 15px; }
+      .key-step span { font-size: 11px; }
+      .control { gap: 33px; padding: 32px 24px; border-radius: 28px; }
+      .control h2 { font-size: 34px; letter-spacing: -1.5px; }
+      .control-copy > p { font-size: 14px; }
+      .control-points { display: grid; gap: 10px; }
+      .approval { padding: 22px; border-radius: 23px; }
+      .privacy { padding: 74px 0; }
+      .privacy h2 { font-size: 36px; }
+      .legal-links { grid-template-columns: 1fr; }
+      .closing { padding: 43px 22px; border-radius: 27px; }
+      .closing h2 { letter-spacing: -1.4px; }
+      footer { flex-direction: column; margin-top: 45px; }
+      .footer-links { flex-wrap: wrap; gap: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+    h1 em { position: relative; display: inline-block; padding: 0 .04em .12em 0; font-family: inherit; font-weight: 750; font-style: normal; letter-spacing: -.075em; background-image: radial-gradient(circle, var(--gold) 1.4px, transparent 1.7px); background-size: 13px 4px; background-repeat: repeat-x; background-position: left bottom; }
+    h1 em::after { content: ""; position: absolute; top: -.06em; right: -.09em; width: .12em; height: .17em; border-radius: 90% 10% 90% 10%; background: var(--gold); transform: rotate(24deg); }
+    .new-pill { display: inline-flex; align-items: center; gap: 9px; max-width: 100%; padding: 7px 12px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255, 255, 255, .45); color: var(--muted); font-size: 11px; line-height: 1.4; transition: border-color .2s ease, background .2s ease; }
+    .new-pill:hover { border-color: rgba(136, 102, 25, .35); background: #fff; }
+    .new-pill span { padding: 3px 7px; border-radius: 9px; background: rgba(232, 182, 76, .18); color: var(--gold-dark); font-size: 10px; font-weight: 650; }
+    .new-pill b { color: var(--gold-dark); font-weight: 500; }
+    .agents-section { padding-top: 104px; }
+    .agent-selector { overflow: hidden; border: 1px solid var(--line); border-radius: 34px; background: rgba(255, 255, 255, .62); }
+    .agent-tabs { display: flex; justify-content: center; gap: 9px; padding: 24px; border-bottom: 1px solid var(--line); }
+    .agent-tab { padding: 11px 19px; border: 1px solid transparent; border-radius: 22px; background: transparent; color: var(--muted); font-family: inherit; font-size: 14px; font-weight: 570; cursor: pointer; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+    .agent-tab:hover { color: var(--ink); background: rgba(23, 25, 35, .04); }
+    .agent-tab[aria-selected="true"] { border-color: rgba(136, 102, 25, .19); background: rgba(232, 182, 76, .15); color: var(--gold-dark); }
+    .agent-tab:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .agent-panel { display: grid; grid-template-columns: .92fr 1.08fr; gap: 32px; min-height: 435px; padding: 32px; }
+    .agent-panel-copy { align-self: center; padding: 16px 10px; }
+    .agent-panel-copy h3 { margin: 17px 0 16px; font-size: 32px; line-height: 1.16; letter-spacing: -1.2px; font-weight: 630; }
+    .agent-panel-copy p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .agent-model-note { display: inline-flex; margin-top: 23px; padding: 8px 12px; border: 1px solid rgba(136, 102, 25, .16); border-radius: 16px; color: var(--gold-dark); font-size: 11px; }
+    .agent-demo { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; border-radius: 28px; background: radial-gradient(circle at 50% 10%, rgba(232, 182, 76, .12), transparent 47%), var(--indigo); color: #fff; text-align: center; }
+    .dot-avatar { --agent-color: #efb66f; display: grid; grid-template-columns: repeat(5, 8px); gap: 8px; place-content: center; width: 132px; height: 132px; margin-bottom: 22px; border: 1px solid rgba(255, 255, 255, .09); border-radius: 34px; background: rgba(255, 255, 255, .07); box-shadow: inset 0 1px rgba(255, 255, 255, .07); }
+    .dot-avatar span { width: 8px; height: 8px; border-radius: 50%; background: var(--agent-color); animation: dot-drift 7s ease-in-out infinite; animation-delay: calc(var(--i) * -40ms); }
+    @keyframes dot-drift { 0%, 68%, 100% { transform: translate(0, 0); } 80% { transform: translate(var(--dx), var(--dy)); } 89% { transform: translate(0, 0); } }
+    .demo-label { color: var(--gold); font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; }
+    .agent-demo h3 { margin: 10px 0 0; font-size: 30px; letter-spacing: -1px; }
+    .example-prompt { max-width: 350px; margin: 25px auto 12px; padding: 17px 19px; border-radius: 21px 21px 21px 7px; background: #fff; color: var(--ink); font-size: 14px; line-height: 1.5; text-align: left; }
+    .demo-caption { color: #b8bed1; font-size: 10px; }
+    .how-section { padding: 112px 0; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .step { padding: 28px 28px 0 0; border-top: 1px solid var(--line); }
+    .step-number { display: inline-grid; place-items: center; width: 38px; height: 38px; border: 1px solid rgba(136, 102, 25, .2); border-radius: 50%; color: var(--gold-dark); font-size: 11px; }
+    .step h3 { margin: 24px 0 11px; font-size: 22px; line-height: 1.2; letter-spacing: -.7px; }
+    .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .action-section { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 28px; margin-top: 24px; padding: 34px; border: 1px solid var(--line); border-radius: 32px; background: rgba(255, 255, 255, .58); }
+    .action-icon { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 23px; background: rgba(232, 182, 76, .16); color: var(--gold-dark); }
+    .action-icon svg { width: 34px; height: 34px; }
+    .action-section h2 { margin: 13px 0 9px; font-size: 31px; letter-spacing: -1.2px; }
+    .action-section p { max-width: 660px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .action-label { padding: 9px 13px; border: 1px solid rgba(136, 102, 25, .17); border-radius: 17px; color: var(--gold-dark); font-size: 11px; white-space: nowrap; }
+    .faq { padding: 105px 0 112px; }
+    .faq-head { max-width: 670px; margin: 0 auto 45px; text-align: center; }
+    .faq-head .eyebrow { display: inline-flex; }
+    .faq-head p { margin: 17px 0 0; color: var(--muted); font-size: 15px; }
+    .faq-list { max-width: 860px; margin: auto; border-top: 1px solid var(--line); }
+    .faq-list details { border-bottom: 1px solid var(--line); }
+    .faq-list summary { position: relative; padding: 24px 46px 24px 0; font-size: 18px; font-weight: 590; letter-spacing: -.25px; cursor: pointer; list-style: none; }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after { content: "+"; position: absolute; top: 21px; right: 5px; color: var(--gold-dark); font-size: 25px; font-weight: 400; transition: transform .2s ease; }
+    .faq-list details[open] summary::after { transform: rotate(45deg); }
+    .faq-list summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-radius: 5px; }
+    .faq-list details p { max-width: 760px; margin: -3px 0 0; padding: 0 44px 25px 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    footer { display: block; margin-top: 65px; padding: 43px 0 32px; }
+    .footer-main { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 50px; }
+    .footer-brand .brand { color: var(--ink); }
+    .footer-brand p { margin: 18px 0 0; font-size: 13px; line-height: 1.75; }
+    .footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-column strong { margin-bottom: 5px; color: var(--ink); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+    .footer-column a { font-size: 13px; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 25px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 11px; }
+    @media (max-width: 820px) {
+      .agent-panel { grid-template-columns: 1fr; }
+      .agent-panel-copy { max-width: 580px; }
+      .agent-demo { min-height: 410px; }
+      .steps { grid-template-columns: 1fr; gap: 25px; }
+      .step { padding-right: 0; }
+      .step h3 { margin-top: 18px; }
+      .action-section { grid-template-columns: auto 1fr; }
+      .action-label { grid-column: 2; justify-self: start; }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      .nav-links a:not(:last-child) { display: none; }
+      .new-pill { gap: 7px; padding: 7px 10px; font-size: 10px; }
+      .new-pill span { font-size: 9px; }
+      .agents-section { padding-top: 74px; }
+      .agent-selector { border-radius: 27px; }
+      .agent-tabs { justify-content: flex-start; gap: 8px; overflow-x: auto; padding: 18px; scrollbar-width: none; }
+      .agent-tabs::-webkit-scrollbar { display: none; }
+      .agent-tab { flex: 0 0 auto; padding: 11px 15px; font-size: 12px; }
+      .agent-panel { gap: 21px; min-height: 0; padding: 22px; }
+      .agent-panel-copy { padding: 6px 0; }
+      .agent-panel-copy h3 { font-size: 27px; }
+      .agent-panel-copy p { font-size: 14px; }
+      .agent-demo { min-height: 390px; padding: 28px 20px; border-radius: 23px; }
+      .dot-avatar { width: 112px; height: 112px; border-radius: 29px; }
+      .example-prompt { font-size: 13px; }
+      .how-section { padding: 74px 0; }
+      .action-section { grid-template-columns: 1fr; gap: 18px; padding: 27px; border-radius: 27px; }
+      .action-icon { width: 58px; height: 58px; border-radius: 19px; }
+      .action-section h2 { font-size: 30px; }
+      .action-label { grid-column: auto; white-space: normal; }
+      .faq { padding: 74px 0; }
+      .faq-head { margin-bottom: 27px; text-align: left; }
+      .faq-list summary { padding: 22px 36px 22px 0; font-size: 16px; }
+      .faq-list summary::after { top: 18px; }
+      .faq-list details p { padding-right: 8px; font-size: 14px; }
+      .footer-main { gap: 35px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .dot-avatar span { animation: none !important; }
+    }
+    .apple-mark { flex: 0 0 auto; width: 18px; height: 18px; margin-right: 10px; filter: invert(1); }
+    .compare-section { padding: 105px 0 110px; }
+    .compare-shell { overflow: hidden; border: 1px solid var(--line); border-radius: 34px; background: rgba(255, 255, 255, .62); }
+    .compare-tabs { display: flex; justify-content: center; gap: 9px; padding: 24px; border-bottom: 1px solid var(--line); }
+    .compare-tab { padding: 11px 19px; border: 1px solid transparent; border-radius: 22px; background: transparent; color: var(--muted); font-family: inherit; font-size: 14px; font-weight: 570; cursor: pointer; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+    .compare-tab:hover { color: var(--ink); background: rgba(23, 25, 35, .04); }
+    .compare-tab[aria-selected="true"] { border-color: rgba(136, 102, 25, .19); background: rgba(232, 182, 76, .15); color: var(--gold-dark); }
+    .compare-tab:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .compare-panel[hidden] { display: none; }
+    .compare-panel { padding: 27px 30px 25px; }
+    .table-scroll { overflow-x: auto; border-radius: 19px; }
+    .compare-table { width: 100%; border-collapse: collapse; table-layout: fixed; background: rgba(255, 255, 255, .45); }
+    .compare-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+    .compare-table th, .compare-table td { padding: 19px 22px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 13px; line-height: 1.55; }
+    .compare-table tr:last-child th, .compare-table tr:last-child td { border-bottom: 0; }
+    .compare-table thead th { color: var(--muted); font-size: 11px; font-weight: 650; letter-spacing: 1px; text-transform: uppercase; }
+    .compare-table thead th:first-child, .compare-table tbody th { width: 22%; }
+    .compare-table thead th:not(:first-child) { width: 39%; }
+    .compare-table tbody th { color: var(--ink); font-weight: 610; }
+    .compare-table td { color: var(--muted); }
+    .compare-table td:nth-child(2) { color: var(--ink); background: rgba(232, 182, 76, .045); }
+    .compare-note { margin: 19px 3px 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .compare-note a { color: var(--gold-dark); text-decoration: underline; text-underline-offset: 3px; }
+    .table-hint { display: none; }
+    .choice-card { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; min-height: 385px; padding: 43px; border-radius: 27px; background: radial-gradient(circle at 85% 0%, rgba(232, 182, 76, .13), transparent 43%), var(--indigo); color: #fff; }
+    .choice-card .eyebrow { color: var(--gold); }
+    .choice-card h3 { margin: 18px 0 15px; font-size: 35px; line-height: 1.1; letter-spacing: -1.4px; }
+    .choice-card p { margin: 0; color: #bdc2d2; font-size: 14px; line-height: 1.7; }
+    .choice-card .button { width: fit-content; margin-top: 24px; background: rgba(255, 255, 255, .94); color: var(--indigo); }
+    .choice-list { display: grid; gap: 17px; margin: 0; padding: 0; list-style: none; }
+    .choice-list li { position: relative; padding-left: 24px; color: #dce0e9; font-size: 14px; line-height: 1.55; }
+    .choice-list li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); }
+    @media (max-width: 820px) {
+      .choice-card { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 560px) {
+      .compare-section { padding: 74px 0; }
+      .compare-shell { border-radius: 27px; }
+      .compare-tabs { justify-content: flex-start; gap: 8px; overflow-x: auto; padding: 18px; scrollbar-width: none; }
+      .compare-tabs::-webkit-scrollbar { display: none; }
+      .compare-tab { flex: 0 0 auto; padding: 11px 15px; font-size: 12px; }
+      .compare-panel { padding: 16px; }
+      .compare-table { min-width: 650px; }
+      .compare-table th, .compare-table td { padding: 16px; }
+      .table-hint { display: block; margin: 13px 3px 0; color: var(--muted); font-size: 10px; }
+      .choice-card { min-height: 0; gap: 30px; padding: 27px 24px; border-radius: 22px; }
+      .choice-card h3 { font-size: 29px; }
+      .choice-card .button { width: 100%; }
+      .choice-list li { font-size: 13px; }
+    }
+    .footer-main { grid-template-columns: 1.25fr repeat(3, 1fr); gap: 36px; }
+    .footer-brand { grid-row: span 2; }
+    .footer-ask { grid-column: 4; }
+    .ask-link { display: flex; align-items: center; gap: 9px; }
+    .ask-link img { width: 16px; height: 16px; }
+    .facts-link { display: inline-block; margin-top: 16px; color: var(--gold-dark); font-size: 11px; text-decoration: underline; text-underline-offset: 3px; }
+    .compare-more { margin-top: 22px; text-align: right; }
+    .compare-more a { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-dark); font-size: 13px; font-weight: 620; }
+    @media (max-width: 820px) {
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-row: auto; }
+      .footer-ask { grid-column: auto; }
+    }
+    @media (max-width: 560px) {
+      .compare-more { text-align: left; }
+    }
   </style>
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="alternate" type="text/plain" href="https://tou.gg/ferra/llms.txt" title="Ferra product facts for AI">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://tou.gg/ferra/#app",
+          "name": "Ferra AI Agents",
+          "alternateName": "Ferra",
+          "url": "https://tou.gg/ferra/",
+          "description": "Personal AI agents for iPhone with one focused task per agent, per-agent OpenRouter models, text and image chat, optional BYOK and approval before external actions.",
+          "applicationCategory": "ProductivityApplication",
+          "operatingSystem": "iOS 17.0 or later",
+          "softwareVersion": "1.0.0",
+          "inLanguage": ["en", "uz"],
+          "isAccessibleForFree": true,
+          "downloadUrl": "https://apps.apple.com/app/id6831706335",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Person", "name": "Maqsudjon Polatov", "url": "https://tou.gg/cv/" },
+          "featureList": ["One focused task per agent", "Live OpenRouter model catalog", "Text and image chat", "Encrypted OpenRouter BYOK", "Usage by agent and model", "Approval before external actions", "English and Uzbek", "In-app account deletion"]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://tou.gg/ferra/#faq",
+          "mainEntity": [
+            { "@type": "Question", "name": "What is Ferra?", "acceptedAnswer": { "@type": "Answer", "text": "Ferra is a personal AI-agent app for iPhone. Each agent has a name, one focused task, its own model and separate chat threads. You can start with a ready-made agent or create your own." } },
+            { "@type": "Question", "name": "Is Ferra free?", "acceptedAnswer": { "@type": "Answer", "text": "Ferra is free to download and includes a daily free-message allowance. There is no in-app subscription. If you connect your own OpenRouter key, model charges and OpenRouter’s terms apply to your own account." } },
+            { "@type": "Question", "name": "Which AI models can my agents use?", "acceptedAnswer": { "@type": "Answer", "text": "Ferra loads the live OpenRouter catalog, with hundreds of models from providers including OpenAI, Google, Anthropic, Meta and others. You choose a model separately for each agent. Image attachments require an image-capable model." } },
+            { "@type": "Question", "name": "Can an agent send an email or message on its own?", "acceptedAnswer": { "@type": "Answer", "text": "No. Ferra asks for your approval first. Apple Mail or Messages then opens with the proposed content, and you make the final decision in that app. Preparing or approving a draft is not treated as proof that it was sent." } },
+            { "@type": "Question", "name": "What happens to my OpenRouter key?", "acceptedAnswer": { "@type": "Answer", "text": "Your key is sent over HTTPS and stored encrypted on Ferra’s backend. The plaintext key is not stored in the app and is never returned to your iPhone after you submit it. You can remove the stored key in Settings." } },
+            { "@type": "Question", "name": "How do I delete my account?", "acceptedAnswer": { "@type": "Answer", "text": "Open Settings → Delete Account in Ferra. This deletes your account, agents, chats, image attachments, actions, reports, usage history, sessions and encrypted OpenRouter key from Ferra’s active database." } }
+          ]
+        }
+      ]
+    }
+  </script>
 </head>
 <body>
-  <nav class="nav" aria-label="Main navigation"><div class="wrap nav-inner">
-    <a class="brand" href="./" aria-label="Ferra home"><img src="ferra-icon.png" alt="" width="36" height="36">Ferra</a>
-    <div class="nav-links"><a href="#features">Features</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></div>
-  </div></nav>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="./" aria-label="Ferra home"><img src="ferra-icon.png" alt="" width="38" height="38">Ferra</a>
+      <div class="nav-links"><a href="#agents">Agents</a><a href="#how-it-works">How it works</a><a href="#compare">Compare</a><a href="#faq">FAQ</a><a href="privacy/">Privacy</a></div>
+    </div>
+  </nav>
   <main class="wrap">
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Your personal AI workspace</div>
-        <h1>AI agents that<br>work for you.</h1>
-        <p class="intro">A focused agent for every task. Choose from hundreds of AI models, chat in your language and decide what happens next.</p>
-        <p class="uz" lang="uz">Ferra — siz uchun ishlaydigan AI agentlari.</p>
-        <div class="actions"><a class="button primary" aria-disabled="true">Download on the App Store</a><a class="button secondary" href="#features">Explore Ferra</a></div>
-        <p class="note">The App Store link will be enabled after review.</p>
-        <div class="trust"><span>400+ models</span><span>Your own key</span><span>No tracking</span></div>
-      </div>
-      <div class="stage" aria-label="Ferra agent list preview" role="img">
-        <div class="halo"></div>
-        <div class="phone">
-          <div class="island"></div><div class="phone-top"><span class="mini-avatar">M</span><span class="plus">+</span></div>
-          <h2>Ferra</h2><p class="phone-sub">Your agents, ready to work.</p>
-          <div class="agent-row"><div class="agent-mini"><div class="agent-icon">R</div>Researcher</div><div class="agent-mini"><div class="agent-icon">E</div>Email</div><div class="agent-mini"><div class="agent-icon">T</div>Translator</div></div>
-          <p class="section-label">All agents</p>
-          <div class="agent-card"><div class="agent-icon">R</div><div><strong>Researcher</strong><p>Find, compare and summarize</p></div></div>
-          <div class="agent-card"><div class="agent-icon">E</div><div><strong>Email assistant</strong><p>Your draft is ready to review</p></div></div>
-          <div class="agent-card"><div class="agent-icon">T</div><div><strong>Translator</strong><p>Clear translations, in context</p></div></div>
-          <div class="search">⌕ Search</div>
+    <section class="hero" id="overview">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <a class="new-pill" href="#action-button"><span>New</span>Open Ferra with the Action Button <b aria-hidden="true">→</b></a>
+          <h1>AI agents that<br><span><em>work</em> for you.</span></h1>
+          <p class="intro">Build a capable team around your day. Give each agent one clear job, choose its intelligence and keep every important decision in your hands.</p>
+          <p class="uz" lang="uz">Ferra — siz uchun ishlaydigan AI agentlari.</p>
+          <div class="actions">
+            <a class="button button-primary" href="https://apps.apple.com/app/id6831706335" target="_blank" rel="noopener noreferrer"><img class="apple-mark" src="assets/apple.svg" alt="" width="18" height="18">Download on the App Store</a>
+            <a class="button button-secondary" href="#features">Explore the app <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="review-note">Available now on the App Store. Free to download.</p>
+          <ul class="trust">
+            <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="currentColor"/><path d="m6.5 10 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Free to start</li>
+            <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="currentColor"/><path d="m6.5 10 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No ads or trackers</li>
+            <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="currentColor"/><path d="m6.5 10 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Your key, encrypted</li>
+          </ul>
         </div>
-        <div class="float-card"><div class="gold-dot"></div><strong>You stay in control</strong><p>Nothing is sent externally without your approval.</p></div>
+        <div class="stage">
+          <figure class="phone"><img src="assets/agents.webp" alt="Ferra’s real agent library with animated dot avatars and custom agent creation" width="900" height="1951" fetchpriority="high"></figure>
+          <div class="float-card models-float"><span class="float-label">Live model catalog</span><strong class="float-value">400+</strong><span class="float-sub">One choice per agent</span></div>
+          <div class="float-card approval-float"><div class="approval-icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 3.5 3.5L16 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><strong>You stay in control</strong><p>External actions always need your approval.</p></div>
+        </div>
+      </div>
+      <div class="proof" aria-label="Ferra at a glance">
+        <div class="proof-item"><strong>400+</strong><span>Live AI models through OpenRouter</span></div>
+        <div class="proof-item"><strong>2</strong><span>Languages: English and Uzbek</span></div>
+        <div class="proof-item"><strong>0</strong><span>Advertising or analytics trackers</span></div>
       </div>
     </section>
-    <div class="principles"><div class="principle"><strong>One agent.</strong> One clear task.</div><div class="principle"><strong>Any model.</strong> Live from OpenRouter.</div><div class="principle"><strong>Your choice.</strong> Before external actions.</div></div>
+    <section class="agents-section" id="agents">
+      <div class="section-head"><div><div class="eyebrow">Start with a capable agent</div><h2 class="section-title">One clear job.<br>A useful place to start.</h2></div><p class="section-copy">Choose a ready-made agent or make your own. Every agent gets its own name, task, model and conversation history.</p></div>
+      <div class="agent-selector">
+        <div class="agent-tabs" role="tablist" aria-label="Explore Ferra’s starter agents">
+          <button class="agent-tab" id="agent-tab-researcher" type="button" role="tab" aria-selected="true" aria-controls="agent-panel" data-agent="researcher">Researcher</button>
+          <button class="agent-tab" id="agent-tab-inbox" type="button" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1" data-agent="inbox">Inbox Manager</button>
+          <button class="agent-tab" id="agent-tab-study" type="button" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1" data-agent="study">Study Coach</button>
+        </div>
+        <div class="agent-panel" id="agent-panel" role="tabpanel" aria-labelledby="agent-tab-researcher">
+          <div class="agent-panel-copy"><span class="feature-tag">The agent’s one job</span><h3 id="agent-task">Find, compare and summarize reliable information. Be concise and note uncertainty.</h3><p id="agent-description">Explore any topic with a focused research companion. Add it in one tap, then choose the model that fits your work.</p><span class="agent-model-note">Any model. Chosen by you.</span></div>
+          <div class="agent-demo">
+            <div class="dot-avatar" id="agent-avatar" aria-hidden="true"></div>
+            <span class="demo-label" id="agent-subtitle">Explore any topic</span>
+            <h3 id="agent-name">Researcher</h3>
+            <div class="example-prompt" id="agent-prompt">Compare three reliable sources and summarize the key differences.</div>
+            <span class="demo-caption">An example request, ready to make your own</span>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="section" id="features">
-      <div class="section-head"><h2 class="section-title">Less setup.<br>More useful work.</h2><p class="section-copy">Ferra keeps the interface simple and the important choices visible: what your agent is for, which model it uses and what it is allowed to do.</p></div>
-      <div class="features">
-        <article class="feature"><span class="feature-number">01</span><h3>A clear job for each agent</h3><p>Create an agent with a name and one focused task. Keep research, writing and translation in their own spaces.</p></article>
-        <article class="feature"><span class="feature-number">02</span><h3>Choose the intelligence</h3><p>Browse a live catalog of more than 400 OpenRouter models. Compare context and pricing, then choose per agent.</p></article>
-        <article class="feature"><span class="feature-number">03</span><h3>Conversations with context</h3><p>Keep separate chat threads, send selected photos to image-capable models and switch between English and Uzbek whenever you like.</p></article>
-        <article class="feature"><span class="feature-number">04</span><h3>Start free. Bring your key.</h3><p>Try Ferra with a daily free allowance, or connect your own OpenRouter key. Your key is encrypted on the server and never sent back to your iPhone.</p></article>
-        <article class="feature"><span class="feature-number">05</span><h3>See where usage goes</h3><p>Review requests, tokens and model-reported cost by agent and model. Your remaining free allowance is visible too.</p></article>
-        <article class="feature"><span class="feature-number">06</span><h3>Safety is part of the flow</h3><p>Report an AI response in a few taps to hide it. Safety filtering and explicit action approval are built into the experience.</p></article>
+      <div class="section-head">
+        <div><div class="eyebrow">Made for real work</div><h2 class="section-title">Powerful where it matters.<br>Simple everywhere else.</h2></div>
+        <p class="section-copy">No complicated workflow builder. Start with a ready-made agent or create your own, then choose exactly how it thinks and what it can do.</p>
+      </div>
+      <div class="bento">
+        <article class="feature models-card">
+          <div class="feature-copy"><span class="feature-tag">Your choice of intelligence</span><h3>The right model for every job.</h3><p>Explore the live OpenRouter catalog by provider. Pick a different model for research, writing, study or anything else you have in mind.</p></div>
+          <div class="models-window"><img src="assets/models.webp" alt="Ferra model picker showing original provider logos and live model counts" width="900" height="1951" loading="lazy"></div>
+        </article>
+        <article class="feature chat-card">
+          <div class="feature-copy"><span class="feature-tag">Text and images</span><h3>Natural conversations.<br>Useful context.</h3><p>Keep separate threads, attach a photo to a capable model and read clear, formatted answers in English or Uzbek.</p></div>
+          <div class="chat-window"><img src="assets/chat.webp" alt="A real Ferra conversation with message bubbles, report control and image attachment button" width="900" height="579" loading="lazy"></div>
+        </article>
+        <article class="feature usage-card">
+          <div class="feature-copy"><span class="feature-tag">Visible usage</span><h3>Know where every request goes.</h3><p>See requests, tokens and model-reported costs by agent and model. Your remaining daily free allowance is always visible.</p></div>
+          <div class="usage-window"><img src="assets/usage.webp" alt="Ferra Usage screen with free allowance and cost breakdowns by agent and model" width="900" height="1951" loading="lazy"></div>
+        </article>
+        <article class="feature key-card">
+          <div class="feature-copy"><span class="feature-tag">Bring your own key</span><h3>Your OpenRouter account.<br>Without exposing your key.</h3><p>Connect your own key when you are ready. Ferra uses it only for your requests.</p></div>
+          <div class="key-flow" aria-label="How Ferra protects your OpenRouter key">
+            <div class="key-step"><div class="key-step-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="3" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5"/></svg></div><div><strong>Sent over HTTPS</strong><span>Your key goes directly to Ferra’s secure backend.</span></div></div>
+            <div class="key-step"><div class="key-step-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 2.7 8 7 10 4.3-2 7-5.5 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m9 12 2 2 4-5" stroke="currentColor" stroke-width="1.5"/></svg></div><div><strong>Encrypted on the server</strong><span>The plaintext key is not stored in the app.</span></div></div>
+            <div class="key-step"><div class="key-step-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6Z" stroke="currentColor" stroke-width="1.5"/><path d="m5 5 14 14" stroke="currentColor" stroke-width="1.5"/></svg></div><div><strong>Never returned to your iPhone</strong><span>You can remove the stored key at any time.</span></div></div>
+          </div>
+        </article>
       </div>
     </section>
-    <section class="control" id="control"><div><div class="eyebrow">Actions need your approval</div><h2>Your agent can suggest.<br>You decide.</h2><p>When an agent wants to send an email or message, Ferra shows the recipient and content first. After your approval, Apple Mail or Messages opens so you can review and confirm sending yourself.</p></div><div class="approval"><span class="approval-label">Approval required</span><h3>Send research email?</h3><div class="email">To: aziza@example.com<br>Subject: Research summary<br><br>Review the complete message before making a choice.</div><div class="approval-actions"><span>Deny</span><span>Approve</span></div></div></section>
-    <section class="privacy-summary"><div><h2>Built without tracking.</h2><p>Sign in privately with Apple. No ads, no analytics SDK and no selling of personal data. Read exactly what Ferra stores, what is sent to OpenRouter and how to delete your account in the app.</p></div><a class="text-link" href="privacy/">Read the Privacy Policy</a></section>
+    <section class="how-section" id="how-it-works">
+      <div class="section-head"><div><div class="eyebrow">How it works</div><h2 class="section-title">From an idea to your<br>first agent in a minute.</h2></div><p class="section-copy">No workflow to draw and no complicated setup. Three clear choices are enough to begin.</p></div>
+      <div class="steps">
+        <article class="step"><span class="step-number">01</span><h3>Name it and give it one job</h3><p>Start with Researcher, Inbox Manager or Study Coach, or describe your own focused agent.</p></article>
+        <article class="step"><span class="step-number">02</span><h3>Choose its AI model</h3><p>Browse the live OpenRouter catalog by provider and pick the intelligence for this agent.</p></article>
+        <article class="step"><span class="step-number">03</span><h3>Chat, attach and approve</h3><p>Ask questions, add an image to a capable model and approve any external action before it continues.</p></article>
+      </div>
+    </section>
+    <section class="control" id="control">
+      <div class="control-copy"><div class="eyebrow">Approval before action</div><h2>Your agent can suggest.<br>You decide.</h2><p>When an agent wants to send an email or message, Ferra shows you the recipient and content first. Only after your approval does Apple Mail or Messages open, where you make the final choice.</p><div class="control-points"><span>No silent sends</span><span>Native Apple apps</span><span>Report any AI response</span></div></div>
+      <div class="approval" aria-label="Example action approval"><span class="approval-label">External action</span><h3>Send research email?</h3><div class="approval-email">To: aziza@example.com<br>Subject: Research summary<br>Content: Review the complete draft before choosing.</div><div class="approval-divider"></div><p class="approval-question">This will open Apple Mail for your final confirmation.</p><div class="approval-actions"><span>Deny</span><span>Approve</span></div></div>
+    </section>
+    <section class="action-section" id="action-button">
+      <div class="action-icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M12 15V7a2.5 2.5 0 0 1 5 0v8-5a2.5 2.5 0 0 1 5 0v6-3a2.5 2.5 0 0 1 5 0v7c0 6-4 9-9 9h-1c-3.5 0-6-1.5-8-4.5l-4-6a2.7 2.7 0 0 1 4-3.5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="eyebrow">Action Button and Siri</div><h2>Open Ferra from anywhere.</h2><p>Ferra’s Open Ferra shortcut works with Siri and supported iPhone Action Buttons. Choose the shortcut yourself in iPhone Settings; Ferra never changes your hardware settings.</p></div>
+      <span class="action-label">Your shortcut. Your choice.</span>
+    </section>
+    <section class="privacy">
+      <div class="privacy-copy"><div class="eyebrow">Privacy, in plain language</div><h2>No hidden audience.<br>No data sale.</h2><p>Sign in privately with Apple. Ferra has no ads, analytics SDK or cross-app tracking. The Privacy Policy explains what is stored, what OpenRouter processes and how to delete your account directly in the app.</p></div>
+      <div class="legal-links"><a class="legal-link" href="privacy/"><div><strong>Privacy Policy</strong><span>Your data, clearly explained</span></div><span class="legal-arrow" aria-hidden="true">↗</span></a><a class="legal-link" href="terms/"><div><strong>Terms of Use</strong><span>The straightforward agreement</span></div><span class="legal-arrow" aria-hidden="true">↗</span></a></div>
+    </section>
+    <section class="faq" id="faq">
+      <div class="faq-head"><div class="eyebrow">Questions, answered</div><h2 class="section-title">A few things worth knowing.</h2><p>Clear answers about models, cost, privacy and control.</p></div>
+      <div class="faq-list">
+        <details><summary>What is Ferra?</summary><p>Ferra is a personal AI-agent app for iPhone. Each agent has a name, one focused task, its own model and separate chat threads. You can start with a ready-made agent or create your own.</p></details>
+        <details><summary>Is Ferra free?</summary><p>Ferra is free to download and includes a daily free-message allowance. There is no in-app subscription. If you connect your own OpenRouter key, model charges and OpenRouter’s terms apply to your own account.</p></details>
+        <details><summary>Which AI models can my agents use?</summary><p>Ferra loads the live OpenRouter catalog, with hundreds of models from providers including OpenAI, Google, Anthropic, Meta and others. You choose a model separately for each agent. Image attachments require an image-capable model.</p></details>
+        <details><summary>Can an agent send an email or message on its own?</summary><p>No. Ferra asks for your approval first. Apple Mail or Messages then opens with the proposed content, and you make the final decision in that app. Preparing or approving a draft is not treated as proof that it was sent.</p></details>
+        <details><summary>What happens to my OpenRouter key?</summary><p>Your key is sent over HTTPS and stored encrypted on Ferra’s backend. The plaintext key is not stored in the app and is never returned to your iPhone after you submit it. You can remove the stored key in Settings.</p></details>
+        <details><summary>How do I delete my account?</summary><p>Open Settings → Delete Account in Ferra. This deletes your account, agents, chats, image attachments, actions, reports, usage history, sessions and encrypted OpenRouter key from Ferra’s active database.</p></details>
+      </div>
+    </section>
+    <section class="compare-section" id="compare">
+      <div class="section-head"><div><div class="eyebrow">Compare Ferra and Stormi</div><h2 class="section-title">Choose by the work,<br>not the hype.</h2></div><p class="section-copy">Both apps let you create agents and choose OpenRouter models. The better fit depends on how much coordination and automation you need.</p></div>
+      <div class="compare-shell">
+        <div class="compare-tabs" role="tablist" aria-label="Compare Ferra and Stormi">
+          <button class="compare-tab" id="compare-tab-features" type="button" role="tab" aria-selected="true" aria-controls="compare-panel-features" data-compare-view="features">At a glance</button>
+          <button class="compare-tab" id="compare-tab-ferra" type="button" role="tab" aria-selected="false" aria-controls="compare-panel-ferra" tabindex="-1" data-compare-view="ferra">Choose Ferra</button>
+          <button class="compare-tab" id="compare-tab-stormi" type="button" role="tab" aria-selected="false" aria-controls="compare-panel-stormi" tabindex="-1" data-compare-view="stormi">Choose Stormi</button>
+        </div>
+        <div class="compare-panel" id="compare-panel-features" role="tabpanel" aria-labelledby="compare-tab-features" data-compare-panel="features">
+          <div class="table-scroll">
+            <table class="compare-table">
+              <caption>Feature comparison of Ferra and Stormi</caption>
+              <thead><tr><th scope="col">Feature</th><th scope="col">Ferra</th><th scope="col">Stormi</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Agent structure</th><td>Separate agents, each with one clear job</td><td>A coordinated team led by Chief of Staff</td></tr>
+                <tr><th scope="row">Model choice</th><td>OpenRouter, chosen separately per agent</td><td>OpenRouter, chosen separately per bot</td></tr>
+                <tr><th scope="row">Tools and actions</th><td>Text/image chat; Apple Mail or Messages after approval</td><td>Plugins for email, calendar, CRM, docs and more</td></tr>
+                <tr><th scope="row">Automation</th><td>No scheduled routines in the current version</td><td>Server-side routines and cross-bot handoffs</td></tr>
+                <tr><th scope="row">Platform</th><td>iPhone, iOS 17 or later</td><td>iPhone and iPad</td></tr>
+                <tr><th scope="row">Starting price</th><td>Free daily allowance; no in-app subscription</td><td>Free to start; optional Pro and Max plans</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <span class="table-hint">Swipe sideways to see every column.</span>
+          <p class="compare-note">Checked November 2026 against <a href="https://trystormi.com/" target="_blank" rel="noopener noreferrer">Stormi’s public website</a>. Features and plans can change.</p>
+        </div>
+        <div class="compare-panel" id="compare-panel-ferra" role="tabpanel" aria-labelledby="compare-tab-ferra" data-compare-panel="ferra" hidden>
+          <div class="choice-card"><div><div class="eyebrow">Choose Ferra if</div><h3>You want focused agents and a simple start.</h3><p>Ferra keeps each job separate and the important controls visible: the agent’s task, its model, its usage and your approval.</p><a class="button button-secondary" href="#agents">Meet Ferra’s agents <span aria-hidden="true">↗</span></a></div><ul class="choice-list"><li>English and Uzbek interfaces</li><li>Image attachments with supported models</li><li>iOS 17+ and no in-app subscription</li><li>Clear per-agent and per-model usage</li></ul></div>
+        </div>
+        <div class="compare-panel" id="compare-panel-stormi" role="tabpanel" aria-labelledby="compare-tab-stormi" data-compare-panel="stormi" hidden>
+          <div class="choice-card"><div><div class="eyebrow">Choose Stormi if</div><h3>You need connected, automated workflows.</h3><p>Stormi is designed for a team of bots that can coordinate, connect to more external tools and run scheduled routines on its server.</p><a class="button button-secondary" href="https://trystormi.com/" target="_blank" rel="noopener noreferrer">Visit Stormi <span aria-hidden="true">↗</span></a></div><ul class="choice-list"><li>Chief of Staff coordinates other bots</li><li>Server-side routines and schedules</li><li>Plugins for email, calendar, CRM and docs</li><li>Optional Pro and Max plans</li></ul></div>
+        </div>
+      </div>
+      <div class="compare-more"><a href="vs/stormi/">Read the full Ferra vs Stormi comparison <span aria-hidden="true">↗</span></a></div>
+    </section>
+    <section class="closing" aria-label="Ferra App Store status"><img src="ferra-icon.png" alt="" width="66" height="66" loading="lazy"><h2>One name. One job. Any model.</h2><p>Your capable team will be ready when you are.</p><a class="button button-primary" href="https://apps.apple.com/app/id6831706335" target="_blank" rel="noopener noreferrer"><img class="apple-mark" src="assets/apple.svg" alt="" width="18" height="18">Download on the App Store</a></section>
   </main>
-  <div class="wrap"><footer><span>Ferra by <a href="https://tou.gg/">Maqsudjon Polatov</a></span><div class="footer-links"><a href="privacy/">Privacy Policy</a><a href="terms/">Terms of Use</a><a href="mailto:polatovmaqsudjon1@gmail.com">Support</a></div></footer></div>
+  <div class="wrap"><footer class="site-footer"><div class="footer-main"><div class="footer-brand"><a class="brand" href="./"><img src="./ferra-icon.png" alt="" width="38" height="38">Ferra</a><p>Personal AI agents that work for you.<br>One name. One job. Any model.</p><a class="facts-link" href="./llms.txt">Product facts for AI (llms.txt)</a></div><div class="footer-column "><strong>Product</strong><a href="./features/">Features</a><a href="./how-it-works/">How it works</a><a href="./agents/">Agent library</a><a href="./use-cases/">Use cases</a><a href="./action-button/">Action Button</a><a href="./pricing/">Pricing</a><a href="./changelog/">Changelog</a></div><div class="footer-column "><strong>Compare</strong><a href="./compare/">Compare overview</a><a href="./vs/stormi/">Ferra vs Stormi</a><a href="./vs/stormi/#method">Source and method</a></div><div class="footer-column "><strong>Learn</strong><a href="./learn/">All guides</a><a href="./learn/what-is-an-ai-agent/">What is an AI agent?</a><a href="./learn/openrouter/">OpenRouter, explained</a><a href="./learn/byok/">BYOK and privacy</a><a href="./llms.txt">Product facts for AI</a></div><div class="footer-column "><strong>Company</strong><a href="./about/">About Ferra</a><a href="./support/">Support</a><a href="./delete-account/">Delete your account</a><a href="./privacy/">Privacy Policy</a><a href="./terms/">Terms of Use</a></div><div class="footer-column footer-ask"><strong>Ask AI about Ferra</strong><a class="ask-link" href="https://chatgpt.com/?q=Give%20me%20a%20short%20introduction%20to%20Ferra%20AI%20Agents%20%28https%3A//tou.gg/ferra/%29%20in%20no%20more%20than%20four%20sentences%3A%20what%20the%20personal%20AI-agent%20app%20for%20iPhone%20does%2C%20who%20it%20is%20for%2C%20and%20how%20one-job%20agents%2C%20per-agent%20OpenRouter%20models%20and%20approval%20before%20external%20actions%20help.%0A%0AUse%20the%20official%20product%20facts%20at%20https%3A//tou.gg/ferra/llms.txt%20and%20the%20official%20website%20as%20sources.%20Ferra%201.0.0%20is%20approved%20by%20Apple%20and%20publicly%20available%20on%20the%20App%20Store%20at%20https%3A//apps.apple.com/app/id6831706335.%0A%0AThen%20ask%20what%20I%20want%20to%20explore%20and%20offer%20these%20options%3A%0A-%20Researcher%2C%20Inbox%20Manager%20and%20Study%20Coach%0A-%20Choosing%20models%20and%20bringing%20your%20own%20OpenRouter%20key%0A-%20Privacy%2C%20usage%20and%20account%20deletion%0A-%20Ferra%20compared%20with%20Stormi%0A%0AKeep%20each%20answer%20concise%20and%20end%20with%20a%20useful%20follow-up%20question." target="_blank" rel="noopener noreferrer"><img src="./assets/ask-chatgpt.svg" alt="" width="16" height="16">ChatGPT</a><a class="ask-link" href="https://claude.ai/new?q=Give%20me%20a%20short%20introduction%20to%20Ferra%20AI%20Agents%20%28https%3A//tou.gg/ferra/%29%20in%20no%20more%20than%20four%20sentences%3A%20what%20the%20personal%20AI-agent%20app%20for%20iPhone%20does%2C%20who%20it%20is%20for%2C%20and%20how%20one-job%20agents%2C%20per-agent%20OpenRouter%20models%20and%20approval%20before%20external%20actions%20help.%0A%0AUse%20the%20official%20product%20facts%20at%20https%3A//tou.gg/ferra/llms.txt%20and%20the%20official%20website%20as%20sources.%20Ferra%201.0.0%20is%20approved%20by%20Apple%20and%20publicly%20available%20on%20the%20App%20Store%20at%20https%3A//apps.apple.com/app/id6831706335.%0A%0AThen%20ask%20what%20I%20want%20to%20explore%20and%20offer%20these%20options%3A%0A-%20Researcher%2C%20Inbox%20Manager%20and%20Study%20Coach%0A-%20Choosing%20models%20and%20bringing%20your%20own%20OpenRouter%20key%0A-%20Privacy%2C%20usage%20and%20account%20deletion%0A-%20Ferra%20compared%20with%20Stormi%0A%0AKeep%20each%20answer%20concise%20and%20end%20with%20a%20useful%20follow-up%20question." target="_blank" rel="noopener noreferrer"><img src="./assets/ask-claude.svg" alt="" width="16" height="16">Claude</a><a class="ask-link" href="https://www.google.com/search?udm=50&q=Give%20me%20a%20short%20introduction%20to%20Ferra%20AI%20Agents%20%28https%3A//tou.gg/ferra/%29%20in%20no%20more%20than%20four%20sentences%3A%20what%20the%20personal%20AI-agent%20app%20for%20iPhone%20does%2C%20who%20it%20is%20for%2C%20and%20how%20one-job%20agents%2C%20per-agent%20OpenRouter%20models%20and%20approval%20before%20external%20actions%20help.%0A%0AUse%20the%20official%20product%20facts%20at%20https%3A//tou.gg/ferra/llms.txt%20and%20the%20official%20website%20as%20sources.%20Ferra%201.0.0%20is%20approved%20by%20Apple%20and%20publicly%20available%20on%20the%20App%20Store%20at%20https%3A//apps.apple.com/app/id6831706335.%0A%0AThen%20ask%20what%20I%20want%20to%20explore%20and%20offer%20these%20options%3A%0A-%20Researcher%2C%20Inbox%20Manager%20and%20Study%20Coach%0A-%20Choosing%20models%20and%20bringing%20your%20own%20OpenRouter%20key%0A-%20Privacy%2C%20usage%20and%20account%20deletion%0A-%20Ferra%20compared%20with%20Stormi%0A%0AKeep%20each%20answer%20concise%20and%20end%20with%20a%20useful%20follow-up%20question." target="_blank" rel="noopener noreferrer"><img src="./assets/ask-gemini.svg" alt="" width="16" height="16">Gemini</a><a class="ask-link" href="https://grok.com/?q=Give%20me%20a%20short%20introduction%20to%20Ferra%20AI%20Agents%20%28https%3A//tou.gg/ferra/%29%20in%20no%20more%20than%20four%20sentences%3A%20what%20the%20personal%20AI-agent%20app%20for%20iPhone%20does%2C%20who%20it%20is%20for%2C%20and%20how%20one-job%20agents%2C%20per-agent%20OpenRouter%20models%20and%20approval%20before%20external%20actions%20help.%0A%0AUse%20the%20official%20product%20facts%20at%20https%3A//tou.gg/ferra/llms.txt%20and%20the%20official%20website%20as%20sources.%20Ferra%201.0.0%20is%20approved%20by%20Apple%20and%20publicly%20available%20on%20the%20App%20Store%20at%20https%3A//apps.apple.com/app/id6831706335.%0A%0AThen%20ask%20what%20I%20want%20to%20explore%20and%20offer%20these%20options%3A%0A-%20Researcher%2C%20Inbox%20Manager%20and%20Study%20Coach%0A-%20Choosing%20models%20and%20bringing%20your%20own%20OpenRouter%20key%0A-%20Privacy%2C%20usage%20and%20account%20deletion%0A-%20Ferra%20compared%20with%20Stormi%0A%0AKeep%20each%20answer%20concise%20and%20end%20with%20a%20useful%20follow-up%20question." target="_blank" rel="noopener noreferrer"><img src="./assets/ask-grok.svg" alt="" width="16" height="16">Grok</a><a class="ask-link" href="https://www.perplexity.ai/?q=Give%20me%20a%20short%20introduction%20to%20Ferra%20AI%20Agents%20%28https%3A//tou.gg/ferra/%29%20in%20no%20more%20than%20four%20sentences%3A%20what%20the%20personal%20AI-agent%20app%20for%20iPhone%20does%2C%20who%20it%20is%20for%2C%20and%20how%20one-job%20agents%2C%20per-agent%20OpenRouter%20models%20and%20approval%20before%20external%20actions%20help.%0A%0AUse%20the%20official%20product%20facts%20at%20https%3A//tou.gg/ferra/llms.txt%20and%20the%20official%20website%20as%20sources.%20Ferra%201.0.0%20is%20approved%20by%20Apple%20and%20publicly%20available%20on%20the%20App%20Store%20at%20https%3A//apps.apple.com/app/id6831706335.%0A%0AThen%20ask%20what%20I%20want%20to%20explore%20and%20offer%20these%20options%3A%0A-%20Researcher%2C%20Inbox%20Manager%20and%20Study%20Coach%0A-%20Choosing%20models%20and%20bringing%20your%20own%20OpenRouter%20key%0A-%20Privacy%2C%20usage%20and%20account%20deletion%0A-%20Ferra%20compared%20with%20Stormi%0A%0AKeep%20each%20answer%20concise%20and%20end%20with%20a%20useful%20follow-up%20question." target="_blank" rel="noopener noreferrer"><img src="./assets/ask-perplexity.svg" alt="" width="16" height="16">Perplexity</a></div></div><div class="footer-bottom"><span>Ferra by <a href="https://tou.gg/">Maqsudjon Polatov</a> · © 2026</span><span>Apple, the Apple logo, iPhone and App Store are trademarks of Apple Inc.</span></div></footer></div>
+  <script>
+    const agents = [
+      {
+        id: "researcher",
+        name: "Researcher",
+        task: "Find, compare and summarize reliable information. Be concise and note uncertainty.",
+        subtitle: "Explore any topic",
+        description: "Explore any topic with a focused research companion. Add it in one tap, then choose the model that fits your work.",
+        prompt: "Compare three reliable sources and summarize the key differences.",
+        color: "#efb66f",
+        glyph: [30, 17, 17, 30, 20, 18, 17]
+      },
+      {
+        id: "inbox",
+        name: "Inbox Manager",
+        task: "Draft clear, friendly emails and organize communication. Never send anything without explicit approval.",
+        subtitle: "Draft with confidence",
+        description: "Prepare clear replies and organize communication without giving up control. Nothing is sent without your explicit approval.",
+        prompt: "Draft a friendly follow-up to this email. Don’t send it yet.",
+        color: "#85d7dc",
+        glyph: [14, 4, 4, 4, 4, 4, 14]
+      },
+      {
+        id: "study",
+        name: "Study Coach",
+        task: "Explain concepts step by step, create practice questions and help the user learn.",
+        subtitle: "Learn by doing",
+        description: "Turn a difficult topic into clear steps and practice questions. Learn at your pace, in English or Uzbek.",
+        prompt: "Explain this concept step by step, then give me three practice questions.",
+        color: "#acd3a4",
+        glyph: [15, 16, 16, 14, 1, 17, 30]
+      }
+    ];
+    const tabs = Array.from(document.querySelectorAll("[data-agent]"));
+    const avatar = document.getElementById("agent-avatar");
+    const panel = document.getElementById("agent-panel");
+    function selectAgent(index, moveFocus = false) {
+      const agent = agents[index];
+      tabs.forEach((tab, tabIndex) => {
+        const selected = tabIndex === index;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        if (selected && moveFocus) tab.focus();
+      });
+      panel.setAttribute("aria-labelledby", `agent-tab-${agent.id}`);
+      document.getElementById("agent-name").textContent = agent.name;
+      document.getElementById("agent-task").textContent = agent.task;
+      document.getElementById("agent-subtitle").textContent = agent.subtitle;
+      document.getElementById("agent-description").textContent = agent.description;
+      document.getElementById("agent-prompt").textContent = agent.prompt;
+      avatar.style.setProperty("--agent-color", agent.color);
+      const dots = [];
+      agent.glyph.forEach((row, rowIndex) => {
+        for (let column = 0; column < 5; column += 1) {
+          const dot = document.createElement("span");
+          dot.style.visibility = (row & (1 << (4 - column))) ? "visible" : "hidden";
+          dot.style.setProperty("--i", dots.length);
+          dot.style.setProperty("--dx", `${(column - 2) * 1.4}px`);
+          dot.style.setProperty("--dy", `${(rowIndex - 3) * 1.2}px`);
+          dots.push(dot);
+        }
+      });
+      avatar.replaceChildren(...dots);
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectAgent(index));
+      tab.addEventListener("keydown", event => {
+        let next;
+        if (event.key === "ArrowRight") next = (index + 1) % agents.length;
+        else if (event.key === "ArrowLeft") next = (index + agents.length - 1) % agents.length;
+        else if (event.key === "Home") next = 0;
+        else if (event.key === "End") next = agents.length - 1;
+        else return;
+        event.preventDefault();
+        selectAgent(next, true);
+      });
+    });
+    selectAgent(0);
+    const comparisonTabs = Array.from(document.querySelectorAll("[data-compare-view]"));
+    const comparisonPanels = Array.from(document.querySelectorAll("[data-compare-panel]"));
+    function selectComparison(index, moveFocus = false) {
+      comparisonTabs.forEach((tab, tabIndex) => {
+        const selected = tabIndex === index;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        if (selected && moveFocus) tab.focus();
+      });
+      comparisonPanels.forEach((panel, panelIndex) => {
+        panel.hidden = panelIndex !== index;
+      });
+    }
+    comparisonTabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectComparison(index));
+      tab.addEventListener("keydown", event => {
+        let next;
+        if (event.key === "ArrowRight") next = (index + 1) % comparisonTabs.length;
+        else if (event.key === "ArrowLeft") next = (index + comparisonTabs.length - 1) % comparisonTabs.length;
+        else if (event.key === "Home") next = 0;
+        else if (event.key === "End") next = comparisonTabs.length - 1;
+        else return;
+        event.preventDefault();
+        selectComparison(next, true);
+      });
+    });
+    selectComparison(0);
+  </script>
 </body>
 </html>

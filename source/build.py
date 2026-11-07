@@ -32,6 +32,19 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '&family=Big+Shoulders+Stencil+Display:wght@700;800&family=Instrument+Sans:wght@400;500;600&family=Kalam:wght@400;700'
          '&family=Geist+Mono:wght@400;500&display=swap">')
 
+FERRA_UPDATED = "2026-11-08"
+FERRA_PAGES = [
+    ("", "0.9"), ("privacy/", "0.5"), ("terms/", "0.5"),
+    ("features/", "0.7"), ("how-it-works/", "0.7"), ("use-cases/", "0.7"),
+    ("agents/", "0.8"), ("agents/researcher/", "0.7"),
+    ("agents/inbox-manager/", "0.7"), ("agents/study-coach/", "0.7"),
+    ("action-button/", "0.6"), ("pricing/", "0.7"), ("changelog/", "0.5"),
+    ("compare/", "0.7"), ("vs/stormi/", "0.7"), ("learn/", "0.7"),
+    ("learn/what-is-an-ai-agent/", "0.7"), ("learn/openrouter/", "0.7"),
+    ("learn/byok/", "0.7"), ("about/", "0.6"), ("support/", "0.6"),
+    ("delete-account/", "0.6")
+]
+
 # Old URLs that no longer have a page of their own, and where they went.
 LANGS = ["uz", "ru", "zh"]
 OLD_PAGES = ["", "work/", "work/flarestamina/", "work/ailenta/", "work/chertma/", "work/nullsample/",
@@ -323,6 +336,7 @@ def rss(notes):
 def sitemap(notes, today):
     urls = [("", today, "1.0"), ("cv/", today, "0.8"), ("work/", today, "0.8"), ("log/", today, "0.8")]
     urls += [(n["path"], n.get("updated", n["date"]), "0.7") for n in notes]
+    urls += [(f"ferra/{path}", FERRA_UPDATED, priority) for path, priority in FERRA_PAGES]
     rows = "\n".join(f"  <url><loc>{SITE}/{p}</loc><lastmod>{d}</lastmod><priority>{pr}</priority></url>" for p, d, pr in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{rows}\n</urlset>\n'
 
@@ -400,7 +414,7 @@ def main():
                           {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
                           {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml"}]}, indent=2) + "\n")
             write(out, "llms.txt", "# tou.gg\n\n> Maqsudjon Polatov, product engineer in Tashkent. Welds metal by day, ships software by night.\n\n"
-                  "## Pages\n\n- [Home](https://tou.gg/)\n- [CV](https://tou.gg/cv/)\n- [Notes](https://tou.gg/log/)\n- [RSS](https://tou.gg/rss.xml)\n\n## Notes\n\n"
+                  "## Pages\n\n- [Home](https://tou.gg/)\n- [CV](https://tou.gg/cv/)\n- [Notes](https://tou.gg/log/)\n- [RSS](https://tou.gg/rss.xml)\n\n## Products\n\n- [Ferra AI Agents](https://tou.gg/ferra/): A personal AI-agent app for iPhone built by Maqsudjon Polatov. Each agent has one focused task, its own OpenRouter model and separate chats, with optional encrypted BYOK and approval before external actions. [Product facts, pricing and current availability](https://tou.gg/ferra/llms.txt).\n\n## Notes\n\n"
                   + "\n".join(f"- [{n['title']}]({SITE}/{n['path']}): {n['description']}" for n in notes_order) + "\n")
             write(out, "humans.txt", "/* TEAM */\nMaqsudjon Polatov, Tashkent. Product engineer and metal fabricator.\nContact: polatovmaqsudjon1@gmail.com · t.me/toudotgg\n")
             write(out, "404.html", document(head("Not found · tou.gg", "This page does not exist.", "404.html"),

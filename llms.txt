@@ -9,6 +9,10 @@
 - [Notes](https://tou.gg/log/)
 - [RSS](https://tou.gg/rss.xml)
 
+## Products
+
+- [Ferra AI Agents](https://tou.gg/ferra/): A personal AI-agent app for iPhone built by Maqsudjon Polatov. Each agent has one focused task, its own OpenRouter model and separate chats, with optional encrypted BYOK and approval before external actions. [Product facts, pricing and current availability](https://tou.gg/ferra/llms.txt).
+
 ## Notes
 
 - [FlareStamina: free IELTS practice, built around a welding job](https://tou.gg/work/flarestamina/): How a handful of listening tests became a free IELTS platform with 144 tests, a writing lab, a speaking lab and a news desk, and why the login walls had to come down.
