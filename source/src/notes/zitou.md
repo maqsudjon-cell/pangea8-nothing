@@ -5,14 +5,16 @@ slug: zitou
 section: work
 order: 2
 date: 2026-10-14
-updated: 2026-10-19
+updated: 2026-11-08
 project: Zitou
 url: https://zitou.app
 image: zitou.webp
 tags: Chinese, HSK, Education, Cloudflare Workers
-description: A free app that teaches Chinese in Uzbek and nine other languages: a 124,000-word dictionary, all HSK lists, an HSK 1 course for the classroom, stroke-order writing, spaced repetition, and tools for teachers.
+description: A free app that teaches Chinese in Uzbek and nine other languages, on the web, on the App Store and in Telegram: a 124,000-word dictionary, all HSK lists, an HSK 1 course for the classroom, stroke-order writing, spaced repetition, and tools for teachers.
 facts:
   - Live: [zitou.app](https://zitou.app) · in Uzbek: [zitou.uz](https://zitou.uz)
+  - iPhone and iPad: [App Store](https://apps.apple.com/app/id6818937091), since 5 November 2026
+  - Android: in Telegram as a Mini App, [@zitouggbot](https://t.me/zitouggbot)
   - Dictionary: 124,000+ words
   - HSK words (2025 list): 10,057
   - Native-speaker audio: 8,500+ words
@@ -24,6 +26,8 @@ facts:
 I started learning Chinese on 19 September 2026. Four days later, on 23 September, the first version of the Cloudflare Worker that now serves **Zitou** went up. On 1 October it moved to its own domain, [zitou.app](https://zitou.app), and on 19 October the Uzbek pages got their own address, [zitou.uz](https://zitou.uz).
 
 Zitou is a free app for learning Chinese in Uzbek. It also works in English, Russian, Chinese, Spanish, Portuguese, French, German, Turkish and Indonesian, so ten interface languages in all. You do not need an account to start, and it runs in the browser on a phone, a tablet or a computer.
+
+Since 5 November 2026 it is also an iPhone and iPad app on the [App Store](https://apps.apple.com/app/id6818937091), the same app in a native shell, with Sign in with Apple, reminders and Pro through the App Store ([the note](/log/zitou-app-store/)). There is no Google Play version yet; on Android, Zitou runs inside Telegram as a Mini App of [@zitouggbot](https://t.me/zitouggbot).
 
 ## What is in it
 
