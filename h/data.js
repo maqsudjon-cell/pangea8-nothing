@@ -6,7 +6,9 @@ const lessons = {
   5: { title: 'Sana va dam olish', hanzi: '今天我休息', hero: '今天', headline: 'Kuningizni rejalashtiring.', description: 'Sanalar, hafta kunlari, ovqat tayyorlash va yoqqan narsalar haqida gapiring.' },
   6: { title: 'Telefon va xarid', hanzi: '你的手机号是多少？', hero: '手机', headline: 'Bog‘laning va xarid qiling.', description: 'Telefon raqami, xarid, ovqat va transportga oid kundalik so‘zlar.' },
   7: { title: 'Vaqt va kino', hanzi: '我晚上六点半下班', hero: '现在', headline: 'Vaqtingizni boshqaring.', description: 'Soat, dars, ish, uchrashuv va kinoga borish haqida aniq gapiring.' },
-  8: { title: 'Joy va kasb', hanzi: '我爸爸也在医院工作', hero: '医院', headline: 'Joyni va kasbni ayting.', description: 'Buyumlarning joyi, uchrashuv manzili va shifokorlik kasbi haqida so‘zlaring.' }
+  8: { title: 'Joy va kasb', hanzi: '我爸爸也在医院工作', hero: '医院', headline: 'Joyni va kasbni ayting.', description: 'Buyumlarning joyi, uchrashuv manzili va shifokorlik kasbi haqida so‘zlaring.' },
+  9: { title: 'Reja va bo‘sh vaqt', hanzi: '我明天上午在学校学习', hero: '学习', headline: 'Rejangizni ayting.', description: 'Joy, vaqt, o‘qish va bo‘sh vaqt rejalaringiz haqida gapiring.' },
+  10: { title: 'Narx va xarid', hanzi: '这儿的苹果真便宜！', hero: '便宜', headline: 'Narxni so‘rang va xarid qiling.', description: 'Pul, meva, kiyim va narxlar haqida do‘konda gaplashishni mashq qiling.' }
 };
 
 const words = [
@@ -191,6 +193,54 @@ addWord(8, '医生', 'yīshēng', 'shifokor', 'ot', '医 — tibbiyot · 生 —
 addWord(8, '工作', 'gōngzuò', 'ishlamoq', 'fe’l', '工 — ish · 作 = 亻 + 乍', 'Shifokor odam 亻 shifoxonada o‘z ishini 工 qiladi: “U shifoxonada ishlaydi”.');
 addWord(8, '胡医生', 'Hú yīshēng', 'shifokor Hu', 'maxsus ot', '胡 — Hu familiyasi · 医生 — shifokor', 'Oq xalat kiygan Hu familiyali shifokorni tasavvur qiling. Murojaat: 胡医生.');
 
+addWord(9, '前边', 'qiánbian', 'old; old tomon', 'ot', '前 — old · 边 — tomon', 'Maktabning old tomonida 前边 kinoteatr turibdi. Yuzingiz qarab turgan tomonga qadam tashlang.');
+addWord(9, '边', 'bian / biān', 'tomon; chet (joy bildiradi)', 'qo‘shimcha / ot', '边 = 力 + 辶', 'Yo‘l 辶 bo‘ylab yurib, uning chetida 边 to‘xtang. Old 前, tashqari 外 kabi so‘zlar bilan joy bildiradi.');
+addWord(9, '家', 'jiā', 'ta (oila yoki muassasa uchun)', 'o‘lchov so‘z', '家 = 宀 + 豕', 'Bitta oilani yoki bitta do‘konni sanang: bir 家. Tom 宀 ostidagi uy butun bir oilani eslatadi.');
+addWord(9, '那个', 'nàge', 'u; o‘sha bitta', 'olmosh', '那 — u, o‘sha · 个 — umumiy o‘lchov', 'Yaqiningizdagi emas, uzoqroqdagi bitta narsani ko‘rsating: “O‘sha 那个”.');
+addWord(9, '外边', 'wàibian', 'tashqari; tashqi tomon', 'ot', '外 — tashqari · 边 — tomon', 'Eshikdan chiqib, binoning tashqi 外 tomoniga 边 o‘ting. Endi siz tashqaridasiz.');
+addWord(9, '椅子', 'yǐzi', 'stul', 'ot', '椅 = 木 + 奇 · 子 — ot yasovchi', 'Yog‘och 木 stulni ko‘ring va unga sekin o‘tiring. 椅子 — stul.');
+addWord(9, '上', 'shang / shàng', 'ustida; yuqori qismi', 'ot', '上 — yuqori', 'Kitobni stolning ustiga qo‘ying: 桌子上. Narsa pastda emas, yuqorida 上.');
+addWord(9, '本', 'běn', 'ta (kitoblar uchun)', 'o‘lchov so‘z', '本 = 木 + 一', 'Bir kitobni ikki qo‘lingizda ushlang: bir 本 kitob. 木 ostidagi 一 chiziq uning ildizini eslatib, kitobni mustahkam ushlang.');
+addWord(9, '书', 'shū', 'kitob', 'ot', '书 — kitob', 'Kitobni oching va sahifasini varaqlang. 书 — o‘qiladigan kitob.');
+addWord(9, '那', 'nà', 'u; o‘sha', 'olmosh', '那', 'Uzoqdagi bitta narsani barmoq bilan ko‘rsating: “O‘sha 那”.');
+addWord(9, '第', 'dì', '-chi (tartib sonini bildiradi)', 'old qo‘shimcha', '第 = ⺮ + 弟', 'Navbatdagi odamlarni sanang: 第一 — birinchi, 第二 — ikkinchi. 第 tartibni boshlaydi.');
+addWord(9, '学习', 'xuéxí', 'o‘rganmoq; o‘qimoq', 'fe’l', '学 — o‘rganmoq · 习 — mashq qilmoq', 'Avval yangi narsani o‘rganing 学, keyin mashq qiling 习. Bu ikki harakat — 学习.');
+addWord(9, '做', 'zuò', 'qilmoq; shug‘ullanmoq', 'fe’l', '做 = 亻 + 古 + 攵', 'Odam 亻 qo‘li bilan bir ishni bajarib ko‘rsatadi. “Nima qilyapsiz?” — 做 nima?');
+addWord(9, '白天', 'báitiān', 'kunduz', 'ot', '白 — oq, yorug‘ · 天 — kun, osmon', 'Oq 白 yorug‘ osmon 天 ostida quyosh charaqlaydi. Bu — kunduz.');
+addWord(9, '读书', 'dúshū', 'kitob o‘qimoq; o‘qimoq', 'fe’l', '读 — o‘qimoq · 书 — kitob', 'Qo‘lingizga kitob 书 olib, uning satrlarini diqqat bilan o‘qing 读.');
+addWord(9, '和', 'hé', 'bilan; … bilan', 'predlog', '和 = 禾 + 口', 'Do‘stingiz yoningizga kelsin: “Men u 和 birga o‘qiyman” — u bilan.');
+addWord(9, '朋友', 'péngyou', 'do‘st', 'ot', '朋 — do‘st · 友 — do‘st, yordamchi', 'Ikki odam yonma-yon 朋 turib, qo‘ldan yordam beradi 友. Bu — do‘stlar.');
+addWord(9, '唱', 'chàng', 'kuylamoq', 'fe’l', '唱 = 口 + 昌', 'Og‘iz 口 dan yoqimli ohang chiqadi. Mikrofonni olib qo‘shiq kuylang 唱.');
+addWord(9, '歌', 'gē', 'qo‘shiq', 'ot', '歌 = 哥 + 欠', 'Sahna chirog‘i yonadi va yangi qo‘shiq 歌 boshlanadi. Ohangni tinglab, birga kuylang.');
+addWord(9, '好听', 'hǎotīng', 'yoqimli eshitiladi; yoqimli ohangli', 'sifat', '好 — yaxshi · 听 — eshitmoq', 'Qo‘shiqni eshitib 听, yuzingizga tabassum yuguradi: “Juda yoqimli 好听!”');
+addWord(9, '电视', 'diànshì', 'televizor', 'ot', '电 — elektr · 视 — ko‘rish, tomosha', 'Elektr 电 ishga tushirgan ekranda harakatlanuvchi tasvirni tomosha qilasiz 视 — televizor.');
+addWord(9, '狗', 'gǒu', 'it', 'ot', '狗 = 犭 + 句', 'Hayvon 犭 belgisi yonidagi kichik it vovillaydi. Unga “Keling!” deb chaqiring.');
+addWord(9, '玩', 'wán', 'o‘ynamoq; dam olmoq', 'fe’l', '玩 = 王 + 元', 'Ishni chetga qo‘yib, do‘stlaringiz bilan o‘yin o‘ynang. Birga quvoning — 玩.');
+
+addWord(10, '杯子', 'bēizi', 'stakan; chashka', 'ot', '杯 = 木 + 不 · 子 — ot yasovchi', 'Qo‘lingizga chashka 杯子 olib, ichidan suv iching. Stol ustidagi aynan shu idishni eslab qoling.');
+addWord(10, '售货员', 'shòuhuòyuán', 'sotuvchi', 'ot', '售 — sotmoq · 货 — tovar · 员 — xodim', 'Do‘kondagi xodim 员 tovarni 货 sizga sotadi 售. Bu — sotuvchi.');
+addWord(10, '这边', 'zhèbiān', 'bu tomonda; bu yerda', 'olmosh', '这 — bu · 边 — tomon', 'Yaqin joyni qo‘l bilan ko‘rsating: “Bu tomon 这边”. Sotuvchi stakanlarni shu yerga qo‘yadi.');
+addWord(10, '钱', 'qián', 'pul', 'ot', '钱 = 钅 + 戋', 'Metall 钅 tangalarni cho‘ntagingizdan olib, narxni to‘lang. Bu — pul.');
+addWord(10, '这些', 'zhèxiē', 'bular', 'olmosh', '这 — bu · 些 — bir necha', 'Oldingizdagi bir nechta stakanni bir harakat bilan ko‘rsating: “Bular 这些 qancha?”');
+addWord(10, '块', 'kuài', 'yuan (kundalik pul o‘lchovi); bo‘lak', 'o‘lchov so‘z', '块 = 土 + 夬', 'Narx yozilgan kartaga qo‘lingizni qo‘ying: besh 块 — besh yuan. Kundalik narxlarda 块 ishlatiladi.');
+addWord(10, '那些', 'nàxiē', 'ular; o‘shalar', 'olmosh', '那 — u, o‘sha · 些 — bir necha', 'Uzoqdagi bir nechta buyumni ko‘rsating: “O‘shalar 那些”. Yaqin bo‘lsa 这些, uzoq bo‘lsa 那些.');
+addWord(10, '这儿', 'zhèr', 'bu yer; shu yer', 'olmosh', '这 — bu · 儿 — yer shaklidagi qo‘shimcha', 'Turgan joyingizni barmoq bilan ko‘rsating: “Bu yer 这儿”.');
+addWord(10, '水果', 'shuǐguǒ', 'meva', 'ot', '水 — suv, shirali · 果 — meva', 'Shirali 水 meva 果 idishini ko‘ring: olma va boshqa mevalar — 水果.');
+addWord(10, '少', 'shǎo', 'kam; oz', 'sifat', '少 = 小 + 丿', 'To‘la idish va ichida ozgina narsa qolgan idishni solishtiring. Ikkinchisi — kam 少.');
+addWord(10, '斤', 'jīn', 'jin (500 gramm)', 'o‘lchov so‘z', '斤 — vazn o‘lchovi', 'Taroziga yarim kilogramm olma qo‘ying: bir 斤. Xitoyda meva shu o‘lchov bilan sotiladi.');
+addWord(10, '苹果', 'píngguǒ', 'olma', 'ot', '苹 — 苹果 so‘zining birinchi belgisi · 果 — meva', 'Qizil, shirali olmani qo‘lingizga olib bir luqma tishlang. 苹果 — olma.');
+addWord(10, '便宜', 'piányi', 'arzon', 'sifat', '便 — qulay · 宜 — mos, qulay', 'Yoqimli narxni ko‘rib tabassum qilasiz: katta pul to‘lash shart emas. Bu — arzon 便宜.');
+addWord(10, '商店', 'shāngdiàn', 'do‘kon', 'ot', '商 — savdo · 店 — do‘kon binosi', 'Eshigida tovarlar turgan bino 店 ga kirib xarid qilasiz. Savdo 商 joyi — do‘kon.');
+addWord(10, '衣服', 'yīfu', 'kiyim', 'ot', '衣 — kiyim · 服 — kiyim, libos', 'Shkafdan kiyim 衣服 olib, ustingizga kiyib ko‘ring. Bu so‘z kiyimlarning umumiy nomi.');
+addWord(10, '件', 'jiàn', 'ta (kiyim uchun o‘lchov)', 'o‘lchov so‘z', '件 = 亻 + 牛', 'Kiyimlarni bittadan sanang: bir 件 ko‘ylak, ikki 件 kiyim.');
+addWord(10, '元', 'yuán', 'yuan (Xitoy pul birligi)', 'o‘lchov so‘z', '元 = 二 + 儿', 'Narx belgisiga “yuan” deb o‘qing: o‘n 元. Rasmiy yozuvda 元, kundalik gapda 块 ham ishlatiladi.');
+addWord(10, '怎么样', 'zěnmeyàng', 'qanday; qanaqa', 'olmosh', '怎么 — qanday · 样 — ko‘rinish, tur', 'Kiyimni kiyib ko‘rib, do‘stingizdan so‘rang: “Qanday 怎么样? Yaraşdimi?”');
+addWord(10, '贵', 'guì', 'qimmat', 'sifat', '贵 = 中 + 一 + 贝', 'Juda katta narx yozilgan kartani ko‘rib, cho‘ntagingizni ushlab qolasiz. Bu — qimmat 贵.');
+addWord(10, '穿', 'chuān', 'kiymoq; kiyib olmoq', 'fe’l', '穿 = 穴 + 牙', 'Ko‘ylakni boshidan o‘tkazib, kiyib oling. Kiyinish harakati — 穿.');
+addWord(10, '女', 'nǚ', 'ayol; qiz', 'sifat', '女 — ayol', 'Do‘konning ayollar kiyimlari bo‘limini ko‘rsating: 女. Erkaklar bo‘limi esa 男.');
+addWord(10, '男', 'nán', 'erkak', 'sifat', '男 = 田 + 力', 'Maydon 田 va kuch 力 tasvirini erkaklar kiyimlari bo‘limi bilan bog‘lang: 男.');
+addWord(10, '那儿', 'nàr', 'u yer; o‘sha yer', 'olmosh', '那 — u, o‘sha · 儿 — yer shaklidagi qo‘shimcha', 'Uzoqdagi joyni ko‘rsating: “U yer 那儿”. Bu yer 这儿 dan farq qiladi.');
+
 const lessonOrder = {};
 words.forEach(word => {
   lessonOrder[word.lesson] = (lessonOrder[word.lesson] || 0) + 1;
@@ -281,7 +331,24 @@ const characterData = {
   '校': ['xiào', 'maktab; ta’lim binosi', '木 + 交'], '书': ['shū', 'kitob', '书'],
   '前': ['qián', 'old; oldinda', '前'], '能': ['néng', 'qila olmoq', '厶 + 月 + 匕 + 匕'],
   '到': ['dào', 'yetib kelmoq', '至 + 刂'], '病': ['bìng', 'kasallik', '疒 + 丙'],
-  '胡': ['hú', 'Hu familiyasi', '古 + 月']
+  '胡': ['hú', 'Hu familiyasi', '古 + 月'],
+  '椅': ['yǐ', 'stul', '木 + 奇'], '本': ['běn', 'kitob; ta (kitoblar uchun)', '木 + 一'],
+  '第': ['dì', 'tartib soni belgisi', '⺮ + 弟'], '习': ['xí', 'mashq qilmoq; o‘rganmoq', '习'],
+  '白': ['bái', 'oq; yorug‘', '白'], '读': ['dú', 'o‘qimoq', '讠 + 卖'],
+  '唱': ['chàng', 'kuylamoq', '口 + 昌'], '歌': ['gē', 'qo‘shiq', '哥 + 欠'],
+  '听': ['tīng', 'eshitmoq; tinglamoq', '口 + 斤'], '视': ['shì', 'ko‘rish; tomosha qilish', '礻 + 见'],
+  '狗': ['gǒu', 'it', '犭 + 句'], '玩': ['wán', 'o‘ynamoq', '王 + 元'],
+  '杯': ['bēi', 'stakan; chashka', '木 + 不'], '售': ['shòu', 'sotmoq', '隹 + 口'],
+  '货': ['huò', 'tovar', '化 + 贝'], '员': ['yuán', 'xodim; a’zo', '口 + 贝'],
+  '钱': ['qián', 'pul', '钅 + 戋'], '块': ['kuài', 'bo‘lak; yuan', '土 + 夬'],
+  '水': ['shuǐ', 'suv', '水'], '果': ['guǒ', 'meva; natija', '日 + 木'],
+  '斤': ['jīn', 'jin; 500 gramm', '斤'], '苹': ['píng', '苹果 so‘zining birinchi belgisi', '艹 + 平'],
+  '便': ['pián / biàn', 'arzon; qulay', '亻 + 更'], '宜': ['yí', 'qulay; mos', '宀 + 且'],
+  '商': ['shāng', 'savdo; tijorat', '商'], '衣': ['yī', 'kiyim', '衣'],
+  '服': ['fu', 'kiyim; libos', '月 + 卩 + 又'], '件': ['jiàn', 'ta; buyum', '亻 + 牛'],
+  '元': ['yuán', 'yuan; Xitoy pul birligi', '二 + 儿'], '样': ['yàng', 'ko‘rinish; tur', '木 + 羊'],
+  '贵': ['guì', 'qimmat', '中 + 一 + 贝'], '穿': ['chuān', 'kiymoq; teshib o‘tmoq', '穴 + 牙'],
+  '男': ['nán', 'erkak', '田 + 力']
 };
 
 const characters = {};

@@ -15,20 +15,21 @@ function loadState() {
       learned: new Set((saved.learned || old.learned || []).map(Number)),
       bests: saved.bests || (legacyBest ? { 1: legacyBest } : {}),
       reviews: saved.reviews || {},
+      findStats: saved.findStats && typeof saved.findStats === 'object' && !Array.isArray(saved.findStats) ? saved.findStats : {},
       written: new Set(saved.written || []),
-      lesson: Number(saved.lesson) >= 1 && Number(saved.lesson) <= 8 ? Number(saved.lesson) : 1
+      lesson: lessons[Number(saved.lesson)] ? Number(saved.lesson) : 1
     };
   } catch {
-    return { learned: new Set(), bests: {}, reviews: {}, written: new Set(), lesson: 1 };
+    return { learned: new Set(), bests: {}, reviews: {}, findStats: {}, written: new Set(), lesson: 1 };
   }
 }
 
 const saved = loadState();
 const state = {
   view: 'words', lesson: saved.lesson, filter: 'all', search: '',
-  learned: saved.learned, bests: saved.bests, reviews: saved.reviews, written: saved.written,
+  learned: saved.learned, bests: saved.bests, reviews: saved.reviews, findStats: saved.findStats, written: saved.written,
   cardIndex: 0, revealed: false, direction: 'meaning', quiz: null, find: null,
-  writer: null, writerVersion: 0, writeChar: '你', writeMode: 'show'
+  findMode: 'guided', findScope: 'lesson', writer: null, writerVersion: 0, writeChar: '你', writeMode: 'show'
 };
 let activeWords = [];
 let activeCharacters = [];
@@ -37,7 +38,7 @@ function persist() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       learned: [...state.learned], bests: state.bests, reviews: state.reviews,
-      written: [...state.written], lesson: state.lesson
+      findStats: state.findStats, written: [...state.written], lesson: state.lesson
     }));
   } catch {}
 }
@@ -309,24 +310,86 @@ function renderQuizResult() {
   $('#quiz-area').innerHTML = `<div class="quiz-result"><span class="section-kicker">TEST YAKUNLANDI</span><div class="result-score">${quiz.score}/${quiz.questions.length}</div><h2>${percent >= 80 ? 'Barakalla!' : 'Yaxshi urinish!'}</h2><p>${message}${isNewBest ? ' Bu sizning eng yaxshi natijangiz.' : ''}</p><div class="result-actions"><button class="secondary-button" data-go="cards">Kartochkalar</button><button class="primary-button" id="restart-quiz">Qayta ishlash <span aria-hidden="true">↻</span></button></div></div>`;
 }
 
-function renderFindStart() {
-  $('#find-area').innerHTML = `<div class="find-start"><div class="find-start-demo" aria-hidden="true"><span>工作</span><span class="demo-missed">里</span><span>米饭</span><span>谁</span></div><span class="section-kicker">DOSKA O‘YINI</span><h2>${activeWords.length} ta hanzini toping</h2><p>Har savolda pinyin va ma’no beriladi. Xato qilsangiz yoki “Bilmadim” desangiz, to‘g‘ri hanzi qizil doiraga olinadi va so‘z keyin yana chiqadi.</p><div class="quiz-meta"><span>+100 ball</span><span>Seriya bonusi</span><span>Qiyin so‘z qaytadi</span></div><button class="primary-button" id="start-find">O‘yinni boshlash <span aria-hidden="true">→</span></button></div>`;
+function findStat(wordId) {
+  const stats = state.findStats[wordId];
+  return stats && typeof stats === 'object' ? stats : { attempts: 0, correct: 0, wrong: 0, streak: 0, confusions: {} };
 }
 
-function startFind() {
+function difficultFindWords() {
+  return activeWords.filter(word => {
+    const stats = findStat(word.id);
+    return Number(stats.wrong) > 0 && Number(stats.streak || 0) < 2;
+  });
+}
+
+function weightedFindOrder(pool) {
+  return pool.map(word => {
+    const stats = findStat(word.id);
+    const weight = Math.max(0.6, 1.6 + Number(stats.wrong || 0) * 2 + (isDue(word) ? 0.7 : 0) - Math.min(Number(stats.streak || 0), 4) * 0.35);
+    return { word, rank: Math.random() ** (1 / weight) };
+  }).sort((a, b) => b.rank - a.rank).map(entry => entry.word);
+}
+
+function findSimilarity(word, candidate) {
+  const shared = [...new Set(candidate.hanzi)].filter(char => word.hanzi.includes(char)).length;
+  const radicalList = '氵讠亻口木女心忄艹宀钅辶阝犭礻';
+  const wordParts = new Set([...word.parts].filter(char => radicalList.includes(char)));
+  const sharedParts = [...candidate.parts].filter(char => wordParts.has(char)).length;
+  const stats = findStat(word.id);
+  const other = findStat(candidate.id);
+  const confusion = Number((stats.confusions || {})[candidate.id] || 0) + Number((other.confusions || {})[word.id] || 0);
+  const lengthScore = word.hanzi.length === candidate.hanzi.length ? 1.2 : -Math.abs(word.hanzi.length - candidate.hanzi.length) * 0.4;
+  return shared * 4 + sharedParts * 1.4 + confusion * 2 + lengthScore + (word.type === candidate.type ? 0.35 : 0);
+}
+
+function buildFindBoard(target) {
+  const count = matchMedia('(max-width: 700px)').matches ? 6 : 8;
+  const ranked = activeWords.filter(word => word.id !== target.id).map(word => ({ word, score: findSimilarity(target, word) })).sort((a, b) => b.score - a.score || a.word.order - b.word.order);
+  const similar = shuffled(ranked.slice(0, Math.min(ranked.length, (count - 1) * 2)).map(entry => entry.word));
+  const selected = similar.slice(0, Math.ceil((count - 1) * 0.65));
+  const selectedIds = new Set(selected.map(word => word.id));
+  const remainder = shuffled(ranked.map(entry => entry.word).filter(word => !selectedIds.has(word.id)));
+  return shuffled([target, ...selected, ...remainder.slice(0, count - 1 - selected.length)]);
+}
+
+function findFeedback(word) {
+  const game = state.find;
+  if (!game.answered) return `<strong>Doskadagi hanzini tanlang</strong><span>${game.mode === 'guided' ? 'Pinyin va ma’noni o‘qing, so‘ng belgini bosing.' : 'Avval ma’nodan hanzini eslang. Pinyin javobdan keyin ochiladi.'}</span>`;
+  const recovered = Number(game.mistakes[word.id] || 0) > 0;
+  if (game.lastCorrect) return `<strong>To‘g‘ri — ${word.hanzi}</strong><span>${recovered ? `+${game.lastPoints} ball. Endi to‘g‘ri topdingiz; bu so‘z hali qiyinlar ro‘yxatida qoladi.` : `+${game.lastPoints} ball. Seriya davom etmoqda!`}</span>`;
+  const repeatIn = game.queue.slice(1).findIndex(item => item.id === word.id);
+  const schedule = repeatIn === 0 ? 'Bu so‘z keyingi savolda yana chiqadi.' : `Bu so‘z ${repeatIn} ta savoldan keyin yana chiqadi.`;
+  return `<strong>To‘g‘ri javob: ${word.hanzi}</strong><span>${escapeHTML(word.story)}</span><small>${schedule} Hikoyani o‘qib, obrazni eslab qoling.</small>`;
+}
+
+function renderFindStart() {
+  const difficult = difficultFindWords();
+  if (!difficult.length) state.findScope = 'lesson';
+  $('#find-area').innerHTML = `<div class="find-start"><div class="find-start-demo" aria-hidden="true"><span>工作</span><span class="demo-missed">里</span><span>米饭</span><span>谁</span></div><span class="section-kicker">AQILLI DOSKA</span><h2>${activeWords.length} ta hanzini toping</h2><p>Har safar kichik doska ochiladi. O‘xshash hanzilar diqqatingizni sinaydi, xato so‘z 2–3 savoldan keyin qaytadi. Qiyin so‘zlaringiz keyingi mashqlarda ham saqlanadi.</p><div class="find-start-options"><span class="find-option-label">SAVOL TURI</span><div class="find-mode-switch" role="group" aria-label="Savol turi"><button data-find-mode="guided" class="${state.findMode === 'guided' ? 'active' : ''}" aria-pressed="${state.findMode === 'guided'}"><strong>Pinyin + ma’no</strong><small>Yordam bilan topish</small></button><button data-find-mode="recall" class="${state.findMode === 'recall' ? 'active' : ''}" aria-pressed="${state.findMode === 'recall'}"><strong>Faqat ma’no</strong><small>Yoddan eslash</small></button></div>${difficult.length ? `<div class="find-scope-switch" role="group" aria-label="Mashq doirasi"><button data-find-scope="lesson" class="${state.findScope === 'lesson' ? 'active' : ''}" aria-pressed="${state.findScope === 'lesson'}">Butun dars · ${activeWords.length}</button><button data-find-scope="difficult" class="${state.findScope === 'difficult' ? 'active' : ''}" aria-pressed="${state.findScope === 'difficult'}">Qiyin so‘zlar · ${difficult.length}</button></div>` : ''}</div><div class="quiz-meta"><span>6–8 ta belgi</span><span>Xatosiz +100 ball</span><span>Vaqt cheklanmagan</span></div><button class="primary-button" id="start-find">O‘yinni boshlash <span aria-hidden="true">→</span></button></div>`;
+}
+
+function startFind(mode = state.findMode, scope = state.findScope) {
+  let pool = scope === 'difficult' ? difficultFindWords() : activeWords;
+  if (!pool.length) {
+    pool = activeWords;
+    scope = 'lesson';
+  }
+  state.findMode = mode;
+  state.findScope = scope;
   state.find = {
-    queue: shuffled(activeWords), solved: new Set(), score: 0, streak: 0, bestStreak: 0,
-    attempts: 0, correctAttempts: 0, answered: false, currentWrong: false,
-    wrongIds: [], mistakes: {}, lastCorrect: null
+    queue: weightedFindOrder(pool), total: pool.length, scope, mode, solved: new Set(), score: 0, streak: 0, bestStreak: 0,
+    attempts: 0, correctAttempts: 0, answered: false, wrongIds: [], mistakes: {}, lastCorrect: null, lastPoints: 0
   };
   renderFind();
+  $('#find-area').scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 }
 
 function findWordStyle(word, index) {
-  const palette = ['#292b29', '#8052a0', '#c7547a', '#358c89', '#b38a27', '#3c70a5', '#66923e'];
-  const sizes = [30, 34, 38, 32, 36];
-  const tilts = [-3, 2, -1, 3, 0, -2];
-  const shifts = [-5, 3, 0, 5, -2];
+  const palette = ['#292b29', '#8052a0', '#c7547a', '#358c89', '#9a7526', '#3c70a5', '#66923e'];
+  const baseSize = word.hanzi.length >= 4 ? 25 : word.hanzi.length === 3 ? 29 : 33;
+  const sizes = [baseSize, baseSize + 1, baseSize - 1];
+  const tilts = [-2, 1, -1, 2, 0, -1];
+  const shifts = [-3, 2, 0, 3, -2];
   const seed = word.id + index;
   return `--word-color:${palette[seed % palette.length]};--font-size:${sizes[seed % sizes.length]}px;--tilt:${tilts[seed % tilts.length]}deg;--dx:${shifts[seed % shifts.length]}px;--dy:${shifts[(seed + 2) % shifts.length]}px`;
 }
@@ -336,56 +399,102 @@ function renderFind() {
   if (!game.queue.length) return renderFindResult();
   const word = game.queue[0];
   const accuracy = game.attempts ? Math.round(game.correctAttempts / game.attempts * 100) : 100;
-  const board = activeWords.map((item, index) => {
+  game.board = buildFindBoard(word);
+  const board = game.board.map((item, index) => {
     const classes = ['find-word'];
-    if (game.solved.has(item.id)) classes.push('solved');
     if (game.answered && item.id === word.id) classes.push(game.lastCorrect ? 'correct-target' : 'missed-target');
     if (game.answered && game.wrongIds.includes(item.id)) classes.push('wrong-choice');
-    return `<button class="${classes.join(' ')}" style="${findWordStyle(item, index)}" data-find-id="${item.id}" lang="zh" aria-label="${item.hanzi}" ${game.answered || game.solved.has(item.id) ? 'disabled' : ''}>${item.hanzi}<span aria-hidden="true">✓</span></button>`;
+    return `<button type="button" class="${classes.join(' ')}" style="${findWordStyle(item, index)}" data-find-id="${item.id}" lang="zh" aria-label="${item.hanzi}" ${game.answered ? 'disabled' : ''}>${item.hanzi}<span aria-hidden="true">✓</span></button>`;
   }).join('');
-  let feedback = '<div class="find-feedback neutral"><strong>Hanzini doskadan toping</strong><span>Javobni xayolda ayting, keyin belgini bosing.</span></div>';
-  if (game.answered && game.lastCorrect) feedback = `<div class="find-feedback correct" role="status"><strong>To‘g‘ri — ${word.hanzi}</strong><span>${game.currentWrong ? 'Bu safar topdingiz. So‘z o‘rganilganlar qatoriga qo‘shildi.' : `+${100 + Math.max(0, game.streak - 1) * 10} ball. Seriya davom etmoqda!`}</span></div>`;
-  if (game.answered && !game.lastCorrect) feedback = `<div class="find-feedback wrong" role="status"><strong>To‘g‘ri javob: ${word.hanzi}</strong><span>${escapeHTML(word.story)}</span><small>Bu so‘z navbat oxiriga qo‘shildi — keyin yana topasiz.</small></div>`;
+  const feedbackClass = game.answered ? (game.lastCorrect ? 'correct' : 'wrong') : 'neutral';
+  const showPinyin = game.mode === 'guided' || game.answered;
   $('#find-area').innerHTML = `<div class="find-game">
-    <div class="find-stats"><div><span>BALL</span><strong>${game.score}</strong></div><div><span>SERIYA</span><strong>${game.streak}×</strong></div><div><span>ANQLIK</span><strong>${accuracy}%</strong></div><div><span>TOPILDI</span><strong>${game.solved.size}/${activeWords.length}</strong></div></div>
-    <div class="progress-track find-progress"><span style="width:${game.solved.size / activeWords.length * 100}%"></span></div>
-    <div class="find-prompt"><div><span>SHU HANZINI TOPING</span><h2>${word.pinyin}</h2><p>${escapeHTML(word.meaning)}</p></div><button class="icon-button" id="find-speak" aria-label="Talaffuzni tinglash">${speakerIcon}</button></div>
+    <div class="find-stats"><div><span>BALL</span><strong id="find-score">${game.score}</strong></div><div><span>SERIYA</span><strong id="find-streak">${game.streak}×</strong></div><div><span>ANIQLIK</span><strong id="find-accuracy">${accuracy}%</strong></div><div><span>TOPILDI</span><strong id="find-solved">${game.solved.size}/${game.total}</strong></div></div>
+    <div class="progress-track find-progress" aria-label="Mashq jarayoni"><span id="find-progress-bar" style="width:${game.solved.size / game.total * 100}%"></span></div>
+    <div class="find-prompt" id="find-prompt" tabindex="-1"><div><span>${game.mode === 'guided' ? 'PINYIN VA MA’NO BO‘YICHA TOPING' : 'MA’NOSIDAN HANZINI ESLANG'}</span><h2 id="find-pinyin">${showPinyin ? word.pinyin : 'Qaysi hanzi?'}</h2><p>${escapeHTML(word.meaning)}</p></div><button class="icon-button" id="find-speak" aria-label="${word.hanzi} talaffuzini tinglash">${speakerIcon}</button></div>
     <div class="find-board" aria-label="Hanzi doskasi">${board}</div>
-    ${feedback}
-    <div class="find-controls"><button class="secondary-button" id="restart-find">Qayta boshlash</button><button class="dont-know-button" id="find-unknown" ${game.answered ? 'disabled' : ''}>Bilmadim</button><button class="primary-button" id="next-find" ${game.answered ? '' : 'hidden'}>${game.solved.size === activeWords.length ? 'Natijani ko‘rish' : 'Keyingi savol'} <span aria-hidden="true">→</span></button></div>
+    <div class="find-feedback ${feedbackClass}" id="find-feedback" role="status" aria-live="polite" aria-atomic="true">${findFeedback(word)}</div>
+    <div class="find-controls"><button class="secondary-button" id="restart-find">Qayta boshlash</button><button class="dont-know-button" id="find-unknown" ${game.answered ? 'disabled' : ''}>Bilmadim</button><button class="primary-button" id="next-find" ${game.answered ? '' : 'hidden'}>${game.solved.size === game.total ? 'Natijani ko‘rish' : 'Keyingi savol'} <span aria-hidden="true">→</span></button></div>
   </div>`;
+}
+
+function updateFindAnswer(word) {
+  const game = state.find;
+  const accuracy = Math.round(game.correctAttempts / game.attempts * 100);
+  $('#find-score').textContent = game.score;
+  $('#find-streak').textContent = `${game.streak}×`;
+  $('#find-accuracy').textContent = `${accuracy}%`;
+  $('#find-solved').textContent = `${game.solved.size}/${game.total}`;
+  $('#find-progress-bar').style.width = `${game.solved.size / game.total * 100}%`;
+  $('#find-pinyin').textContent = word.pinyin;
+  $$('[data-find-id]').forEach(button => {
+    const id = Number(button.dataset.findId);
+    button.disabled = true;
+    button.classList.toggle('correct-target', game.lastCorrect && id === word.id);
+    button.classList.toggle('missed-target', !game.lastCorrect && id === word.id);
+    button.classList.toggle('wrong-choice', game.wrongIds.includes(id));
+    button.classList.toggle('solved', game.lastCorrect && id === word.id);
+  });
+  const feedback = $('#find-feedback');
+  feedback.className = `find-feedback ${game.lastCorrect ? 'correct' : 'wrong'}`;
+  feedback.innerHTML = findFeedback(word);
+  $('#find-unknown').disabled = true;
+  const next = $('#next-find');
+  next.hidden = false;
+  next.innerHTML = `${game.solved.size === game.total ? 'Natijani ko‘rish' : 'Keyingi savol'} <span aria-hidden="true">→</span>`;
+  next.focus({ preventScroll: true });
 }
 
 function answerFind(answerId) {
   const game = state.find;
-  if (!game || game.answered) return;
+  if (!game || game.answered || !game.queue.length) return;
   const word = game.queue[0];
   const correct = answerId === word.id;
+  const recovered = Number(game.mistakes[word.id] || 0) > 0;
+  const stats = findStat(word.id);
+  stats.attempts = Number(stats.attempts || 0) + 1;
+  stats.lastSeen = Date.now();
+  stats.confusions = stats.confusions && typeof stats.confusions === 'object' ? stats.confusions : {};
   game.attempts++;
   game.answered = true;
   game.lastCorrect = correct;
   game.wrongIds = correct ? [] : [answerId].filter(Boolean);
   if (correct) {
+    stats.correct = Number(stats.correct || 0) + 1;
+    stats.streak = Number(stats.streak || 0) + 1;
     game.correctAttempts++;
     game.solved.add(word.id);
-    if (!game.currentWrong) {
-      game.score += 100 + game.streak * 10;
-      game.streak++;
-    } else {
-      game.score += 40;
-      game.streak = 0;
-    }
+    game.lastPoints = recovered ? 40 : 100 + Math.min(game.streak, 5) * 10;
+    game.score += game.lastPoints;
+    game.streak = recovered ? 0 : game.streak + 1;
     game.bestStreak = Math.max(game.bestStreak, game.streak);
-    markRecognized(word);
+    if (recovered) {
+      const review = state.reviews[word.id] || { reviews: 0 };
+      state.learned.delete(word.id);
+      state.reviews[word.id] = { step: 0, due: Date.now() + 600000, reviews: Number(review.reviews || 0) };
+    } else {
+      markRecognized(word);
+    }
   } else {
-    game.currentWrong = true;
+    stats.wrong = Number(stats.wrong || 0) + 1;
+    stats.streak = 0;
     game.streak = 0;
     game.mistakes[word.id] = (game.mistakes[word.id] || 0) + 1;
-    game.queue.push(word);
+    const gap = 3 + Math.floor(Math.random() * 2);
+    game.queue.splice(Math.min(gap, game.queue.length), 0, word);
+    if (answerId) {
+      stats.confusions[answerId] = Number(stats.confusions[answerId] || 0) + 1;
+      const other = findStat(answerId);
+      other.confusions = other.confusions && typeof other.confusions === 'object' ? other.confusions : {};
+      other.confusions[word.id] = Number(other.confusions[word.id] || 0) + 1;
+      state.findStats[answerId] = other;
+    }
     flagDifficult(word);
   }
-  renderFind();
-  if (game.answered) $('#next-find').focus();
+  state.findStats[word.id] = stats;
+  persist();
+  updateProgress();
+  updateFindAnswer(word);
 }
 
 function nextFind() {
@@ -393,17 +502,19 @@ function nextFind() {
   if (!game || !game.answered) return;
   game.queue.shift();
   game.answered = false;
-  game.currentWrong = false;
   game.wrongIds = [];
   game.lastCorrect = null;
+  game.lastPoints = 0;
+  if (!game.queue.length) return renderFindResult();
   renderFind();
+  $('#find-prompt').focus({ preventScroll: true });
 }
 
 function renderFindResult() {
   const game = state.find;
   const accuracy = game.attempts ? Math.round(game.correctAttempts / game.attempts * 100) : 0;
-  const difficult = Object.entries(game.mistakes).sort((a, b) => b[1] - a[1]).map(([id, count]) => ({ word: activeWords.find(item => item.id === Number(id)), count }));
-  $('#find-area').innerHTML = `<div class="find-result"><span class="section-kicker">DOSKA TOZALANDI</span><div class="result-score">${accuracy}%</div><h2>${difficult.length ? 'Yana bir muhim qadam!' : 'Barcha so‘zlar topildi!'}</h2><p>${game.score} ball · eng uzun seriya ${game.bestStreak}× · ${game.attempts} ta urinish</p>${difficult.length ? `<div class="difficult-list"><h3>Keyingi mashq uchun qiyin so‘zlar</h3>${difficult.map(({ word, count }) => `<div><span lang="zh">${word.hanzi}</span><p><strong>${word.pinyin}</strong>${escapeHTML(word.meaning)}</p><small>${count} xato</small></div>`).join('')}</div>` : '<p class="perfect-note">Hech qanday xato yo‘q. Endi Yoddan yozish bilan mustahkamlang.</p>'}<div class="result-actions"><button class="secondary-button" data-go="cards">Qiyinlarini takrorlash</button><button class="primary-button" id="restart-find">Yana o‘ynash <span aria-hidden="true">↻</span></button></div></div>`;
+  const difficult = Object.entries(game.mistakes).sort((a, b) => b[1] - a[1]).map(([id, count]) => ({ word: activeWords.find(item => item.id === Number(id)), count })).filter(entry => entry.word);
+  $('#find-area').innerHTML = `<div class="find-result"><span class="section-kicker">MASHQ YAKUNLANDI</span><div class="result-score">${accuracy}%</div><h2>${difficult.length ? 'Qiyin so‘zlarni mustahkamlaymiz!' : 'Barcha so‘zlar topildi!'}</h2><p>${game.score} ball · eng uzun seriya ${game.bestStreak}× · ${game.attempts} ta urinish</p>${difficult.length ? `<div class="difficult-list"><h3>Keyingi mashq uchun qiyin so‘zlar</h3>${difficult.map(({ word, count }) => `<div><span lang="zh">${word.hanzi}</span><p><strong>${word.pinyin}</strong>${escapeHTML(word.meaning)}</p><small>${count} xato</small></div>`).join('')}</div>` : '<p class="perfect-note">Hech qanday xato yo‘q. Endi “Faqat ma’no” yoki “Yoddan yozish” bilan mustahkamlang.</p>'}<div class="result-actions">${difficult.length ? `<button class="secondary-button" id="practice-difficult-find">Faqat qiyinlar · ${difficult.length}</button>` : '<button class="secondary-button" data-go="cards">Kartochkalar</button>'}<button class="primary-button" id="restart-find">Yana o‘ynash <span aria-hidden="true">↻</span></button></div></div>`;
 }
 
 const strokeCache = new Map();
@@ -498,10 +609,13 @@ function startWriting(mode) {
 $('#lesson-select').innerHTML = Object.entries(lessons).map(([id, lesson]) => `<option value="${id}">${id}-dars · ${lesson.title} (${words.filter(word => word.lesson === Number(id)).length})</option>`).join('');
 $('#lesson-select').addEventListener('change', event => setLesson(event.target.value));
 $('#reset-progress').addEventListener('click', () => {
-  if (!window.confirm('Barcha darslardagi o‘rganilgan so‘zlar, test va yozish natijalari o‘chirilsinmi?')) return;
+  if (!window.confirm('Barcha darslardagi o‘rganilgan so‘zlar, test, Topish va yozish natijalari o‘chirilsinmi?')) return;
   state.learned.clear();
   state.written.clear();
   state.reviews = {};
+  state.findStats = {};
+  state.findMode = 'guided';
+  state.findScope = 'lesson';
   state.bests = {};
   state.quiz = null;
   state.find = null;
@@ -608,7 +722,21 @@ $('#quiz-area').addEventListener('click', event => {
   }
 });
 $('#find-area').addEventListener('click', event => {
-  if (event.target.closest('#start-find') || event.target.closest('#restart-find')) startFind();
+  const mode = event.target.closest('[data-find-mode]');
+  if (mode) {
+    state.findMode = mode.dataset.findMode;
+    renderFindStart();
+    return;
+  }
+  const scope = event.target.closest('[data-find-scope]');
+  if (scope) {
+    state.findScope = scope.dataset.findScope;
+    renderFindStart();
+    return;
+  }
+  if (event.target.closest('#start-find')) return startFind();
+  if (event.target.closest('#restart-find')) return startFind(state.find?.mode, state.find?.scope);
+  if (event.target.closest('#practice-difficult-find')) return startFind(state.find?.mode, 'difficult');
   const answer = event.target.closest('[data-find-id]');
   if (answer) answerFind(Number(answer.dataset.findId));
   if (event.target.closest('#find-unknown')) answerFind(null);
