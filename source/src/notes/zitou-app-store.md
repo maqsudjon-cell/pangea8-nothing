@@ -7,7 +7,7 @@ project: Note
 tags: Zitou, iOS, App Store, Chinese, Education
 description: Zitou: Learn Chinese & HSK went live on the App Store on 5 November 2026. The iPhone app is the same app as zitou.app; Android users open it in Telegram for now.
 ---
-On 5 November 2026 [Zitou](/work/zitou/) went live on the App Store as [Zitou: Learn Chinese & HSK](https://apps.apple.com/app/id6818937091). It is free to download, for iPhone and iPad on iOS 15 or later.
+On 5 November 2026 [Zitou](/work/zitou/) went live on the App Store as [Zitou: Learn Chinese & HSK](https://apps.apple.com/app/id6818937091). It is free to download, for iPhone on iOS 15 or later.
 
 ## The same app, one more door
 
