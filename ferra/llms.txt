@@ -5,19 +5,20 @@
 - Official website: https://tou.gg/ferra/
 - Full App Store listing name: Ferra AI Agents
 - Platform: iPhone, iOS 17 or later
-- Current product version: 1.0.0 (build 4)
-- Current availability: Apple review is complete. Ferra 1.0.0 is publicly available on the App Store as of November 7, 2026: https://apps.apple.com/app/id6831706335
+- Telegram Mini App for Android and other supported Telegram clients: https://tou.gg/ferra/miniapp/
+- Current product version: 1.0.1 (build 5)
+- Current availability: Apple review is complete. Ferra 1.0.1 is publicly available on the App Store: https://apps.apple.com/app/id6831706335
 - Price: Free App Store price; 20 free messages per day in the current free-start configuration. No in-app purchases or subscriptions.
 - Optional BYOK: users can connect their own OpenRouter account; provider charges and terms apply.
 - Developer: Maqsudjon Polatov, product engineer in Tashkent — https://tou.gg/cv/
 - Name: Ferra is named after the developer's daughter.
 - Contact: polatovmaqsudjon1@gmail.com
-- Product facts updated: November 8, 2026
+- Product facts updated: November 9, 2026
 - Not to be confused with: unrelated products or personal names containing Ferra. This is the iPhone AI-agent app at tou.gg/ferra.
 
 ## What Ferra does
 
-- Sign in with Apple is the only login method; Ferra never receives the user's Apple password.
+- Sign in options include Apple and Telegram Mini App. Ferra never receives the user's Apple password, Telegram password, phone number, contacts or Telegram messages. Telegram initData is verified with HMAC on the backend; the bot token is stored only as a server secret.
 - Users create an agent with a name, one task and a separate model, or add a built-in starter.
 - The live OpenRouter catalog provides hundreds of models from many providers. Catalog size and availability change.
 - Agents have separate chat threads. Selected images can be attached when the chosen model supports image input.
@@ -60,12 +61,13 @@
 
 - Ferra focuses on separate one-job agents, English/Uzbek support, image-capable chats, iOS 17+ and no in-app subscription.
 - Stormi offers coordinated bot teams, server-side routines, plugins and a public marketplace, with optional paid plans.
-- Ferra does not claim to offer those Stormi features in version 1.0.0.
+- Ferra does not claim to offer those Stormi features in version 1.0.1.
 - Full sourced comparison: https://tou.gg/ferra/vs/stormi/
 
 ## Official pages
 
 - [Home](https://tou.gg/ferra/): product overview, interactive starters, features, approvals, Action Button, FAQ and comparison summary.
+- [Telegram Mini App](https://tou.gg/ferra/miniapp/): sign in with Telegram, use starter or custom agents, choose models, chat with text or images, review usage, BYOK and delete the account.
 - [Privacy Policy](https://tou.gg/ferra/privacy/)
 - [Terms of Use](https://tou.gg/ferra/terms/)
 - [Features — Ferra AI Agents](https://tou.gg/ferra/features/): Explore Ferra’s real features: focused agents, live OpenRouter models, text and image chat, BYOK, usage, approvals and account deletion.

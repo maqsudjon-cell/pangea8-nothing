@@ -32,7 +32,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '&family=Big+Shoulders+Stencil+Display:wght@700;800&family=Instrument+Sans:wght@400;500;600&family=Kalam:wght@400;700'
          '&family=Geist+Mono:wght@400;500&display=swap">')
 
-FERRA_UPDATED = "2026-11-08"
+FERRA_UPDATED = "2026-11-09"
 FERRA_PAGES = [
     ("", "0.9"), ("privacy/", "0.5"), ("terms/", "0.5"),
     ("features/", "0.7"), ("how-it-works/", "0.7"), ("use-cases/", "0.7"),
