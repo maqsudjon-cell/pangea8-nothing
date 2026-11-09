@@ -5,7 +5,7 @@
 - Official website: https://tou.gg/ferra/
 - Full App Store listing name: Ferra AI Agents
 - Platform: iPhone, iOS 17 or later
-- Telegram Mini App for Android and other supported Telegram clients: https://tou.gg/ferra/miniapp/
+- Telegram Mini App for Android and other supported Telegram clients: https://tou.gg/ferra/miniapp/ (open through https://t.me/Ferraaibot)
 - Current product version: 1.0.1 (build 5)
 - Current availability: Apple review is complete. Ferra 1.0.1 is publicly available on the App Store: https://apps.apple.com/app/id6831706335
 - Price: Free App Store price; 20 free messages per day in the current free-start configuration. No in-app purchases or subscriptions.
