@@ -37,9 +37,9 @@
 - Inbox Manager: Draft clear, friendly emails and organize communication. Never send anything without explicit approval. Guide: https://tou.gg/ferra/agents/inbox-manager/
 - Study Coach: Explain concepts step by step, create practice questions and help the user learn. Guide: https://tou.gg/ferra/agents/study-coach/
 
-## What Ferra does not do in version 1.0.0
+## What Ferra does not do in version 1.0.1
 
-- No Android, desktop or web app.
+- No native Android or desktop app. Android is supported through the Telegram Mini App; standalone browser sign-in is not supported.
 - No public bot marketplace, general plugin catalog or custom MCP connector.
 - No scheduled routines, cross-agent delegation or always-on background agent work.
 - No silent external sends, automatic hardware configuration or claim of delivery without native confirmation.
@@ -74,7 +74,7 @@
 - [How Ferra works — from an idea to an AI agent](https://tou.gg/ferra/how-it-works/): Learn exactly how to sign in, add a Ferra agent, choose its OpenRouter model, chat with text or images and approve external actions.
 - [Ferra use cases — research, email drafts and learning](https://tou.gg/ferra/use-cases/): See practical ways to use Ferra’s Researcher, Inbox Manager, Study Coach and custom one-job agents without giving up approval or privacy.
 - [Ferra pricing — free start and optional BYOK](https://tou.gg/ferra/pricing/): Ferra is free to download with 20 free messages per day, no in-app subscription and optional OpenRouter BYOK with visible usage.
-- [Ferra changelog — version 1.0.0](https://tou.gg/ferra/changelog/): The factual Ferra 1.0.0 release record: starter agents, per-agent OpenRouter models, image chat, BYOK, usage, approvals and account deletion.
+- [Ferra changelog — iOS and Telegram Mini App](https://tou.gg/ferra/changelog/): The current Ferra release record: iOS 1.0.1 and the Telegram Mini App with agents, OpenRouter models, chat, BYOK, usage and account deletion.
 - [Open Ferra with Siri or the iPhone Action Button](https://tou.gg/ferra/action-button/): Set up Ferra’s Open Ferra shortcut with Siri or a supported iPhone Action Button. You choose the shortcut; Ferra never changes hardware settings.
 - [Compare Ferra with other AI agent apps](https://tou.gg/ferra/compare/): Read Ferra’s factual, sourced comparison with Stormi, including model choice, agent structure, tools, automation, platforms and starting price.
 - [Ferra vs Stormi — focused agents or connected automation](https://tou.gg/ferra/vs/stormi/): Compare Ferra and Stormi on agent structure, OpenRouter models, actions, routines, platforms and price, with an official source and clear trade-offs.

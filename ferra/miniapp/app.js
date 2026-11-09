@@ -842,6 +842,12 @@ document.getElementById("settings-content").addEventListener("submit", event => 
   if (event.target.id === "byok-form") connectByok(event);
 });
 document.getElementById("language-button").addEventListener("click", toggleLanguage);
+document.getElementById("open-telegram").addEventListener("click", event => {
+  if (tg?.initData && typeof tg.openTelegramLink === "function") {
+    event.preventDefault();
+    tg.openTelegramLink("https://t.me/Ferraaibot");
+  }
+});
 document.getElementById("retry-auth").addEventListener("click", signIn);
 document.getElementById("confirm-delete").addEventListener("click", deleteAccount);
 
