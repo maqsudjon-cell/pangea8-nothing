@@ -33,7 +33,7 @@ h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(22px, 4vw
 .contacts a { text-decoration: none; }
 .open { margin: 12px 0 0; font-size: 13px; }
 .open b { color: var(--accent); font-weight: 600; }
-.nums { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 18px 0 4px; }
+.nums { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin: 18px 0 4px; }
 .nums div { background: var(--desk); border-radius: 10px; padding: 8px 10px; }
 .nums b { display: block; font-family: var(--f-display); font-weight: 600; font-size: 18px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .nums span { color: var(--muted); font-size: 11.5px; }
@@ -114,15 +114,16 @@ footer { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line);
   <p class="open"><b>Open to</b> full-time remote (Europe / US / Gulf overlap) or on-site in Tashkent.</p>
 
   <div class="nums">
-    <div><b>18</b><span>live sites</span></div>
-    <div><b>19</b><span>months solo</span></div>
-    <div><b>191</b><span>public repos</span></div>
-    <div><b>3,146</b><span>commits</span></div>
-    <div><b>14</b><span>domains</span></div>
+    <div><b>19</b><span>live sites</span></div>
+    <div><b>2</b><span>App Store apps</span></div>
+    <div><b>20</b><span>months solo</span></div>
+    <div><b>192</b><span>public repos</span></div>
+    <div><b>3,244</b><span>commits</span></div>
+    <div><b>15</b><span>domains</span></div>
   </div>
 
   <h2>Summary</h2>
-  <p class="summary">Independent product engineer. I direct AI coding agents end to end: spec, architecture, build, DNS and TLS, operations. 18 live sites in 19 months while welding full-time in Tashkent, running on 14 domains, 7 Cloudflare Workers and GitHub Pages. Flagships: FlareStamina (144 free IELTS tests) and Zitou (Chinese for Uzbek speakers, 123,000+ word dictionary).</p>
+  <p class="summary">Independent product engineer. I direct AI coding agents end to end: spec, architecture, build, DNS and TLS, App Store releases, operations. 19 live sites and 2 App Store apps in 20 months while welding full-time in Tashkent, running on 15 domains, Cloudflare Workers and GitHub Pages. Flagships: FlareStamina (144 free IELTS tests), Zitou (Chinese for Uzbek speakers, 124,000+ word dictionary) and Ferra (AI agents for iPhone, and slide decks from a single topic).</p>
 
   <h2>Experience</h2>
   <div class="job">
@@ -130,9 +131,10 @@ footer { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line);
     <time>2025 — present</time>
     <ul>
       <li>FlareStamina: 144 IELTS tests in production (78 Listening, 53 Reading), AI Writing Lab, Speaking Lab, score converter. Free, no paywall.</li>
-      <li>Zitou: Chinese for Uzbek speakers. 123,000+ word dictionary, 10,057 HSK words, 8,500+ words with native audio; classes, exams and live games for teachers.</li>
+      <li>Zitou: Chinese for Uzbek speakers on zitou.uz, zitou.app, the App Store (iPhone and iPad) and Telegram. 124,000+ word dictionary, 10,057 HSK words, HSK 3.0 mock exams for all six levels; a feed, chats, duels and weekly leagues; classes and live games for teachers.</li>
+      <li>Ferra: Ferra AI Agents for iPhone (App Store, 7 Nov 2026; Android through a Telegram Mini App), one job and one model per agent, nothing sent without approval. ferra.tou.gg turns a topic into a finished deck with real sources and images, as PPTX or PDF.</li>
       <li>AI Lenta: unattended Uzbek AI news wire. 27 sources, a GitHub Actions pipeline with hourly updates; every number in a summary is checked against the source.</li>
-      <li>Open data on Hugging Face: uz-lexicon-skeleton (28,052,730 rows, CC BY 4.0, backs Chertma) an 8,296-word HSK Chinese–Uzbek–Russian vocabulary, and Nullsample Multitrack (20 synthetic tracks with stems, MIDI and exact annotations).</li>
+      <li>Open data on Hugging Face: uz-lexicon-skeleton (28,052,730 rows, CC BY 4.0, backs Chertma), an 8,296-word HSK Chinese–Uzbek–Russian vocabulary, and Nullsample Multitrack (20 synthetic tracks with stems, MIDI and exact annotations).</li>
       <li>Also shipped: Davomat (Telegram attendance), Tadam (wedding photo album via QR), Nullsample (music from code), zh.tou.gg, Chertma, Pierics, Minnos.</li>
     </ul>
   </div>
@@ -148,7 +150,8 @@ footer { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line);
   <h2>Live sites</h2>
   <div class="work">
     <div><b>FlareStamina</b><span>flarestamina.com · IELTS practice</span></div>
-    <div><b>Zitou</b><span>zitou.app · Chinese in Uzbek</span></div>
+    <div><b>Zitou</b><span>zitou.app · zitou.uz · Chinese in Uzbek</span></div>
+    <div><b>Ferra</b><span>ferra.tou.gg · AI slide decks</span></div>
     <div><b>AI Lenta</b><span>ailenta.uz · AI news in Uzbek</span></div>
     <div><b>zh.tou.gg</b><span>Chinese homework</span></div>
     <div><b>Davomat</b><span>chzq.uz · attendance in Telegram</span></div>
@@ -192,11 +195,11 @@ footer { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line);
 
   <h2>Stack</h2>
   <div class="stack">
-    <span>JS / TS</span><span>Node</span><span>Python</span><span>Cloudflare Workers</span><span>D1 / R2</span><span>Firebase</span><span>Supabase</span><span>Claude API</span><span>GitHub Actions</span><span>GitHub Pages</span><span>Web Audio</span><span>Canvas</span>
+    <span>JS / TS</span><span>Node</span><span>Python</span><span>Swift / SwiftUI</span><span>Capacitor</span><span>Cloudflare Workers</span><span>D1 / R2</span><span>Firebase</span><span>Supabase</span><span>Telegram Mini Apps</span><span>Claude API</span><span>OpenRouter</span><span>GitHub Actions</span><span>GitHub Pages</span><span>Web Audio</span><span>Canvas</span>
   </div>
 
   <footer>
-    <span>Updated 14 Oct 2026</span>
+    <span>Updated 16 Nov 2026</span>
     <span>tou.gg · to you, given gladly</span>
   </footer>
 </main>

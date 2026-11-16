@@ -131,6 +131,9 @@ h1 .night { color: var(--hot); text-shadow: 0 0 22px rgb(255 122 26 / .45); }
 .cell b { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.35rem, 2.3vw, 1.8rem); line-height: 1; text-transform: uppercase; letter-spacing: .01em; }
 .cell span.l { font-size: .85rem; color: #C9C4BA; max-height: 0; overflow: hidden; transition: max-height .4s; }
 .cell:hover span.l, .cell:focus-visible span.l { max-height: 3rem; }
+/* tou.gg itself takes the whole bottom row, so the grille stays full at any pane count */
+.cell.here { grid-column: 1 / -1; aspect-ratio: auto; min-height: clamp(7rem, 12vw, 9.5rem); }
+.cell.here .curl { width: auto; height: 78%; }
 /* weld joints at the corners: they flash once when the grille comes into view */
 .grille .joint { position: absolute; z-index: 5; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; pointer-events: none;
   background: radial-gradient(circle, #5B6168 0 35%, #3A4047 36% 60%, transparent 62%); }
@@ -246,7 +249,7 @@ footer a { color: var(--dim); }
     <div class="plate" aria-label="Live counter">
       <div class="k">Seconds since the first repo · 28 Feb 2025</div>
       <div class="v" id="secs">51,206,078</div>
-      <div class="row"><span>Live sites <b>18</b></span><span>Repos <b>191</b></span><span>Commits <b>3,146</b></span></div>
+      <div class="row"><span>Live sites <b>19</b></span><span>Repos <b>192</b></span><span>Commits <b>3,244</b></span></div>
     </div>
   </div>
 </header>
@@ -268,10 +271,11 @@ footer a { color: var(--dim); }
   </section>
 
   <section class="wrap sec" id="work" aria-labelledby="h-work">
-    <div class="head"><h2 id="h-work" class="rv"><small>18 live sites</small>Behind the grille</h2><p class="chalk rv">hover a pane and the light comes on. every pane opens the story.</p></div>
+    <div class="head"><h2 id="h-work" class="rv"><small>19 live sites</small>Behind the grille</h2><p class="chalk rv">hover a pane and the light comes on. every pane opens the story.</p></div>
     <div class="grille" id="grille">
       <a class="cell" href="/work/flarestamina/"><img src="/img/flarestamina.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">IELTS</span><b>FlareStamina</b><span class="l">144 free IELTS tests in real exam mode.</span></span></a>
       <a class="cell" href="/work/zitou/"><img src="/img/zitou.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Chinese</span><b>Zitou</b><span class="l">Chinese in Uzbek, ten minutes a day.</span></span></a>
+      <a class="cell" href="https://ferra.tou.gg/"><img src="/img/ferra.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Slides</span><b>Ferra</b><span class="l">Type a topic, get a finished deck.</span></span></a>
       <a class="cell" href="/work/ailenta/"><img src="/img/ailenta.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">News</span><b>AI Lenta</b><span class="l">AI news in Uzbek, every number checked.</span></span></a>
       <a class="cell" href="/work/zh-tou-gg/"><img src="/img/zh.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Chinese</span><b>zh.tou.gg</b><span class="l">Homework in the order of the slides.</span></span></a>
       <a class="cell" href="/work/chertma/"><img src="/img/chertma.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Uzbek</span><b>Chertma</b><span class="l">Plain ASCII in, correct Uzbek out.</span></span></a>
@@ -287,7 +291,7 @@ footer a { color: var(--dim); }
       <a class="cell" href="/work/zed-avlod/"><img src="/img/zedavlod.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Client</span><b>ZED AVLOD</b><span class="l">A school with real results.</span></span></a>
       <a class="cell" href="/work/ctn/"><img src="/img/ctnlc.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Client</span><b>CTN</b><span class="l">A whole school site in one file.</span></span></a>
       <a class="cell" href="/work/maqsudjon-com/"><img src="/img/maqsudjon.webp" alt="" width="800" height="500" loading="lazy"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">Lab</span><b>maqsudjon.com</b><span class="l">The lab and the build log.</span></span></a>
-      <a class="cell" href="/work/tou-gg/"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">You are here</span><b>tou.gg</b><span class="l">This page, and how it is built.</span></span></a>
+      <a class="cell here" href="/work/tou-gg/"><span class="curl" aria-hidden="true"></span><span class="info"><span class="tag">You are here</span><b>tou.gg</b><span class="l">This page, and how it is built.</span></span></a>
     </div>
   </section>
 
@@ -309,7 +313,7 @@ footer a { color: var(--dim); }
   </section>
 
   <section class="wrap sec" id="cv" aria-labelledby="h-cv">
-    <div class="head"><h2 id="h-cv" class="rv"><small>Curriculum vitae</small>Spec plate</h2><p class="chalk rv">one page. checked 14 oct 2026.</p></div>
+    <div class="head"><h2 id="h-cv" class="rv"><small>Curriculum vitae</small>Spec plate</h2><p class="chalk rv">one page. checked 16 nov 2026.</p></div>
     <div class="cv">
       <div class="spec rv">
         <h3>M. Polatov</h3>
@@ -317,7 +321,7 @@ footer a { color: var(--dim); }
           <dt>Model</dt><dd>Product engineer</dd>
           <dt>Built in</dt><dd>Tashkent · open to remote</dd>
           <dt>In service</dt><dd>Steel since 2023 · code since Feb 2025</dd>
-          <dt>Output</dt><dd>18 sites · 191 repos · 3,146 commits</dd>
+          <dt>Output</dt><dd>19 sites · 2 App Store apps · 192 repos · 3,244 commits</dd>
           <dt>Uzbek</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>C2</dd>
           <dt>English</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>B2 · IELTS 6.0</dd>
           <dt>Korean</dt><dd><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span>A2 · TOPIK 2</dd>
@@ -334,7 +338,7 @@ footer a { color: var(--dim); }
           <li><time>Aug 2026</time>IELTS Academic 6.0 · Tadam. <span>CEFR B2. A wedding album with no app.</span></li>
           <li><time>Sep 2026</time>AI Lenta · Davomat · tou.gg. <span>BA begins. Chinese, day one.</span></li>
           <li><time>Oct 2026</time>Zitou on zitou.uz. <span>HSK 1 course, three open datasets.</span></li>
-          <li><time>Nov 2026</time>Zitou on the App Store. <span>For iPhone; Android in Telegram. Now.</span></li>
+          <li><time>Nov 2026</time>Zitou and Ferra on the App Store. <span>Ferra turns a topic into a deck. Now.</span></li>
         </ol>
         <div class="cv-actions"><a class="btn" href="/cv/">Full CV</a><a class="btn ghost" href="/Maqsudjon-Polatov-CV.pdf">PDF</a></div>
       </div>
@@ -353,7 +357,7 @@ footer a { color: var(--dim); }
     </div>
   </section>
 </main>
-<footer class="wrap"><span>© 2026 Maqsudjon Polatov · tou = to you · gg = given gladly</span><span>Numbers checked 14 Oct 2026 · <a href="/log/">Notes</a> · <a href="/rss.xml">RSS</a></span></footer>
+<footer class="wrap"><span>© 2026 Maqsudjon Polatov · tou = to you · gg = given gladly</span><span>Numbers checked 16 Nov 2026 ·<a href="/log/">Notes</a> · <a href="/rss.xml">RSS</a></span></footer>
 
 <script>
 (() => {

@@ -364,10 +364,10 @@ def main():
         {"@type": "WebSite", "@id": SITE + "/#site", "url": SITE + "/", "name": "tou.gg", "publisher": {"@id": SITE + "/#person"}},
         {"@type": "ProfilePage", "url": SITE + "/", "mainEntity": {"@id": SITE + "/#person"}},
         PERSON]}
-    home_head = head(f"{AUTHOR} · tou.gg", "Maqsudjon Polatov, product engineer in Tashkent. I weld metal by day and ship software by night: 18 live sites, open data and notes on every build.", "", extra_ld=home_ld, verify=True)
+    home_head = head(f"{AUTHOR} · tou.gg", "Maqsudjon Polatov, product engineer in Tashkent. I weld metal by day and ship software by night: 19 live sites, 2 App Store apps, open data and notes on every build.", "", extra_ld=home_ld, verify=True)
 
     cv_src = (SRC / "cv.html").read_text(encoding="utf-8")
-    cv_head = head(f"CV · {AUTHOR}", "CV of Maqsudjon Polatov, product engineer in Tashkent: 18 live sites in 19 months while welding full-time.", "cv/",
+    cv_head = head(f"CV · {AUTHOR}", "CV of Maqsudjon Polatov, product engineer in Tashkent: 19 live sites and 2 App Store apps in 20 months while welding full-time.", "cv/",
                    extra_ld={"@context": "https://schema.org", "@graph": [PERSON]})
 
     for preview in (False, True):
