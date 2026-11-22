@@ -317,7 +317,7 @@
     <category>Open source</category>
     <category>DSP</category>
     <description>A music generator where every sound is computed from code, the same seed gives the same track on any browser, and the six stems come out separate because they were never mixed.</description>
-    <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/nullsample.jpg" alt=""></p><p>Before any of the software, I made music. I release UK garage under the name Matsumi; the album <em>HOME</em> is on Spotify, and most of its listeners are in the UK, which is where that sound lives. <strong>Nullsample</strong> is what happened when the two halves met.</p>
+    <content:encoded><![CDATA[<p><img src="https://tou.gg/brand/og/nullsample.jpg" alt=""></p><p>Before any of the software, I made music. I release UK garage under the name ferrasium; the album <em>HOME</em> is on Spotify, and most of its listeners are in the UK, which is where that sound lives. <strong>Nullsample</strong> is what happened when the two halves met.</p>
 <p>It is a music generator in the browser. Press once and a track exists. There is no sample anywhere: no one-shots, no loops, no recorded impulse for the reverb, no trained model. Every sound is computed at runtime on your own device from oscillators, noise, envelopes, filters and distortion stages.</p>
 <h2 id="why-zero-samples">Why zero samples</h2>
 <p>Most "generative music" is a sample pack with a random seed on top. You cannot hear how it was made, and you cannot make it again. With Nullsample there is nothing in a track that came from anyone else's recording, so the audio you generate is yours to use, including commercially. Nothing to license, nobody to sue you.</p>

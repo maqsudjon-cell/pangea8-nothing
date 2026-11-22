@@ -19,7 +19,7 @@ facts:
   - Licence: AGPL-3.0
   - Open dataset: [20 tracks with labels](https://huggingface.co/datasets/Maqsudjonpolatov/nullsample-multitrack)
 ---
-Before any of the software, I made music. I release UK garage under the name Matsumi; the album *HOME* is on Spotify, and most of its listeners are in the UK, which is where that sound lives. **Nullsample** is what happened when the two halves met.
+Before any of the software, I made music. I release UK garage under the name ferrasium; the album *HOME* is on Spotify, and most of its listeners are in the UK, which is where that sound lives. **Nullsample** is what happened when the two halves met.
 
 It is a music generator in the browser. Press once and a track exists. There is no sample anywhere: no one-shots, no loops, no recorded impulse for the reverb, no trained model. Every sound is computed at runtime on your own device from oscillators, noise, envelopes, filters and distortion stages.
 
