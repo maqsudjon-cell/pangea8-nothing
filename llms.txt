@@ -9,7 +9,7 @@
 - Person: Maqsudjon Polatov, Tashkent, Uzbekistan (UTC+5)
 - Method: directs AI coding agents end to end (spec -> architecture -> build -> DNS/TLS -> ops). Welds full time; ships software nights and days off.
 - Email: polatovmaqsudjon1@gmail.com
-- Telegram: https://t.me/toudotgg
+- Telegram: https://t.me/ferrasium
 - GitHub: https://github.com/maqsudjon-cell
 - Lab and long-form archive: https://maqsudjon.com
 - Source of this site: https://github.com/maqsudjon-cell/tou

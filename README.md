@@ -71,4 +71,4 @@ GitHub setting that still has to be ticked by hand.
 
 Maqsudjon Polatov · Tashkent
 [polatovmaqsudjon1@gmail.com](mailto:polatovmaqsudjon1@gmail.com) ·
-[Telegram](https://t.me/toudotgg) · [GitHub](https://github.com/maqsudjon-cell)
+[Telegram](https://t.me/ferrasium) · [GitHub](https://github.com/maqsudjon-cell)

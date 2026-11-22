@@ -4,7 +4,7 @@ Role: Product engineer / metal fabricator
 Site: https://tou.gg
 Location: Tashkent, Uzbekistan
 Contact: polatovmaqsudjon1@gmail.com
-Telegram: https://t.me/toudotgg
+Telegram: https://t.me/ferrasium
 
 /* THE SITE */
 Last update: 2026-09-20
